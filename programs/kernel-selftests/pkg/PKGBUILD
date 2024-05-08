@@ -13,6 +13,8 @@ md5sums=('SKIP' 'SKIP')
 # If you want test a specfied version, you can download the code first, build and install it,
 # then restart the machine using the new kernel. Lastly, you can start to test it.
 
+. $LKP_SRC/lib/debug.sh
+
 get_kernel_version()
 {
 	# format: X.Y.Z-...

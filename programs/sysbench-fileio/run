@@ -11,6 +11,7 @@
 ## running a database under intensive load.
 
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/debug.sh
 
 [ -n "$period"	] || period=600
 [ -n "$rwmode"	] || rwmode=rndrw

@@ -2,6 +2,7 @@
 
 . $LKP_SRC/lib/tests/nvml.sh
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/debug.sh
 
 check_vmem_param()
 {

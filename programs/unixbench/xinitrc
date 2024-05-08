@@ -10,6 +10,7 @@
 
 . $LKP_SRC/lib/reproduce-log.sh
 . $LKP_SRC/lib/upload.sh
+. $LKP_SRC/lib/debug.sh
 
 cd $BENCHMARK_ROOT/unixbench/UnixBench || die "no $BENCHMARK_ROOT/unixbench/UnixBench dir"
 

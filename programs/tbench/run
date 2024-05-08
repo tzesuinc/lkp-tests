@@ -8,6 +8,7 @@
 ## it doesn't require a lab of Windows PCs:
 . $LKP_SRC/lib/reproduce-log.sh
 . $LKP_SRC/lib/env.sh
+. $LKP_SRC/lib/debug.sh
 
 [ -n "$direct_server_ips" ] && server=$direct_server_ips
 [ -z "$server" ] && server=127.0.0.1

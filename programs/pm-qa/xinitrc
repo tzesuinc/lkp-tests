@@ -6,6 +6,7 @@
 . $LKP_SRC/lib/upload.sh
 . $LKP_SRC/lib/reproduce-log.sh
 . $LKP_SRC/lib/install.sh
+. $LKP_SRC/lib/debug.sh
 
 cd $BENCHMARK_ROOT/pm-qa || die "no $BENCHMARK_ROOT/pm-qa"
 

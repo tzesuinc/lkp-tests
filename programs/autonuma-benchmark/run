@@ -3,6 +3,7 @@
 # - iterations
 
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/debug.sh
 
 export PATH=$PATH:$BENCHMARK_ROOT/autonuma-benchmark
 

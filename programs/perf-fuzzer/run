@@ -9,6 +9,7 @@
 
 . $LKP_SRC/lib/env.sh
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/debug.sh
 
 cd $BENCHMARK_ROOT/perf_event_tests/fuzzer || die "can not find fuzzer dir"
 

@@ -6,6 +6,7 @@
 ## performance under a variety of conditions.
 
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/debug.sh
 
 cd $BENCHMARK_ROOT/netpipe || die "no $BENCHMARK_ROOT/netpipe"
 

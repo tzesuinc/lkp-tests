@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. $LKP_SRC/lib/debug.sh
+
 [ -n "$lib_env_load_once" ] && return
 lib_env_load_once=1
 

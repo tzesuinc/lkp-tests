@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/debug.sh
 
 check_add_user()
 {

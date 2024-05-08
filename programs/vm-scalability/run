@@ -17,6 +17,7 @@
 # 1 means setup by disk/fs, etc.
 
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/debug.sh
 
 log_eval "cd $BENCHMARK_ROOT/vm-scalability" || die "no $BENCHMARK_ROOT/vm-scalability"
 

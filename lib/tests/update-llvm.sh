@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . $LKP_SRC/lib/env.sh
+. $LKP_SRC/lib/debug.sh
 
 # make bpf failed when we use clang under v15 on v6.7 kernel
 # prepare_for_llvm works for cluster, for local user, please install clang v15 or newer
