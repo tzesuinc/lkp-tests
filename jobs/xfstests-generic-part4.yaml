@@ -51,6 +51,7 @@ fs:
 xfstests:
   test:
     - generic-logdev
+    - generic-scratch-shutdown # [not run] ext2 does not support shutdown
 
 ---
 fs:
