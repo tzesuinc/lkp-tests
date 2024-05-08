@@ -52,6 +52,7 @@ xfstests:
   test:
     - generic-logdev
     - generic-scratch-shutdown # [not run] ext2 does not support shutdown
+    - generic-metadata-journaling # [not run] ext2 does not support metadata journaling
 
 ---
 fs:
