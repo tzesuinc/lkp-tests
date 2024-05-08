@@ -19,6 +19,7 @@
 # 14 ...
 . $LKP_SRC/lib/env.sh
 . $LKP_SRC/lib/install.sh
+. $LKP_SRC/lib/reproduce-log.sh
 
 remove_case()
 {

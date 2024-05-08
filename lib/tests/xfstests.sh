@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. $LKP_SRC/lib/reproduce-log.sh
+
 check_add_user()
 {
 	[ "x$1" != "x" ] || return

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . $LKP_SRC/lib/env.sh
+. $LKP_SRC/lib/reproduce-log.sh
 
 check_group_param()
 {

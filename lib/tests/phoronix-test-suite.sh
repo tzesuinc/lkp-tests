@@ -2,6 +2,7 @@
 
 . $LKP_SRC/lib/env.sh
 . $LKP_SRC/lib/debug.sh
+. $LKP_SRC/lib/reproduce-log.sh
 
 # ffmpeg only support max 64 threads
 fixup_ffmpeg()

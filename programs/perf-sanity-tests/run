@@ -5,6 +5,7 @@
 
 . $LKP_SRC/lib/env.sh
 . $LKP_SRC/lib/tests/perf_test.sh
+. $LKP_SRC/lib/reproduce-log.sh
 
 set_perf_path '/usr/bin/perf'
 

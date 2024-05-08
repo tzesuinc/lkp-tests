@@ -8,6 +8,7 @@
 
 . $LKP_SRC/lib/debug.sh
 . $LKP_SRC/lib/env.sh
+. $LKP_SRC/lib/reproduce-log.sh
 
 ## It Scale takes a testcase and runs it from 1 through to n
 ## parallel copies to see if the testcase will scale. It

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . $LKP_SRC/lib/install.sh
+. $LKP_SRC/lib/reproduce-log.sh
 
 rebuild()
 {

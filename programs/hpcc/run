@@ -5,6 +5,8 @@
 ## execution in Open MPI. mpirun uses the Open Run-Time
 ## Environment (ORTE) to launch jobs.
 
+. $LKP_SRC/lib/reproduce-log.sh
+
 cd /tmp || exit
 log_cmd cp -a /usr/share/doc/hpcc/examples/_hpccinf.txt hpccinf.txt
 
