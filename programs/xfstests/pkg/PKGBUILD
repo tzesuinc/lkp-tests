@@ -125,6 +125,8 @@ generate_special_require_tests()
 
 	# [not run] ext2 does not support shutdown
 	collect "_require_scratch_shutdown$" generic > $benchmark_path/tests/generic-scratch-shutdown
+	# [not run] ext2 does not support metadata journaling
+	collect _require_metadata_journaling generic > $benchmark_path/tests/generic-metadata-journaling
 
 	# these tests require -o dax support
 	for fs in generic ext4
