@@ -8,6 +8,8 @@
 # parameter, but easy to add more remote-rootfs format support
 # in future if we need.
 
+. $LKP_SRC/lib/env.sh
+
 # eg: lkp-server:/osimage/debian-full-x86_64
 source=$1
 [ -z "${source}" ] && {
@@ -64,7 +66,7 @@ nfs_mount_rootfs=$MNT_POINT/NFS-${rootfs_name}
 [ -d ${nfs_mount_rootfs} ] || mkdir -p ${nfs_mount_rootfs} || exit
 
 # mount NFS to local and rsync to destination subvolume
-if command -v mount.nfs >/dev/null; then
+if has_cmd mount.nfs; then
 	NFSMOUNT="mount.nfs"
 else
 	NFSMOUNT="mount"

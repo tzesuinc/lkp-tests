@@ -7,8 +7,9 @@ shopt -s nullglob
 
 . $LKP_SRC/lib/debug.sh
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/env.sh
 
-command -v ndctl || die "Can not find executable ndctl file"
+has_cmd ndctl || die "Can not find executable ndctl file"
 
 #1) check if nfit_test and its dependencies are available on local host
 #2) avoid the following debug output:

@@ -2,6 +2,7 @@
 
 . $LKP_SRC/lib/install.sh
 . $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/env.sh
 
 rebuild()
 {
@@ -86,8 +87,8 @@ workaround_env()
 	ln -fs bash /bin/sh
 
 	# install mkisofs which is linked to genisoimage
-	command -v mkisofs || {
-		genisoimage=$(command -v genisoimage)
+	has_cmd mkisofs || {
+		genisoimage=$(cmd_path genisoimage)
 		if [ -n "$genisoimage" ]; then
 			log_cmd ln -sf "$genisoimage" /usr/bin/mkisofs
 		else
@@ -96,10 +97,10 @@ workaround_env()
 	}
 
 	# fix CONF: 'iptables' not found
-	command -v iptables >/dev/null || log_cmd ln -sf /usr/sbin/iptables-nft /usr/bin/iptables
+	has_cmd iptables || log_cmd ln -sf /usr/sbin/iptables-nft /usr/bin/iptables
 
 	# fix CONF: 'ip6tables' not found
-	command -v ip6tables >/dev/null || log_cmd ln -sf /usr/sbin/ip6tables-nft /usr/bin/ip6tables
+	has_cmd ip6tables || log_cmd ln -sf /usr/sbin/ip6tables-nft /usr/bin/ip6tables
 }
 
 specify_tmpdir()

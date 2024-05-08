@@ -15,7 +15,7 @@ build_selftests()
 		# local user may contain both gcc-5 and gcc-6
 		CC=$(basename $(readlink $(which gcc)))
 		# force to use gcc-5 to build x86
-		[[ "$CC" = "gcc-6" ]] && command -v gcc-5 >/dev/null && sed -i -e '/^include ..\/lib.mk/a CC=gcc-5' x86/Makefile
+		[[ "$CC" = "gcc-6" ]] && has_cmd gcc-5 && sed -i -e '/^include ..\/lib.mk/a CC=gcc-5' x86/Makefile
 	}
 
 	make				|| return
@@ -105,29 +105,29 @@ prepare_for_commands()
 	export PATH=$BENCHMARK_ROOT/kernel-selftests/kernel-selftests/dropwatch/bin:$PATH
 
 	# temporarily workaround compile error on gcc-6
-	command -v gcc-5 >/dev/null && log_cmd ln -sf /usr/bin/gcc-5 /usr/bin/gcc
+	has_cmd gcc-5 && log_cmd ln -sf /usr/bin/gcc-5 /usr/bin/gcc
 	# fix cc: command not found
-	command -v cc >/dev/null || log_cmd ln -sf /usr/bin/gcc /usr/bin/cc
+	has_cmd cc || log_cmd ln -sf /usr/bin/gcc /usr/bin/cc
 	# fix bpf: /bin/sh: clang: command not found
-	command -v clang >/dev/null || {
+	has_cmd clang || {
 		installed_clang=$(find /usr/bin -name "clang-[0-9]*")
 		log_cmd ln -sf $installed_clang /usr/bin/clang
 	}
 	# fix bpf: /bin/sh: line 2: llc: command not found
-	command -v llc >/dev/null || {
+	has_cmd llc || {
 		installed_llc=$(find /usr/bin -name "llc-*")
 		log_cmd ln -sf $installed_llc /usr/bin/llc
 	}
 	# fix bpf /bin/sh: llvm-readelf: command not found
-	command -v llvm-readelf >/dev/null || {
+	has_cmd llvm-readelf || {
 		llvm=$(find /usr/lib -name "llvm*" -type d)
 		llvm_ver=${llvm##*/}
 		export PATH=$PATH:/usr/lib/$llvm_ver/bin
 	}
 	# fix sh: 1: iptables: not found
-	command -v iptables >/dev/null || log_cmd ln -sf /usr/sbin/iptables-nft /usr/bin/iptables
+	has_cmd iptables || log_cmd ln -sf /usr/sbin/iptables-nft /usr/bin/iptables
 	# fix ip6tables: command not found
-	command -v ip6tables >/dev/null || log_cmd ln -sf /usr/sbin/ip6tables-nft /usr/bin/ip6tables
+	has_cmd ip6tables || log_cmd ln -sf /usr/sbin/ip6tables-nft /usr/bin/ip6tables
 }
 
 check_kconfig()
