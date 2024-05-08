@@ -123,6 +123,9 @@ generate_special_require_tests()
 		collect "_require_logdev$" $fs > $benchmark_path/tests/$fs-logdev
 	done
 
+	# [not run] ext2 does not support shutdown
+	collect "_require_scratch_shutdown$" generic > $benchmark_path/tests/generic-scratch-shutdown
+
 	# these tests require -o dax support
 	for fs in generic ext4
 	do
