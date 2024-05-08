@@ -6,6 +6,7 @@
 
 . $LKP_SRC/lib/env.sh
 . $LKP_SRC/lib/debug.sh
+. $LKP_SRC/lib/reproduce-log.sh
 
 mount_dev()
 {
