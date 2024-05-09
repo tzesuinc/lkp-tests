@@ -25,6 +25,8 @@ mount_dev()
 
 	# shellcheck disable=SC2164
 	log_cmd cd $mnt
+
+	stat -f $PWD
 }
 
 ## some options are universal, put them in universal_setting
