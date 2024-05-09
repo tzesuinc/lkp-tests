@@ -191,7 +191,7 @@ setup_fs_config()
 		log_eval export WORKAREA="$BENCHMARK_ROOT/xfstests"
 	}
 
-	is_test_in_group "$test" "xfs-external" && {
+	is_test_in_group "$test" "xfs-realtime" && {
 		log_eval export USE_EXTERNAL="yes"
 		log_eval export SCRATCH_RTDEV="$SCRATCH_LOGDEV"
 		log_eval unset SCRATCH_LOGDEV

@@ -11,7 +11,7 @@ fs:
 
 xfstests:
   test:
-    - xfs-external
+    - xfs-realtime
     - xfs-083
     - xfs-132
     - xfs-211
