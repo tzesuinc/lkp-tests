@@ -149,7 +149,7 @@ setup_fs_config()
 		log_eval export SCRATCH_XFS_LIST_FUZZ_VERBS=random
 	}
 
-	is_test_belongs_to_group "$test" "xfs-no-bug-on-assert" && {
+	is_test_belongs_to_group "$test" "generic-no-bug-on-assert" || is_test_belongs_to_group "$test" "xfs-no-bug-on-assert" && {
 		[ -f /sys/fs/xfs/debug/bug_on_assert ] && echo 0 > /sys/fs/xfs/debug/bug_on_assert
 	}
 
