@@ -39,6 +39,7 @@ xfstests:
     - generic-group-73
     - generic-group-74
     - generic-no-bug-on-assert
+    - generic-scratch-reflink
 
 ---
 fs:
