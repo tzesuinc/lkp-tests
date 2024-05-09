@@ -2,7 +2,7 @@ require 'spec_helper'
 require "#{LKP_SRC}/lib/bash"
 
 describe 'xfstests' do
-  describe 'is_test_belongs_to_group' do
+  describe 'is_test_in_group' do
     before(:all) do
       @benchmark_root = File.join(LKP_SRC, 'spec', 'benchmark_root')
     end
@@ -22,7 +22,7 @@ describe 'xfstests' do
         { test: 'ext4-029', group: 'ext4-logdev' },
         { test: 'xfs-275', group: 'xfs-logdev' }
       ].each do |entry|
-        expect(Bash.call("source #{LKP_SRC}/lib/tests/xfstests.sh; export BENCHMARK_ROOT=#{@benchmark_root}; is_test_belongs_to_group \"#{entry[:test]}\" \"#{entry[:group]}\"; echo $?")).to eq('0')
+        expect(Bash.call("source #{LKP_SRC}/lib/tests/xfstests.sh; export BENCHMARK_ROOT=#{@benchmark_root}; is_test_in_group \"#{entry[:test]}\" \"#{entry[:group]}\"; echo $?")).to eq('0')
       end
     end
 
@@ -34,7 +34,7 @@ describe 'xfstests' do
         { test: 'generic-510', group: 'generic-dax' },
         { test: 'xfs-114', group: 'xfs-scratch-reflink-[0-9]*' }
       ].each do |entry|
-        expect(Bash.call("source #{LKP_SRC}/lib/tests/xfstests.sh; export BENCHMARK_ROOT=#{@benchmark_root}; is_test_belongs_to_group \"#{entry[:test]}\" \"#{entry[:group]}\"; echo $?")).to eq('1')
+        expect(Bash.call("source #{LKP_SRC}/lib/tests/xfstests.sh; export BENCHMARK_ROOT=#{@benchmark_root}; is_test_in_group \"#{entry[:test]}\" \"#{entry[:group]}\"; echo $?")).to eq('1')
       end
     end
   end
