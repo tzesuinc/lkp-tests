@@ -27,6 +27,10 @@ module LKP
       @regexp = load_regular_expressions(file) if File.size?(file)
     end
 
+    def patterns
+      File.read(file).split("\n")
+    end
+
     class << self
       attr_reader :klass_2_path
 
