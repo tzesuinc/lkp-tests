@@ -34,3 +34,9 @@
 564
 # execution time > 12h
 650
+# Require selinux to be enabled
+700
+# _require_acl_get_max, btrfs/ext2 does not define maximum ACL count
+026
+# [not run] btrfs/udf/xfs does not support cross-device copy_file_range
+565

@@ -10,3 +10,9 @@
 233
 # it requires special configurations, which will break some other xfs tests
 275
+# This test is only valid on 32 bit machines
+197
+# SELinux not enabled
+300
+# Require XFS built without CONFIG_XFS_DEBUG
+490
