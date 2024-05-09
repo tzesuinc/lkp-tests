@@ -123,9 +123,9 @@ generate_special_require_tests()
 		collect "_require_logdev$" $fs > $benchmark_path/tests/$fs-logdev
 	done
 
-	# [not run] ext2 does not support shutdown
+	# [not run] btrfs/ext2/udf does not support shutdown
 	collect "_require_scratch_shutdown$" generic > $benchmark_path/tests/generic-scratch-shutdown
-	# [not run] ext2 does not support metadata journaling
+	# [not run] ext2/udf does not support metadata journaling
 	collect _require_metadata_journaling generic > $benchmark_path/tests/generic-metadata-journaling
 
 	# these tests require -o dax support

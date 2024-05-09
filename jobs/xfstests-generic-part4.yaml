@@ -38,7 +38,6 @@ xfstests:
     - generic-group-72
     - generic-group-73
     - generic-group-74
-    # - generic-scratch-verity
     # - generic-no-bug-on-assert
 ---
 fs:
@@ -51,8 +50,37 @@ fs:
 xfstests:
   test:
     - generic-logdev
-    - generic-scratch-shutdown # [not run] ext2 does not support shutdown
-    - generic-metadata-journaling # [not run] ext2 does not support metadata journaling
+
+---
+fs:
+  - ext4
+  - xfs
+  - btrfs
+  - f2fs
+
+xfstests:
+  test:
+    - generic-metadata-journaling # [not run] ext2/udf does not support metadata journaling
+
+---
+fs:
+  - ext4
+  - xfs
+  - f2fs
+
+xfstests:
+  test:
+    - generic-scratch-shutdown # [not run] btrfs/ext2/udf does not support shutdown
+
+# ---
+# fs:
+#   - ext4
+#   - btrfs
+#   - f2fs
+
+# xfstests:
+#   test:
+#     - generic-scratch-verity # [not run] No verity support for ext2/udf/xfs
 
 ---
 fs:
