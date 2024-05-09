@@ -94,6 +94,7 @@ fs:
 xfstests:
   test:
     - generic-525
+    - generic-freeze # [not run] udf does not support freezing
 
 ---
 fs:
@@ -105,4 +106,4 @@ fs:
 
 xfstests:
   test:
-    - generic-idmapped-mounts
+    - generic-idmapped-mounts # [not run] vfstest not support by cifs/ext2/udf
