@@ -131,6 +131,9 @@ generate_special_require_tests()
 	# [not run] vfstest not support by cifs/ext2/udf
 	collect _require_idmapped_mounts generic > $benchmark_path/tests/generic-idmapped-mounts
 
+	# [not run] udf does not support freezing
+	collect _require_freeze generic > $benchmark_path/tests/generic-freeze
+
 	# these tests require -o dax support
 	for fs in generic ext4
 	do
