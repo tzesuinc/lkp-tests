@@ -198,7 +198,7 @@ setup_fs_config()
 	}
 	is_test_in_group "$test" "xfs-reflink-rmapbt" && log_eval export MKFS_OPTIONS="\"-mreflink=1 -mrmapbt=1\""
 	is_test_in_group "$test" "xfs-scratch-reflink-[0-9]*" && log_eval export MKFS_OPTIONS="-mreflink=1"
-	is_test_in_group "$test" "xfs-rmapbt" && log_eval export MKFS_OPTIONS="-mrmapbt=1"
+	is_test_in_group "$test" "xfs-scratch-rmapbt" && log_eval export MKFS_OPTIONS="-mrmapbt=1"
 	[ "$test" = "xfs-244" ] && log_eval export MKFS_OPTIONS="-mcrc=0"
 	[ "$test" = "xfs-132" ] && (mkfs.xfs -f -mreflink=1 $TEST_DEV || die "mkfs.xfs test_dev failed")
 	[ "$test" = "xfs-211" ] && (mkfs.xfs -f -mreflink=1 $TEST_DEV || die "mkfs.xfs test_dev failed")

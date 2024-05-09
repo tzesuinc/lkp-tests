@@ -11,7 +11,7 @@ fs:
 
 xfstests:
   test:
-    - xfs-rmapbt
+    - xfs-scratch-rmapbt
     - xfs-scratch-reflink-06
     - xfs-scratch-reflink-08
     - xfs-scratch-reflink-09

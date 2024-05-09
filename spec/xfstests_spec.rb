@@ -14,7 +14,7 @@ describe 'xfstests' do
         { test: 'xfs-276', group: 'xfs-realtime' },
         { test: 'xfs-114', group: 'xfs-reflink-rmapbt' },
         { test: 'xfs-307', group: 'xfs-scratch-reflink-[0-9]*' },
-        { test: 'xfs-235', group: 'xfs-rmapbt' },
+        { test: 'xfs-235', group: 'xfs-scratch-rmapbt' },
         { test: 'generic-510', group: 'generic-group-[0-9]*' },
         { test: 'generic-437', group: 'generic-dax' },
         { test: 'generic-457', group: 'generic-logwrites' },
