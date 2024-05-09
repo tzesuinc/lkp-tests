@@ -117,6 +117,9 @@ generate_special_require_tests()
 	collect "_require_log_writes$" btrfs > $benchmark_path/tests/btrfs-logwrites
 	collect "_require_log_writes$" generic > $benchmark_path/tests/generic-logwrites
 
+	# [not run] cifs does not support NFS export
+	collect _require_exportfs generic > $benchmark_path/tests/generic-exportfs
+
 	# these tests requires a valid $SCRATCH_LOGDEV
 	for fs in generic ext4 xfs
 	do
