@@ -128,6 +128,9 @@ generate_special_require_tests()
 	# [not run] ext2/udf does not support metadata journaling
 	collect _require_metadata_journaling generic > $benchmark_path/tests/generic-metadata-journaling
 
+	# [not run] vfstest not support by cifs/ext2/udf
+	collect _require_idmapped_mounts generic > $benchmark_path/tests/generic-idmapped-mounts
+
 	# these tests require -o dax support
 	for fs in generic ext4
 	do
