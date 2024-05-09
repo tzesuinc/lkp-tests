@@ -25,7 +25,7 @@ phoronix-test-suite:
     - build-gdb-1.1.0
     - build-godot-4.0.0
     - build-imagemagick-1.7.2
-    - build-mesa-1.0.0
+    # - build-mesa-1.0.0 # The test quit with a non-zero exit status. E: ninja: error: loading 'build.ninja': No such file or directory
     - build-mplayer-1.5.0
     - build-php-1.6.0
     - byte-1.2.2
