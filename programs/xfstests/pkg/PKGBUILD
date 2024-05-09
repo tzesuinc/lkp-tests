@@ -120,6 +120,9 @@ generate_special_require_tests()
 	# [not run] cifs does not support NFS export
 	collect _require_exportfs generic > $benchmark_path/tests/generic-exportfs
 
+	# [not run] duperemove does not support file system type: ext2
+	collect _require_scratch_duperemove generic > $benchmark_path/tests/generic-scratch-duperemove
+
 	# these tests requires a valid $SCRATCH_LOGDEV
 	for fs in generic ext4 xfs
 	do
