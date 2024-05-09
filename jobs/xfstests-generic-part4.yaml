@@ -68,6 +68,17 @@ fs:
   - ext4
   - xfs
   - f2fs
+  - udf
+
+xfstests:
+  test:
+    - generic-026 # [not run] btrfs/ext2 does not define maximum ACL count
+
+---
+fs:
+  - ext4
+  - xfs
+  - f2fs
 
 xfstests:
   test:
