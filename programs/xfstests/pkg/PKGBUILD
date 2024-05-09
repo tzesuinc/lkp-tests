@@ -103,7 +103,7 @@ generate_special_require_tests()
 	collect _require_realtime xfs > $benchmark_path/tests/xfs-realtime
 	git grep -L "_require_realtime" $(git grep -l "_require_scratch_reflink" $(git grep -l "_require_xfs_scratch_rmapbt" | grep tests/xfs))  | awk -F/ '{print $3}' | grep -v -f <(cat $benchmark_path/tests/xfs-*) > $benchmark_path/tests/xfs-reflink-rmapbt
 	git grep -L "_require_realtime" $(git grep -L "_require_scratch_reflink" $(git grep -l "_require_xfs_scratch_rmapbt" | grep tests/xfs))  | awk -F/ '{print $3}' | grep -v -f <(cat $benchmark_path/tests/xfs-*) > $benchmark_path/tests/xfs-rmapbt
-	git grep -L "_require_realtime" $(git grep -L "_require_xfs_scratch_rmapbt" $(git grep -l "_require_scratch_reflink" | grep tests/xfs))  | awk -F/ '{print $3}' | grep -v -f <(cat $benchmark_path/tests/xfs-*) > $benchmark_path/tests/xfs-reflink
+	collect _require_scratch_reflink xfs > $benchmark_path/tests/xfs-scratch-reflink
 
 	collect _require_scratch_reflink generic > $benchmark_path/tests/generic-scratch-reflink
 
@@ -212,8 +212,8 @@ split_tests()
 	$LKP_SRC/tools/split-tests udf-all 10 udf-group-
 	$LKP_SRC/tools/split-tests ocfs2-all 10 ocfs2-group-
 
-	$LKP_SRC/tools/split-tests xfs-reflink 20 xfs-reflink-
-	hide xfs-reflink
+	$LKP_SRC/tools/split-tests xfs-scratch-reflink 20 xfs-scratch-reflink-
+	hide xfs-scratch-reflink
 }
 
 # Some special tests need to be separated and tested separately

@@ -11,9 +11,9 @@ describe 'xfstests' do
       [
         { test: 'xfs-no-bug-on-assert', group: 'xfs-no-bug-on-assert' },
         { test: 'xfs-115', group: 'xfs-no-bug-on-assert' },
-        { test: 'xfs-276', group: 'xfs-external' },
+        { test: 'xfs-276', group: 'xfs-realtime' },
         { test: 'xfs-114', group: 'xfs-reflink-rmapbt' },
-        { test: 'xfs-307', group: 'xfs-reflink-[0-9]*' },
+        { test: 'xfs-307', group: 'xfs-scratch-reflink-[0-9]*' },
         { test: 'xfs-235', group: 'xfs-rmapbt' },
         { test: 'generic-510', group: 'generic-group-[0-9]*' },
         { test: 'generic-437', group: 'generic-dax' },
@@ -32,7 +32,7 @@ describe 'xfstests' do
         { test: 'ext4-group-00', group: 'ext4-logdev' },
         { test: 'xfs-115', group: 'generic-dax' },
         { test: 'generic-510', group: 'generic-dax' },
-        { test: 'xfs-114', group: 'xfs-reflink-[0-9]*' }
+        { test: 'xfs-114', group: 'xfs-scratch-reflink-[0-9]*' }
       ].each do |entry|
         expect(Bash.call("source #{LKP_SRC}/lib/tests/xfstests.sh; export BENCHMARK_ROOT=#{@benchmark_root}; is_test_belongs_to_group \"#{entry[:test]}\" \"#{entry[:group]}\"; echo $?")).to eq('1')
       end
