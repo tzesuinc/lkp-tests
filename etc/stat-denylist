@@ -74,7 +74,6 @@ Spectre_v2_mitigation
 ^dmesg\.kernel_BUG_at_kernel/entry/common\.c
 ^dmesg\.kernel_BUG_at_net/core/skbuff\.c
 ^dmesg\.Kernel_panic\-not_syncing:Failed_to_register_CPU_subsystem
-^dmesg\.Kernel_panic\-not_syncing:hung_task:blocked_tasks
 ^dmesg\.Kernel_panic\-not_syncing:security_add_hooks_Too_many_LSMs_registered
 ^dmesg\.Kernel_panic\-not_syncing:softlockup:hung_tasks
 ^dmesg\.Kernel_panic\-not_syncing:System_is_deadlocked_on_memory
