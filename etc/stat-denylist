@@ -127,6 +127,7 @@ Spectre_v2_mitigation
 ^dmesg\.WARNING:at_kernel/sched/topology\.c:\#sd_init
 ^dmesg\.WARNING:at_kernel/time/clocksource\-wdtest\.c:\#wdtest_func
 ^dmesg\.WARNING:at_lib/dynamic_debug\.c:\#ddebug_add_module
+^dmesg\.WARNING:at_lib/idr\.c:#ida_free
 ^dmesg\.WARNING:at_lib/refcount\.c:\#refcount_warn_saturate
 ^dmesg\.WARNING:at_lib/refcount\.c:\#stack_depot_dec_count
 ^dmesg\.WARNING:at_lib/ref_tracker\.c:\#ref_tracker_dir_exit
