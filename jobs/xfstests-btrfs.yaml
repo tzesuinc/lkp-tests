@@ -11,6 +11,7 @@ fs:
 
 xfstests:
   test:
+    # - btrfs-075
     - btrfs-logwrites
     - btrfs-group-00
     - btrfs-group-01
@@ -45,4 +46,5 @@ xfstests:
     - btrfs-group-30
     - btrfs-group-31
     - btrfs-group-32
+    - btrfs-group-33
     # - btrfs-scratch-verity

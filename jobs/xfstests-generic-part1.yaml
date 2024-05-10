@@ -21,7 +21,6 @@ xfstests:
     - generic-group-01
     - generic-group-02
     - generic-group-03
-    - generic-group-04
     - generic-group-05
     - generic-group-06
     - generic-group-07

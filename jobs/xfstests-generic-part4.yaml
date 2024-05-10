@@ -28,8 +28,6 @@ xfstests:
     - generic-group-62
     - generic-group-63
     - generic-group-64
-    - generic-group-65
-    - generic-group-66
     - generic-group-67
     - generic-group-68
     - generic-group-69
