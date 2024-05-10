@@ -8,6 +8,7 @@
  is trying to release lock \(.*\) at
 32-bit relocation outside of kernel!
 64-bit relocation outside of kernel!
+addition on 0; use-after-free
 Assertion failed
 assertion failed
 Assertion failure
@@ -15,6 +16,7 @@ assertion failure
 audit: \(.*\) error: .*
 BUG .* \(.*\): .*
 CPU[0-9]+: .* cpu clock throttled .*
+decrement hit 0; leaking memory
 Destination address inappropriately aligned
 Destination address too large
 EIP is at [a-zA-Z0-9._]+\+0x.*/0x.*
@@ -51,10 +53,12 @@ pagealloc: memory corruption
 pagealloc: single bit error
 PANIC: double fault, 
 PANIC: early exception 
+refcount_t: underflow; use-after-free
 RIP: [0-9a-f]{4}:[a-zA-Z0-9._]+\+0x.*/0x.*
 RIP: [0-9a-f]{4}:\[.*\] [a-zA-Z0-9._]+\+0x.*/0x.*
 rootfs image is not initramfs \(invalid magic at start of compressed archive\)
 S0Box: more than 5 loops in s0box_interrupt
+saturated; leaking memory
 segfault at .* ip .* sp .* error .* likely on CPU .*
 sysctl could not get directory: 
 sysctl duplicate entry: 
@@ -62,6 +66,7 @@ sysctl link missing during unregister:
 sysctl table check failed: 
 UBSAN: .*
 Unknown interrupt or fault at:
+unknown saturation event
 WARNING: .* detected$
 WARNING: .* lock.*
 WARNING: .*!$
