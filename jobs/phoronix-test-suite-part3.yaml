@@ -10,7 +10,7 @@ phoronix-test-suite:
     - build-gcc-1.4.0
     - mnn-2.1.0
     - openradioss-1.1.1
-    - openems-1.0.0 # 96 cpu, 512G memory tbox, run once cost about 22m
+    # - openems-1.0.0 # The test quit with a non-zero exit status. E: AttributeError: module 'numpy' has no attribute 'float'. 96 cpu, 512G memory tbox, run once cost about 22m
     - petsc-1.0.0
     # - nwchem-1.1.1 # runtime > 1h on lkp-csl-2sp7
     # - hdparm-read-1.0.0 #  The test run did not produce a result.
