@@ -133,7 +133,11 @@ force_times_to_run()
 		local target=${environment_directory}/../test-profiles/pts/${test}/test-definition.xml
 		if [[ -f $target ]]; then
 			local times_to_run=$(grep -oP '(?<=<TimesToRun>).*(?=</TimesToRun>)' $target)
-			[[ $times_to_run ]] && log_cmd export FORCE_TIMES_TO_RUN=$times_to_run
+			if [[ $times_to_run ]]; then
+				log_cmd export FORCE_TIMES_TO_RUN=$times_to_run
+			else
+				log_cmd export FORCE_TIMES_TO_RUN=3
+			fi
 		else
 			log_cmd export FORCE_TIMES_TO_RUN=3
 		fi
