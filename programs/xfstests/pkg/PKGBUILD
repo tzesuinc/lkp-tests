@@ -111,6 +111,11 @@ generate_special_require_tests()
 	# [not run] Reflink not supported by test filesystem type: ext2
 	collect _require_test_reflink generic > $benchmark_path/tests/generic-test-reflink
 
+	# [not run] Dedupe not supported by scratch filesystem type: ext4
+	collect _require_scratch_dedupe generic > $benchmark_path/tests/generic-scratch-dedupe
+	# [not run] Dedupe not supported by test filesystem type: ext2
+	collect _require_test_dedupe generic > $benchmark_path/tests/generic-test-dedupe
+
 	# run slowly on udf
 	collect "holetest" generic > $benchmark_path/tests/generic-holetest
 
