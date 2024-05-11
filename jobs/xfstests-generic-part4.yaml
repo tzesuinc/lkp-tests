@@ -52,6 +52,19 @@ xfstests:
     - generic-logdev
     - generic-scratch-duperemove # [not run] duperemove does not support file system type: ext2
     - generic-test-reflink # [not run] Reflink not supported by test filesystem type: ext2
+    - generic-test-dedupe # [not run] Dedupe not supported by test filesystem type: ext2
+
+---
+fs:
+  - ext2
+  - xfs
+  - btrfs
+  - f2fs
+  - udf
+
+xfstests:
+  test:
+    - generic-scratch-dedupe # [not run] Dedupe not supported by scratch filesystem type: ext4
 
 ---
 fs:
