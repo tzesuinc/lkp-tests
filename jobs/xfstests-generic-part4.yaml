@@ -51,6 +51,7 @@ xfstests:
   test:
     - generic-logdev
     - generic-scratch-duperemove # [not run] duperemove does not support file system type: ext2
+    - generic-test-reflink # [not run] Reflink not supported by test filesystem type: ext2
 
 ---
 fs:
