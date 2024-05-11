@@ -24,6 +24,7 @@ EIP: [a-zA-Z0-9._]+\+0x[a-f0-9]+/0x[a-f0-9]+
 Failed to allocate space for phdrs
 genirq: Flags mismatch irq .*
 getblk\(\): invalid block size [0-9]+ requested
+GUP no longer grows the stack
 inconsistent \{.*\} -> \{.*\} usage\.
 INFO: .* cpu=.*
 INFO: .*detected stall.*
