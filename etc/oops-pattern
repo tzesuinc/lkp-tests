@@ -37,6 +37,7 @@ Initiating system reboot
 Initramfs unpacking failed: 
 invoked oom-killer: gfp_mask=0x
 IP-Config: Auto-configuration of network failed
+KASAN: .*
 Kernel BUG at
 kernel BUG at .*
 Kernel is not a valid ELF file
