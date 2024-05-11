@@ -9,26 +9,36 @@ require "#{LKP_SRC}/lib/ruby_ext"
 
 module LKP
   class Pattern
-    attr_reader :regexp, :file
+    attr_reader :file
 
     def initialize(file)
       @file = file
-
-      load
     end
 
     def contain?(content)
       return unless regexp
 
-      content =~ regexp
+      Array(content).any? { |line| line =~ regexp }
     end
 
-    def load
-      @regexp = load_regular_expressions(file) if File.size?(file)
+    def regexp
+      return @regexp if @regexp
+      return unless File.size?(file)
+
+      lines = File.readlines(file)
+                  .map(&:chomp)
+                  .reject(&:empty?)
+                  .reject { |line| line.start_with?('#') }
+
+      @regexp = Regexp.new lines.join('|')
     end
 
     def patterns
       File.read(file).split("\n")
+    end
+
+    def pattern(content)
+      patterns.find { |pattern| content =~ Regexp.new(pattern) }
     end
 
     class << self
