@@ -47,6 +47,7 @@ KGDB: re-enter exception: ALL breakpoints killed
 kobject .*: (tried to .*|invalid kobject pointer!|must have a ktype to be initialized properly!)
 low stack detected by irq handler
 Mem-Info:
+no CFI hash found at.*
 Oops: .*
 Out of memory and no killable processes
 Out of memory: Kill process 
