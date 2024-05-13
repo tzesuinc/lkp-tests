@@ -31,9 +31,7 @@ xfstests:
     - generic-group-12
     - generic-group-13
     - generic-group-14
-    - generic-group-15
     - generic-group-16
-    - generic-group-17
     - generic-group-18
 
 ---

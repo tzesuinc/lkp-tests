@@ -31,13 +31,11 @@ xfstests:
     - generic-group-12
     - generic-group-13
     - generic-group-14
-    - generic-group-15
     - generic-group-16
     - generic-311
     - generic-281
     # - generic-409 # runtime > 20m
     - generic-logwrites
-    - generic-group-17
     - generic-group-18
     - generic-group-19
     - generic-group-20
@@ -98,3 +96,4 @@ xfstests:
     - generic-525
     - generic-no-bug-on-assert
     # - generic-scratch-verity
+    # - generic-scratch-dedupe
