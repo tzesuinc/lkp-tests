@@ -1,0 +1,9 @@
+boot_failures: 1
+
+# sysctl could not get directory:
+sysctl_could_not_get_directory: 1
+message:sysctl_could_not_get_directory: [    0.861994] sysctl could not get directory: /debug/test_sysctl/mnt/mnt_error -30
+pattern:sysctl_could_not_get_directory: sysctl could not get directory:
+
+timestamp:last: 0.861994
+timestamp:sysctl_could_not_get_directory: 0.861994

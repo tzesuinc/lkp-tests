@@ -30,7 +30,7 @@ module LKP
                   .reject(&:empty?)
                   .reject { |line| line.start_with?('#') }
 
-      @regexp = Regexp.new lines.join('|')
+      @regexp = Regexp.new "(#{lines.join('|')})"
     end
 
     def patterns
