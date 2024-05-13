@@ -22,6 +22,7 @@ Spectre_v2_mitigation
 ^dmesg\.(E|R)IP:fb_deferred_io_init
 ^dmesg\.(E|R)IP:ida_free
 ^dmesg\.(E|R)IP:kallsyms_init
+^dmesg\.(E|R)IP:kprobe_trace_self_tests_init
 ^dmesg\.(E|R)IP:kthread_should_stop
 ^dmesg\.(E|R)IP:nand_scan_tail
 ^dmesg\.(E|R)IP:nand_scan_with_ids
@@ -123,6 +124,7 @@ Spectre_v2_mitigation
 ^dmesg\.WARNING:at_kernel/rcu/tree_exp\.h:#synchronize_rcu_expedited
 ^dmesg\.WARNING:at_kernel/sched/topology\.c:#sd_init
 ^dmesg\.WARNING:at_kernel/time/clocksource\-wdtest\.c:#wdtest_func
+^dmesg\.WARNING:at_kernel/trace/trace_kprobe\.c:#kprobe_trace_self_tests_init
 ^dmesg\.WARNING:at_lib/dynamic_debug\.c:#ddebug_add_module
 ^dmesg\.WARNING:at_lib/idr\.c:#ida_free
 ^dmesg\.WARNING:at_lib/refcount\.c:#refcount_warn_saturate
