@@ -93,6 +93,7 @@ Spectre_v2_mitigation
 ^dmesg\.net/netfilter/ipset/ip_set_core\.c:#RCU\-list_traversed_in_non\-reader_section
 ^dmesg\.Out_of_memory_and_no_killable_processes
 ^dmesg\.page_allocation_failure
+^dmesg\.refcount_t:underflow;use-after-free
 ^dmesg\.sysctl_could_not_get_directory
 ^dmesg\.sysctl_table_check_failed
 ^dmesg\.timestamp:.*
