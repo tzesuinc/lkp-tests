@@ -130,7 +130,7 @@ phoronix-test-suite:
     # - noise-level-1.1.0 # not an available test
     # - numenta-nab-1.1.0 # install failed
     # - octave-benchmark-1.0.0 # not an available test
-    - oidn-2.1.0
+    # - oidn-2.1.0 # The test quit with a non-zero exit status. E: Error: unsupported device type: SYCL
     # - onnx-1.6.0 # The test quit with a non-zero exit status. E: onnxruntime/onnxruntime/test/onnx/onnx_model_info.cc:45 void OnnxModelInfo::InitOnnxModelInfo(const PATH_CHAR_TYPE*) open file "yolov4/yolov4.onnx" failed: No such file or directory
     - opencl-benchmark-1.0.0
     - opencv-bench-1.0.0

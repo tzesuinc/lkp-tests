@@ -57,6 +57,6 @@ phoronix-test-suite:
       # - GPU Apple Metal
       # - GPU NVIDIA CUDA # not supported and not display
       # - GPU Vulkan
-  - test:
-    - xsbench-cl-1.0.0
+  # - test:
+    # - xsbench-cl-1.0.0 # The test quit with a non-zero exit status.
     # - x264-opencl-1.9.1 # this benchmark has build errors
