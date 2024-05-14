@@ -96,11 +96,7 @@ workaround_env()
 		fi
 	}
 
-	# fix CONF: 'iptables' not found
-	has_cmd iptables || log_cmd ln -sf /usr/sbin/iptables-nft /usr/bin/iptables
-
-	# fix CONF: 'ip6tables' not found
-	has_cmd ip6tables || log_cmd ln -sf /usr/sbin/ip6tables-nft /usr/bin/ip6tables
+	set_iptables_path
 }
 
 specify_tmpdir()

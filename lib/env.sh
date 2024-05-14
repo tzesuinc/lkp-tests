@@ -87,6 +87,24 @@ set_perf_path()
 	fi
 }
 
+set_iptables_path()
+{
+	for iptables_bin in iptables ip6tables
+	do
+		has_cmd $iptables_bin || {
+			if has_cmd $iptables_bin-nft; then
+				ln -sfv $(cmd_path $iptables_bin-nft) /usr/bin/$iptables_bin
+				ln -sfv $(cmd_path $iptables_bin-nft-restore) /usr/bin/$iptables_bin-restore
+				ln -sfv $(cmd_path $iptables_bin-nft-save) /usr/bin/$iptables_bin-save
+			elif has_cmd $iptables_bin-legacy; then
+				ln -sfv $(cmd_path $iptables_bin-legacy) /usr/bin/$iptables_bin
+				ln -sfv $(cmd_path $iptables_bin-legacy-restore) /usr/bin/$iptables_bin-restore
+				ln -sfv $(cmd_path $iptables_bin-legacy-save) /usr/bin/$iptables_bin-save
+			fi
+		}
+	done
+}
+
 disable_nmi_watchdog()
 {
 	# Disable NMI watchdog to free up one perf counter

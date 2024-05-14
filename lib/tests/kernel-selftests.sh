@@ -124,10 +124,8 @@ prepare_for_commands()
 		llvm_ver=${llvm##*/}
 		export PATH=$PATH:/usr/lib/$llvm_ver/bin
 	}
-	# fix sh: 1: iptables: not found
-	has_cmd iptables || log_cmd ln -sf /usr/sbin/iptables-nft /usr/bin/iptables
-	# fix ip6tables: command not found
-	has_cmd ip6tables || log_cmd ln -sf /usr/sbin/ip6tables-nft /usr/bin/ip6tables
+
+	set_iptables_path
 }
 
 check_kconfig()
