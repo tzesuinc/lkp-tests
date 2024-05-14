@@ -503,12 +503,23 @@ end
 def stat_unittest(lines)
   stats = LKP::Stats.new
 
+  test_along_with_function_tracer = nil
+
   lines.each do |line|
     case line
     when /### dt-test ### (pass|fail) (.+)/i
       # ### dt-test ### pass of_unittest_match_node():1497
       stats.add("of-unittest.#{$2}", $1, overwrite: true)
-    when /Testing (.+): (OK|PASSED)/
+    when /Running tests again, along with the function tracer/
+      test_along_with_function_tracer = 'function tracer'
+    when /Testing (.+): OK/
+      # Testing event system initcall: OK
+      test_case = $1
+      test_case = "#{test_along_with_function_tracer}.#{test_case}" if test_along_with_function_tracer
+      stats.add(test_case, :pass)
+
+      test_along_with_function_tracer = nil if line =~ /Testing ftrace filter: OK/
+    when /Testing (.+): (PASSED)/
       # Testing event system initcall: OK
       stats.add($1, :pass)
     when /(\w+):\s.+\d+ tests passed/

@@ -71,15 +71,22 @@
 [  372.428875][    T1] pass test0():47 negative result
 [  372.429852][    T1] pass test0():48 positive result
 [  372.430832][    T1] end of comedi:"example" unittests - 2 passed, 0 failed
-[  384.071568][    T1] Running tests on trace events:
-[  384.072616][    T1] Testing event create_synth_test: OK
-[  384.100854][    T1] Testing event empty_synth_test: OK
-[  384.132323][    T1] Testing event gen_synth_test: OK
-[  384.164374][    T1] Testing event initcall_finish: OK
-[  442.977112][    T1] Testing event system initcall: OK
-[  443.014075][    T1] Running tests on all trace events:
-[  443.015165][    T1] Testing all events: OK
-[  446.769158][    T1] Testing ftrace filter: OK
+[   31.293640][    T1] Running tests on trace events:
+[   31.298444][    T1] Testing event initcall_finish: OK
+[   31.352905][    T1] Testing event initcall_start: OK
+[   31.407147][    T1] Testing event initcall_level: OK
+[   31.461800][    T1] Testing event emulate_vsyscall: OK
+[   99.953990][    T1] Testing event system initcall: OK
+[  100.008138][    T1] Running tests on all trace events:
+[  100.013275][    T1] Testing all events: OK
+[  101.370130][    T1] Running tests again, along with the function tracer
+[  101.376960][    T1] Running tests on trace events:
+[  101.381916][    T1] Testing event initcall_finish: OK
+[  101.445000][    T1] Testing event initcall_start: OK
+[  101.511851][    T1] Testing event initcall_level: OK
+[  184.102867][    T1] Running tests on all trace events:
+[  184.108193][    T1] Testing all events: OK
+[  186.735200][    T1] Testing ftrace filter: OK
 [  446.818051][    T1] trace_kprobe: Testing kprobe tracing: OK
 [  447.461986][    T1] Demotion targets for Node 0: null
 [  447.464506][    T1] kmemleak: Kernel memory leak detector initialized (mem pool available: 14117)
@@ -101,3 +108,8 @@
 [  447.563081][    T1] raid6test: test_disks(0, 3): faila=  0(D)  failb=  3(P)  OK
 [  424.813717][    T1] ### dt-test ### EXPECT \ : ---[ end trace <<int>> ]---
 [  424.814141][    T1] ### dt-test ### pass of_unittest_lifecycle():3294
+[  129.822053][    T1] ### dt-test ### pass of_unittest_dynamic():236
+[  129.823860][    T1] ### dt-test ### pass of_unittest_parse_phandle_with_args():404
+[  129.826081][    T1] ### dt-test ### pass of_unittest_parse_phandle_with_args():458
+[  129.828401][    T1] ### dt-test ### pass of_unittest_parse_phandle_with_args():458
+[  129.830621][    T1] ### dt-test ### pass of_unittest_parse_phandle_with_args():458

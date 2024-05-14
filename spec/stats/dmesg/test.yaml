@@ -12,14 +12,21 @@ test_meminit.test_kvmalloc.pass: 1
 test_meminit.test_kmemcache.pass: 1
 test_meminit.test_rcu_persistent.pass: 1
 test_meminit.pass: 1
-event_create_synth_test.pass: 1
-event_empty_synth_test.pass: 1
-event_gen_synth_test.pass: 1
 event_initcall_finish.pass: 1
+event_initcall_start.pass: 1
+event_initcall_level.pass: 1
+event_emulate_vsyscall.pass: 1
 event_system_initcall.pass: 1
 all_events.pass: 1
-ftrace_filter.pass: 1
+function_tracer.event_initcall_finish.pass: 1
+function_tracer.event_initcall_start.pass: 1
+function_tracer.event_initcall_level.pass: 1
+function_tracer.all_events.pass: 1
+function_tracer.ftrace_filter.pass: 1
 kprobe_tracing.pass: 1
 of-unittest.of_unittest_lifecycle_3294.pass: 1
+of-unittest.of_unittest_dynamic_236.pass: 1
+of-unittest.of_unittest_parse_phandle_with_args_404.pass: 1
+of-unittest.of_unittest_parse_phandle_with_args_458.pass: 1
 
-timestamp:last: 424.814141
+timestamp:last: 129.830621
