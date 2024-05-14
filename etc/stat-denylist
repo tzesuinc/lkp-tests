@@ -227,6 +227,7 @@ Spectre_v2_mitigation
 ^kmsg\.veth[0-9]*:Failed_to_cycle_device_veth
 ^kmsg\.Writes:Total:#Max/Min:#Fail
 ^kvm-unit-tests-qemu\.apic
+^kvm-unit-tests.*\.pmu_pebs\.fail
 ^last_state\..+\.exit_code
 ^last_state\.exit_fail
 ^last_state\.initrd_broken
