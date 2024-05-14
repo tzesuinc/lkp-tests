@@ -9,6 +9,7 @@ require "#{LKP_SRC}/lib/lkp_path"
 require "#{LKP_SRC}/lib/log"
 require "#{LKP_SRC}/lib/programs"
 require "#{LKP_SRC}/lib/lkp_pattern"
+require "#{LKP_SRC}/lib/tests/stats"
 
 LKP_SRC_ETC ||= LKP::Path.src('etc')
 
@@ -499,23 +500,28 @@ def ignore_lkdtm_dmesg?(result_root)
   File.foreach(last_state).grep(/^is_incomplete_run: 1/).empty?
 end
 
-def stat_unittest(unittests)
-  found_unitest = false
-  unittests.each do |line|
-    if line =~ /### dt-test ### start of unittest/
-      found_unitest = true
-      next
-    end
+def stat_unittest(lines)
+  stats = LKP::Stats.new
 
-    next unless found_unitest
-    break if line =~ /### dt-test ### end of unittest - (\d+) passed, (\d+) failed/
-
-    # ### dt-test ### FAIL of_unittest_overlay_high_level():2475 overlay_base_root not initialized
-    if line =~ /(.*)### dt-test ### FAIL (.*)/
-      e = $2.gsub(/:|\d+/, '').tr(' ', '_')
-      puts "unittest.#{e}.fail: 1"
+  lines.each do |line|
+    case line
+    when /### dt-test ### (pass|fail) (.+)/i
+      # ### dt-test ### pass of_unittest_match_node():1497
+      stats.add("of-unittest.#{$2}", $1)
+    when /Testing (.+): (OK|PASSED)/
+      # Testing event system initcall: OK
+      stats.add($1, :pass)
+    when /(\w+):\s.+\d+ tests passed/
+      # test_hexdump: all 1184 tests passed
+      # IDA: 147357 of 147357 tests passed
+      stats.add($1.downcase, :pass)
+    when /test_meminit: all \d+ tests in (test_.+) (passed)/
+      # test_meminit: all 11 tests in test_pages passed
+      stats.add("test_meminit.#{$1}", :pass)
     end
   end
+
+  stats.dump(OK: :pass)
 end
 
 # check possibly misplaced serial log
