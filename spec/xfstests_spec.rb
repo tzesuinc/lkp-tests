@@ -9,8 +9,8 @@ describe 'xfstests' do
 
     it 'judges the belonging case' do
       [
-        { test: 'xfs-no-bug-on-assert', group: 'xfs-no-bug-on-assert' },
-        { test: 'xfs-115', group: 'xfs-no-bug-on-assert' },
+        { test: 'xfs-no-xfs-bug-on-assert', group: 'xfs-no-xfs-bug-on-assert' },
+        { test: 'xfs-115', group: 'xfs-no-xfs-bug-on-assert' },
         { test: 'xfs-276', group: 'xfs-realtime' },
         { test: 'xfs-114', group: 'xfs-reflink-rmapbt' },
         { test: 'xfs-307', group: 'xfs-scratch-reflink-[0-9]*' },

@@ -94,6 +94,6 @@ xfstests:
     - generic-group-74
     - generic-logdev
     - generic-525
-    - generic-no-bug-on-assert
+    - generic-no-xfs-bug-on-assert
     # - generic-scratch-verity
     # - generic-scratch-dedupe

@@ -96,7 +96,7 @@ is_test_in_groups()
 is_test_in_group()
 {
 	# test: xfs-115 | ext4-group-00
-	# group: xfs-no-bug-on-assert | ext4-logdev
+	# group: xfs-no-xfs-bug-on-assert | ext4-logdev
 	local test=$1
 	local group=$2
 
@@ -161,7 +161,7 @@ setup_fs_config()
 		log_eval export SCRATCH_XFS_LIST_FUZZ_VERBS=random
 	}
 
-	is_test_in_groups "$test" "generic-no-bug-on-assert" "xfs-no-bug-on-assert" && {
+	is_test_in_groups "$test" "generic-no-xfs-bug-on-assert" "xfs-no-xfs-bug-on-assert" && {
 		[ -f /sys/fs/xfs/debug/bug_on_assert ] && echo 0 > /sys/fs/xfs/debug/bug_on_assert
 	}
 
