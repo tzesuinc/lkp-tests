@@ -1,3 +1,5 @@
+automake
+autoconf
 gcc-multilib
 git
 make
