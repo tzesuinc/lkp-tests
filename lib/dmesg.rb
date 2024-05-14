@@ -507,7 +507,7 @@ def stat_unittest(lines)
     case line
     when /### dt-test ### (pass|fail) (.+)/i
       # ### dt-test ### pass of_unittest_match_node():1497
-      stats.add("of-unittest.#{$2}", $1)
+      stats.add("of-unittest.#{$2}", $1, overwrite: true)
     when /Testing (.+): (OK|PASSED)/
       # Testing event system initcall: OK
       stats.add($1, :pass)
