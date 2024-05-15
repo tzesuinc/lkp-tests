@@ -103,8 +103,8 @@ generate_special_require_tests()
 	declare -A rules=(
 		[_require_xfs_stress_online_repair]=xfs
 		[_require_xfs_stress_scrub]=xfs
-		[_require_scratch_reflink]=generic
-		[_require_test_reflink]=generic # [not run] Reflink not supported by test filesystem type: ext2
+		[_require_test_reflink]=generic # [not run] Reflink not supported by test filesystem type: ext2/ext4
+		[_require_scratch_reflink]=generic # [not run] Reflink not supported by scratch filesystem type: ext2
 		[_require_scratch_dedupe]=generic # [not run] Dedupe not supported by scratch filesystem type: ext4
 		[_require_test_dedupe]=generic # [not run] Dedupe not supported by test filesystem type: ext2
 		[holetest]=generic # run slowly on udf
@@ -118,12 +118,14 @@ generate_special_require_tests()
 		[_require_scratch_duperemove]=generic # [not run] duperemove does not support file system type: ext2
 		[_require_logdev]="generic ext4 xfs" # require a valid $SCRATCH_LOGDEV
 		[_require_no_xfs_bug_on_assert]="generic xfs"
+		[_scratch_mkfs_blocksized]=generic # [not run] Filesystem f2fs not supported in _scratch_mkfs_blocksized
 	)
 
 	for pattern in "${!rules[@]}"; do
-		local test=${pattern#_require_} # xfs_stress_scrub
+		local test=${pattern#_} # require_xfs_stress_scrub
+		test=${test#require_} # xfs_stress_scrub
 		test=${test#${fs}_} # stress_scrub
-		test="${test//_/-}"
+		test="${test//_/-}" # stress-scrub
 
 		for fs in ${rules[$pattern]}; do
 			echo "collect ${pattern} $fs as $fs-$test"
