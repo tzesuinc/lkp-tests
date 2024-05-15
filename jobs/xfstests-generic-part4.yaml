@@ -36,8 +36,7 @@ xfstests:
     - generic-group-72
     - generic-group-73
     - generic-group-74
-    - generic-no-bug-on-assert
-    - generic-scratch-reflink
+    - generic-no-xfs-bug-on-assert
 
 ---
 fs:
@@ -50,13 +49,10 @@ fs:
 xfstests:
   test:
     - generic-logdev
-    - generic-scratch-duperemove # [not run] duperemove does not support file system type: ext2
-    - generic-test-reflink # [not run] Reflink not supported by test filesystem type: ext2
-    - generic-test-dedupe # [not run] Dedupe not supported by test filesystem type: ext2
+    - generic-scratch-reflink # [not run] Reflink not supported by scratch filesystem type: ext2
 
 ---
 fs:
-  - ext2
   - xfs
   - btrfs
   - f2fs
@@ -64,7 +60,30 @@ fs:
 
 xfstests:
   test:
-    - generic-scratch-dedupe # [not run] Dedupe not supported by scratch filesystem type: ext4
+    - generic-test-reflink # [not run] Reflink not supported by test filesystem type: ext2/ext4
+
+---
+fs:
+  - ext4
+  - xfs
+  - btrfs
+  - udf
+
+xfstests:
+  test:
+    - generic-test-dedupe # [not run] Dedupe not supported by test filesystem type: ext2/f2fs
+    - generic-scratch-duperemove # [not run] duperemove does not support file system type: ext2/f2fs
+
+---
+fs:
+  - ext2
+  - xfs
+  - btrfs
+  - f2fs
+
+xfstests:
+  test:
+    - generic-scratch-dedupe # [not run] Dedupe not supported by scratch filesystem type: ext4/udf
 
 ---
 fs:
@@ -115,7 +134,7 @@ fs:
   - xfs
   - btrfs
   - f2fs
-# - ocfs2 # mount.ocfs2 known bug
+  # - ocfs2 # mount.ocfs2 known bug
 
 xfstests:
   test:
@@ -133,3 +152,16 @@ fs:
 xfstests:
   test:
     - generic-idmapped-mounts # [not run] vfstest not support by cifs/ext2/udf
+
+---
+fs:
+  - ext2
+  - ext4
+  - xfs
+  - btrfs
+  - udf
+  # - ocfs2 # mount.ocfs2 known bug
+
+xfstests:
+  test:
+    - generic-scratch-mkfs-blocksized # [not run] Filesystem f2fs not supported in _scratch_mkfs_blocksized
