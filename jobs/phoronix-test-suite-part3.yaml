@@ -12,7 +12,7 @@ phoronix-test-suite:
     - openradioss-1.1.1
     # - openems-1.0.0 # The test quit with a non-zero exit status. E: AttributeError: module 'numpy' has no attribute 'float'. 96 cpu, 512G memory tbox, run once cost about 22m
     - petsc-1.0.0
-    # - nwchem-1.1.1 # runtime > 1h on lkp-csl-2sp7
+    - nwchem-1.1.1 # runtime > 1h on lkp-csl-2sp7
     # - hdparm-read-1.0.0 #  The test run did not produce a result.
     # - duckdb-1.0.0 # The test quit with a non-zero exit status.
     # - build-linux-kernel-1.15.0 # runtime > 40m on lkp-csl-2sp7
@@ -22,7 +22,7 @@ phoronix-test-suite:
     # - build-webkitfltk-1.1.0 # deprecated
     - cockroach-1.0.2
     - asmfish-1.1.2
-    # - numpy-1.2.1 # runtime > 1h
+    - numpy-1.2.1 # runtime > 1h
 
   - test: easywave-1.0.0
     option_a:
@@ -60,29 +60,29 @@ phoronix-test-suite:
       - Keyed Algorithms
       # - All Algorithms     [This option can be very time consuming.]
 
-  # - test: etcd-1.0.0 # Estimated Time To Completion: 49 Minutes
-    # option_a:
-      # - PUT
-      # - RANGE
-    # option_b:
-      # - 50
+  - test: etcd-1.0.0 # Estimated Time To Completion: 49 Minutes
+    option_a:
+      - PUT
+      - RANGE
+    option_b:
+      - 50
       # - 100
       # - 500
-    # option_c:
-      # - 100
+    option_c:
+      - 100
       # - 1000
 
-  # - test: hammerdb-mariadb-1.1.0
-    # option_a:
-      # - 8
+  - test: hammerdb-mariadb-1.1.0
+    option_a:
+      - 8
       # - 16
       # - 32
       # - 64
       # - 128
       # - 256
       # - 512
-    # option_b:
-      # - 100
+    option_b:
+      - 100
       # - 250
       # - 500
       # - 1000
