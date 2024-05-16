@@ -116,8 +116,14 @@ setup_network()
 		echo "!!! $err_msg !!!" > /dev/ttyS0
 	}
 
-	reboot 2>/dev/null
-	exit
+	if is_virt; then
+		export NO_NETWORK=1
+		echo "export NO_NETWORK=1 due to config network failed"
+		return
+	else
+		reboot 2>/dev/null
+		exit
+	fi
 }
 
 add_lkp_user()
