@@ -205,6 +205,9 @@ split_tests()
 
 	$LKP_SRC/tools/split-tests xfs-scratch-reflink 20 xfs-scratch-reflink-
 	hide xfs-scratch-reflink
+
+	$LKP_SRC/tools/split-tests generic-metadata-journaling 20 generic-metadata-journaling-
+	hide generic-metadata-journaling
 }
 
 # Some special tests need to be separated and tested separately
