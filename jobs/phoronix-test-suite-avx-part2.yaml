@@ -22,10 +22,10 @@ phoronix-test-suite:
     option_b:
       - 1
       # - 16
-      - 32
+      # - 32
       # - 64
       # - 256
-      - 512
+      # - 512
     option_c:
       - VGG-16
       - ResNet-50
