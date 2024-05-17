@@ -1,5 +1,5 @@
-automake
 autoconf
+automake
 gcc-multilib
 git
 make
