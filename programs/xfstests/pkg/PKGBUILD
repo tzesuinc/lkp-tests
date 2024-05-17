@@ -124,10 +124,11 @@ generate_special_require_tests()
 	for pattern in "${!rules[@]}"; do
 		local test=${pattern#_} # require_xfs_stress_scrub
 		test=${test#require_} # xfs_stress_scrub
-		test=${test#${fs}_} # stress_scrub
-		test="${test//_/-}" # stress-scrub
+		test="${test//_/-}" # xfs-stress-scrub
 
 		for fs in ${rules[$pattern]}; do
+			test=${test#${fs}-} # stress-scrub
+
 			echo "collect ${pattern} $fs as $fs-$test"
 			collect "$pattern" "$fs" > "$benchmark_path/tests/$fs-$test"
 		done
