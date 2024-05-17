@@ -94,7 +94,30 @@ fs:
 
 xfstests:
   test:
-    - generic-metadata-journaling # [not run] ext2/udf does not support metadata journaling
+    # [not run] ext2/udf does not support metadata journaling
+    - generic-metadata-journaling-01
+    - generic-metadata-journaling-02
+    - generic-metadata-journaling-03
+    - generic-metadata-journaling-04
+    - generic-metadata-journaling-05
+    - generic-metadata-journaling-08
+    - generic-metadata-journaling-16
+    - generic-metadata-journaling-17
+    - generic-metadata-journaling-18
+    - generic-metadata-journaling-19
+    - generic-metadata-journaling-20
+    - generic-metadata-journaling-22
+    - generic-metadata-journaling-23
+    - generic-metadata-journaling-24
+    - generic-metadata-journaling-25
+    - generic-metadata-journaling-26
+    - generic-metadata-journaling-27
+    - generic-metadata-journaling-29
+    - generic-metadata-journaling-31
+    - generic-metadata-journaling-32
+    - generic-metadata-journaling-33
+    - generic-metadata-journaling-34
+    - generic-metadata-journaling-35
 
 ---
 fs:
