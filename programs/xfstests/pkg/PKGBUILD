@@ -119,6 +119,7 @@ generate_special_require_tests()
 		[_require_logdev]="generic ext4 xfs" # require a valid $SCRATCH_LOGDEV
 		[_require_no_xfs_bug_on_assert]="generic xfs"
 		[_scratch_mkfs_blocksized]=generic # [not run] Filesystem f2fs not supported in _scratch_mkfs_blocksized
+		[_require_projid16bit]=xfs # [not run] 16 bit project IDs not supported on /dev/sda4
 	)
 
 	for pattern in "${!rules[@]}"; do

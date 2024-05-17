@@ -11,3 +11,4 @@ xfstests:
   test:
     - xfs-stress-online-repair
     - xfs-stress-scrub
+    - xfs-projid16bit
