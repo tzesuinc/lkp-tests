@@ -529,6 +529,8 @@ def stat_unittest(lines)
     when /test_meminit: all \d+ tests in (test_.+) (passed)/
       # test_meminit: all 11 tests in test_pages passed
       stats.add("test_meminit.#{$1}", :pass)
+    when /Kernel tests: Boot OK|run-job \/lkp/
+      break
     end
   end
 
