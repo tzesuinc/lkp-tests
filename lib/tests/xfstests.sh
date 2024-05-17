@@ -231,7 +231,7 @@ setup_fs_config()
 	}
 
 	# need at least 3 partitions for TEST_DEV, SCRATCH_DEV and LOGWRITES_DEV
-	if is_test_in_groups "$test" "generic-logwrites" "btrfs-logwrites" && [ "$nr_partitions" -ge 3 ]; then
+	if is_test_in_groups "$test" "generic-log-writes" "btrfs-log-writes" && [ "$nr_partitions" -ge 3 ]; then
 		LOGWRITES_DEV=${partitions#* }
 		LOGWRITES_DEV=${LOGWRITES_DEV%% *}
 		log_eval export LOGWRITES_DEV="$LOGWRITES_DEV"

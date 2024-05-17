@@ -12,7 +12,7 @@ fs:
 xfstests:
   test:
     # - btrfs-075
-    - btrfs-logwrites
+    - btrfs-log-writes
     - btrfs-group-00
     - btrfs-group-01
     - btrfs-group-02

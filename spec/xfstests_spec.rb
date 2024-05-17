@@ -17,7 +17,7 @@ describe 'xfstests' do
         { test: 'xfs-235', group: 'xfs-scratch-rmapbt' },
         { test: 'generic-510', group: 'generic-group-[0-9]*' },
         { test: 'generic-437', group: 'generic-dax' },
-        { test: 'generic-457', group: 'generic-logwrites' },
+        { test: 'generic-457', group: 'generic-log-writes' },
         { test: 'generic-487', group: 'generic-logdev' },
         { test: 'ext4-029', group: 'ext4-logdev' },
         { test: 'xfs-275', group: 'xfs-logdev' }

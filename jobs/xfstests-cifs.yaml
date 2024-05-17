@@ -35,7 +35,7 @@ xfstests:
     - generic-311
     - generic-281
     # - generic-409 # runtime > 20m
-    - generic-logwrites
+    - generic-log-writes
     - generic-group-18
     - generic-group-19
     - generic-group-20
