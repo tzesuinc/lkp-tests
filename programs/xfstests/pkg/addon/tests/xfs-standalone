@@ -1,5 +1,7 @@
 # execution time > 100m
 002
+# the filesystem has valuable metadata changes in a log which needs to 11 be replayed
+083
 # execution time ~ 80m
 136
 # execution time > 40m
@@ -16,3 +18,5 @@
 300
 # Require XFS built without CONFIG_XFS_DEBUG
 490
+# [not run] Can't run find-api-violations.sh without WORKAREA set
+437

@@ -42,3 +42,5 @@
 565
 # runtime > 3057s on 4HDD-xfs-generic-scratch-reflink lkp-skl-d03
 176
+# special handling in xfstests.sh
+470
