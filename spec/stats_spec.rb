@@ -12,7 +12,9 @@ describe 'stats' do
         old_stat = File.read yaml_file
 
         stat_script = LKP::Programs.find_parser(script)
-        new_stat = if script =~ /^(kmsg|dmesg|mpstat|fio)$/
+        new_stat = if script =~ /^(kmsg)$/
+                     `RESULT_ROOT=/boot/1/vm- #{stat_script} #{file}`
+                   elsif script =~ /^(dmesg|mpstat|fio)$/
                      `#{stat_script} #{file}`
                    else
                      `#{stat_script} < #{file}`
