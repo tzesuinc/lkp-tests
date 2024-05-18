@@ -13,10 +13,12 @@ while (line = $stdin.gets)
   line = line.resolve_invalid_bytes
 
   case line
-  when /^([^ ]+? ).*\[(passed)\]/
+  when /^(nvme[^\s]+)\s+\(tr=loop bd=(device|file)\).*\[(passed|failed)\]/
+    # nvme/006 (tr=loop bd=device) (create an NVMeOF target)       [passed]
+    # nvme/006 (tr=loop bd=file) (create an NVMeOF target)         [passed]
+    stats.add "#{$1}.#{$2}", $3
+  when /^([^ ]+? ).*\[(passed|failed)\]/
     # srp/002 (File I/O ... and login (mq)) [passed]
-    stats.add $1.to_s, $2
-  when /^([^ ]+? ).*\[(failed)\]/
     # meta/003 (exit with non-zero status)                         [failed]
     # [   60.799343] meta/003 (exit with non-zero status)                         [failed]
     stats.add $1.to_s, $2

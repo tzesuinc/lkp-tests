@@ -1,0 +1,10 @@
+nvme/005 (tr=loop) (reset local loopback target)             [passed]
+    runtime  2.068s  ...  2.079s
+nvme/006 (tr=loop bd=device) (create an NVMeOF target)
+    runtime  0.076s  ...
+nvme/006 (tr=loop bd=device) (create an NVMeOF target)       [passed]
+    runtime  0.076s  ...  0.081s
+nvme/006 (tr=loop bd=file) (create an NVMeOF target)
+    runtime  0.837s  ...
+nvme/006 (tr=loop bd=file) (create an NVMeOF target)         [passed]
+    runtime  0.837s  ...  0.779s
