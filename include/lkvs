@@ -4,3 +4,4 @@ initrds+:
 
 need_kconfig:
 - INTEL_UNCORE_FREQ_CONTROL: m
+- X86_USER_SHADOW_STACK: y
