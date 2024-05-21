@@ -114,7 +114,7 @@ need_kconfig:
 - IP_DCCP
 - MACVLAN
 - MACVTAP
-% elsif ___.group == "netfilter"
+% elsif ___.group == "net/netfilter"
 - NET_NS: y
 - NFT_OBJREF: m
 - NFT_FLOW_OFFLOAD: m

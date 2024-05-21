@@ -302,14 +302,14 @@ fixup_gpio()
 	export CFLAGS="-I../../../../usr/include"
 }
 
-fixup_netfilter()
+fixup_net_netfilter()
 {
 	# RULE_APPEND failed (No such file or directory): rule in chain BROUTING.
 	# table `broute' is obsolete commands.
 	update-alternatives --set ebtables /usr/sbin/ebtables-legacy
 
-	echo "timeout=3600" >> netfilter/settings
-	sed -ie "s/[\t[:space:]]\.\.\/\.\.\/\.\.\/samples\/pktgen\/pktgen_bench_xmit_mode_netif_receive.sh/\.\.\/\.\.\/\.\.\/\.\.\/samples\/pktgen\/pktgen_bench_xmit_mode_netif_receive.sh/g" netfilter/nft_concat_range.sh
+	echo "timeout=3600" >> net/netfilter/settings
+	sed -ie "s/[\t[:space:]]\.\.\/\.\.\/\.\.\/samples\/pktgen\/pktgen_bench_xmit_mode_netif_receive.sh/\.\.\/\.\.\/\.\.\/\.\.\/samples\/pktgen\/pktgen_bench_xmit_mode_netif_receive.sh/g" net/netfilter/nft_concat_range.sh
 }
 
 fixup_lkdtm()
@@ -621,8 +621,8 @@ fixup_test_group()
 
 	if [[ "$group" = "tc-testing" ]]; then
 		fixup_tc_testing || return
-	elif [[ $(type -t "fixup_${group}") = function ]]; then
-		fixup_${group} || return
+	elif [[ $(type -t "fixup_${group//\//_}") = function ]]; then
+		fixup_${group//\//_} || return
 	fi
 
 	# update Makefile to run the specified $test only
