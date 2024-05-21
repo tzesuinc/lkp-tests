@@ -25,7 +25,7 @@ kernel-selftests:
   group:
     - group-02
     - group-s
-    - mptcp
+    - net/mptcp
     - pidfd
 
 # for sysctl

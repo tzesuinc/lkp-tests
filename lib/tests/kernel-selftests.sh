@@ -471,8 +471,6 @@ prepare_for_selftest()
 		selftest_mfs=$(ls -d [m-r]*/Makefile | grep -v -e ^media_tests -e ^rseq -e ^resctrl -e ^mm -e ^net -e ^netfilter -e ^rcutorture -e ^powerpc -e ^pidfd -e ^memory-hotplug -e ^rust)
 	elif [ "$group" = "group-03" ]; then
 		selftest_mfs=$(ls -d [t-z]*/Makefile | grep -v -e ^x86 -e ^tc-testing -e ^vm -e ^user_events -e ^watchdog)
-	elif [ "$group" = "mptcp" ]; then
-		selftest_mfs=$(ls -d net/mptcp/Makefile)
 	elif [ "$group" = "group-s" ]; then
 		selftest_mfs=$(ls -d s*/Makefile | grep -v -e ^sgx -e ^sparc64)
 	elif [ "$group" = "memory-hotplug" ]; then

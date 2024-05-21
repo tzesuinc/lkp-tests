@@ -382,7 +382,7 @@ need_kconfig:
 - MEMORY_HOTPLUG_SPARSE: y
 - NOTIFIER_ERROR_INJECTION
 - MEMORY_NOTIFIER_ERROR_INJECT
-% elsif ___.group == "mptcp"
+% elsif ___.group == "net/mptcp"
 - NFT_COMPAT
 - NFT_SOCKET
 - NETFILTER_XT_MATCH_BPF
