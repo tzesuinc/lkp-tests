@@ -99,6 +99,7 @@ runtests()
             log_cmd ./runtests -f pmu/tests
             ;;
         splitlock)
+            cat /proc/cpuinfo | grep -q split_lock_detect || die "split_lock_detect not supported on current CPU"
             log_cmd ./runtests -f splitlock/tests
             ;;
     esac
