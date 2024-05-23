@@ -265,6 +265,14 @@ module Git
 
         @ancestors[commit] = @base.command("merge-base --is-ancestor #{sha} #{commit} 2>/dev/null; echo $?").to_i.zero?
       end
+
+      def command(cmd, opts = [], redirect = '', chdir: true, &block)
+        @base.command(cmd, opts, redirect, chdir: chdir, &block)
+      end
+
+      def command_lines(cmd, opts = [], redirect = '', chdir: true)
+        @base.command_lines(cmd, opts, redirect, chdir: chdir)
+      end
     end
 
     class Tag
