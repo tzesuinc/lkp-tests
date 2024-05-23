@@ -15,7 +15,7 @@ module Git
         # this is to convert non sha1 40 such as tag name to corresponding commit sha
         # otherwise Object::AbstractObject uses @base.lib.revparse(@objectish) to get sha
         # which sometimes is not as expected when we give a tag name
-        self.objectish = @base.command('rev-list', ['-1', objectish]) unless sha1_40?(objectish)
+        self.objectish = command('rev-list', ['-1', objectish]) unless sha1_40?(objectish)
       end
 
       def project
@@ -29,7 +29,7 @@ module Git
       end
 
       def tags
-        @tags ||= @base.command("tag --points-at #{sha} | grep -v ^error:").split
+        @tags ||= command("tag --points-at #{sha} | grep -v ^error:").split
       end
 
       def parent_shas
@@ -37,7 +37,7 @@ module Git
       end
 
       def show(content)
-        @base.command_lines('show', "#{sha}:#{content}")
+        command_lines('show', "#{sha}:#{content}")
       end
 
       def tag
@@ -63,7 +63,7 @@ module Git
         if project == 'linux' && !@base.project_spec['use_customized_release_tag_pattern']
           @base.linux_last_release_tag_strategy(sha)
         else
-          last_release_sha = @base.command("rev-list #{sha} | grep -m1 -Fx \"#{@base.release_shas.join("\n")}\"").chomp
+          last_release_sha = command("rev-list #{sha} | grep -m1 -Fx \"#{@base.release_shas.join("\n")}\"").chomp
 
           last_release_sha.empty? ? nil : [@base.release_shas2tags[last_release_sha], false]
         end
@@ -171,7 +171,7 @@ module Git
 
       def reachable_from?(branch)
         branch = @base.gcommit(branch)
-        r = @base.command('rev-list', ['-n', '1', sha, "^#{branch.sha}"])
+        r = command('rev-list', ['-n', '1', sha, "^#{branch.sha}"])
         r.strip.empty?
       end
 
@@ -188,7 +188,7 @@ module Git
       end
 
       def relative_commit_date
-        @base.lib.command("log -n1 --format=format:'%cr' #{sha}")
+        command("log -n1 --format=format:'%cr' #{sha}")
       end
 
       def prev_official_release
@@ -210,12 +210,12 @@ module Git
       end
 
       def files
-        @base.command("diff-tree --no-commit-id --name-only -r #{sha}").split
+        command("diff-tree --no-commit-id --name-only -r #{sha}").split
       end
 
       def fixed?(branch)
         short_sha = sha[0..7]
-        !@base.command("log --grep 'Fixes:' #{sha}..#{branch} | grep \"Fixes: #{short_sha}\"").empty?
+        !command("log --grep 'Fixes:' #{sha}..#{branch} | grep \"Fixes: #{short_sha}\"").empty?
       end
 
       def fixed_by(branch)
@@ -224,13 +224,13 @@ module Git
 
       def reverted?(branch)
         reverted_subject = "Revert \\\"#{subject.gsub(/(["\[\]])/, '\\\\\1')}\\\""
-        !@base.command("log --format=%s #{sha}..#{branch} | grep -x -m1 \"#{reverted_subject}\"").empty?
+        !command("log --format=%s #{sha}..#{branch} | grep -x -m1 \"#{reverted_subject}\"").empty?
       end
 
       def exist_in?(branch)
         # $ git merge-base --is-ancestor 071e7d275bd4abeb7d75844020b05bd77032ac62 origin/master
         # fatal: Not a valid commit name 071e7d275bd4abeb7d75844020b05bd77032ac62
-        @base.command("merge-base --is-ancestor #{sha} #{branch} 2>/dev/null; echo $?").to_i.zero?
+        command("merge-base --is-ancestor #{sha} #{branch} 2>/dev/null; echo $?").to_i.zero?
       end
 
       def mainline?
@@ -246,7 +246,7 @@ module Git
       def patch_id
         return @patch_id if @patch_id
 
-        @patch_id = @base.command("show #{sha} 2>/dev/null | git patch-id --stable").split.first
+        @patch_id = command("show #{sha} 2>/dev/null | git patch-id --stable").split.first
       end
 
       def changes(base_commit = nil)
@@ -255,7 +255,7 @@ module Git
         base_commit ||= "#{sha}~"
 
         cmd = "diff --name-status #{base_commit} #{sha}"
-        @base.command_lines(cmd)
+        command_lines(cmd)
       end
 
       def ancestor?(commit)
@@ -267,7 +267,7 @@ module Git
         @ancestors ||= {}
         @ancestors[commit] if @ancestors.key? commit
 
-        @ancestors[commit] = @base.command("merge-base --is-ancestor #{sha} #{commit} 2>/dev/null; echo $?").to_i.zero?
+        @ancestors[commit] = command("merge-base --is-ancestor #{sha} #{commit} 2>/dev/null; echo $?").to_i.zero?
       end
 
       def command(cmd, opts = [], redirect = '', chdir: true, &block)
