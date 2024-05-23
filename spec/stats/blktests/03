@@ -66,3 +66,23 @@ meta/014 (skip in test())
 meta/014 (skip in test())                                    [not run]
     runtime    ...  0.000s
     (╯°□°)╯︵ ┻━┻
+meta/016 (condition set 0) (repeat test())
+meta/016 (condition set 0) (repeat test())                   [passed]
+    runtime    ...  0.000s
+meta/016 (condition set 1) (repeat test())
+meta/016 (condition set 1) (repeat test())                   [passed]
+    runtime    ...  0.000s
+meta/018 (x=0 y=0) (combine two set_conditions() hooks)
+meta/018 (x=0 y=0) (combine two set_conditions() hooks)      [passed]
+    runtime    ...  0.000s
+meta/018 (x=1 y=0) (combine two set_conditions() hooks)
+meta/018 (x=1 y=0) (combine two set_conditions() hooks)      [passed]
+    runtime    ...  0.000s
+meta/018 (x=0 y=1) (combine two set_conditions() hooks)
+meta/018 (x=0 y=1) (combine two set_conditions() hooks)      [passed]
+meta/019 (x=0 y=0 z=0) (combine three set_conditions() hooks)
+meta/019 (x=0 y=0 z=0) (combine three set_conditions() hooks) [passed]
+    runtime    ...  0.000s
+meta/019 (x=1 y=0 z=0) (combine three set_conditions() hooks)
+meta/019 (x=1 y=0 z=0) (combine three set_conditions() hooks) [passed]
+    runtime    ...  0.000s
