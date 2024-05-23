@@ -218,6 +218,10 @@ module Git
         !@base.command("log --grep 'Fixes:' #{sha}..#{branch} | grep \"Fixes: #{short_sha}\"").empty?
       end
 
+      def fixed_by(branch)
+        command_lines("log --grep='^Fixes: #{sha[0..7]}' -P --oneline --format='%H' #{sha}..#{branch}").map { |commit| @base.gcommit(commit) }
+      end
+
       def reverted?(branch)
         reverted_subject = "Revert \\\"#{subject.gsub(/(["\[\]])/, '\\\\\1')}\\\""
         !@base.command("log --format=%s #{sha}..#{branch} | grep -x -m1 \"#{reverted_subject}\"").empty?
