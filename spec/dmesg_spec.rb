@@ -51,6 +51,14 @@ describe 'Dmesg' do
         expect(line).to eq 'segfault_at_ip_sp_error'
       end
     end
+
+    it 'slab cache affected' do
+      ['[   32.298491][  T896] BUG kmalloc-8: Right Redzone overwritten',
+       '[   14.476643][    C0] BUG kmalloc-512 (Tainted: G S      W       T ): Right Redzone overwritten'].each do |line|
+        line, _bug_to_bisect = analyze_error_id line
+        expect(line).to eq 'BUG_kmalloc-#:Right_Redzone_overwritten'
+      end
+    end
   end
 
   describe 'get_crash_calltraces' do
