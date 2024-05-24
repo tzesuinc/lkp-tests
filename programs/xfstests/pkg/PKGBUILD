@@ -94,12 +94,6 @@ generate_special_require_tests()
 		grep "dangerous_fuzzers" tests/$fs/group.list | cut -d' ' -f1 > $benchmark_path/tests/$fs-dangerous_fuzzers
 	done
 
-	# below sequence should not be changed because some xfs tests require both _require_scratch_reflink and _require_xfs_scratch_rmapbt
-	collect _require_realtime xfs > $benchmark_path/tests/xfs-realtime
-	git grep -L "_require_realtime" $(git grep -l "_require_scratch_reflink" $(git grep -l "_require_xfs_scratch_rmapbt" | grep tests/xfs))  | awk -F/ '{print $3}' | grep -v -f <(cat $benchmark_path/tests/xfs-*) > $benchmark_path/tests/xfs-reflink-rmapbt
-	collect _require_xfs_scratch_rmapbt xfs > $benchmark_path/tests/xfs-scratch-rmapbt
-	collect _require_scratch_reflink xfs > $benchmark_path/tests/xfs-scratch-reflink
-
 	declare -A rules=(
 		[_require_xfs_stress_online_repair]=xfs
 		[_require_xfs_stress_scrub]=xfs
@@ -134,6 +128,12 @@ generate_special_require_tests()
 			collect "$pattern" "$fs" > "$benchmark_path/tests/$fs-$test"
 		done
 	done
+
+	# below sequence should not be changed because some xfs tests require both _require_scratch_reflink and _require_xfs_scratch_rmapbt
+	collect _require_realtime xfs > $benchmark_path/tests/xfs-realtime
+	git grep -L "_require_realtime" $(git grep -l "_require_scratch_reflink" $(git grep -l "_require_xfs_scratch_rmapbt" | grep tests/xfs))  | awk -F/ '{print $3}' | grep -v -f <(cat $benchmark_path/tests/xfs-*) > $benchmark_path/tests/xfs-reflink-rmapbt
+	collect _require_xfs_scratch_rmapbt xfs > $benchmark_path/tests/xfs-scratch-rmapbt
+	collect _require_scratch_reflink xfs > $benchmark_path/tests/xfs-scratch-reflink
 
 	# these tests require -o dax support
 	for fs in generic ext4
