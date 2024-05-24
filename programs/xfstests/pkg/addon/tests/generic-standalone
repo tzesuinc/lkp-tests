@@ -34,6 +34,8 @@
 564
 # execution time > 12h
 650
+# execution time > 2h on 4HDD-ext4-smbv2/lkp-skl-d05
+676
 # Require selinux to be enabled
 700
 # _require_acl_get_max, btrfs/ext2 does not define maximum ACL count
