@@ -14,8 +14,6 @@ patch_source()
 {
 	cd $srcdir/$pkgname
 
-	patch -p1 < "$(get_pkg_dir $pkgname)/libhugetlbfs-test.patch"
-
 	if [ "$DISTRO" = "centos" ]; then
 		patch -p1 < $(get_pkg_dir $pkgname)/0001-tests-hugetests.h-fix-compile-errors-under-centos.patch
 	fi
