@@ -343,10 +343,6 @@ def analyze_error_id(line)
     # [  834.411251 ] init[1]: segfault at ffffffffff600400 ip ffffffffff600400 sp 00007fff59f7caa8 error 15
     line = 'segfault at ip sp error'
     bug_to_bisect = oops_to_bisect_pattern line
-  when /(BUG kmalloc-\d+) \(Tainted:.+\)(: .+)/
-    # [   14.476643][    C0] BUG kmalloc-512 (Tainted: G S      W       T ): Right Redzone overwritten
-    line = "#{$1}#{$2}"
-    bug_to_bisect = oops_to_bisect_pattern line
   else
     bug_to_bisect = oops_to_bisect_pattern line
   end
@@ -372,6 +368,10 @@ def analyze_error_id(line)
   error_id.gsub!(/(=)[0-9a-f]+\b/, '\1#')
   error_id.gsub!(/[+\/]0x[0-9a-f]+\b/, '')
   error_id.gsub!(/[+\/][0-9a-f]+\b/, '')
+
+  # [   14.476643][    C0] BUG kmalloc-512 (Tainted: G S      W       T ): Right Redzone overwritten
+  # [  264.548980][    C1] BUG kmalloc-rnd-02-96 (Tainted: G        W       TN): Freechain corrupt
+  error_id.gsub!(/ \(Tainted:.+\)/, '')
 
   error_id = common_error_id(error_id)
 
