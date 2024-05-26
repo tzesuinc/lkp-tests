@@ -251,7 +251,7 @@ phoronix-test-suite:
     option_b: # Test
       - Random Write
       - Async Random Write
-      - Random Read
+      # - Random Read # The test run did not produce a result.
       - Async Random Read
       - Sequential Write
       - Sequential Read
