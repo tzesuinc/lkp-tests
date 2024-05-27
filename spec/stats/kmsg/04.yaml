@@ -1,6 +1,6 @@
 
 # Slab corruption (Tainted: G W ): .* start=
-Slab_corruption:kmalloc-#start=#,len=: 1: 1
+Slab_corruption:kmalloc-#start=#,len=: 1
 message:Slab_corruption:kmalloc-#start=#,len=: <3>[    2.279788] Slab corruption (Tainted: G        W      ): kmalloc-1024 start=c96b2000, len=1024
 pattern:Slab_corruption:kmalloc-#start=#,len=: Slab corruption (Tainted: G W ): .* start=
 
