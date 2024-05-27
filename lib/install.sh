@@ -132,17 +132,23 @@ get_dependency_file()
 
 map_python_packages()
 {
-	# many python2 pkgs are not available in debian 11 and higher version source anymore
-	# do a general mapping from python-pkg to python3-pkg
-	[[ "$distro-$_system_version" =~ debian-1[1-9] ]] && map_python2_to_python3
-
-	# many python2 pkgs are not available in ubuntu 20.04 and higher version source anymore
-	# do a general mapping from python-pkg to python3-pkg
-	[[ "$distro-$_system_version" =~ ubuntu-2[0-9].* ]] && map_python2_to_python3
-
-	[[ "$distro-$_system_version" =~ fedora-[3][8-9] ]] && map_python2_to_python3
-
-	[[ "$distro-$_system_version" =~ centos-[9] ]] && map_python2_to_python3
+	# Do a general mapping from python-pkg to python3-pkg since many python2 pkgs are not available in
+	#	debian 11 and higher version source anymore
+	#	ubuntu 20.04 and higher version source anymore
+	case "$distro-$_system_version" in
+		debian-1[1-9]*|debian-trixie_sid)
+			map_python2_to_python3
+			;;
+		ubuntu-2[0-9].*)
+			map_python2_to_python3
+			;;
+		fedora-[3][8-9]*)
+			map_python2_to_python3
+			;;
+		centos-[9]*)
+			map_python2_to_python3
+			;;
+	esac
 }
 
 get_dependency_packages()
