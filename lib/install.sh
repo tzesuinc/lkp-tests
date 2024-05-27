@@ -130,6 +130,21 @@ get_dependency_file()
 	[ -f "$file" ] && echo $file
 }
 
+map_python_packages()
+{
+	# many python2 pkgs are not available in debian 11 and higher version source anymore
+	# do a general mapping from python-pkg to python3-pkg
+	[[ "$distro-$_system_version" =~ debian-1[1-9] ]] && map_python2_to_python3
+
+	# many python2 pkgs are not available in ubuntu 20.04 and higher version source anymore
+	# do a general mapping from python-pkg to python3-pkg
+	[[ "$distro-$_system_version" =~ ubuntu-2[0-9].* ]] && map_python2_to_python3
+
+	[[ "$distro-$_system_version" =~ fedora-[3][8-9] ]] && map_python2_to_python3
+
+	[[ "$distro-$_system_version" =~ centos-[9] ]] && map_python2_to_python3
+}
+
 get_dependency_packages()
 {
 	local distro=$1
@@ -144,17 +159,7 @@ get_dependency_packages()
 	parse_packages_arch
 	[ "$distro" != "debian" ] && remove_packages_version && remove_packages_repository
 
-	# many python2 pkgs are not available in debian 11 and higher version source anymore
-	# do a general mapping from python-pkg to python3-pkg
-	[[ "$distro-$_system_version" =~ debian-1[1-9] ]] && map_python2_to_python3
-
-	# many python2 pkgs are not available in ubuntu 20.04 and higher version source anymore
-	# do a general mapping from python-pkg to python3-pkg
-	[[ "$distro-$_system_version" =~ ubuntu-2[0-9].* ]] && map_python2_to_python3
-
-	[[ "$distro-$_system_version" =~ fedora-[3][8-9] ]] && map_python2_to_python3
-
-	[[ "$distro-$_system_version" =~ centos-[9] ]] && map_python2_to_python3
+	map_python_packages
 
 	adapt_packages | sort | uniq
 }
