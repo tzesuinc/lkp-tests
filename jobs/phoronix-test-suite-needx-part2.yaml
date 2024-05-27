@@ -8,8 +8,8 @@ times_to_run: 1
 phoronix-test-suite:
   - test: realsr-ncnn-1.0.0
     option_a:
-      # - Yes # TAA (Temporal Anti-Aliasing) costs long time
-      - No
+      # - 1 # Yes # TAA (Temporal Anti-Aliasing) costs long time
+      - 2 # No
 
   - test: vkmark-1.3.2
     option_a:
