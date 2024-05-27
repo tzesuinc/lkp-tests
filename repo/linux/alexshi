@@ -1,2 +1,3 @@
 url: https://github.com/alexshi/linux.git
 belongs_to: ali
+test_old_branches: .*
