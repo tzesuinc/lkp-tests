@@ -45,4 +45,16 @@ fs:
 
 xfstests:
   test:
-    - generic-387
+    - generic-470
+
+---
+fs:
+  - ext2
+  - ext4
+  - btrfs
+  - f2fs
+  - udf
+
+xfstests:
+  test:
+    - generic-387 # runtime > 2h on 4HDD-xfs/lkp-skl-d01
