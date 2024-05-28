@@ -1014,7 +1014,7 @@ end
 class FirmwareStater < Stater
   def stat(line, stats)
     case line
-    when /^# Running kernel configuration test \d+ -- (.*)/
+    when /# Running kernel configuration test \d+ -- (.*)/
       # Running kernel configuration test 1 -- rare
       @test_case = $1
     when /^# Testing with the (file .*)\.\.\.$/
