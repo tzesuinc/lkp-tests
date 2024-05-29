@@ -70,12 +70,12 @@ for storage in $storages
 do
 	mnt_point=$(stat -c %m $(readlink -f $storage))
 	available_storage_size=$(df -k | awk '{print $4" "$NF}' | grep $mnt_point$ | awk '{print $1}')
-	[ $available_storage_size ] || die "storage $storage doesn't mounted"
+	[ -n "$available_storage_size" ] || die "storage $storage doesn't mounted"
 	available_storage_size=$(to_byte ${available_storage_size}k)
 
 	require_size=$test_size
 	df | grep $mnt_point$ | awk '{print $1}' | grep -q /dev/pmem && require_size=$size
-	[ $available_storage_size -lt $require_size ] && die "storage $storage available size: $available_storage_size < $require_size"
+	[ "$available_storage_size" -lt "$require_size" ] && die "storage $storage available size: $available_storage_size < $require_size"
 done
 
 nr_storages=$(echo $storages | wc -w)
