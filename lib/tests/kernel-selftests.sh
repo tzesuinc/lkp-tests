@@ -475,6 +475,9 @@ prepare_for_selftest()
 		selftest_mfs=$(ls -d s*/Makefile | grep -v -e ^sgx -e ^sparc64)
 	elif [ "$group" = "memory-hotplug" ]; then
 		selftest_mfs=$(ls -d memory-hotplug/Makefile)
+	elif [ "$group" = "net/netfilter" ]; then
+		selftest_mfs=$(ls -d net/netfilter/Makefile)
+		[ "$selftest_mfs" ] || selftest_mfs=$(ls -d netfilter/Makefile)
 	else
 		selftest_mfs=$(ls -d $group/Makefile)
 	fi
