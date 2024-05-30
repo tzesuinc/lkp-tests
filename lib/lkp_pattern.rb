@@ -47,6 +47,9 @@ module LKP
       def generate_klass(file_path)
         @klass_2_path ||= {}
 
+        klass_name = File.basename(file_path).underscore.camelize
+        return if @klass_2_path.key?(klass_name)
+
         klass = Class.new(self) do
           include Singleton
 
@@ -55,7 +58,7 @@ module LKP
           end
         end
 
-        LKP.const_set File.basename(file_path).underscore.camelize, klass
+        LKP.const_set klass_name, klass
 
         @klass_2_path[klass.name] = file_path
       end
