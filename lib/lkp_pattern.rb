@@ -25,11 +25,7 @@ module LKP
       return @regexp if @regexp
       return unless File.size?(file)
 
-      lines = File.readlines(file)
-                  .map(&:chomp)
-                  .reject(&:empty?)
-                  .reject { |line| line.start_with?('#') }
-
+      lines = self.class.lines(file)
       @regexp = Regexp.new "(#{lines.join('|')})"
     end
 
@@ -61,6 +57,13 @@ module LKP
         LKP.const_set klass_name, klass
 
         @klass_2_path[klass.name] = file_path
+      end
+
+      def lines(file)
+        File.readlines(file)
+            .map(&:chomp)
+            .reject(&:empty?)
+            .reject { |line| line.start_with?('#') }
       end
     end
   end
