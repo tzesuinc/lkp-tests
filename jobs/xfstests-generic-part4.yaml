@@ -140,6 +140,7 @@ xfstests:
     - generic-metadata-journaling-33
     - generic-metadata-journaling-34
     - generic-metadata-journaling-35
+    - generic-metadata-journaling-37
 
 ---
 fs:

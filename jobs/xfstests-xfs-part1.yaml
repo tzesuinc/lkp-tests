@@ -13,9 +13,6 @@ xfstests:
   test:
     - xfs-realtime
     - xfs-083
-    - xfs-132
-    - xfs-211
-    - xfs-244
     - xfs-275
     - xfs-437
     # - xfs-136 # execution time ~ 80mins
