@@ -101,7 +101,7 @@ is_test_in_group()
 	local group=$2
 
 	# if it is running a group but not a single test, directly return true if the name matches
-	[ "$test" = "$group" ] && return
+	[[ "$test" =~ ^$group$ ]] && return
 
 	# test_prefix: xfs | ext4
 	# test_number: 115 | group-00
