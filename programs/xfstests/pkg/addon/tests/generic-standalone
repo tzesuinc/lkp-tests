@@ -46,3 +46,5 @@
 176
 # special handling in xfstests.sh
 470
+# _require_scratch_casefold, btrfs/ext2/udf/xfs does not support casefold feature
+556
