@@ -52,11 +52,9 @@ xfstests:
     - generic-logdev
 
     # [not run] Reflink not supported by scratch filesystem type: ext2
-    - generic-scratch-reflink-07
     - generic-scratch-reflink-08
     - generic-scratch-reflink-09
     - generic-scratch-reflink-10
-    - generic-scratch-reflink-11
     - generic-scratch-reflink-12
     - generic-scratch-reflink-13
     - generic-scratch-reflink-14
@@ -94,19 +92,27 @@ fs:
 
 xfstests:
   test:
-    - generic-test-dedupe # [not run] Dedupe not supported by test filesystem type: ext2/f2fs
     - generic-scratch-duperemove # [not run] duperemove does not support file system type: ext2/f2fs
+
+---
+fs:
+  - xfs
+  - btrfs
+  - udf
+
+xfstests:
+  test:
+    - generic-test-dedupe # [not run] Dedupe not supported by test filesystem type: ext2/ext4/f2fs
 
 ---
 fs:
   - ext2
   - xfs
   - btrfs
-  - f2fs
 
 xfstests:
   test:
-    - generic-scratch-dedupe # [not run] Dedupe not supported by scratch filesystem type: ext4/udf
+    - generic-scratch-dedupe # [not run] Dedupe not supported by scratch filesystem type: ext4/f2fs/udf
 
 ---
 fs:
@@ -187,6 +193,7 @@ xfstests:
   test:
     - generic-525
     - generic-freeze # [not run] udf does not support freezing
+    - generic-attrs # [not run] attr namespace user not supported by this filesystem type: udf
 
 ---
 fs:
@@ -212,3 +219,12 @@ fs:
 xfstests:
   test:
     - generic-scratch-mkfs-blocksized # [not run] Filesystem f2fs not supported in _scratch_mkfs_blocksized
+
+---
+fs:
+  - ext4
+  - f2fs
+
+xfstests:
+  test:
+    - generic-556 # [not run] btrfs/ext2/udf/xfs does not support casefold feature

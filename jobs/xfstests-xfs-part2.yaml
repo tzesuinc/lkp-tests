@@ -28,5 +28,5 @@ xfstests:
     - xfs-scratch-reflink-25
     - xfs-scratch-reflink-26
     - xfs-scratch-reflink-27
-    - xfs-reflink-rmapbt
+    - xfs-scratch-reflink_scratch-rmapbt
     # - xfs-233 # execution time > 30mins

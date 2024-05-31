@@ -51,7 +51,6 @@ xfstests:
 
 ---
 fs:
-  - ext2
   - ext4
   - xfs
   - btrfs
@@ -60,4 +59,4 @@ fs:
 
 xfstests:
   test:
-    - generic-281
+    - generic-281 # [not run] Reflink not supported by scratch filesystem type: ext2
