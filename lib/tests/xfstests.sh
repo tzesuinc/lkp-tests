@@ -191,14 +191,16 @@ setup_fs_config()
 		log_eval export WORKAREA="$BENCHMARK_ROOT/xfstests"
 	}
 
-	is_test_in_group "$test" "xfs-realtime" && {
+	# xfs-realtime xfs-realtime_scratch-rmapbt xfs-realtime_scratch-reflink
+	is_test_in_group "$test" "xfs-realtime.*" && {
 		log_eval export USE_EXTERNAL="yes"
 		log_eval export SCRATCH_RTDEV="$SCRATCH_LOGDEV"
 		log_eval unset SCRATCH_LOGDEV
 	}
+
 	is_test_in_group "$test" "xfs-scratch-reflink_scratch-rmapbt" && log_eval export MKFS_OPTIONS="\"-mreflink=1 -mrmapbt=1\""
-	is_test_in_groups "$test" "xfs-scratch-reflink-[0-9]*" "generic-scratch-reflink-[0-9]*" && log_eval export MKFS_OPTIONS="-mreflink=1"
-	is_test_in_group "$test" "xfs-scratch-rmapbt" && log_eval export MKFS_OPTIONS="-mrmapbt=1"
+	is_test_in_groups "$test" "(xfs|generic)-scratch-reflink-[0-9]*" "xfs-realtime_scratch-reflink" && log_eval export MKFS_OPTIONS="-mreflink=1"
+	is_test_in_groups "$test" "xfs-scratch-rmapbt" "xfs-realtime_scratch-rmapbt" && log_eval export MKFS_OPTIONS="-mrmapbt=1"
 	is_test_in_group "$test" "xfs-projid16bit" && log_eval export MKFS_OPTIONS="-mcrc=0"
 
 	if [ "$fs" = xfs ] && is_test_in_group "$test" "generic-group-[0-9]*"; then

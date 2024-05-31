@@ -138,6 +138,9 @@ generate_special_require_tests()
 		[_scratch_mkfs_blocksized]=generic # [not run] Filesystem f2fs not supported in _scratch_mkfs_blocksized
 		[_require_projid16bit$]=xfs # [not run] 16 bit project IDs not supported on /dev/sda4
 		[_require_acls$]=generic # [not run] ACLs not supported by this filesystem type: cifs
+
+		[_require_realtime$ _require_xfs_scratch_rmapbt$]=xfs
+		[_require_realtime$ _require_scratch_reflink$]=xfs
 		[_require_realtime$]=xfs
 
 		# below sequence should not be changed because some xfs tests require both _require_scratch_reflink and _require_xfs_scratch_rmapbt
