@@ -12,7 +12,7 @@ describe 'xfstests' do
         { test: 'xfs-no-xfs-bug-on-assert', group: 'xfs-no-xfs-bug-on-assert' },
         { test: 'xfs-115', group: 'xfs-no-xfs-bug-on-assert' },
         { test: 'xfs-276', group: 'xfs-realtime' },
-        { test: 'xfs-114', group: 'xfs-reflink-rmapbt' },
+        { test: 'xfs-114', group: 'xfs-scratch-reflink_scratch-rmapbt' },
         { test: 'xfs-307', group: 'xfs-scratch-reflink-[0-9]*' },
         { test: 'xfs-235', group: 'xfs-scratch-rmapbt' },
         { test: 'generic-510', group: 'generic-group-[0-9]*' },
