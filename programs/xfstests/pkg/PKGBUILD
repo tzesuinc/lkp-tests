@@ -144,6 +144,8 @@ generate_special_require_tests()
 		[_require_scratch_reflink$ _require_xfs_scratch_rmapbt$]=xfs
 		[_require_scratch_reflink$]=xfs
 		[_require_xfs_scratch_rmapbt$]=xfs
+
+		[_require_attrs$]=generic # [not run] attr namespace user not supported by this filesystem type: udf
 	)
 
 	for pattern in "${!rules[@]}"; do # _require_scratch_reflink$ _require_xfs_scratch_rmapbt$
