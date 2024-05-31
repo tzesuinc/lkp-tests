@@ -121,7 +121,6 @@ generate_special_require_tests()
 		[_require_xfs_stress_online_repair$]=xfs
 		[_require_xfs_stress_scrub$]=xfs
 		[_require_test_reflink$]=generic # [not run] Reflink not supported by test filesystem type: ext2/ext4
-		[_require_scratch_reflink$]=generic # [not run] Reflink not supported by scratch filesystem type: ext2
 		[_require_scratch_dedupe$]=generic # [not run] Dedupe not supported by scratch filesystem type: ext4
 		[_require_test_dedupe$]=generic # [not run] Dedupe not supported by test filesystem type: ext2
 		[holetest]=generic # run slowly on udf
@@ -145,7 +144,7 @@ generate_special_require_tests()
 
 		# below sequence should not be changed because some xfs tests require both _require_scratch_reflink and _require_xfs_scratch_rmapbt
 		[_require_scratch_reflink$ _require_xfs_scratch_rmapbt$]=xfs
-		[_require_scratch_reflink$]=xfs
+		[_require_scratch_reflink$]="xfs generic" # [not run] Reflink not supported by scratch filesystem type: ext2
 		[_require_xfs_scratch_rmapbt$]=xfs
 
 		[_require_attrs$]=generic # [not run] attr namespace user not supported by this filesystem type: udf
@@ -157,7 +156,7 @@ generate_special_require_tests()
 		for fs in ${rules[$pattern]}; do
 			test=${test//${fs}-} # scratch-reflink_scratch-rmapbt
 
-			echo "collect ${pattern} $fs as $fs-$test"
+			echo "collect $fs ${pattern} as $fs-$test"
 			collect "$fs" $pattern > "$benchmark_path/tests/$fs-$test"
 		done
 	done
