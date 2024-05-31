@@ -93,16 +93,18 @@ collect()
 	eval $cmd | cut -d/ -f3 | grep -v -f <(cat $benchmark_path/tests/$fs-*) | sort
 }
 
-# FIXME this can't handle pattern like "_require_scratch_reflink$ holetest"
 pattern_to_test()
 {
-	local pattern="$1"
+	local fs=$1
+	local pattern="$2"
 
-	local test="${pattern//\$}" # _require_scratch_reflink _require_xfs_scratch_rmapbt
-	test="${test//_/-}" # -require-scratch-reflink -require-xfs-scratch-rmapbt
-	test="${test// -/_}" # -require-scratch-reflink_require-xfs-scratch-rmapbt
-	test="${test#-}" # require-scratch-reflink_require-xfs-scratch-rmapbt
-	echo "${test//require-}" # scratch-reflink_xfs-scratch-rmapbt
+	local test=" ${pattern//\$}" # " _require_scratch_reflink _require_xfs_scratch_rmapbt"
+	test="${test//require/_}" # " ___scratch_reflink ___xfs_scratch_rmapbt"
+	test=$(echo "$test" | sed "s/ _*${fs}/ _/g") # " ___scratch_reflink _scratch_rmapbt"
+	test=$(echo "$test" | sed 's/ _*/_/g') # _scratch_reflink_scratch_rmapbt
+	test="${test//_/-}" # -scratch-reflink-scratch-rmapbt
+
+	echo "$fs$test"
 }
 
 generate_special_require_tests()
@@ -112,9 +114,9 @@ generate_special_require_tests()
 
 	for fs in generic ext4 udf ocfs2 nfs btrfs xfs overlay shared ceph f2fs perf cifs
 	do
-		# "006 dangerous_fuzzers" in tests/ext4/group.list => "006" in ext4-dangerous_fuzzers
-		# "054 auto quick dangerous_fuzzers" in tests/ext4/group.list => "054" in ext4-dangerous_fuzzers
-		grep "dangerous_fuzzers" tests/$fs/group.list | cut -d' ' -f1 > $benchmark_path/tests/$fs-dangerous_fuzzers
+		# "006 dangerous_fuzzers" in tests/ext4/group.list => "006" in ext4-dangerous-fuzzers
+		# "054 auto quick dangerous_fuzzers" in tests/ext4/group.list => "054" in ext4-dangerous-fuzzers
+		grep "dangerous_fuzzers" tests/$fs/group.list | cut -d' ' -f1 > $benchmark_path/tests/$fs-dangerous-fuzzers
 	done
 
 	declare -A rules=(
@@ -151,13 +153,11 @@ generate_special_require_tests()
 	)
 
 	for pattern in "${!rules[@]}"; do # _require_scratch_reflink$ _require_xfs_scratch_rmapbt$
-		local test=$(pattern_to_test "$pattern") # scratch-reflink_xfs-scratch-rmapbt
-
 		for fs in ${rules[$pattern]}; do
-			test=${test//${fs}-} # scratch-reflink_scratch-rmapbt
+			local test=$(pattern_to_test "$fs" "$pattern") # scratch-reflink_xfs-scratch-rmapbt
 
-			echo "collect $fs ${pattern} as $fs-$test"
-			collect "$fs" $pattern > "$benchmark_path/tests/$fs-$test"
+			echo "collect $fs ${pattern} as $test"
+			collect "$fs" $pattern > "$benchmark_path/tests/$test"
 		done
 	done
 

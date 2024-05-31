@@ -161,7 +161,7 @@ setup_fs_config()
 		log_eval export SCRATCH_XFS_LIST_FUZZ_VERBS=random
 	}
 
-	is_test_in_groups "$test" "generic-no-xfs-bug-on-assert" "xfs-no-xfs-bug-on-assert" && {
+	is_test_in_group "$test" "(generic|xfs)-no-xfs-bug-on-assert" && {
 		[ -f /sys/fs/xfs/debug/bug_on_assert ] && echo 0 > /sys/fs/xfs/debug/bug_on_assert
 	}
 
@@ -191,20 +191,20 @@ setup_fs_config()
 		log_eval export WORKAREA="$BENCHMARK_ROOT/xfstests"
 	}
 
-	# xfs-realtime xfs-realtime_scratch-rmapbt xfs-realtime_scratch-reflink
+	# xfs-realtime xfs-realtime-scratch-rmapbt xfs-realtime-scratch-reflink
 	is_test_in_group "$test" "xfs-realtime.*" && {
 		log_eval export USE_EXTERNAL="yes"
 		log_eval export SCRATCH_RTDEV="$SCRATCH_LOGDEV"
 		log_eval unset SCRATCH_LOGDEV
 	}
 
-	is_test_in_group "$test" "xfs-scratch-reflink_scratch-rmapbt" && log_eval export MKFS_OPTIONS="\"-mreflink=1 -mrmapbt=1\""
-	is_test_in_groups "$test" "(xfs|generic)-scratch-reflink-[0-9]*" "xfs-realtime_scratch-reflink" && log_eval export MKFS_OPTIONS="-mreflink=1"
-	is_test_in_groups "$test" "xfs-scratch-rmapbt" "xfs-realtime_scratch-rmapbt" && log_eval export MKFS_OPTIONS="-mrmapbt=1"
+	is_test_in_group "$test" "xfs-scratch-reflink-scratch-rmapbt" && log_eval export MKFS_OPTIONS="\"-mreflink=1 -mrmapbt=1\""
+	is_test_in_groups "$test" "(xfs|generic)-scratch-reflink-[0-9]*" "xfs-realtime-scratch-reflink" && log_eval export MKFS_OPTIONS="-mreflink=1"
+	is_test_in_groups "$test" "xfs-scratch-rmapbt" "xfs-realtime-scratch-rmapbt" && log_eval export MKFS_OPTIONS="-mrmapbt=1"
 	is_test_in_group "$test" "xfs-projid16bit" && log_eval export MKFS_OPTIONS="-mcrc=0"
 
 	if [ "$fs" = xfs ] && is_test_in_group "$test" "generic-group-[0-9]*"; then
-		mkfs.xfs -f -mreflink=1 $TEST_DEV || die "mkfs.xfs test_dev failed"
+		mkfs.xfs -f -mreflink=1 $TEST_DEV || die "mkfs.xfs $TEST_DEV failed"
 		log_eval export MKFS_OPTIONS="-mreflink=1"
 	fi
 
@@ -231,7 +231,7 @@ setup_fs_config()
 	}
 
 	# need at least 3 partitions for TEST_DEV, SCRATCH_DEV and LOGWRITES_DEV
-	if is_test_in_groups "$test" "generic-log-writes" "btrfs-log-writes" && [ "$nr_partitions" -ge 3 ]; then
+	if is_test_in_group "$test" "(btrfs|generic)-log-writes" && [ "$nr_partitions" -ge 3 ]; then
 		LOGWRITES_DEV=${partitions#* }
 		LOGWRITES_DEV=${LOGWRITES_DEV%% *}
 		log_eval export LOGWRITES_DEV="$LOGWRITES_DEV"
@@ -249,7 +249,7 @@ setup_fs_config()
 		[ "$fs" = "xfs" ] && unset MKFS_OPTIONS
 	fi
 
-	is_test_in_groups "$test" "generic-logdev" "ext4-logdev" "xfs-logdev" && {
+	is_test_in_group "$test" "(ext4|generic|xfs)-logdev" && {
 		log_eval export USE_EXTERNAL=yes
 
 		# create a 100M partition for log, avoid test cost too much time

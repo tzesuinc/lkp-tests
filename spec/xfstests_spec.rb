@@ -11,7 +11,7 @@ describe 'xfstests' do
       { test: 'xfs-no-xfs-bug-on-assert', group: 'xfs-no-xfs-bug-on-assert' },
       { test: 'xfs-115', group: 'xfs-no-xfs-bug-on-assert' },
       { test: 'xfs-276', group: 'xfs-realtime' },
-      { test: 'xfs-114', group: 'xfs-scratch-reflink_scratch-rmapbt' },
+      { test: 'xfs-114', group: 'xfs-scratch-reflink-scratch-rmapbt' },
       { test: 'xfs-307', group: 'xfs-scratch-reflink-[0-9]*' },
       { test: 'xfs-scratch-reflink-00', group: 'xfs-scratch-reflink-[0-9]*' },
       { test: 'xfs-235', group: 'xfs-scratch-rmapbt' },
@@ -36,10 +36,26 @@ describe 'xfstests' do
       { test: 'xfs-115', group: 'generic-dax' },
       { test: 'generic-510', group: 'generic-dax' },
       { test: 'xfs-114', group: 'xfs-scratch-reflink-[0-9]*' },
-      { test: 'xfs-scratch-reflink', group: 'xfs-scratch-reflink_scratch-rmapbt' },
+      { test: 'xfs-scratch-reflink', group: 'xfs-scratch-reflink-scratch-rmapbt' },
     ].each do |entry|
       it "#{entry[:test]} not belongs to #{entry[:group]}" do
         expect(Bash.call("source #{LKP_SRC}/lib/tests/xfstests.sh; export BENCHMARK_ROOT=#{@benchmark_root}; is_test_in_group \"#{entry[:test]}\" \"#{entry[:group]}\"; echo $?")).to eq('1')
+      end
+    end
+  end
+
+  describe 'pattern_to_test' do
+    [
+      { fs: 'xfs', pattern: '_require_xfs_stress_online_repair$', test: 'xfs-stress-online-repair' },
+      { fs: 'generic', pattern: 'holetest', test: 'generic-holetest' },
+      { fs: 'xfs', pattern: '_require_no_xfs_bug_on_assert$', test: 'xfs-no-xfs-bug-on-assert' },
+      { fs: 'xfs', pattern: '_require_scratch_reflink$ _require_xfs_scratch_rmapbt$', test: 'xfs-scratch-reflink-scratch-rmapbt' },
+      { fs: 'generic', pattern: '_scratch_mkfs_blocksized', test: 'generic-scratch-mkfs-blocksized' },
+      { fs: 'xfs', pattern: '_require_scratch_reflink$ holetest', test: 'xfs-scratch-reflink-holetest' },
+      { fs: 'generic', pattern: 'holetest _require_xfs_stress_online_repair$', test: 'generic-holetest-xfs-stress-online-repair' }
+    ].each do |entry|
+      it "map #{entry[:fs]} #{entry[:pattern]}" do
+        expect(Bash.call("source #{LKP_SRC}/programs/xfstests/pkg/PKGBUILD; pattern_to_test \"#{entry[:fs]}\" \"#{entry[:pattern]}\"")).to eq(entry[:test])
       end
     end
   end
