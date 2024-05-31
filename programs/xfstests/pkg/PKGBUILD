@@ -95,31 +95,32 @@ generate_special_require_tests()
 	done
 
 	declare -A rules=(
-		[_require_xfs_stress_online_repair]=xfs
-		[_require_xfs_stress_scrub]=xfs
-		[_require_test_reflink]=generic # [not run] Reflink not supported by test filesystem type: ext2/ext4
-		[_require_scratch_reflink]=generic # [not run] Reflink not supported by scratch filesystem type: ext2
-		[_require_scratch_dedupe]=generic # [not run] Dedupe not supported by scratch filesystem type: ext4
-		[_require_test_dedupe]=generic # [not run] Dedupe not supported by test filesystem type: ext2
+		[_require_xfs_stress_online_repair$]=xfs
+		[_require_xfs_stress_scrub$]=xfs
+		[_require_test_reflink$]=generic # [not run] Reflink not supported by test filesystem type: ext2/ext4
+		[_require_scratch_reflink$]=generic # [not run] Reflink not supported by scratch filesystem type: ext2
+		[_require_scratch_dedupe$]=generic # [not run] Dedupe not supported by scratch filesystem type: ext4
+		[_require_test_dedupe$]=generic # [not run] Dedupe not supported by test filesystem type: ext2
 		[holetest]=generic # run slowly on udf
-		[_require_exportfs]=generic # [not run] cifs does not support NFS export
-		[_require_scratch_shutdown]=generic # [not run] btrfs/ext2/udf does not support shutdown
+		[_require_exportfs$]=generic # [not run] cifs does not support NFS export
+		[_require_scratch_shutdown$]=generic # [not run] btrfs/ext2/udf does not support shutdown
 		[_require_metadata_journaling]=generic # [not run] ext2/udf does not support metadata journaling
-		[_require_idmapped_mounts]=generic # [not run] vfstest not support by cifs/ext2/udf
-		[_require_freeze]=generic # [not run] udf does not support freezing
-		[_require_scratch_verity]="generic btrfs" # require CONFIG_FS_VERITY
-		[_require_log_writes]="generic btrfs" # require a valid $LOGWRITES_DEV # rli9 FIXME consider other fs that has this requirement
-		[_require_scratch_duperemove]=generic # [not run] duperemove does not support file system type: ext2
+		[_require_idmapped_mounts$]=generic # [not run] vfstest not support by cifs/ext2/udf
+		[_require_freeze$]=generic # [not run] udf does not support freezing
+		[_require_scratch_verity$]="generic btrfs" # require CONFIG_FS_VERITY
+		[_require_log_writes]="generic btrfs" # require a valid $LOGWRITES_DEV
+		[_require_scratch_duperemove$]=generic # [not run] duperemove does not support file system type: ext2
 		[_require_logdev]="generic ext4 xfs" # require a valid $SCRATCH_LOGDEV
-		[_require_no_xfs_bug_on_assert]="generic xfs"
+		[_require_no_xfs_bug_on_assert$]="generic xfs"
 		[_scratch_mkfs_blocksized]=generic # [not run] Filesystem f2fs not supported in _scratch_mkfs_blocksized
-		[_require_projid16bit]=xfs # [not run] 16 bit project IDs not supported on /dev/sda4
-		[_require_acls]=generic # [not run] ACLs not supported by this filesystem type: cifs
+		[_require_projid16bit$]=xfs # [not run] 16 bit project IDs not supported on /dev/sda4
+		[_require_acls$]=generic # [not run] ACLs not supported by this filesystem type: cifs
 	)
 
 	for pattern in "${!rules[@]}"; do
-		local test=${pattern#_} # require_xfs_stress_scrub
-		test=${test#require_} # xfs_stress_scrub
+		local test="${pattern#_}" # require_xfs_stress_scrub$
+		test="${test%\$}" # require_xfs_stress_scrub
+		test="${test#require_}" # xfs_stress_scrub
 		test="${test//_/-}" # xfs-stress-scrub
 
 		for fs in ${rules[$pattern]}; do
