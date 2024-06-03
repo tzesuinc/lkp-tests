@@ -114,6 +114,26 @@ is_test_in_group()
 	[ "$test_prefix" = "$group_prefix" ] && grep -q -E "^$test_number$" $BENCHMARK_ROOT/xfstests/tests/$group
 }
 
+setup_mkfs_options()
+{
+	local mkfs_options=""
+
+	if [[ "$fs" = f2fs ]]; then
+		mkfs_options="-f"
+	elif is_test_in_group "$test" "xfs-projid16bit"; then
+		mkfs_options="-mcrc=0"
+	elif [[ "$fs" = "xfs" ]] && is_test_in_group "$test" "generic-dax"; then
+		# new version of mkfs.xfs set reflink=1 as default and conflict with DAX mount
+		# need to set reflink=0 manually
+		mkfs_options="-mreflink=0"
+	else
+		is_test_in_group "$test" ".*-scratch-reflink.*" && mkfs_options+="-mreflink=1 "
+		is_test_in_group "$test" ".*-scratch-rmapbt.*" && mkfs_options+="-mrmapbt=1 "
+	fi
+
+	[[ $mkfs_options ]] && log_eval export MKFS_OPTIONS="\"$mkfs_options\""
+}
+
 setup_fs_config()
 {
 	log_eval export TEST_DIR=${mount_points%% *}
@@ -137,8 +157,6 @@ setup_fs_config()
 	else
 		log_eval export SCRATCH_DEV=${partitions##* }
 	fi
-
-	[ "$fs" = f2fs ] && log_eval export MKFS_OPTIONS="-f"
 
 	## We could use the "pack-deps" job to generate the relevant dependency package with cgz format,
 	## but sometimes the dependency package have a different layout with the original package.
@@ -198,19 +216,12 @@ setup_fs_config()
 		log_eval unset SCRATCH_LOGDEV
 	}
 
-	is_test_in_group "$test" "xfs-scratch-reflink-scratch-rmapbt" && log_eval export MKFS_OPTIONS="\"-mreflink=1 -mrmapbt=1\""
-	is_test_in_groups "$test" "(xfs|generic)-scratch-reflink-[0-9]*" "xfs-realtime-scratch-reflink" && log_eval export MKFS_OPTIONS="-mreflink=1"
-	is_test_in_groups "$test" "xfs-scratch-rmapbt" "xfs-realtime-scratch-rmapbt" && log_eval export MKFS_OPTIONS="-mrmapbt=1"
-	is_test_in_group "$test" "xfs-projid16bit" && log_eval export MKFS_OPTIONS="-mcrc=0"
+	setup_mkfs_options
 
 	if [ "$fs" = xfs ] && is_test_in_group "$test" "generic-group-[0-9]*"; then
 		mkfs.xfs -f -mreflink=1 $TEST_DEV || die "mkfs.xfs $TEST_DEV failed"
 		log_eval export MKFS_OPTIONS="-mreflink=1"
 	fi
-
-	# new version of mkfs.xfs set reflink=1 as default and conflict with DAX mount
-	# need to set reflink=0 manually
-	[ "$fs" = "xfs" ] && is_test_in_group "$test" "generic-dax" && log_eval export MKFS_OPTIONS="-mreflink=0"
 
 	[ "$test" = "generic-387" ] && {
 		[ -n "$SCRATCH_DEV_POOL" ] && {
