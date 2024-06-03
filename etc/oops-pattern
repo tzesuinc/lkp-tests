@@ -77,6 +77,7 @@ WARNING: .* detected$
 WARNING: .* lock.*
 WARNING: .*!$
 WARNING: at .*
+WARNING: bad lookup idx: .*
 WARNING: chain_key collision
 WARNING: CPU: [0-9]+ PID: .+ at .*
 WARNING: dead process
