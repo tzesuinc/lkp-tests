@@ -37,7 +37,6 @@ xfstests:
     - generic-group-73
     - generic-group-74
     - generic-no-xfs-bug-on-assert
-    - generic-acls
 
 ---
 fs:
@@ -50,27 +49,6 @@ fs:
 xfstests:
   test:
     - generic-logdev
-
-    # [not run] Reflink not supported by scratch filesystem type: ext2
-    - generic-scratch-reflink-08
-    - generic-scratch-reflink-09
-    - generic-scratch-reflink-10
-    - generic-scratch-reflink-12
-    - generic-scratch-reflink-13
-    - generic-scratch-reflink-14
-    - generic-scratch-reflink-15
-    - generic-scratch-reflink-16
-    - generic-scratch-reflink-17
-    - generic-scratch-reflink-18
-    - generic-scratch-reflink-20
-    - generic-scratch-reflink-22
-    - generic-scratch-reflink-25
-    - generic-scratch-reflink-27
-    - generic-scratch-reflink-28
-    - generic-scratch-reflink-32
-    - generic-scratch-reflink-33
-    - generic-scratch-reflink-35
-    - generic-scratch-reflink-36
 
 ---
 fs:
@@ -170,6 +148,16 @@ xfstests:
   test:
     - generic-scratch-shutdown # [not run] btrfs/ext2/udf does not support shutdown
 
+---
+fs:
+  - ext4
+  - xfs
+  - f2fs
+
+xfstests:
+  test:
+    - generic-scratch-shutdown-metadata-journaling
+
 # ---
 # fs:
 #   - ext4
@@ -194,6 +182,7 @@ xfstests:
     - generic-525
     - generic-freeze # [not run] udf does not support freezing
     - generic-attrs # [not run] attr namespace user not supported by this filesystem type: udf
+    - generic-acls # [not run] ACLs not supported by this filesystem type: cifs/udf
 
 ---
 fs:
@@ -228,3 +217,16 @@ fs:
 xfstests:
   test:
     - generic-556 # [not run] btrfs/ext2/udf/xfs does not support casefold feature
+
+---
+fs:
+  - ext2
+  - ext4
+  - xfs
+  - f2fs
+  - udf
+  # - ocfs2 # mount.ocfs2 known bug
+
+xfstests:
+  test:
+    - generic-quota # [not run] disk quotas not supported by this filesystem type: btrfs

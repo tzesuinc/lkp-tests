@@ -12,7 +12,7 @@ fs:
 xfstests:
   test:
     - xfs-realtime
-    - xfs-realtime_scratch-rmapbt
+    - xfs-realtime-scratch-rmapbt
     - xfs-realtime-scratch-reflink
     - xfs-083
     - xfs-275

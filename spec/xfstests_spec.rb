@@ -22,7 +22,7 @@ describe 'xfstests' do
       { test: 'ext4-029', group: 'ext4-logdev' },
       { test: 'xfs-275', group: 'xfs-logdev' },
       { test: 'xfs-realtime', group: 'xfs-realtime.*' },
-      { test: 'xfs-realtime_scratch-rmapbt', group: 'xfs-realtime.*' },
+      { test: 'xfs-realtime-scratch-rmapbt', group: 'xfs-realtime.*' },
       { test: 'generic-scratch-reflink-01', group: '(xfs|generic)-scratch-reflink-[0-9]*'}
     ].each do |entry|
       it "#{entry[:test]} belongs to #{entry[:group]}" do
