@@ -1,4 +1,5 @@
 bison
+comerr-dev
 e2fslibs-dev
 libaio-dev
 libopenmpi-dev
