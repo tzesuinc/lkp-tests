@@ -23,7 +23,7 @@ describe 'xfstests' do
       { test: 'xfs-275', group: 'xfs-logdev' },
       { test: 'xfs-realtime', group: 'xfs-realtime.*' },
       { test: 'xfs-realtime-scratch-rmapbt', group: 'xfs-realtime.*' },
-      { test: 'generic-scratch-reflink-01', group: '(xfs|generic)-scratch-reflink-[0-9]*'}
+      { test: 'generic-scratch-reflink-01', group: '(xfs|generic)-scratch-reflink-[0-9]*' }
     ].each do |entry|
       it "#{entry[:test]} belongs to #{entry[:group]}" do
         expect(Bash.call("source #{LKP_SRC}/lib/tests/xfstests.sh; export BENCHMARK_ROOT=#{@benchmark_root}; is_test_in_group \"#{entry[:test]}\" \"#{entry[:group]}\"; echo $?")).to eq('0')
@@ -36,7 +36,7 @@ describe 'xfstests' do
       { test: 'xfs-115', group: 'generic-dax' },
       { test: 'generic-510', group: 'generic-dax' },
       { test: 'xfs-114', group: 'xfs-scratch-reflink-[0-9]*' },
-      { test: 'xfs-scratch-reflink', group: 'xfs-scratch-reflink-scratch-rmapbt' },
+      { test: 'xfs-scratch-reflink', group: 'xfs-scratch-reflink-scratch-rmapbt' }
     ].each do |entry|
       it "#{entry[:test]} not belongs to #{entry[:group]}" do
         expect(Bash.call("source #{LKP_SRC}/lib/tests/xfstests.sh; export BENCHMARK_ROOT=#{@benchmark_root}; is_test_in_group \"#{entry[:test]}\" \"#{entry[:group]}\"; echo $?")).to eq('1')
