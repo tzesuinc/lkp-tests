@@ -227,7 +227,7 @@ phoronix-test-suite:
       - Tradebeans
       - Tradesoap
       - BioJava Biological Data Framework
-      - Apache Cassandra
+      # - Apache Cassandra # The test quit with a non-zero exit status.
       - GraphChi
       - H2O In-Memory Platform For Machine Learning
       - jMonkeyEngine
