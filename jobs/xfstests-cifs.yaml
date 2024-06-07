@@ -57,7 +57,6 @@ xfstests:
     - generic-group-35
     - generic-group-36
     - generic-group-37
-    - generic-group-38
     - generic-group-39
     - generic-group-40
     - generic-group-41

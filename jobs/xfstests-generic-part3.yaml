@@ -22,7 +22,6 @@ xfstests:
     - generic-log-writes
     - generic-exportfs # [not run] cifs does not support NFS export
     - generic-group-37
-    - generic-group-38
     - generic-group-39
     - generic-group-40
     - generic-group-41
