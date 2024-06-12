@@ -207,6 +207,7 @@ libmpx2:
 libncurses5-dev: ncurses-devel
 libncursesw5-dev:
 libndctl-dev: ndctl-devel
+libnfs-dev: libnfs-devel
 libnl-3-200: libnl3
 libnl-3-dev: libnl3-devel
 libnl-cli-3-200: libnl3-cli
@@ -242,6 +243,7 @@ libperl5: perl-libs
 libpfm4-dev: libpfm-devel
 libpfm4: libpfm
 libpipeline1: libpipeline
+libpipewire-0.3-dev: pipewire-devel
 libpixman-1-0: pixman
 libpixman-1-dev: pixman-devel
 libpmem-dev: libpmem-devel
@@ -258,6 +260,7 @@ libprocps-dev: procps-ng-devel
 libprocps: procps-ng
 libprotobuf-dev: protobuf-devel
 libpthread-stubs0-dev:
+libpulse-dev: pulseaudio-libs-devel
 libpython2.7:
 libpython3: python3-libs
 libqt5opengl5-dev:
@@ -269,14 +272,19 @@ libreadline5: readline
 libsasl2-2:
 libsctp-dev: lksctp-tools-devel
 libsctp1: lksctp-tools
+libsdl2-dev: SDL2-devel
+libseccomp-dev: libseccomp-devel
 libseccomp2:
 libselinux1-dev: libselinux-devel
 libselinux1: libselinux
 libsigsegv2:
 libslang2-dev: slang-devel
+libslirp-dev: libslirp-devel
 libsmbclient-dev: libsmbclient-devel
 libsnappy-dev: snappy-devel
 libsnappy1v5: snappy
+libspice-protocol-dev: spice-protocol
+libspice-server-dev:
 libsqlite3-0: libsqlite3x
 libsqlite3-dev: sqlite-devel
 libssl-dev: openssl-devel
@@ -294,10 +302,11 @@ libubsan0:
 libudev-dev: systemd-devel
 libudev1: systemd-libs
 libunwind-dev: libunwind-devel
-liburing-dev:
+liburing-dev: liburing-devel
 libuuid1: libuuid
 libuv1-dev: libuv-devel
 libv4l-dev: libv4l-devel
+libvdeplug-dev:
 libvirt-clients: libvirt-client
 libvirt-daemon-system: libvirt-client libvirt-daemon
 libvirt-dev: libvirt-devel
@@ -317,6 +326,7 @@ libx32gomp1:
 libx32itm1:
 libx32quadmath0:
 libx32ubsan1:
+libxen-dev: xen-devel
 libxkbcommon-dev: libxkbcommon-devel
 libxml2-dev: libxml2-devel
 libxmlrpc-core-c3-dev:
