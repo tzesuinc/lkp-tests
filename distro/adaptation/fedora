@@ -13,6 +13,7 @@ build-essential: make automake gcc gcc-c++ kernel-devel rpm-build
 cgroup-bin: libcgroup
 cgroup-tools: libcgroup-tools
 cgroupfs-mount:
+comerr-dev: libcom_err-devel
 cron: cronie
 cryptsetup-bin: cryptsetup
 dbench=4.0-2: dbench
@@ -101,6 +102,7 @@ libcap-ng-dev: libcap-ng-devel
 libcap2-bin: libcap
 libcap2: libcap
 libclang-dev: clang-devel
+libcomerr2: libcom_err
 libconfig-dev: libconfig-devel
 libcpupower-dev:
 libcrypto++-dev:

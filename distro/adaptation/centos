@@ -13,6 +13,7 @@ cgroup-bin: libcgroup
 cgroupfs-mount:
 clang-6.0: clang.x86_64
 cmake: cmake cmake3
+comerr-dev: libcom_err-devel
 cron: cronie
 curl: curl-minimal
 dbench=4.0-2: dbench
@@ -98,6 +99,7 @@ libcap-ng-dev: libcap-ng-devel
 libcap2-bin: libcap
 libcap2: libcap
 libcilkrts5:
+libcomerr2: libcom_err
 libconfig-dev: libconfig-devel
 libcpupower-dev:
 libcrypto++-dev:
