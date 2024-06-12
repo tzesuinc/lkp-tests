@@ -23,3 +23,4 @@ ltp:
     - fs-02 # 31G
     - fs-03
     - syscalls-05 # 24G
+    - ltp-aiodio.part2-00 # 23G

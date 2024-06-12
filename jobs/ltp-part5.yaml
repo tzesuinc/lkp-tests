@@ -13,5 +13,4 @@ fs:
 
 ltp:
   test:
-    - ltp-aiodio.part2-00
     - ltp-aiodio.part2-01
