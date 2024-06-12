@@ -232,12 +232,10 @@ Spectre_v2_mitigation
 ^last_state\..+\.exit_code
 ^last_state\.exit_fail
 ^last_state\.initrd_broken
-^last_state\.is_incomplete_run
 ^last_state\.kvm_fail
 ^last_state\.microcode_is_not_matched
 ^last_state\.OOM
 ^last_state\.post_run
-^last_state\.running
 ^last_state\.soft_timeout
 ^last_state\.wget_initrd
 ^last_state\.wget_initrd_fail
