@@ -149,7 +149,7 @@ generate_special_require_tests()
 
 		# below sequence should not be changed because some xfs tests require both _require_scratch_reflink and _require_xfs_scratch_rmapbt
 		[_require_scratch_reflink$ _require_xfs_scratch_rmapbt$]=xfs
-		[_require_scratch_reflink$]="xfs generic" # [not run] Reflink not supported by scratch filesystem type: ext2
+		[_require_scratch_reflink$]="xfs generic" # [not run] Reflink not supported by scratch filesystem type: ext2/ext4/f2fs/udf
 		[_require_xfs_scratch_rmapbt$]=xfs
 
 		[_require_attrs$]=generic # [not run] attr namespace user not supported by this filesystem type: udf

@@ -53,14 +53,12 @@ xfstests:
 fs:
   - xfs
   - btrfs
-  - f2fs
-  - udf
 
 xfstests:
   test:
-    - generic-281 # [not run] Reflink not supported by scratch filesystem type: ext2/ext4
+    - generic-281 # [not run] Reflink not supported by scratch filesystem type: ext2/ext4/f2fs/udf
 
-    # [not run] Reflink not supported by scratch filesystem type: ext2/ext4
+    # [not run] Reflink not supported by scratch filesystem type: ext2/ext4/f2fs/udf
     - generic-scratch-reflink-08
     - generic-scratch-reflink-09
     - generic-scratch-reflink-10
