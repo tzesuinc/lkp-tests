@@ -41,7 +41,7 @@ phoronix-test-suite:
     - simdjson-2.0.1
     - smallpt-1.2.1
     # - smart-1.0.0 # depending on the health of hard disk, may cost long time
-    - smhasher-1.1.0
+    - smhasher-1.1.0 # The test quit with a non-zero exit status. E: ./smhasher: 3: ./SMHasher: not found
     - spark-1.0.1
     # - speedb-1.0.1 # The test quit with a non-zero exit status.
     # - speedtest-cli-1.0.0 # The test quit with a non-zero exit status.
