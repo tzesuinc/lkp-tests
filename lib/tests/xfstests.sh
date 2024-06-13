@@ -131,7 +131,7 @@ setup_mkfs_options()
 		#	reflink not supported with realtime devices
 		[[ "$fs" = "xfs" ]] && is_test_in_group "$test" "(xfs|generic)-scratch-reflink.*" && mkfs_options+="-mreflink=1 "
 
-		is_test_in_group "$test" ".*-scratch-rmapbt.*" && mkfs_options+="-mrmapbt=1 "
+		is_test_in_group "$test" "(xfs-scratch-rmapbt|xfs-scratch-reflink-scratch-rmapbt)" && mkfs_options+="-mrmapbt=1 "
 	fi
 
 	[[ $mkfs_options ]] && log_eval export MKFS_OPTIONS="\"$mkfs_options\""
