@@ -523,7 +523,7 @@ phoronix-test-suite:
       - "5:1"
   - test:
     - memtier-benchmark-1.5.0
-    - mencoder-1.5.0
+    # - mencoder-1.5.0 # mencoder-1.5.0 is not installed
     # - metro2033-redux-1.1.1 # install failed
     # - metroll-redux-1.2.1 # install failed
     - minibude-1.0.0
@@ -552,7 +552,8 @@ phoronix-test-suite:
       # - 3 # 1GB Array, 256 Byte Stride
       # - 4 # 1GB Array, 256 Byte Stride, 2 Threads
       - 5 # 1GB Array, 256 Byte Stride, 4 Threads
-  # - test: mysqlslap-1.1.1 # temporarily comment out  the failed test
+
+  # - test: mysqlslap-1.1.1 # temporarily comment out the failed test
     # option_a: # clients
       # - 1
       # - 4
@@ -563,6 +564,7 @@ phoronix-test-suite:
       # - 128
       # - 256
       # - 512
+
   - test: mutex-1.0.0
     option_a:
       - Mutex Lock Unlock std::mutex
