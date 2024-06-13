@@ -15,6 +15,7 @@ Assertion failure
 assertion failure
 audit: \(.*\) error: .*
 BUG .* \(.*\): .*
+CFI failure at .*
 CPU[0-9]+: .* cpu clock throttled .*
 decrement hit 0; leaking memory
 Destination address inappropriately aligned
