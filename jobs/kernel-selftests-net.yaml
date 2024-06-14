@@ -1,10 +1,11 @@
-suite: kernel-selftests
-testcase: kernel-selftests
+suite: kernel-selftests-bpf
+testcase: kernel-selftests-bpf
 category: functional
 
 kernel-selftests:
   group:
     - net
+    - net/mptcp
 
 ---
 kernel-selftests:
