@@ -68,6 +68,19 @@ setup_test_environment()
 	return 0
 }
 
+fixup_tests()
+{
+	# errata.txt and run_tests.sh are under same directory, using
+	# absolute path for errata.sh will increase the risk of missing
+	# file, here we directly use relative path.
+	sed -i 's/\(ERRATATXT=\).*/\1errata.txt/' config.mak
+
+	# Fix timeout issue in kvm-unit-tests-qemu
+	# 	'FAIL vmx_pf_exception_test_reduced_maxphyaddr (timeout; duration=90s)'
+	# we should keep same setting for bare metal
+	sed -i '/\[vmx_pf_exception_test_reduced_maxphyaddr\]/a\timeout = 240' x86/unittests.cfg
+}
+
 run_tests()
 {
 	log_cmd ./run_tests.sh
