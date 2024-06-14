@@ -3,6 +3,7 @@ initrds+:
 - linux_selftests
 
 need_kconfig:
+- RUNTIME_TESTING_MENU: y
 % if ___.group == "bpf
 - 9P_FS_POSIX_ACL: y
 - 9P_FS_SECURITY: y
@@ -301,15 +302,15 @@ need_kconfig:
 - CRYPTO_CHACHA20POLY1305: m
 - CRYPTO_SM4_GENERIC: y
 - DUMMY: y
-- GENEVE: m
-- IFB: y
+- GENEVE
+- IFB
 - INET_DIAG
 - INET_ESP_OFFLOAD: y
 - INET_ESP: y
 - IP6_NF_IPTABLES: m
 - IP6_NF_NAT: m
 - IP6_NF_RAW: m
-- IP_DCCP: m
+- IP_DCCP
 - IP_GRE: m
 - IP_NF_IPTABLES: m
 - IP_NF_NAT: m
@@ -322,7 +323,7 @@ need_kconfig:
 - IPV6_MULTIPLE_TABLES: y
 - IPV6_SEG6_LWTUNNEL: y
 - IPV6_SIT: y
-- IPV6_VTI: y
+- IPV6_VTI
 - IPV6: y
 - KALLSYMS: y
 - L2TP_ETH: m
@@ -331,7 +332,7 @@ need_kconfig:
 - L2TP_V3: y
 - MACSEC: m
 - MACVLAN
-- MACVTAP: y
+- MACVTAP
 - MPLS_IPTUNNEL: m
 - MPLS_ROUTING: m
 - MPLS: y
@@ -358,14 +359,14 @@ need_kconfig:
 - NET_IPGRE_DEMUX: m
 - NET_IPGRE: m
 - NET_IPIP: y
-- NET_IPVTI: y
+- NET_IPVTI
 - NET_L3_MASTER_DEV: y
 - NET_NS: y
 - NET_SCH_ETF: m
 - NET_SCH_FQ_CODEL: m
 - NET_SCH_FQ: m
 - NET_SCH_HTB: m
-- NET_SCH_INGRESS: m
+- NET_SCH_INGRESS
 - NET_SCH_NETEM
 - NET_SCH_PRIO: m
 - NET_VRF
@@ -420,7 +421,7 @@ need_kconfig:
 - NETFILTER_XT_MATCH_STATISTIC: m
 - NETFILTER_XT_TARGET_MARK: m
 - NETFILTER: y
-- NET_SCH_INGRESS: m
+- NET_SCH_INGRESS
 - NET_SCH_NETEM: m
 - NF_TABLES_INET: y
 - NF_TABLES: m
@@ -516,7 +517,7 @@ need_kconfig:
 - NFT_SYNPROXY: m
 - TUN: m
 - VETH: m
-- VLAN_8021Q: m
+- VLAN_8021Q
 - XFRM_STATISTICS: y
 - XFRM_USER: m
 % end
