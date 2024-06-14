@@ -249,7 +249,7 @@ phoronix-test-suite:
       # - 3 # 2000000
       # - 4 # 10000000 [Longest / most time consuming]
     option_b: # Test
-      - Random Write
+      # - Random Write # The test run did not produce a result.
       - Async Random Write
       # - Random Read # The test run did not produce a result.
       - Async Random Read

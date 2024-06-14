@@ -9,7 +9,7 @@ phoronix-test-suite:
   - test: blender-4.0.0
     option_a:
       - BMW27
-      - Classroom
+      - Classroom # Classroom-Intel_oneAPI.  The test quit with a non-zero exit status. E: Error: Found no Cycles device of the specified type
       # - Fishy Cat # elapsed_time: 2935s
       # - Pabellon Barcelona # elapsed_time: 3164s
       # - Barbershop # The test quit with a non-zero exit status.
