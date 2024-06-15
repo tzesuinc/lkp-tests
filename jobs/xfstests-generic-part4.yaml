@@ -111,8 +111,6 @@ xfstests:
     - generic-metadata-journaling-16
     - generic-metadata-journaling-17
     - generic-metadata-journaling-18
-    - generic-metadata-journaling-19
-    - generic-metadata-journaling-20
     - generic-metadata-journaling-22
     - generic-metadata-journaling-23
     - generic-metadata-journaling-24
