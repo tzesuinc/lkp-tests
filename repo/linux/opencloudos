@@ -21,9 +21,9 @@ private_report_branch: .*
 notify_build_success_branch: .*
 tests:
   - branch: next
-    mail_to:
-      - wu.zheng@intel.com
-      - oliver.sang@intel.com
     parameters:
       kconfig: x86_64-oc_stream_base_config
       base_commit: v6.6.6
+      mail_to:
+        - wu.zheng@intel.com
+        - oliver.sang@intel.com
