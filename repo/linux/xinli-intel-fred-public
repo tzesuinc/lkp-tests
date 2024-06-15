@@ -3,4 +3,12 @@ owner: Xin3 Li <xin3.li@intel.com>
 branch_allowlist: fix_sp_calculation|intel-lkp
 branch_denylist: .*
 notify_build_success_branch: .*
-mail_cc: Xin3 Li <xin3.li@intel.com>
+private_report_branch: .*
+mail_to: Xin3 Li <xin3.li@intel.com>
+tests:
+  - branch: fix_sp_calculation
+    parameters:
+      jobs:
+        - hackbench.yaml
+        - schbench.yaml
+        - stress-ng-scheduler.yaml
