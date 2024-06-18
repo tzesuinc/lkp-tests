@@ -345,12 +345,12 @@ end
 
 def get_valid_average(matrix, key)
   samples = matrix[key]
-  return nil unless samples
-  return nil if samples.include? 0
-  return nil if samples.size < matrix_cols(matrix)
+  return unless samples
+  return if samples.include? 0
+  return if samples.size < matrix_cols(matrix)
 
   avg = matrix[key].average
-  return nil if !$opt_no_hide_noises && matrix[key].standard_deviation > avg / 2
+  return if !$opt_no_hide_noises && matrix[key].standard_deviation > avg / 2
 
   avg
 end

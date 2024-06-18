@@ -114,10 +114,10 @@ module Git
       # v3.12     => v3.13
       def next_official_release_tag
         tag = release_tag
-        return nil unless tag
+        return unless tag
 
         order = @base.release_tag_order(tag)
-        return nil unless order
+        return unless order
 
         @base.release_tags_with_order.reverse_each do |tag, o|
           next if o <= order
@@ -130,7 +130,7 @@ module Git
 
       def next_release_tag
         tag = release_tag
-        return nil unless tag
+        return unless tag
 
         order = @base.release_tag_order(tag)
         @base.release_tags_with_order.reverse_each do |tag, o|

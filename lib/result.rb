@@ -17,7 +17,7 @@ def tbox_group(hostname)
 end
 
 def tbox_group?(hostname)
-  return nil unless hostname.is_a?(String) && !hostname.empty?
+  return unless hostname.is_a?(String) && !hostname.empty?
 
   Dir[LKP::Path.src('hosts', hostname)][0]
 end

@@ -21,7 +21,7 @@ class Array
   end
 
   def median(already_sorted: false)
-    return nil if empty?
+    return if empty?
 
     sort! unless already_sorted
     m_pos = size / 2

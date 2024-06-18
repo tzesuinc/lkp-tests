@@ -280,7 +280,7 @@ class Job
   end
 
   def load_one_defaults(file, job)
-    return nil unless File.exist? file
+    return unless File.exist? file
 
     context_hash = deepcopy(@defaults)
     revise_hash(context_hash, job, overwrite_top_keys: true)
@@ -704,7 +704,7 @@ class Job
       raise
     rescue KeyError => e # no conclusion due to lack of information
       log_error "#{file}: #{e.message} hash: #{hash}"
-      return nil
+      return
     end
     true
   end

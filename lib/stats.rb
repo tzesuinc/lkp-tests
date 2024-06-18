@@ -231,7 +231,7 @@ def load_base_matrix_for_notag_project(git, rp, axis)
   base_matrix_file = "#{rp._result_root}/matrix.json"
   unless File.exist? base_matrix_file
     log_warn "#{base_matrix_file} doesn't exist."
-    return nil
+    return
   end
   load_release_matrix(base_matrix_file)
 end
@@ -267,13 +267,13 @@ def load_base_matrix(matrix_path, head_matrix, options)
     git = $git[project]
   rescue StandardError => e
     log_error e
-    return nil
+    return
   end
 
   return load_base_matrix_for_notag_project(git, rp, axis) if git.tag_names.empty?
 
   begin
-    return nil unless git.commit_exist? commit
+    return unless git.commit_exist? commit
 
     version = nil
     is_exact_match = false
@@ -281,7 +281,7 @@ def load_base_matrix(matrix_path, head_matrix, options)
     log_debug "project: #{project}, version: #{version}, is_exact_match: #{is_exact_match}"
   rescue StandardError => e
     log_error e
-    return nil
+    return
   end
 
   # FIXME: remove it later; or move it somewhere in future
@@ -297,7 +297,7 @@ def load_base_matrix(matrix_path, head_matrix, options)
     end
     unless version
       log_error "Cannot get base RC commit for #{commit}"
-      return nil
+      return
     end
   end
 
@@ -316,7 +316,7 @@ def load_base_matrix(matrix_path, head_matrix, options)
     # FIXME: rli9 after above change, below situation is not reasonable, keep it for debugging purpose now
     unless order
       log_error "unknown version #{version} matrix: #{matrix_path} options: #{options}"
-      return nil
+      return
     end
   end
 
@@ -523,7 +523,7 @@ def __get_changed_stats(a, b, is_incomplete_run, options)
   cols_a = matrix_cols a
   cols_b = matrix_cols b
 
-  return nil if options['variance'] && (cols_a < 10 || cols_b < 10)
+  return if options['variance'] && (cols_a < 10 || cols_b < 10)
 
   # Before: matrix = { "will-it-scale.per_process_ops" => [1183733, 1285303, 721524, 858073, 1207794] }
   # After:  matrix = { "will-it-scale.per_process_ops" => [1183733, 1285303, 721524, 858073, 1207794],
@@ -744,7 +744,7 @@ loading matrices to compare:
   DEBUG
 
   a, b = load_matrices_to_compare matrix_path1, matrix_path2, options
-  return nil if a.nil? || b.nil?
+  return if a.nil? || b.nil?
 
   _get_changed_stats(a, b, options)
 end

@@ -74,7 +74,7 @@ end
 
 def search_file_in_paths(file, relative_to = nil, search_paths = nil)
   if file[0] == '/'
-    return nil unless File.exist? file
+    return unless File.exist? file
 
     return file
   end
@@ -83,7 +83,7 @@ def search_file_in_paths(file, relative_to = nil, search_paths = nil)
 
   if file =~ /^\.\.?\//
     file = File.join(relative_to, file)
-    return nil unless File.exist? file
+    return unless File.exist? file
 
     return file
   end
@@ -215,7 +215,7 @@ class JSONFileNotExistError < StandardError
 end
 
 def load_merge_jsons(path)
-  return nil unless path.index(',')
+  return unless path.index(',')
 
   files = path.split(',')
   files.each do |file|

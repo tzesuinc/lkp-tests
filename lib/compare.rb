@@ -157,7 +157,7 @@ module Compare
     # Convert string to hash:
     # "commit/1,2,3" => { commit => [1, 2, 3] }
     def convert_exclude_result_roots
-      return nil if @exclude_result_roots.to_s.empty?
+      return if @exclude_result_roots.to_s.empty?
 
       arr = @exclude_result_roots.split('/')
       return { arr[0] => arr[1].split(',').delete_if(&:empty?) } if arr.size == 2 && sha1_40?(arr[0]) && arr[1] =~ /[0-9,]+/

@@ -66,7 +66,7 @@ module Cacheable
       end
 
       value = obj.send("#{method_name}_without_cache", *args)
-      return nil if value.nil? && !cache_options[method_name][:cache_nil]
+      return if value.nil? && !cache_options[method_name][:cache_nil]
 
       cache_store[cache_key] = OpenStruct.new(value: value, timestamp: Time.now)
       cache_store[cache_key].value

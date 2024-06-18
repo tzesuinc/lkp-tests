@@ -42,7 +42,7 @@ module Git
 
       working_dir = options[:working_dir] || "#{GIT_ROOT_DIR}/#{options[:project]}"
 
-      return nil if options[:may_not_exist] && !Dir.exist?(working_dir)
+      return if options[:may_not_exist] && !Dir.exist?(working_dir)
 
       Git.orig_open(working_dir, options)
     end

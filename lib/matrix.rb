@@ -207,7 +207,7 @@ def load_matrix_file(matrix_file)
   begin
     matrix = load_json(matrix_file) if File.exist? matrix_file
   rescue StandardError
-    return nil
+    return
   end
   matrix
 end

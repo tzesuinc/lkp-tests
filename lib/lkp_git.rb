@@ -85,7 +85,7 @@ def commit_tag(commit)
 end
 
 def linus_release_tag(commit)
-  return nil unless linus_commit?(commit)
+  return unless linus_commit?(commit)
 
   tag = commit_tag(commit)
   case tag
@@ -126,7 +126,7 @@ def __last_linus_release_tag(commit)
   else
     log_warn "Not a kernel tree? check #{GIT_WORK_TREE}"
     log_warn caller.join "\n"
-    return nil
+    return
   end
 
   tag += "-rc#{rc}" if rc && rc.positive?
