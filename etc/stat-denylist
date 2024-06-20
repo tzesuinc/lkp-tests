@@ -113,6 +113,7 @@ Spectre_v2_mitigation
 ^dmesg\.WARNING:at_drivers/thermal/thermal_sysfs\.c:#cooling_device_stats_setup
 ^dmesg\.WARNING:at_fs/notify/mark\.c:#__fsnotify_recalc_mask
 ^dmesg\.WARNING:at_include/linux/cpumask\.h
+^dmesg\.WARNING:at_kernel/irq/manage.c:#request_threaded_irq
 ^dmesg\.WARNING:at_kernel/kallsyms\.c:#kallsyms_init
 ^dmesg\.WARNING:at_kernel/kcsan/kcsan_test.c:#test_init
 ^dmesg\.WARNING:at_kernel/rcu/rcutorture.c:#rcutorture_oom_notify
