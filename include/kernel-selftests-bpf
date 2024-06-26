@@ -311,7 +311,6 @@ need_kconfig:
 - IP6_NF_NAT: m
 - IP6_NF_RAW: m
 - IP_DCCP
-- IP_GRE: m
 - IP_NF_IPTABLES: m
 - IP_NF_NAT: m
 - IP_NF_RAW: m
