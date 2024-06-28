@@ -8,7 +8,7 @@ phoronix-test-suite:
   - test:
     # - insurgency-1.2.0 # The test run did not produce a result.
     - quadray-1.0.0
-    - sam2017-1.0.2
+    # - sam2017-1.0.2 # E: ./sam2017: line 15: steam: command not found
     # - shadowofthetombraider-1.1.0 # A video game that needs to be downloaded from Steam platform
     # - ss3bfe-1.0.0 # A video game that needs to be downloaded from Steam platform
     - unigine-super-1.0.8

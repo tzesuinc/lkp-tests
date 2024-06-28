@@ -231,7 +231,7 @@ phoronix-test-suite:
       - Total
       - Userspace
       - Kernel
-      - Loader
+      # - Loader # The test run did not produce a result.
       # - Firmware # The test run did not produce a result.
 
   # - test: system-libxml2-1.0.3 # install failed
