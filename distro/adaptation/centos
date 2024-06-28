@@ -326,7 +326,7 @@ libx32gomp1:
 libx32itm1:
 libx32quadmath0:
 libx32ubsan1:
-libxen-dev: xen-devel
+libxen-dev
 libxkbcommon-dev: libxkbcommon-devel
 libxml2-dev: libxml2-devel
 libxmlrpc-core-c3-dev:
@@ -379,6 +379,7 @@ pkg-config: pkgconfig
 plzip:
 postmark:
 protobuf-compiler: protobuf
+python-csvkit:
 python-dev: python3-devel
 python-gi-cairo:
 python-gi:
