@@ -305,8 +305,8 @@ need_kconfig:
 - GENEVE
 - IFB
 - INET_DIAG
-- INET_ESP_OFFLOAD: y
-- INET_ESP: y
+- INET_ESP_OFFLOAD # y
+- INET_ESP # y
 - IP6_NF_IPTABLES: m
 - IP6_NF_NAT: m
 - IP6_NF_RAW: m
@@ -441,7 +441,7 @@ need_kconfig:
 - BRIDGE_NF_EBTABLES: m
 - CGROUP_BPF: y
 - DUMMY # m
-- INET_ESP: m
+- INET_ESP # m
 - IP6_NF_FILTER: m
 - IP6_NF_IPTABLES: m
 - IP6_NF_MATCH_RPFILTER: m
