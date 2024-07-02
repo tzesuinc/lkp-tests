@@ -329,7 +329,7 @@ need_kconfig:
 - L2TP_IP: m
 - L2TP: m
 - L2TP_V3: y
-- MACSEC: m
+- MACSEC # m
 - MACVLAN
 - MACVTAP
 - MPLS_IPTUNNEL: m

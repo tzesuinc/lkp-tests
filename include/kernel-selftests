@@ -144,7 +144,6 @@ need_kconfig:
 % elsif ___.group == "group-02"
 - FUSE_FS: m
 - IPV6_MULTIPLE_TABLES: y
-- MACSEC: y
 - MISC_FILESYSTEMS: y
 - MPTCP: y
 - MPTCP_IPV6: y
