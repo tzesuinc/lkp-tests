@@ -157,7 +157,7 @@ need_kconfig:
 - IPV6_ROUTE_INFO: y
 - IPV6_ROUTER_PREF: y
 - IPV6_SEG6_BPF: y
-- IPV6_SIT: y
+- IPV6_SIT # y
 - IPV6_SUBTREES: y
 - IPV6_TUNNEL: y
 - IPV6: y
@@ -321,7 +321,7 @@ need_kconfig:
 - IPV6_MROUTE: y
 - IPV6_MULTIPLE_TABLES: y
 - IPV6_SEG6_LWTUNNEL: y
-- IPV6_SIT: y
+- IPV6_SIT # y
 - IPV6_VTI
 - IPV6: y
 - KALLSYMS: y
