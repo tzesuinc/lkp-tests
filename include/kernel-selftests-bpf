@@ -357,7 +357,7 @@ need_kconfig:
 - NET_FOU # y
 - NET_IPGRE_DEMUX: m
 - NET_IPGRE: m
-- NET_IPIP: y
+- NET_IPIP # y
 - NET_IPVTI
 - NET_L3_MASTER_DEV: y
 - NET_NS: y
@@ -470,7 +470,7 @@ need_kconfig:
 - NETFILTER_XT_NAT: m
 - NETFILTER_XT_TARGET_REDIRECT: m
 - NETFILTER: y
-- NET_IPIP: m
+- NET_IPIP # m
 - NET_L3_MASTER_DEV: y
 - NET_NS: y
 - NET_PKTGEN: m
