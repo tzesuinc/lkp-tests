@@ -289,7 +289,6 @@ need_kconfig:
 - XDP_SOCKETS: y
 - XFRM_INTERFACE
 - XFRM_SUB_POLICY: y
-- XFRM_USER: y
 - ZEROPLUS_FF: y
 % elsif ___.group == "net"
 - AMT: m
@@ -393,7 +392,7 @@ need_kconfig:
 - VLAN_8021Q
 - VXLAN: m
 - XFRM_INTERFACE: m
-- XFRM_USER: m
+- XFRM_USER # m
 % elsif ___.group == "net/mptcp"
 - INET_DIAG: m
 - INET_MPTCP_DIAG: m
@@ -518,5 +517,5 @@ need_kconfig:
 - VETH: m
 - VLAN_8021Q
 - XFRM_STATISTICS: y
-- XFRM_USER: m
+- XFRM_USER # m
 % end
