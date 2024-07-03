@@ -260,6 +260,10 @@ class NetStater < Stater
                     # and it's passed stat will be
                     # PASS: bridge fdb get
                     'bridge_fdb_get'
+                  elsif $2.include?('set ifalias') && $2.include?('for test-dummy0')
+                    # PASS: set ifalias 82e318f8-b9c2-490c-b15d-28a5a51f8f67 for test-dummy0
+                    # PASS: set ifalias 6099b132-422e-4720-a085-0dc64832052a for test-dummy0
+                    'set ifalias for test-dummy0'
                   else
                     $2
                   end
