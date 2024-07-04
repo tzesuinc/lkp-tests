@@ -10,6 +10,7 @@ hwloc
 libcap-dev
 libelf-dev
 libelf1
+libnl-genl-3-dev
 linux-perf
 msr-tools
 stress
