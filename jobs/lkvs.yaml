@@ -7,7 +7,6 @@ lkvs:
     - cet
     - guest-test
     - pt
-    - ufs
     - ifs
     - tdx-compliance
     - umip

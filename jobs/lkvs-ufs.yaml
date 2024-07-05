@@ -1,0 +1,9 @@
+suite: lkvs
+testcase: lkvs
+category: functional
+
+lkvs:
+  test:
+    - ufs
+
+timeout: 1h
