@@ -141,6 +141,7 @@ Spectre_v2_mitigation
 ^dmesg\.WARNING:at_samples/ftrace/ftrace\-ops\.c:#ops_alloc_init
 ^dmesg\.WARNING:CPU:#PID:#at_rcu_torture_stats_print\[rcutorture\]
 ^dmesg\.WARNING:CPU:#PID:#at_refcount_warn_saturate
+^dmesg\.WARNING:event.*not_valid.*not_supported_by_kernel
 ^dmesg\.WARNING:missing_R10_value_at__fsnotify_parent
 ^dmesg\.WARNING:possible_circular_locking_dependency_detected_chmod_is_trying_to_acquire_lock:at:console_lock_spinning_enable_but_task_is_already_holding_lock:at:tty_insert_flip_string_and_push_buffer.*
 ^dmesg\.WARNING:Spectre_v2_mitigation_leaves_CPU_vulnerable_to_RETBleed_attacks,data_leaks_possible
