@@ -3,9 +3,14 @@ testcase: lkvs
 category: functional
 
 lkvs:
+  test: cstate-server
+
+perf-stat:
+
+---
+lkvs:
   test:
     - ufs
     - rapl-server
-    - cstate-server
 
 timeout: 1h
