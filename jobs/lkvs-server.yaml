@@ -4,6 +4,4 @@ category: functional
 
 lkvs:
   test:
-    - rapl-server
-    - cstate-server
     - topology-server
