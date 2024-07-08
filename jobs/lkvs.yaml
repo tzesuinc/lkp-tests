@@ -5,7 +5,7 @@ category: functional
 lkvs:
   test:
     - cet
-    - guest-test
+    # - guest-test # cause machine power down
     - pt
     - ifs
     - tdx-compliance
