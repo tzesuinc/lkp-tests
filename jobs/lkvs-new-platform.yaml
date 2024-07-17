@@ -7,6 +7,8 @@ lkvs:
 
 perf-stat:
 
+timeout: 1h
+
 ---
 lkvs:
   test:
