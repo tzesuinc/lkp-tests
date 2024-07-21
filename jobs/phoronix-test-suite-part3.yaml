@@ -252,9 +252,9 @@ phoronix-test-suite:
       # - Random Write # The test run did not produce a result.
       - Async Random Write
       # - Random Read # The test run did not produce a result.
-      - Async Random Read
+      # - Async Random Read # The test run did not produce a result.
       - Sequential Write
-      - Sequential Read
+      # - Sequential Read # The test run did not produce a result.
       # - Scan # The test run did not produce a result.
       - Increment
     option_c: # Clients

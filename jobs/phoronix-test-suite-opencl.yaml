@@ -25,12 +25,12 @@ phoronix-test-suite:
       # - Transfer Bandwidth enqueueReadBuffer
       # - Kernel Latency
 
-  - test: darktable-1.0.5
-    option_a:
-      - Boat
-      - Masskrug
-      - Server Room
-      - Server Rack
+  # - test: darktable-1.0.5 # is not installed
+  #   option_a:
+  #     - Boat
+  #     - Masskrug
+  #     - Server Room
+  #     - Server Rack
 
   # - test: parboil-1.2.1 # The test quit with a non-zero exit status. E: SyntaxError: Missing parentheses in call to 'print'.
   #   option_a:
