@@ -166,12 +166,15 @@ fixup_dma()
 	# for PCI devices
 	local name=$(ls /sys/bus/pci/devices/ | head -1)
 	[[ $name ]] || return
+
 	echo dma_map_benchmark > /sys/bus/pci/devices/$name/driver_override || return
+
 	local old_bind_dir=$(ls -d /sys/bus/pci/drivers/*/$name)
 	[[ $old_bind_dir ]] && {
 		echo $name > $(dirname $old_bind_dir)/unbind || return
 	}
-	echo $name > /sys/bus/pci/drivers/dma_map_benchmark/bind || return
+
+	echo $name > /sys/bus/pci/drivers/dma_map_benchmark/bind
 }
 
 skip_standalone_net_tests()
@@ -231,7 +234,7 @@ fixup_net()
 
 	export CCINCLUDE="-I../bpf/tools/include"
 	log_cmd make -j${nr_cpu} -C net 2>&1 || return
-	log_cmd make install TARGETS=net INSTALL_PATH=/usr/bin/ 2>&1 || return
+	log_cmd make install TARGETS=net INSTALL_PATH=/usr/bin/ 2>&1
 }
 
 fixup_efivarfs()
@@ -299,6 +302,7 @@ fixup_gpio()
 	# gcc -O2 -g -std=gnu99 -Wall -I../../../../usr/include/    gpio-mockup-chardev.c ../../../gpio/gpio-utils.o ../../../../usr/include/linux/gpio.h  -lmount -I/usr/include/libmount -o gpio-mockup-chardev
 	# gcc: error: ../../../gpio/gpio-utils.o: No such file or directory
 	log_cmd make -j${nr_cpu} -C ../../../tools/gpio 2>&1 || return
+
 	export CFLAGS="-I../../../../usr/include"
 }
 
@@ -532,19 +536,23 @@ fixup_x86()
 	grep -qw sgx x86/Makefile && {
 		grep -qw sgx /proc/cpuinfo || echo "Current host doesn't support sgx"
 	}
+
+	return 0
 }
 
 fixup_livepatch()
 {
 	# livepatch check if dmesg meet expected exactly, so disable redirect stdout&stderr to kmsg
 	[[ -s "/tmp/pid-tail-global" ]] && cat /tmp/pid-tail-global | xargs kill -9 && echo "" >/tmp/pid-tail-global
+
+	return 0
 }
 
 fixup_mount_setattr()
 {
 	# fix no real run for mount_setattr
 	grep -q TEST_PROGS mount_setattr/Makefile ||
-	grep "TEST_GEN_FILES +=" mount_setattr/Makefile | sed 's/TEST_GEN_FILES/TEST_PROGS/' >> mount_setattr/Makefile
+		grep "TEST_GEN_FILES +=" mount_setattr/Makefile | sed 's/TEST_GEN_FILES/TEST_PROGS/' >> mount_setattr/Makefile
 }
 
 fixup_tc_testing()
@@ -567,6 +575,7 @@ fixup_tc_testing()
 		sed -i s,/sbin/tc,/lkp/benchmarks/kernel-selftests/kernel-selftests/iproute2-next/sbin/tc,g tc-testing/tdc_config.py
 		sed -i s,/sbin/ip,/lkp/benchmarks/kernel-selftests/kernel-selftests/iproute2-next/sbin/ip,g tc-testing/tdc_config.py
 	fi
+
 	modprobe netdevsim
 }
 
