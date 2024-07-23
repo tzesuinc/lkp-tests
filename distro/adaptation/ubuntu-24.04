@@ -34,3 +34,4 @@ python3-tox: tox
 python: python-is-python3
 qt5-default: qtbase5-dev
 winpdb:
+libdw1: libdw1t64
