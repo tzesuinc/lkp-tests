@@ -31,4 +31,16 @@ class String
   def uncolorize
     gsub(/\e\[(\d+)?(;\d+)?(;\d+)?m/, '').gsub(/\e\[K/, '')
   end
+
+  def unicode_escape
+    str = chars.map do |char|
+      if char.ascii_only?
+        char
+      else
+        char.codepoints.map { |cp| "\\u#{cp.to_s(16).rjust(4, '0')}" }.join
+      end
+    end
+
+    str.join
+  end
 end
