@@ -1,0 +1,27 @@
+Linux Jitter testing program version 1.9
+Iterations=10
+The pragram will execute a dummy function 80000 times
+Display is updated every 20000 displayUpdate intervals
+Thread affinity will be set to core_id:1
+Timings are in CPU Core cycles
+Inst_Min:    Minimum Excution time during the display update interval(default is ~1 second)
+Inst_Max:    Maximum Excution time during the display update interval(default is ~1 second)
+Inst_jitter: Jitter in the Excution time during rhe display update interval. This is the value of interest
+last_Exec:   The Excution time of last iteration just before the display update
+Abs_Min:     Absolute Minimum Excution time since the program started or statistics were reset
+Abs_Max:     Absolute Maximum Excution time since the program started or statistics were reset
+tmp:         Cumulative value calcualted by the dummy function
+Interval:    Time interval between the display updates in Core Cycles
+Sample No:   Sample number
+
+   Inst_Min   Inst_Max   Inst_jitter last_Exec  Abs_min    Abs_max      tmp       Interval     Sample No
+     86480     203840     117360      86540      86480     203840    3368878080 1737817000          1
+     86480     208240     121760      86520      86480     208240    1332543488 1737685080          2
+     86480     203160     116680      86500      86480     208240    3591176192 1737371420          3
+     86480     191580     105100      86520      86480     208240    1554841600 1737124520          4
+     86480     186120      99640      86520      86480     208240    3813474304 1737085240          5
+     86480     191000     104520      86480      86480     208240    1777139712 1737300820          6
+     86480     191400     104920      86500      86480     208240    4035772416 1737598720          7
+     86480     208900     122420      86520      86480     208900    1999437824 1737737880          8
+     86480     190060     103580      86520      86480     208900    4258070528 1737683260          9
+     86480     201620     115140      86520      86480     208900    2221735936 1737549060         10

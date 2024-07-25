@@ -26,6 +26,7 @@ hackbench::
 hwsim::
 igt::
 iozone::
+jitter::
 kbuild::
 kernbench::
 kernel-selftests::

@@ -31,6 +31,7 @@ hwsim::
 igt::
 intel-ipsec-mb::
 iozone::
+jitter::
 kbuild::
 kernbench::
 kernel-selftests::

@@ -1,0 +1,18 @@
+pkgname=jitter
+pkgver=git
+pkgrel=1.9
+arch=('x86_64')
+url="https://github.com/FDio/archived-pma_tools.git"
+license=("Apache License")
+source=("https://github.com/FDio/archived-pma_tools.git")
+md5sums=('SKIP')
+
+build() {
+    cd "${srcdir}/archived-pma_tools/${pkgname}"
+    make
+}
+
+package() {
+    mkdir -p "${pkgdir}/lkp/benchmarks/${pkgname}"
+    cp -r "${srcdir}/archived-pma_tools" "${pkgdir}/lkp/benchmarks/${pkgname}"
+}

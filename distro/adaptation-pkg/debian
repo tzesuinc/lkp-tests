@@ -31,6 +31,7 @@ hwsim::
 igt::
 iozone::
 kbuild::
+jitter::
 kernbench::
 kernel-selftests::
 ku-latency::
