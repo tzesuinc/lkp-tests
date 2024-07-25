@@ -4,17 +4,32 @@ category: functional
 
 lkvs:
   test:
+    - amx
+    - avx512vbmi
     - cet
-    # - guest-test # cause machine power down
-    - pt
-    - ifs
-    - tdx-compliance
-    - umip
-    - isst
-    - th
-    - workload-xsave
-    - thermal
-    - xsave
+    - cmpccxadd
+    - dsa
+    - edac
     - fred
-    - sdsi
+    # - guest-test # cause machine power down
+    - idxd
+    - ifs
+    # - instruction-check
+    - isst
+    - pcie
     - pmu
+    - prefetchi
+    - pstate
+    - pt
+    - sdsi
+    - tdx-compliance
+    - tdx-guest
+    # - tdx-osv-sanity
+    - telemetry
+    - th
+    - thermal
+    - tpm
+    - tpmi
+    - umip
+    - workload-xsave
+    - xsave

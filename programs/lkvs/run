@@ -4,6 +4,6 @@
 . $LKP_SRC/lib/tests/lkvs.sh
 
 build_libipt
-build_lkvs
+build_lkvs || exit
 
 runtests
