@@ -4,7 +4,7 @@ LKP_SRC ||= ENV['LKP_SRC'] || File.dirname(__dir__)
 
 require "#{LKP_SRC}/lib/yaml"
 require "#{LKP_SRC}/lib/constant"
-require "#{LKP_SRC}/lib/string_ext"
+require "#{LKP_SRC}/lib/string"
 require "#{LKP_SRC}/lib/lkp_path"
 require "#{LKP_SRC}/lib/log"
 require "#{LKP_SRC}/lib/programs"

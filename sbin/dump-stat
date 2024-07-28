@@ -8,9 +8,9 @@ require "#{LKP_SRC}/lib/statistics"
 require "#{LKP_SRC}/lib/bounds"
 require "#{LKP_SRC}/lib/yaml"
 require "#{LKP_SRC}/lib/job"
-require "#{LKP_SRC}/lib/string_ext"
+require "#{LKP_SRC}/lib/string"
 require "#{LKP_SRC}/lib/log"
-require "#{LKP_SRC}/lib/ruby_ext"
+require "#{LKP_SRC}/lib/ruby"
 
 monitor = ARGV[0]
 monitor_file = ARGV[1]

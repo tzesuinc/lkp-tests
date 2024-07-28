@@ -6,7 +6,7 @@ require 'timeout'
 require 'pathname'
 require 'fileutils'
 require 'stringio'
-require "#{LKP_SRC}/lib/array_ext"
+require "#{LKP_SRC}/lib/array"
 require "#{LKP_SRC}/lib/log"
 require 'English'
 

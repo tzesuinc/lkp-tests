@@ -36,8 +36,9 @@ download_kernel()
 {
 	kernel="$(echo $kernel | sed 's/^\///')"
 
-	echo "downloading kernel image ..."
+	echo "downloading kernel image $kernel ..."
 	set_job_state "wget_kernel"
+
 	kernel_file=$CACHE_DIR/$kernel
 	http_get_newer "$kernel" $kernel_file || {
 		set_job_state "wget_kernel_fail"

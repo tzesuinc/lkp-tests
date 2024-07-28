@@ -4,8 +4,8 @@ LKP_SRC = ENV['LKP_SRC'] || File.dirname(File.dirname(File.dirname(File.realpath
 
 require 'time'
 require "#{LKP_SRC}/lib/statistics"
-require "#{LKP_SRC}/lib/string_ext"
-require "#{LKP_SRC}/lib/array_ext"
+require "#{LKP_SRC}/lib/string"
+require "#{LKP_SRC}/lib/array"
 require "#{LKP_SRC}/lib/tests/stats"
 
 test_name = nil

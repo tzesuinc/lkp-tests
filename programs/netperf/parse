@@ -2,7 +2,7 @@
 
 LKP_SRC = ENV['LKP_SRC'] || File.dirname(File.dirname(File.dirname(File.realpath($PROGRAM_NAME))))
 
-require "#{LKP_SRC}/lib/ruby_ext"
+require "#{LKP_SRC}/lib/ruby"
 
 # netperf.workload is defined as the total transaction number or the total
 # packet number depended on transmission protocal used in netperf
