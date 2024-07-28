@@ -104,6 +104,8 @@ need_kconfig:
 - STRING_HELPERS_KUNIT_TEST: m
 - STRING_KUNIT_TEST: m
 
+- USERCOPY_KUNIT_TEST: m
+
 # below are kunit test configs of bool type
 - DAMON_KUNIT_TEST: y
 - PM_QOS_KUNIT_TEST: y
@@ -136,7 +138,6 @@ need_kconfig:
 - TEST_DIV64: m
 - TEST_BPF: m
 - TEST_MIN_HEAP: m
-- TEST_USER_COPY: m
 - TEST_STATIC_KEYS: m
 - TEST_SCANF: m
 - TEST_PRINTF: m
