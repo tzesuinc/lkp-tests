@@ -13,5 +13,6 @@ libelf1
 libnl-genl-3-dev
 linux-perf
 msr-tools
+sshpass
 stress
 trace-cmd
