@@ -8,3 +8,6 @@ need_kconfig:
 - INTEL_TPMI: y
 - INTEL_VSEC: y
 - X86_USER_SHADOW_STACK: y
+% if ___.group == "x86"
+- INTEL_RAPL: m
+% end

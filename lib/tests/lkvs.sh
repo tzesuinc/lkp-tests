@@ -35,11 +35,18 @@ fixup_splitlock()
     cat /proc/cpuinfo | grep -q split_lock_detect || die "split_lock_detect not supported on current CPU"
 }
 
+fixup_rapl_server()
+{
+    log_cmd modprobe -v intel_rapl
+}
+
+alias fixup_rapl_client=fixup_rapl_server
+
 runtests()
 {
     cd $BENCHMARK_ROOT/$testcase/lkvs/BM || return
 
-    if [[ $(type -t "fixup_${test//-/_}") = function ]]; then
+    if [[ $(type -t "fixup_${test//-/_}") =~ (alias|function) ]]; then
 		fixup_${test//-/_} || return
     fi
 
