@@ -33,61 +33,23 @@ fi
 
 run_kunit_tests()
 {
+	local kernel_version=$(get_kernel_version)
+
 	for i in ${test_array[@]}; do
-		# f7e01ab828fd4 kasan: move tests to mm/kasan/
-		# kasan unit test is renamed from test_kasan to kasan_test by above commit merged in v6.1-rc1
-		[[ $i = kasan_test ]] && {
-			if modprobe -q -n kasan_test; then
-				i=kasan_test
-			elif modprobe -q -n test_kasan; then
-				i=test_kasan
-			else
-				echo 'kasan unit test module is not found' >&2
-				continue
-			fi
-		}
-		[[ $i =~ "drm_" || $i =~ "cpumask_kunit" ]] && {
-			if ! is_kernel_version_gt 6.0; then
-				# skip not exist module
-				continue
-			fi
-		}
+		# skip x86 only modules
 		[[ $arch = "i386" ]] && {
-			# skip TEST_LIVEPATCH related modules
+			# TEST_LIVEPATCH
 			[[ $i = test_klp_livepatch ]] && continue
 			[[ $i = test_klp_shadow_vars ]] && continue
-			# skip TEST_HMM related module
+			# TEST_HMM
 			[[ $i = test_hmm ]] && continue
 		}
-		[[ $i =~ "clk" || $i =~ "overflow_kunit" || $i =~ "stackinit_kunit" ]] && {
-			if ! is_kernel_version_ge 5.18; then
-				# skip not exist module
-				continue
-			fi
-		}
-		[[ $i =~ "soc-utils-test" ]] && {
-			if ! is_kernel_version_ge 5.19; then
-				# skip not exist module
-				continue
-			fi
-		}
-		[[ $i =~ "iio-test-format" || $i =~ "iio-test-rescale" || $i =~ "snd-soc-avs-i2s-test" ]] && {
-			if ! is_kernel_version_ge 6.0; then
-				# skip not exist module
-				continue
-			fi
+
+		modprobe -q -n $i || {
+			echo "fail to modprobe -q -n $i on $kernel_version" >&2
+			continue
 		}
 
-		[[ $i = "cros_kunit_proto_test" || $i = "property-entry-test" ]] && {
-			is_kernel_version_ge 6.7 || continue
-		}
-
-		[[ $i =~ "hid-uclogic-test" ]] && {
-			if ! is_kernel_version_ge 6.1; then
-				# skip not exist module
-				continue
-			fi
-		}
 		log_cmd modprobe -v $i
 		log_cmd rmmod $i
 	done
