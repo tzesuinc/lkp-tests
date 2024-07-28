@@ -2,4 +2,4 @@
 kmsg:
 heartbeat:
 meminfo:
-kmemleak:
+# kmemleak:
