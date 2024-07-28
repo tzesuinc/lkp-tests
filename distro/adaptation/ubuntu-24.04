@@ -5,6 +5,7 @@ dh-systemd: debhelper
 exfat-utils: exfatprogs
 fuse: fuse3
 lib32gcc-dev: lib32gcc-12-dev
+libdw1: libdw1t64
 libevent-2.1-6: libevent-2.1-7
 libgsl: libgsl27
 libhwloc5: libhwloc15
@@ -34,4 +35,3 @@ python3-tox: tox
 python: python-is-python3
 qt5-default: qtbase5-dev
 winpdb:
-libdw1: libdw1t64
