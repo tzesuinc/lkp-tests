@@ -56,15 +56,15 @@ class LinuxTestcasesTableSet
        leaking-addresses locktorture ltp mce-test otc_ddt piglit pm-qa nvml
        qemu rcuscale rcutorture suspend suspend-stress trinity ndctl nfs-test hwsim
        idle-inject mdadm-selftests nvml test-bpf mce-log perf-sanity-tests
-       build-perf_test update-ucode reboot cat libhugetlbfs-test ocfs2test
+       update-ucode reboot cat libhugetlbfs-test ocfs2test
        perf-test fxmark kvm-kernel-boot-test bkc_ddt rdma-pyverbs
        xfstests packetdrill avocado v4l2 vmem perf-stat-tests cgroup2-test].freeze
   OTHER_TESTCASES =
-    %w[build-dpdk build-nvml build-qemu convert-lkpdoc-to-html convert-lkpdoc-to-html-css rsync-rootfs
+    %w[convert-lkpdoc-to-html convert-lkpdoc-to-html-css rsync-rootfs
        health-stats hwinfo ipmi-setup debug
-       lkp-bug lkp-install-run lkp-services lkp-src pack lkp-qemu
-       pack-deps makepkg makepkg-deps borrow dpdk-dts mbtest build-acpica build-ltp
-       bust-shm-exit build-llvm_project upgrade-trinity build-0day-crosstools deploy-clang kmemleak-test kunit].freeze
+       lkp-install-run lkp-services lkp-src pack lkp-qemu
+       pack-deps makepkg makepkg-deps borrow dpdk-dts mbtest
+       bust-shm-exit upgrade-trinity deploy-clang kmemleak-test kunit].freeze
 end
 
 def functional_test?(testcase)

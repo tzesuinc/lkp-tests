@@ -5,7 +5,6 @@ dmesg.*
 kmemleak\..+unreferenced_object\..+
 kmsg.*
 last_state.*
-lkp-bug.*
 locktoture\..+lock_hotplug
 rcutoture\..+rcu_hotplug
 stderr.*

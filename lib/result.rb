@@ -30,18 +30,9 @@ class ResultPath < Hash
     'default' => %w[path_params tbox_group rootfs kconfig compiler commit run],
     'kvm:default' => %w[path_params tbox_group rootfs kconfig compiler commit run],
     'health-stats' => %w[path_params run],
-    'lkp-bug' => %w[path_params run],
     'hwinfo' => %w[tbox_group run],
-    'build-dpdk' => %w[rootfs dpdk_config commit dpdk_compiler dpdk_commit run],
-    'build-qemu' => %w[rootfs qemu_config qemu_commit run],
-    'build-llvm_project' => %w[rootfs llvm_project_commit run],
     'deploy-clang' => %w[rootfs llvm_project_commit run],
-    'build-nvml' => %w[rootfs nvml_commit run],
-    'build-ltp' => %w[rootfs ltp_commit run],
-    'build-acpica' => %w[acpica_commit test run],
-    'build-ceph' => %w[ceph_commit run],
-    'kvm-kernel-boot-test' => %w[tbox_group kconfig commit qemu_config qemu_commit linux_commit run],
-    'build-perf_test' => %w[perf_test_commit run]
+    'kvm-kernel-boot-test' => %w[tbox_group kconfig commit qemu_config qemu_commit linux_commit run]
   }.freeze
 
   def path_scheme

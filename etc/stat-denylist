@@ -8,11 +8,6 @@ Spectre_v2_mitigation
 ^boot-slabinfo\.
 ^boot-time\.
 ^buddyinfo\.
-^build-.+\.dmesg\.
-^build-.+\.kmsg\.
-^build-.+\.stderr\.
-^build-.+\.time\.
-^build-0day-crosstools\.
 ^cpuidle\.
 ^diskstats\.
 ^dmesg\.(E|R)IP:acpi_safe_halt
