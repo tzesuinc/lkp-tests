@@ -87,7 +87,7 @@ runtests()
                 log_cmd ./runtests -c "th/th_test 2"
                 ;;
             workload-xsave)
-                log_cmd cd build || die "fail to cd build dir"
+                log_cmd cd $test/build || die "fail to cd build dir"
                 local available_workloads=$(./yogini 2>&1 | grep "Available workloads" | cut -d: -f 2 | xargs)
                 log_cmd ../start_test.sh -1 100 $available_workloads
                 ;;
