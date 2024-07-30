@@ -143,7 +143,7 @@ module Git
       end
 
       def linux_next_version
-        show('localversion-next').first
+        show('localversion-next').first.sub(/^-/, '')
       rescue Git::GitExecuteError
         # ignore error to return nil
         nil
