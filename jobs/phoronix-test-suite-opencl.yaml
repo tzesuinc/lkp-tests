@@ -3,6 +3,9 @@ testcase: phoronix-test-suite
 category: benchmark
 
 phoronix-test-suite:
+  - test:
+      - opencl-benchmark-1.0.0
+
   # - test: arrayfire-1.2.0 # The test run did not produce a result.
     # option_a:
       # - BLAS CPU FP32
