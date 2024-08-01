@@ -57,7 +57,7 @@ fixup_splitlock()
 
 fixup_rapl_server()
 {
-    log_cmd modprobe -v intel_rapl
+    log_cmd modprobe -v intel_rapl_msr
 }
 
 alias fixup_rapl_client=fixup_rapl_server
