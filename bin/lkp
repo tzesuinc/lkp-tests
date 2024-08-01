@@ -52,10 +52,20 @@ try_run()
 	[ -x "$path" ] && exec "$path" $lkp_args "$@"
 }
 
+try_run2()
+{
+	local subdir="$1"
+	local path=$(find "$LKP_SRC/$subdir" -name "$lkp_command" -type f)
+	shift
+
+	[ -x "$path" ] && exec "$path" $lkp_args "$@"
+}
+
 try_run 'bin'		"$@"
 try_run 'sbin'		"$@"
 try_run 'tools'		"$@"
 try_run 'lkp-exec'	"$@"
+try_run2 'tools' "$@"
 
 echo "Cannot find \"$lkp_command\" command under $LKP_SRC/{bin,sbin,tools,lkp-exec}/"
 exit 1
