@@ -4,7 +4,6 @@ category: functional
 
 kernel-selftests-bpf:
   group:
-    - net
     - net/mptcp
 
 ---
@@ -37,3 +36,10 @@ kernel-selftests-bpf:
     - fib_nexthops.sh
     - xfrm_policy.sh
     - pmtu.sh
+
+---
+kernel-selftests-bpf:
+  group:
+    - net
+
+timeout: 1h
