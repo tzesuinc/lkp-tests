@@ -126,7 +126,6 @@ libegl1-mesa-dev: mesa-libEGL-devel
 libegl1: mesa-libEGL
 libelf-dev: elfutils-devel
 libelf1: elfutils-libelf
-libevent-2.1-6: libevent
 libevent-2: libevent
 libevent-dev: libevent-devel
 libexpat1-dev: expat-devel

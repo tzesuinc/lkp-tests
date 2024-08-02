@@ -13,8 +13,8 @@ lib64asan3: lib64asan6
 lib64gcc-dev: lib64gcc-11-dev
 lib64gcc1: lib64gcc-s1
 libasan: libasan6
-libevent-2.1-6: libevent-2.1-7
 libevent-2: libevent-2.1-7
+libevent-openssl-2: libevent-openssl-2.1-7
 libgcc-dev: libgcc-11-dev
 libgcrypt-dev: libgcrypt20-dev
 libglut3: libglut3.12
