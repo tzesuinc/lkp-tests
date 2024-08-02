@@ -487,6 +487,12 @@ prepare_for_selftest()
 	fi
 }
 
+fixup_cpufreq()
+{
+	# cpufreq selftests runs longer on machine with large number of cpus
+	echo 'timeout=600' > $group/settings
+}
+
 fixup_mm()
 {
 	# memory management selftests used to be named as vm selftests
