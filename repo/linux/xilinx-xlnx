@@ -29,3 +29,4 @@ subsystems:
 test_old_branches: .*
 notify_build_success_branch: lkp_test
 branch_denylist: pr/.*
+no_merge_branch: xlnx_rebase_.*
