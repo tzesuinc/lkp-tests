@@ -1,2 +1,2 @@
-url: git://git.kernel.org/pub/scm/linux/kernel/git/mingo/tip.git
+url: https://git.kernel.org/pub/scm/linux/kernel/git/mingo/tip.git
 owner: Ingo Molnar <mingo@redhat.com>

@@ -1,4 +1,4 @@
-url: git://git.kernel.org/pub/scm/linux/kernel/git/andi.shyti/linux.git
+url: https://git.kernel.org/pub/scm/linux/kernel/git/andi.shyti/linux.git
 integration_testing_branches: i2c/i2c-host
 owner: Andi Shyti <andi.shyti@kernel.org>
 mail_to: Andi Shyti <andi.shyti@kernel.org>

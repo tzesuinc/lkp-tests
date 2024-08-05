@@ -1,4 +1,4 @@
-url: git://git.kernel.org/pub/scm/linux/kernel/git/netfilter/nf.git
+url: https://git.kernel.org/pub/scm/linux/kernel/git/netfilter/nf.git
 mail_cc:
 - netfilter-devel@vger.kernel.org
 - coreteam@netfilter.org
