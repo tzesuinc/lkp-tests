@@ -3,6 +3,9 @@
 LKP_SRC = ENV['LKP_SRC'] || File.dirname(File.dirname(File.realpath($PROGRAM_NAME)))
 
 require "#{LKP_SRC}/lib/string"
+require "#{LKP_SRC}/lib/tests/stats"
+
+stats = LKP::Stats.new
 
 summary_start = false
 while (line = $stdin.gets)
@@ -11,15 +14,23 @@ while (line = $stdin.gets)
   summary_start = true if !summary_start && line =~ /Test Start Time:/
   next unless summary_start
 
+  # Test Start Time: 2024-08-05_14-52-06
+  # --------------------------------------------------------
+  # Testcase                                                                     Result    Exit Value  Duration
+  # --------                                                                     ------    ----------  --------
   # cet_tests.sh -t cp_test -n glibc_shstk_test -k "control protection" -p s2    FAIL      1           1.231s
   # [RESULT][intel_sst.sh -t isst_pp_config_enable_status]                       [BLOCK]   [2]         [1.174s]
-  next unless line =~ /^(.+)\s+(FAIL|BLOCK|PASS|NA)\s+(\d+)\s+(.+)s/ || line =~ /^\[RESULT\]\[(.+)\]\s+\[(FAIL|BLOCK|PASS|NA)\]\s+\[(\d+)\]\s+\[(.+)s\]/
+  # [RESULT][pmu_tests.sh -t lbr_events_all]                                     [FAIL]    [129]       [0.155s]
+  # [RESULT][pmu_tests.sh -t timed_pebs_msr]                                     [FAIL]    [1]         [0.055s]
+  # [RESULT][pmu_tests.sh -t uncore_events]                                      [PASS]    [0]         [232.755s]
+
+  next unless line =~ /^(.+)\s+(FAIL|BLOCK|PASS|NA)\s+\d+\s+.+s/ || line =~ /^\[RESULT\]\[(.+)\]\s+\[(FAIL|BLOCK|PASS|NA)\]\s+\[\d+\]\s+\[.+s\]/
 
   testcase = $1
   result = $2
-  _exit_value = $3
-  _duration = $4
 
-  # cet_tests.sh_-t_cp_test_-n_glibc_shstk_test_-k_control_protection_-p_s2.fail: 1
-  puts "#{testcase.strip.delete('"').tr(' ', '_')}.#{result.downcase}: 1"
+  # cet_tests.sh_-t_cp_test_-n_glibc_shstk_test_-k_control_protection_-p_s2 fail
+  stats.add testcase, result
 end
+
+stats.dump
