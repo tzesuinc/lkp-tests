@@ -7,9 +7,9 @@ need_kconfig:
 - INTEL_UNCORE_FREQ_CONTROL_TPMI: y
 - X86_USER_SHADOW_STACK: y
 
-% if ___.group == "x86"
+% if ___.test == "x86"
 - INTEL_RAPL: m
-% elsif ___.group == "ufs" || ___.group == "tpmi"
+% elsif ___.test == "ufs" || ___.test == "tpmi"
 - INTEL_TPMI: m
 - INTEL_VSEC: m
 % end
