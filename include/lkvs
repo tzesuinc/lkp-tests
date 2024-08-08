@@ -3,9 +3,11 @@ initrds+:
 - linux_selftests
 
 need_kconfig:
-- INTEL_UNCORE_FREQ_CONTROL: y
-- INTEL_UNCORE_FREQ_CONTROL_TPMI: y
+- INTEL_UNCORE_FREQ_CONTROL
+- INTEL_UNCORE_FREQ_CONTROL_TPMI
+- INTEL_VSEC
 - X86_USER_SHADOW_STACK: y
+- AS_WRUSS: y
 
 % if ___.test == "x86"
 - INTEL_RAPL: m
