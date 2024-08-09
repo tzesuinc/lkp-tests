@@ -50,7 +50,7 @@ phoronix-test-suite:
       - 3 # 10 [Higher Density]
     option_b:
       - Bosphorus 1080p
-      - Bosphorus 4K
+      - Bosphorus 4K #  E: height not found in y4m header
   - test: tensorflow-lite-1.1.0
     option_a:
       - Mobilenet Float
