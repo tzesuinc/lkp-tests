@@ -1,0 +1,9 @@
+suite: kernel-selftests-bpf
+testcase: kernel-selftests-bpf
+category: functional
+
+kernel-selftests-bpf:
+  group:
+    - ftrace
+
+kernel_cmdline: kvm-intel.unrestricted_guest=0
