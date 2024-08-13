@@ -1,0 +1,16 @@
+#!/bin/sh
+# - core_id
+# - rate
+# - loops
+# - samples
+
+. $LKP_SRC/lib/reproduce-log.sh
+
+cd $BENCHMARK_ROOT/jitter/archived-pma_tools/jitter || die "jitter benchmark is not installed yet"
+
+[ -n "$core_id" ] || core_id=1
+[ -n "$rate" ] || rate=20000
+[ -n "$loops" ] || loops=80000
+[ -n "$samples" ] || samples=200
+
+./jitter -c $core_id -r $rate -l $loops -i $samples || die "jitter failed to run"

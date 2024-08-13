@@ -1,0 +1,25 @@
+short_description: >
+    A user space C program to assess OS level overhead.
+
+homepage: https://github.com/FDio/archived-pma_tools.git
+
+usage:
+./jitter [-c <core id>] [-l] [r] [-h] [-p $(pgrep perf)] [-t]
+        -c : pin jitter to core_id. Default core_id is 1
+        -r : Display update rate. Default is 20000
+        -l : Loop count for code block. Default is 80000
+        -p : perf_pid [run: perf record -S -C$CORENO -e intel_pt// -v on another window]
+        -i : Sample counts after which program terminates. Default count is 200
+        -f : Parser friendly output
+For resetting statistics use:  pkill -USR1 jitter
+For elevating the priority of this program try:  chrt -r -p 99 processId
+
+results:
+  Inst_Min:    Minimum Excution time during the display update interval(default is ~1 second)
+  Inst_Max:    Maximum Excution time during the display update interval(default is ~1 second)
+  Inst_jitter: Jitter in the Excution time during rhe display update interval. This is the value of interest
+  last_Exec:   The Excution time of last iteration just before the display update
+  Abs_Min:     Absolute Minimum Excution time since the program started or statistics were reset
+  Abs_Max:     Absolute Maximum Excution time since the program started or statistics were reset
+  tmp:         Cumulative value calcualted by the dummy function
+  Interval:    Time interval between the display updates in Core Cycles

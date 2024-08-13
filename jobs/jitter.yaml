@@ -1,0 +1,10 @@
+suite: jitter
+testcase: jitter
+category: benchmark
+
+jitter:
+
+  core_id: 1
+  rate: 20000
+  loops: 80000
+  samples: 200

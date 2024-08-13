@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+LKP_SRC = ENV['LKP_SRC'] || File.dirname(File.dirname(File.dirname(File.realpath($PROGRAM_NAME))))
+
+require "#{LKP_SRC}/lib/statistics"
+
+inst_min = []
+inst_max = []
+inst_jitter = []
+last_exec = []
+abs_min = []
+abs_max = []
+
+def percentile(values, percentile)
+  sorted = values.sort
+  a = (percentile * (sorted.length - 1) + 1).floor - 1
+  b = (percentile * (sorted.length - 1) + 1).modulo(1)
+  return sorted[a] + (b * (sorted[a + 1] - sorted[a]))
+end
+
+i = 0
+while (line = $stdin.gets)
+  case line.chomp!
+  when /\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+.*$/
+    data = line.split
+    inst_min[i] = data[0].to_i
+    inst_max[i] = data[1].to_i
+    inst_jitter[i] = data[2].to_i
+    last_exec[i] = data[3].to_i
+    abs_min[i] = data[4].to_i
+    abs_max[i] = data[5].to_i
+    i += 1
+  end
+end
+
+puts "Instantaneous_min: #{inst_min.min}"
+puts "Instantaneous_max: #{inst_max.max}"
+puts "Instantaneous_jitter: #{inst_jitter.average.round(2)}"
+puts "Instantaneous_jitter_stddev: #{inst_jitter.relative_stddev.round(2)}"
+puts "Instantaneous_jitter_99th_percentile: #{percentile(inst_jitter, 0.99).round(2)}"
+puts "last_exec_time: #{last_exec.average}"
+puts "Absolute_min: #{abs_min.min}"
+puts "Absolute_max: #{abs_max.max}"
