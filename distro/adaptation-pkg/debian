@@ -30,8 +30,8 @@ hackbench::
 hwsim::
 igt::
 iozone::
-kbuild::
 jitter::
+kbuild::
 kernbench::
 kernel-selftests::
 ku-latency::
