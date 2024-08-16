@@ -8,6 +8,3 @@ category: functional
 kernel-selftests:
   group:
     - memory-hotplug
-
-# for sysctl
-kernel_cmdline: sysctl.debug.test_sysctl.boot_int=1
