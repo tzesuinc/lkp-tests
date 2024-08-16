@@ -170,7 +170,7 @@ need_kconfig:
 - SYNC: y
 - SW_SYNC: y
 - GENERIC_ENTRY: y
-- TEST_SYSCTL: y
+- TEST_SYSCTL: m
 - X86_SGX: y
 % elsif ___.group == "group-03"
 - NET: y
