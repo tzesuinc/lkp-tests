@@ -10,8 +10,8 @@ arch=$(get_system_arch)
 if [[ "$group" = "group-00" ]]; then
 	test_array=("bitfield_kunit" "test_bits" "cmdline_kunit" "ext4-inode-test" "test_hash" \
 	            "test_linear_ranges" "list-test" "memcpy_kunit" "dev_addr_lists_test" "resource_kunit" \
-	            "lib_test" "sysctl-test" "time_test" "test_list_sort" "test_sort" "kasan_test" \
-	            "kfence_test" "mptcp_crypto_test" "mptcp_token_test" "rational-test" "slub_kunit" \
+	            "lib_test" "sysctl-test" "time_test" "test_list_sort" "test_sort" \
+	            "mptcp_crypto_test" "mptcp_token_test" "rational-test" "slub_kunit" \
 	            "apparmor_policy_unpack_test" "fortify_kunit" "property-entry-test" \
 	            "drm_cmdline_parser_test" "drm_damage_helper_test" "drm_dp_mst_helper_test" "drm_mm_test" \
 	            "drm_format_helper_test" "drm_format_test" "drm_framebuffer_test" "drm_plane_helper_test" "drm_rect_test"\
@@ -28,7 +28,7 @@ elif [[ "$group" = "group-01" ]]; then
 	            "test_vmalloc" "test_klp_state" "test_meminit" "test_printf" "test_maple_tree" "thunderbolt_dma_test" "clocksource-wdtest" \
 	            "crc32test" "atomic64_test" "snd-soc-avs-i2s-test" "test_dynamic_debug" "raid6test" "backtracetest")
 elif [[ "$group" = "group-03" ]]; then
-	test_array=("drm_buddy_test")
+	test_array=("drm_buddy_test" "kasan_test" "kfence_test")
 fi
 
 run_kunit_tests()
@@ -36,6 +36,8 @@ run_kunit_tests()
 	local kernel_version=$(get_kernel_version)
 
 	for i in ${test_array[@]}; do
+		echo "$FUNCNAME: test $i"
+
 		# skip x86 only modules
 		[[ $arch = "i386" ]] && {
 			# TEST_LIVEPATCH

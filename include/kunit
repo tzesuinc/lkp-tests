@@ -41,18 +41,12 @@ need_kconfig:
 - FORTIFY_KUNIT_TEST: m
 - FORTIFY_SOURCE: y
 
-- KASAN_KUNIT_TEST: m
-- KASAN: y
-
 - EXT4_KUNIT_TESTS: m
 - EXT4_FS
 
 # conflict with KASAN
 # - KCSAN_KUNIT_TEST: m
 - TRACEPOINTS: y
-
-- KFENCE_KUNIT_TEST: m
-- KFENCE: y
 
 - MPTCP_KUNIT_TEST: m
 - MPTCP: y
@@ -296,4 +290,10 @@ need_kconfig:
 % elsif ___.group == "group-03"
 - DRM_KUNIT_TEST: m
 - DRM
+
+- KFENCE_KUNIT_TEST: m
+- KFENCE: y
+
+- KASAN_KUNIT_TEST: m
+- KASAN: y
 % end
