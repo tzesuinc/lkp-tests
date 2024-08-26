@@ -8,3 +8,6 @@ notify_build_success_branch: .*
 owner:
 - Chen Wang <unicorn_wang@outlook.com>
 - Inochi Amaoto <inochiama@outlook.com>
+mail_cc:
+- Chen Wang <unicorn_wang@outlook.com>
+- Inochi Amaoto <inochiama@outlook.com>
