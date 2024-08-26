@@ -5,54 +5,60 @@ category: benchmark
 need_x: true
 
 phoronix-test-suite:
-  # - test: cl-mem-1.0.1 # need to run on better perf tbox than lkp-cfl-d1
-    # option_a:
-      # - Read
-      # - Write
-      # - Copy
-  # - test: financebench-1.1.1 # The test quit with a non-zero exit status.
-  #   option_a:
-  #     - Bonds OpenMP
-      # - Repo OpenMP
+  - test:
+    - luxmark-1.2.1 # "OpenCL unavailable" issue unable to fix yet
+    - gl-vs-vk-1.0.0 # required lib libGLEW.so.1.13 is too old
 
-    # - gl-vs-vk-1.0.0 # required lib libGLEW.so.1.13 is too old
-  # - test: juliagpu-1.3.1 # "OpenCL unavailable" issue unable to fix yet
-    # option_a:
-      # - CPU
-      # - GPU
-      # - CPU+GPU
-  # - test: luxmark-1.2.1 # "OpenCL unavailable" issue unable to fix yet
-  # - test: mandelbulbgpu-1.3.0 # "OpenCL unavailable" issue unable to fix yet
-    # option_a:
-      # - CPU
-      # - GPU
-      # - CPU+GPU
-  # - test: mandelgpu-1.3.1 # "OpenCL unavailable" issue unable to fix yet
-    # option_a:
-      # - CPU
-      # - GPU
-      # - CPU+GPU
-  - test: mixbench-1.0.0
+  - test: cl-mem-1.0.1 # need to run on better perf tbox than lkp-cfl-d1
     option_a:
-      # - Single Precision # The test quit with a non-zero exit status.
+      - Read
+      - Write
+      - Copy
+
+  - test: financebench-1.1.1 # The test quit with a non-zero exit status.
+    option_a:
+      - Bonds OpenMP
+      - Repo OpenMP
+
+  - test: juliagpu-1.3.1 # "OpenCL unavailable" issue unable to fix yet
+    option_a:
+      - CPU
+      - GPU
+      - CPU+GPU
+
+  - test: mandelbulbgpu-1.3.0 # "OpenCL unavailable" issue unable to fix yet
+    option_a:
+      - CPU
+      - GPU
+      - CPU+GPU
+
+  - test: mandelgpu-1.3.1 # "OpenCL unavailable" issue unable to fix yet
+    option_a:
+      - CPU
+      - GPU
+      - CPU+GPU
+
+  - test: mixbench-1.0.0 # The test quit with a non-zero exit status.
+    option_a:
+      - Single Precision
       - Double Precision
-      # - Integer # The test quit with a non-zero exit status.
+      - Integer
 
-  # - test: shoc-1.2.0 # No supported options found for target. "OpenCL unavailable" issue unable to fix yet
-  #   option_a:
-  #     - Bus Speed Download
-  #     - Bus Speed Readback
-  #     - Max SP Flops
-  #     - Texture Read Bandwidth
-  #     - FFT SP
-  #     - MD5 Hash
-  #     - Triad
+  - test: shoc-1.2.0 # No supported options found for target. "OpenCL unavailable" issue unable to fix yet
+    option_a:
+      - Bus Speed Download
+      - Bus Speed Readback
+      - Max SP Flops
+      - Texture Read Bandwidth
+      - FFT SP
+      - MD5 Hash
+      - Triad
 
-  # - test: smallpt-gpu-1.3.0 # "OpenCL unavailable" issue unable to fix yet
-    # option_a:
-      # - CPU
-      # - GPU
-    # option_b:
-      # - Complex
-      # - Caustic3
-      # - Cornell
+  - test: smallpt-gpu-1.3.0 # "OpenCL unavailable" issue unable to fix yet
+    option_a:
+      - CPU
+      - GPU
+    option_b:
+      - Complex
+      - Caustic3
+      - Cornell
