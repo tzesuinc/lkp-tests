@@ -5,3 +5,4 @@ Out of memory: .*trinity
 Spectre V2 : WARNING: Unprivileged eBPF is enabled with eIBRS on, data leaks possible via Spectre v2 BHB attacks
 trinity.*: page allocation failure
 trinity.*: page allocation stalls for
+BUG: KASAN: .* \[kasan_test\]
