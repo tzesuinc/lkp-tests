@@ -30,7 +30,7 @@ while (line = $stdin.gets)
   result = $2
 
   # cet_tests.sh_-t_cp_test_-n_glibc_shstk_test_-k_control_protection_-p_s2 fail
-  stats.add testcase, result
+  stats.add testcase, result, overwrite: true
 end
 
 stats.dump
