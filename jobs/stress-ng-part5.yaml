@@ -23,6 +23,7 @@ stress-ng:
     - udp
     - udp-flood
     - umount
+    - unlink
     - unshare
     - uprobe
     - urandom

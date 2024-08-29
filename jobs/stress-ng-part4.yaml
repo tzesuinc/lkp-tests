@@ -29,6 +29,7 @@ stress-ng:
     - sigchld
     - sigfd
     - sigfpe
+    - sigill
     - sigio
     - signal
     - signest
@@ -39,6 +40,8 @@ stress-ng:
     - sigsegv
     - sigsuspend
     - sigtrap
+    - sigurg
+    - sigvtalrm
     - sigxcpu
     - sigxfsz
     - skiplist
@@ -53,8 +56,10 @@ stress-ng:
     - softlockup
     - spawn
     - sparsematrix
+    - spinmem
     - splice
     - stackmmap
+    - statmount
     - str
     - stream
     - switch

@@ -32,8 +32,10 @@ stress-ng:
     - pkey
     # - plugin # run user provided stressor functions loaded from a shared library
     - poll
+    - powmath
     - prctl
     - prefetch
+    - prime
     - prio-inv
     - priv-instr
     - pthread

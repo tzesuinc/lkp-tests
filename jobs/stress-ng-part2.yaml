@@ -20,6 +20,8 @@ stress-ng:
     - icache
     - icmp-flood
     - idle-page
+    - insertionsort
+    - intmath
     - ioport
     - io-uring
     - ipsec-mb
@@ -38,9 +40,12 @@ stress-ng:
     - llc-affinity
     - loadavg
     - lockbus
+    - lockmix
+    - logmath
     - longjmp
     - loop
     - lsearch
+    - lsm
     - madvise
     - malloc
     - matrix
@@ -54,6 +59,7 @@ stress-ng:
     - memthrash
     - mergesort
     - mincore
+    - min-nanosleep
     - misaligned
     - mlock
     - mlockmany
@@ -69,9 +75,11 @@ stress-ng:
     - mpfr
     - mq
     - mremap
+    - mseal
     - msg
     - msync
     - msyncmany
+    - mtx
     - munmap
     - mutex
 

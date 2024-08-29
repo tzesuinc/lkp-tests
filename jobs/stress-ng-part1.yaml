@@ -16,10 +16,14 @@ stress-ng:
     - atomic
     - bad-altstack
     - bad-ioctl
+    - besselmath
     - bigheap
+    - bitonicsort
+    - bitops
     - branch
     - brk
     - bsearch
+    - bubblesort
     - cache
     - cacheline
     - cap
@@ -45,9 +49,13 @@ stress-ng:
     - epoll
     - exec
     - exit-group
+    - expmath
     - factor
     - far-branch
     - fault
+    - fd-fork
+    - fd-race
+    - fibsearch
     - fifo
     - flushcache
     - fma
@@ -55,6 +63,7 @@ stress-ng:
     - forkheavy
     - fp
     - fp-error
+    - fractal
     - full
     - funccall
     - funcret
