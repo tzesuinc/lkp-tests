@@ -19,6 +19,7 @@ mail_to:
 - wu.zheng@intel.com
 - yingbao.jia@intel.com
 - pei.p.jia@intel.com
+no_merge_branch: .*
 private_report_branch: .*
 notify_build_success_branch: .*
 tests:
