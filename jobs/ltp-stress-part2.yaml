@@ -9,7 +9,7 @@ ltp:
   test:
     # Stress tests groups, will take too long time, close them for now
     # 5 hours 43 mins
-    #  - controllers
+    # - controllers
     # 4 hours 2 mins
     - net_stress.broken_ip
     # 6 hours 39 mins
@@ -18,10 +18,10 @@ ltp:
     - net_stress.ipsec_dccp
     - net_stress.ipsec_sctp
     # Stress test groups, all cases fail or CONF, or fail to get test results
-    #  - ltp-aio-stress
-    #  - net.nfs
-    #  - net_stress.ipsec_icmp
-    #  - net_stress.ipsec_tcp
-    #  - net_stress.ipsec_udp
-    #  - net_stress.multicast
-    #  - net_stress.route
+    # - ltp-aio-stress
+    # - net.nfs
+    # - net_stress.ipsec_icmp
+    # - net_stress.ipsec_tcp
+    # - net_stress.ipsec_udp
+    # - net_stress.multicast
+    # - net_stress.route
