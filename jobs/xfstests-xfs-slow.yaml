@@ -1,0 +1,17 @@
+suite: xfstests
+testcase: xfstests
+category: functional
+
+need_memory: 3G
+
+disk: 4HDD
+
+timeout: 1h
+
+fs:
+  - xfs
+
+xfstests:
+  test:
+    - xfs-233 # execution time > 30mins
+    - xfs-136 # execution time ~ 80mins
