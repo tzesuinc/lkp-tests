@@ -122,6 +122,13 @@ install_numactl()
 	ln -sf "${benchmark_path}"/testcases/bin/numactl/bin/memhog "${benchmark_path}"/testcases/bin/memhog
 }
 
+build_ltp()
+{
+	make autotools
+	./configure --prefix=$1
+	make
+}
+
 build()
 {
 	split_syscalls_tests || return

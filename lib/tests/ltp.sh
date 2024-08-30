@@ -4,36 +4,6 @@
 . $LKP_SRC/lib/reproduce-log.sh
 . $LKP_SRC/lib/env.sh
 
-rebuild()
-{
-	[ -d "$1" ] || return
-	local build_dir=$1
-	local current_dir=$(pwd)
-
-	cd $build_dir && {
-		make clean || return
-		make || return
-		cd $current_dir
-	}
-}
-
-build_ltp()
-{
-	make autotools
-	./configure --prefix=$1
-	make || return
-
-	local distro=$(basename $rootfs)
-	if [[ ! "$distro" =~ "debian-12" ]]; then
-		# fix rpc test cases, linking to libtirpc-dev will make the tests failed in debian
-		sed -i "s/^LDLIBS/#LDLIBS/" testcases/network/rpc/rpc-tirpc/tests_pack/Makefile.inc || return
-	fi
-	rebuild testcases/network/rpc/rpc-tirpc/tests_pack/rpc_suite/rpc/rpc_createdestroy_svc_destroy || return
-	rebuild testcases/network/rpc/rpc-tirpc/tests_pack/rpc_suite/rpc/rpc_createdestroy_svcfd_create || return
-	rebuild testcases/network/rpc/rpc-tirpc/tests_pack/rpc_suite/rpc/rpc_regunreg_xprt_register || return
-	rebuild testcases/network/rpc/rpc-tirpc/tests_pack/rpc_suite/rpc/rpc_regunreg_xprt_unregister
-}
-
 check_linux_header()
 {
 	# is exist linux_header, link to /lib/modulers/`uname -r`/build
