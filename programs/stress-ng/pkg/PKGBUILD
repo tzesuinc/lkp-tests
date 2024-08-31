@@ -15,5 +15,9 @@ build() {
 
 package() {
   cd "$srcdir/$pkgname"
-  make DESTDIR="$pkgdir" install
+  make DESTDIR="$pkgdir" install || return
+
+  mkdir -p "${pkgdir}/lkp/benchmarks/${pkgname}"
+  # stress-watchdog.c
+  ls stress-*.c | "${pkgdir}/lkp/benchmarks/${pkgname}/tests"
 }
