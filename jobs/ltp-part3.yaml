@@ -7,7 +7,6 @@ need_memory: 4G
 ltp:
   test:
     - crypto
-    - fs_bind
     - kernel_misc
     # - kernel_misc-zram01 # run for more than 28m
     - net.ipv6

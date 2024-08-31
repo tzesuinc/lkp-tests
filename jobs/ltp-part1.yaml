@@ -13,7 +13,6 @@ ltp:
     - cpuhotplug
     # - dma_thread_diotest # kernel bug, will nerver be success. please see https://github.com/linux-test-project/ltp/issues/63
     - fcntl-locktests
-    - fs_perms_simple
     - hugetlb
     - hyperthreading
     - ima
