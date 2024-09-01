@@ -54,8 +54,8 @@ stress-ng:
     - sockmany
     - sockpair
     - softlockup
-    - spawn
     - sparsematrix
+    - spawn
     - spinmem
     - splice
     - stackmmap
@@ -66,9 +66,9 @@ stress-ng:
     - syncload
     - sysbadaddr
     - syscall
+    - sysfs
     - sysinfo
     - sysinval
-    - sysfs
 
 # ---
 # need_memoey: 238G

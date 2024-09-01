@@ -23,8 +23,8 @@ stress-ng:
   - sockabuse
   - sockdiag
   - sockfd
-  - sockpair
   - sockmany
+  - sockpair
   - tun
   - udp
   - udp-flood

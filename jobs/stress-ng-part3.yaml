@@ -45,8 +45,8 @@ stress-ng:
     - quota
     - race-sched
     - radixsort
-    - randlist
     - ramfs
+    - randlist
     - rawpkt
     - rawsock
     - rawudp

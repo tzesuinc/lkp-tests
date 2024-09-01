@@ -22,8 +22,8 @@ stress-ng:
     - idle-page
     - insertionsort
     - intmath
-    - ioport
     - io-uring
+    - ioport
     - ipsec-mb
     - itimer
     - jpeg
@@ -58,8 +58,8 @@ stress-ng:
     - memrate
     - memthrash
     - mergesort
-    - mincore
     - min-nanosleep
+    - mincore
     - misaligned
     - mlock
     - mlockmany
@@ -71,8 +71,8 @@ stress-ng:
     - mmapmany
     # - module # require open RUNTIME_TESTING_MENU and TEST_LKM
     - monte-carlo
-    - mprotect
     - mpfr
+    - mprotect
     - mq
     - mremap
     - mseal

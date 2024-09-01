@@ -10,9 +10,9 @@ testtime:
 stress-ng:
   test:
     - tee
+    - time-warp
     - timer
     - timerfd
-    - time-warp
     - tlb-shootdown
     - tmpfs
     - tree
