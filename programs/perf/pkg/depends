@@ -8,6 +8,7 @@ iproute2
 libaudit-dev
 libbabeltrace-dev
 libcap-dev
+libcapstone-dev
 libclang-dev
 libdw-dev
 libdw1
@@ -25,6 +26,7 @@ libslang2-dev
 libssl-dev
 libtraceevent-dev
 libtraceevent1
+libtracefs-dev
 libunwind
 libunwind-dev
 libzstd-dev
