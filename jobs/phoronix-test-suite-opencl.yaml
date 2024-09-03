@@ -3,8 +3,8 @@ testcase: phoronix-test-suite
 category: benchmark
 
 phoronix-test-suite:
-  - test:
-      - opencl-benchmark-1.0.0
+  # - test:
+  #     - opencl-benchmark-1.0.0 # Error: There are no OpenCL devices available. Make sure that the OpenCL 1.2
 
   # - test: arrayfire-1.2.0 # The test run did not produce a result.
     # option_a:
