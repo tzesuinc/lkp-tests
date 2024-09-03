@@ -1,3 +1,5 @@
-gdbtest.py_gdbtest.test_existing_commands_raw.raw.pass: 1
-gdbtest.py_gdbtest.test_existing_commands_raw.pass: 1
-gdbtest.py_gdbtest.test_existing_commands.pass: 1
+gdbtest.py_GdbTest.test_existing_commands_raw.pass: 1
+gdbtest.py_GdbTest.test_existing_commands.pass: 1
+type_specific.lkvs.td_huge_resource.half.error: 1
+type_specific.lkvs.boot_check.vm.16G.16_cpu.pass: 1
+type_specific.lkvs.boot_check.vm.16G.208_cpu.pass: 1

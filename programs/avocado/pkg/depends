@@ -1,5 +1,16 @@
+arping
 build-essential
+dnsmasq
 gawk
 gdb
 gdbserver
+iptables
+libvirt-clients
+libvirt-daemon-system
+netcat-openbsd
+openvswitch-switch
 python
+python-pypillowfight
+qemu-system
+qemu-utils
+tcpdump

@@ -1,16 +1,37 @@
-2022-11-07 19:02:32 avocado run /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands_raw --job-timeout 30
+2022-11-07 19:02:32 avocado run /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands_raw
 JOB ID     : 25b14f81370799090ee1897ce3237917aee9f6d7
 JOB LOG    : /tmp/avocado/result/job-2022-11-07T19.02-25b14f8/job.log
  (1/1) /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands_raw: STARTED
  (1/1) /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands_raw:  PASS (0.43 s)
 RESULTS    : PASS 1 | ERROR 0 | FAIL 0 | SKIP 0 | WARN 0 | INTERRUPT 0 | CANCEL 0
 JOB TIME   : 1.57 s
-2022-11-07 19:02:34 avocado run /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands --job-timeout 30
+2022-11-07 19:02:34 avocado run /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands
 JOB ID     : 4dc61874db96dd2b7b33c2fc0ae6bbb6732b0231
 JOB LOG    : /tmp/avocado/result/job-2022-11-07T19.02-4dc6187/job.log
- (1/2) /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands_raw: STARTED
  (2/2) /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands: STARTED
- (1/2) /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands_raw:  PASS (0.46 s)
  (2/2) /lkp/benchmarks/avocado/examples/tests/gdbtest.py:GdbTest.test_existing_commands:  PASS (0.54 s)
 RESULTS    : PASS 2 | ERROR 0 | FAIL 0 | SKIP 0 | WARN 0 | INTERRUPT 0 | CANCEL 0
 JOB TIME   : 1.72 s
+
+2024-09-09 14:17:34 avocado run type_specific.lkvs.td_huge_resource.half
+JOB ID     : 6c79241af002a0d3866663863208b9c88d2d71b9
+JOB LOG    : /tmp/avocado/result/job-2024-09-09T14.17-6c79241/job.log
+ (1/1) type_specific.lkvs.td_huge_resource.half: STARTED
+ (1/1) type_specific.lkvs.td_huge_resource.half:  ERROR: VM 'avocado-vt-vm1' failed to start: Error occurred while executing make_create_command(). Check the log for traceback. (13.55 s)
+RESULTS    : PASS 0 | ERROR 1 | FAIL 0 | SKIP 0 | WARN 0 | INTERRUPT 0 | CANCEL 0
+JOB TIME   : 15.36 s
+2024-09-09 14:39:37 avocado run type_specific.lkvs.boot_check.vm.16G.16_cpu
+JOB ID     : e022afea52aef8f81d6013c165aa281b6313e155
+JOB LOG    : /tmp/avocado/result/job-2024-09-09T14.39-e022afe/job.log
+ (1/1) type_specific.lkvs.boot_check.vm.16G.16_cpu: STARTED
+ (1/1) type_specific.lkvs.boot_check.vm.16G.16_cpu:  PASS (36.35 s)
+RESULTS    : PASS 1 | ERROR 0 | FAIL 0 | SKIP 0 | WARN 0 | INTERRUPT 0 | CANCEL 0
+JOB TIME   : 37.90 s
+2024-09-09 14:40:16 avocado run type_specific.lkvs.boot_check.vm.16G.208_cpu
+JOB ID     : f204a625ecc74065212f68fca91924a919f5f5db
+JOB LOG    : /tmp/avocado/result/job-2024-09-09T14.40-f204a62/job.log
+ (1/1) type_specific.lkvs.boot_check.vm.16G.208_cpu: STARTED
+ (1/1) type_specific.lkvs.boot_check.vm.16G.208_cpu:  PASS (37.23 s)
+RESULTS    : PASS 1 | ERROR 0 | FAIL 0 | SKIP 0 | WARN 0 | INTERRUPT 0 | CANCEL 0
+JOB TIME   : 38.77 s
+2024-09-09 14:40:56 avocado run type_specific.lkvs.boot_check.vm.16G.256_cpu

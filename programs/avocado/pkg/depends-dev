@@ -1,8 +1,9 @@
+iptables
 libffi-dev
 libssl-dev
+libvirt-clients
 libvirt-dev
 libyaml-dev
 python
 python-dev
-python-libvirt
 python-pip

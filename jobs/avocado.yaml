@@ -3,7 +3,6 @@ testcase: avocado
 category: functional
 
 avocado:
-  test_group:
-    - group_00
-    - group_01
-    - group_02
+  group:
+    - lkvs
+    # - io-github-autotest-qemu
