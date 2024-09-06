@@ -106,6 +106,12 @@ setup_network()
 	$LKP_DEBUG_PREFIX $LKP_SRC/bin/run-ipconfig
 	network_ok && return
 
+	# final try by directly calling "net_devices_link" then dhclient
+	net_devices_link up
+	sleep 60 # 'up' could be not so fast
+	dhclient
+	network_ok && return
+
 	local err_msg='IP-Config: Auto-configuration of network failed'
 	dmesg | grep -q -F "$err_msg" || {
 		# Include $err_msg in the error message so that it matches
