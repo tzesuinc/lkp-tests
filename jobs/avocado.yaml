@@ -4,5 +4,17 @@ category: functional
 
 avocado:
   group:
-    - lkvs
+    - lkvs.boot_check.tdvm
+    - lkvs.boot_check.vm
+    - lkvs.feature_test
+    - lkvs.multi_vms
+    - lkvs.td_boot_multimes
+    - lkvs.td_debug
+    - lkvs.td_disable_ept
+    - lkvs.td_huge_resource
+    - lkvs.tdx_basic
+    - lkvs.tdx_max_guests
+    - lkvs.tsc_freq
+    - lkvs.x86_cpu_flags
+    - lkvs.x86_cpuid
     # - io-github-autotest-qemu

@@ -69,14 +69,14 @@ EOT
 	# to install the lkvs tests actually
 	log_cmd avocado vt-bootstrap --vt-no-downloads --vt-type qemu
 
-	avocado list | grep $group | sort > $avocado_result_dir/tests
+	avocado list | grep lkvs | sort > $avocado_result_dir/tests
 }
 
 setup_conf || die "failed to setup config file"
 setup_env || die "failed to setup env"
 
 # this could be run setup_env
-[[ $group = lkvs ]] && install_lkvs_tests
+[[ $group =~ lkvs ]] && install_lkvs_tests
 
 run_test || die "failed to run test"
 
