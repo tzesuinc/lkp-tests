@@ -14,14 +14,19 @@ libglut3:
 libgsl: libgsl23
 libicu: libicu63
 libipsec-mb: libipsec-mb0
+libisl: libisl19
 libjson: libjson-c3
+libllvm: libllvm13
 libntfs: libntfs-3g883
 libperl5: libperl5.28
 libprocps: libprocps7
 libpython3:
+libstdc++-dev:
+libtiff: libtiff5
 libtirpc: libtirpc3
 libtraceevent-dev:
 libtraceevent1:
 liburing:
+libwebp: libwebp6
 libx32gcc-dev: libx32gcc-8-dev
 perl-modules-5: perl-modules-5.28

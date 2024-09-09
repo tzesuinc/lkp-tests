@@ -13,6 +13,7 @@ lib64asan3: lib64asan6
 lib64gcc-dev: lib64gcc-11-dev
 lib64gcc1: lib64gcc-s1
 libasan: libasan6
+libcilkrts5:
 libevent-2: libevent-2.1-7
 libevent-openssl-2: libevent-openssl-2.1-7
 libgcc-dev: libgcc-11-dev
@@ -23,8 +24,11 @@ libhugetlbfs: libhugetlbfs0
 libhwloc5: libhwloc15
 libicu: libicu72
 libipsec-mb: libipsec-mb1
+libisl: libisl23
 libjson: libjson-c5
 libldap-2.4-2: libldap-2.5-0
+libllvm: libllvm14
+libmpx2:
 libmysqlclient-dev: default-libmysqlclient-dev
 libntfs: libntfs-3g89
 libperl5: libperl5.36
@@ -35,8 +39,11 @@ libpython2.7:
 libpython3: libpython3.11
 libreadline5: readline-common
 libssl: libssl3
+libstdc++-dev: libstdc++-11-dev
+libtiff: libtiff6
 libtirpc: libtirpc-common
 liburing: liburing2
+libwebp: libwebp7
 libx32asan5: libx32asan6
 libx32gcc-dev: libx32gcc-11-dev
 libx32gcc1: libx32gcc-s1

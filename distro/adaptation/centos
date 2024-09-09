@@ -298,7 +298,7 @@ libtirpc3:
 libtool-bin: libtool
 libtracefs-dev: libtracefs-devel
 libtsan0: libtsan.x86_64
-libubsan0:
+libubsan:
 libudev-dev: systemd-devel
 libudev1: systemd-libs
 libunwind-dev: libunwind-devel

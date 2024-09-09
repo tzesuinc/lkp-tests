@@ -6,6 +6,8 @@ libgcrypt-dev: libgcrypt20-dev
 libiscsi: libiscsi7
 libssl: libssl1.1
 libtirpc: libtirpc1
+libubsan: libubsan1
+libunistring: libunistring2
 libunwind: libunwind8
 mysql-server: default-mysql-server
 openjdk: openjdk-11-jdk

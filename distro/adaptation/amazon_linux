@@ -172,7 +172,7 @@ libtirpc:
 libtool-bin: libtool
 libtraceevent-dev:
 libtraceevent1:
-libubsan0:
+libubsan:
 libudev-dev: systemd-devel
 libudev1: systemd-libs
 libunwind-dev: libunwind-devel

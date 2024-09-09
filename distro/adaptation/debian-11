@@ -15,13 +15,17 @@ libhugetlbfs: libhugetlbfs0
 libicu: libicu67
 libipsec-mb: libipsec-mb0
 libjson: libjson-c5
+libllvm: libllvm13
 libntfs: libntfs-3g883
 libperl5: libperl5.32
 libprocps: libprocps8
 libpython3: libpython3.9
 libreadline5: readline-common
+libstdc++-dev: libstdc++-10-dev
+libtiff: libtiff5
 libtirpc: libtirpc-common
 liburing: liburing1
+libwebp: libwebp6
 libx32gcc-dev: libx32gcc-10-dev
 libx32gcc1: libx32gcc-s1
 perl-modules-5: perl-modules-5.32
