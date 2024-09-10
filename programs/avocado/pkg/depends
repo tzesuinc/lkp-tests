@@ -7,6 +7,7 @@ gdbserver
 iptables
 libvirt-clients
 libvirt-daemon-system
+msr-tools
 netcat-openbsd
 openvswitch-switch
 python
