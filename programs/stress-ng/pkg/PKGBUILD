@@ -19,5 +19,5 @@ package() {
 
   mkdir -p "${pkgdir}/lkp/benchmarks/${pkgname}"
   # stress-watchdog.c
-  ls stress-*.c | "${pkgdir}/lkp/benchmarks/${pkgname}/tests"
+  ls stress-*.c > "${pkgdir}/lkp/benchmarks/${pkgname}/tests"
 }
