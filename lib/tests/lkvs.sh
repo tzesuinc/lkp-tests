@@ -71,7 +71,11 @@ runtests()
     fi
 
     if [[ -f $test/tests ]]; then
-        log_cmd ./runtests -f $test/tests
+        if [[ $test = amx ]]; then
+            log_cmd ./runtests -f amx/tmul -t amx/tests
+        else
+            log_cmd ./runtests -f $test/tests
+        fi
     else
         case $test in
             cstate-client)
