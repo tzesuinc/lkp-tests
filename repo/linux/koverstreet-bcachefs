@@ -1,1 +1,3 @@
 url: https://github.com/koverstreet/bcachefs
+owner: Kent Overstreet <kent.overstreet@linux.dev>
+branch_denylist: bcachefs-garbage
