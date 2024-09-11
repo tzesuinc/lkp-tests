@@ -7,6 +7,7 @@ echo "LKP_SRC=$LKP_SRC"
 (
 	find $LKP_SRC/distro/adaptation -type f ! -name README.md
 	find $LKP_SRC/distro/adaptation-pkg -type f
+	echo $LKP_SRC/distro/keep-deb
 
 	find $LKP_SRC/programs -type f -name depends\*
 	find $LKP_SRC/etc -type f ! -name makepkg.conf
