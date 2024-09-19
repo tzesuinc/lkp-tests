@@ -55,6 +55,37 @@ fi
 cat /proc/cmdline | grep "lkp_grub=off" > /dev/null
 [ $? -eq 0 ] && exit 0
 
+escape_cgi_param()
+{
+	local uri="$1"
+	# uri=${uri//%/%25} # must be the first one
+	# uri=${uri//+/%2B}
+	# uri=${uri//&/%26}
+	# uri=${uri//\?/%3F}
+	# uri=${uri//@/%40}
+	# uri=${uri//:/%3A}
+	# uri=${uri//;/%3D}
+	echo "$uri" |
+	sed -r	-e 's/%/%25/g' \
+		-e 's/\+/%2B/g' \
+		-e 's/&/%26/g' \
+		-e 's/#/%23/g' \
+		-e 's/\?/%3F/g' \
+		-e 's/ /%20/g'
+}
+
+lkp_jobfile_append_var()
+{
+	local key_value=$1
+
+	local query_str=job_file=$(escape_cgi_param "$job")
+	echo "$WGET_CMD -O /dev/null $LKP_SERVER/~lkp/cgi-bin/lkp-jobfile-append-var?$query_str&$key_value"
+	if [ "$job" != "" ]
+	then
+		$WGET_CMD -O /dev/null "$LKP_SERVER/~lkp/cgi-bin/lkp-jobfile-append-var?$query_str&$key_value"
+	fi
+}
+
 (
 	lkp_log()
 	{
@@ -146,6 +177,8 @@ cat /proc/cmdline | grep "lkp_grub=off" > /dev/null
 					kernel=$(basename $wkernel)
 					version=$(echo $kernel | awk -F"vmlinuz-" '{ print $2}')
 					echo $kernel > $LKP_JOB_DIR/kernel
+					# fetch out job, too
+					job=$(echo $v | awk -F"job=" '{print $2}' | awk '{print $1}')
 					;;
 				initrd)
 					winitrd=$v
@@ -208,6 +241,8 @@ cat /proc/cmdline | grep "lkp_grub=off" > /dev/null
 
 	# Override the grub default kernel parameters to Job kernel parameters
 	sed -i "/vmlinuz-$version /s#.*#		linux	/boot/vmlinuz-$version $option#" /boot/grub/grub.cfg
+
+	lkp_jobfile_append_var "job_state=booting"
 
 	lkp_log ""
 	lkp_log "Rebooting to $version"
