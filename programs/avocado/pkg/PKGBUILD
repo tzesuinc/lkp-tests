@@ -8,6 +8,7 @@ source=("https://github.com/avocado-framework/avocado.git" "https://github.com/i
 md5sums=('SKIP' 'SKIP')
 
 . $LKP_SRC/lib/debug.sh
+. $LKP_SRC/lib/install.sh
 . $LKP_SRC/lib/reproduce-log.sh
 
 build() {
@@ -43,6 +44,8 @@ package() {
 
 	setup_conf
 	log_cmd avocado vt-bootstrap --yes-to-all --vt-type qemu
+
+	cp $(get_pkg_dir $pkgname)/addon/tdx_temp.cfg $avocado_data_dir/avocado-vt/backends/qemu/cfg/
 
 	cp_to_pkg "$avocado_conf_file"
 	cp_to_pkg "$avocado_data_dir"
