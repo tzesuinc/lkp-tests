@@ -8,6 +8,7 @@ source=("https://github.com/avocado-framework/avocado.git" "https://github.com/i
 md5sums=('SKIP' 'SKIP')
 
 . $LKP_SRC/lib/debug.sh
+. $LKP_SRC/lib/reproduce-log.sh
 
 build() {
 	cd "$srcdir/$pkgname"
