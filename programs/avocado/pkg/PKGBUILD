@@ -64,6 +64,10 @@ package()
 	setup_conf
 	log_cmd avocado vt-bootstrap --yes-to-all --vt-type qemu
 
+	# reduce package size
+	rm -rf $avocado_data_dir/avocado-vt/images/*
+	find $avocado_data_dir/avocado-vt/virttest/test-providers.d -name .git -type d | xargs rm -rf
+
 	cp_to_pkg "$avocado_conf_file"
 	cp_to_pkg "$avocado_data_dir"
 	cp_to_pkg /usr/lib/python3
