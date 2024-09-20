@@ -64,11 +64,11 @@ package()
 	setup_conf
 	log_cmd avocado vt-bootstrap --yes-to-all --vt-type qemu
 
-	cp $(get_pkg_dir $pkgname)/addon/tdx_temp.cfg $avocado_data_dir/avocado-vt/backends/qemu/cfg/
-
 	cp_to_pkg "$avocado_conf_file"
 	cp_to_pkg "$avocado_data_dir"
 	cp_to_pkg /usr/lib/python3
+
+	cp_to_pkg "$(get_pkg_dir $pkgname)/addon/tdx_temp.cfg" "${pkgdir}$avocado_data_dir/avocado-vt/backends/qemu/cfg/"
 
 	# /usr/local/lib/python3.11/dist-packages# ls -d avocado*
 	# avocado  avocado_framework-107.0.egg-info  avocado_framework_plugin_vt-104.0.dist-info  avocado_vt
