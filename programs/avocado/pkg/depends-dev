@@ -1,9 +1,12 @@
+acpica-tools
 iptables
 libffi-dev
 libssl-dev
 libvirt-clients
 libvirt-dev
 libyaml-dev
+nasm
 python
 python-dev
 python-pip
+uuid-dev

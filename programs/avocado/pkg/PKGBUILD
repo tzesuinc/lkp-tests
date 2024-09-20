@@ -4,15 +4,33 @@ pkgrel=1
 arch=('i386' 'x86_64')
 url="https://github.com/avocado-framework"
 license=('GPL')
-source=("https://github.com/avocado-framework/avocado.git" "https://github.com/intel/lkvs.git")
-md5sums=('SKIP' 'SKIP')
+source=("https://github.com/avocado-framework/avocado.git" "https://github.com/intel/lkvs.git" "https://github.com/tianocore/edk2.git")
+md5sums=('SKIP' 'SKIP' 'SKIP')
 
 . $LKP_SRC/lib/debug.sh
 . $LKP_SRC/lib/install.sh
 . $LKP_SRC/lib/reproduce-log.sh
 
-build() {
+build()
+{
 	cd "$srcdir/$pkgname"
+
+	build_edk2
+}
+
+build_edk2()
+{
+	log_cmd cd "$srcdir/edk2"
+
+	source edksetup.sh BaseTools
+
+	git submodule init
+	git submodule update --recursive || return
+
+	log_cmd make -C BaseTools/Source/C || return
+
+	# generate Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd
+	log_cmd OvmfPkg/build.sh -a X64 -n 112
 }
 
 avocado_conf_file="/etc/avocado/avocado.conf"
@@ -32,13 +50,14 @@ EOT
 cp_to_pkg()
 {
 	local src="$1"
-	local dst_dir="${pkgdir}$(dirname $src)"
+	local dst_dir="${2:-${pkgdir}$(dirname $src)}"
 
 	log_cmd mkdir -p "$dst_dir"
 	log_cmd cp -af $src "$dst_dir"
 }
 
-package() {
+package()
+{
 	pip3 install --break-system-packages avocado-framework
 	pip3 install --break-system-packages git+https://github.com/avocado-framework/avocado-vt
 
@@ -55,6 +74,6 @@ package() {
 	# avocado  avocado_framework-107.0.egg-info  avocado_framework_plugin_vt-104.0.dist-info  avocado_vt
 	cp_to_pkg /usr/local
 
-	mkdir -p "${pkgdir}/lkp/benchmarks/lkvs"
-	cp -af "$srcdir/lkvs/KVM" "${pkgdir}/lkp/benchmarks/lkvs"
+	cp_to_pkg "$srcdir/lkvs/KVM" "${pkgdir}/lkp/benchmarks/lkvs"
+	cp_to_pkg "$srcdir/edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd" "${pkgdir}/lkp/benchmarks/edk2/Build/OvmfX64/DEBUG_GCC5/FV"
 }
