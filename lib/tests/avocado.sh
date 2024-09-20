@@ -1,3 +1,5 @@
+#!/bin/bash
+
 . $LKP_SRC/lib/reproduce-log.sh
 . $LKP_SRC/lib/debug.sh
 . $LKP_SRC/lib/env.sh
@@ -21,14 +23,20 @@ EOT
 
 run_test()
 {
-	echo "$group total tests $(avocado list | grep \.$group\. | wc -l)"
-	# avocado-vt type_specific.io-github-autotest-qemu.blockdev_commit_backing_file
-	# avocado-vt io-github-autotest-qemu.vlan.vlan_connective_test
-	# avocado-vt type_specific.lkvs.boot_check.vm.16G.208_cpu
-	local test
-	log_cmd avocado list | grep \.$group\. | cut -d' ' -f2 | while read test; do
-		log_cmd avocado run $test 2>&1
-	done
+	local config_file=$1
+
+	if [[ $config_file ]]; then
+		log_cmd avocado run --vt-config $config_file 2>&1
+	else
+		echo "$group total tests $(avocado list | grep \.$group\. | wc -l)"
+		# avocado-vt type_specific.io-github-autotest-qemu.blockdev_commit_backing_file
+		# avocado-vt io-github-autotest-qemu.vlan.vlan_connective_test
+		# avocado-vt type_specific.lkvs.boot_check.vm.16G.208_cpu
+		local test
+		log_cmd avocado list | grep \.$group\. | cut -d' ' -f2 | while read test; do
+			log_cmd avocado run $test 2>&1
+		done
+	fi
 }
 
 setup_env()
