@@ -59,6 +59,14 @@ setup_env()
 	# create virbr0 interface that is a virtual network bridge
 	log_cmd virsh net-define /usr/share/libvirt/networks/default.xml || return
 	log_cmd virsh net-start default
+
+	# The standard package for Open vSwitch on Debian is named openvswitch-switch, while avocado-vt requires to restart the openvswitch service
+	log_cmd mv /lib/systemd/system/openvswitch-switch.service /lib/systemd/system/openvswitch.service
+	log_cmd sed -i 's/openvswitch-switch/openvswitch/g' /lib/systemd/system/openvswitch.service
+	# to recognize the new service file
+	log_cmd systemctl daemon-reload
+
+	log_cmd sleep 120
 }
 
 install_lkvs_tests()
