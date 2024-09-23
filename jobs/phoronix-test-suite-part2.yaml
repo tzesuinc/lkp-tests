@@ -42,7 +42,7 @@ phoronix-test-suite:
     - smallpt-1.2.1
     # - smart-1.0.0 # depending on the health of hard disk, may cost long time
     # - smhasher-1.1.0 # The test quit with a non-zero exit status. E: ./smhasher: 3: ./SMHasher: not found
-    - spark-1.0.1
+    # - spark-1.0.1 # E: _pickle.PicklingError: Could not serialize object: IndexError: tuple index out of range
     # - speedb-1.0.1 # The test quit with a non-zero exit status.
     # - speedtest-cli-1.0.0 # The test quit with a non-zero exit status.
     - sqlite-speedtest-1.0.1
