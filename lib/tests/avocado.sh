@@ -41,6 +41,10 @@ run_test()
 
 setup_env()
 {
+	log_cmd modprobe -rv kvm_intel kvm
+	log_cmd modprobe -v kvm_intel tdx=1
+	log_cmd cat /sys/module/kvm_intel/parameters/tdx
+
 	# required for lkvs
 	lsmod | grep tun || modprobe tun
 
