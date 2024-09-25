@@ -53,7 +53,8 @@ setup_env()
 	adduser --system --ingroup libvirt-qemu --home /var/lib/libvirt --no-create-home --shell /bin/false libvirt-qemu
 
 	log_cmd systemctl restart libvirtd || return
-	sleep 120
+	# sleep enough time to avoid the failure of later net-define
+	sleep 300
 	log_cmd systemctl status libvirtd
 
 	# create virbr0 interface that is a virtual network bridge
@@ -65,8 +66,6 @@ setup_env()
 	log_cmd sed -i 's/openvswitch-switch/openvswitch/g' /lib/systemd/system/openvswitch.service
 	# to recognize the new service file
 	log_cmd systemctl daemon-reload
-
-	log_cmd sleep 120
 }
 
 install_lkvs_tests()
