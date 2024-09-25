@@ -2,11 +2,11 @@
 # - nr_task
 # - duration
 
-. $LKP_SRC/lib/tests/cassandra.sh
+. $LKP_SRC/lib/tests/fixup.sh
 . $LKP_SRC/lib/reproduce-log.sh
 . $LKP_SRC/lib/debug.sh
 
-setup_java_home
+fixup_java_home
 
 cd "$BENCHMARK_ROOT/linkbench" || die "no $BENCHMARK_ROOT/linkbench"
 

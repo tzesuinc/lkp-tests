@@ -22,10 +22,10 @@
 
 . "$LKP_SRC"/lib/reproduce-log.sh
 . "$LKP_SRC"/lib/numactl.sh
-. $LKP_SRC/lib/tests/cassandra.sh
+. $LKP_SRC/lib/tests/fixup.sh
 
-setup_python
-setup_java_home
+fixup_python
+fixup_java_home
 
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib

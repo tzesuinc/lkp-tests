@@ -1,11 +1,11 @@
 #!/bin/sh
 
 . $LKP_SRC/lib/reproduce-log.sh
-. $LKP_SRC/lib/tests/cassandra.sh
+. $LKP_SRC/lib/tests/fixup.sh
 
 cassandra_server=$BENCHMARK_ROOT/cassandra/bin/cassandra
 
-setup_java_home
+fixup_java_home
 
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib

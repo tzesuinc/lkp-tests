@@ -3,7 +3,7 @@
 . $LKP_SRC/lib/debug.sh
 . $LKP_SRC/lib/env.sh
 
-setup_java_home()
+fixup_java_home()
 {
 	if [ -d /usr/lib/jvm/java-1.11.0-openjdk ]; then
 		export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk
@@ -25,7 +25,7 @@ setup_java_home()
 }
 
 # mainly to resolve "/usr/bin/env: ‘python’: No such file or directory"
-setup_python()
+fixup_python()
 {
 	has_cmd python && return
 
