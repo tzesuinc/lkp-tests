@@ -129,7 +129,7 @@ upgrade() {
 		case $(distro_pkg_format) in
 			deb)
 				pack_deb "$pkg_name"
-				dpkg -i --force-overwrite "$pkg_name-lkp.deb" 2>/tmp/dpkg_error || {
+				dpkg -i "$pkg_name-lkp.deb" 2>/tmp/dpkg_error || {
 					grep -v "dpkg: warning: files list file for package '.*' missing;" /tmp/dpkg_error
 					exit 1
 				}
