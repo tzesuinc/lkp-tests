@@ -1,0 +1,5 @@
+url: https://github.com/gourryinverse/linux
+owner: Gregory Price <gourry@gourry.net>
+mail_to: Gregory Price <gourry@gourry.net>
+mail_cc: Gregory Price <gourry@gourry.net>
+notify_build_success_branch: .*
