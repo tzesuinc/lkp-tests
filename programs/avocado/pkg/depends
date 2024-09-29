@@ -1,9 +1,11 @@
 arping
 build-essential
+cpuid
 dnsmasq
 gawk
 gdb
 gdbserver
+git
 iptables
 libvirt-clients
 libvirt-daemon-system
@@ -15,3 +17,4 @@ python-pypillowfight
 qemu-system
 qemu-utils
 tcpdump
+xz-utils
