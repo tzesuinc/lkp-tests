@@ -41,9 +41,11 @@ run_test()
 
 setup_env()
 {
-	log_cmd modprobe -rv kvm_intel kvm
-	log_cmd modprobe -v kvm_intel tdx=1
-	log_cmd cat /sys/module/kvm_intel/parameters/tdx
+	[[ $(cat /sys/module/kvm_intel/parameters/tdx) = Y ]] || {
+		log_cmd modprobe -rv kvm_intel kvm
+		log_cmd modprobe -v kvm_intel tdx=1
+		log_cmd cat /sys/module/kvm_intel/parameters/tdx
+	}
 
 	# required for lkvs
 	lsmod | grep tun || modprobe tun
@@ -57,8 +59,7 @@ setup_env()
 	adduser --system --ingroup libvirt-qemu --home /var/lib/libvirt --no-create-home --shell /bin/false libvirt-qemu
 
 	log_cmd systemctl restart libvirtd || return
-	# sleep enough time to avoid the failure of later net-define
-	sleep 300
+	sleep 60
 	log_cmd systemctl status libvirtd
 
 	# create virbr0 interface that is a virtual network bridge
