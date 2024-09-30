@@ -19,6 +19,15 @@ setup_conf()
 	cat <<EOT >> $avocado_conf_file
 logs_dir = $avocado_result_dir
 EOT
+
+	local avocado_data_dir=$1
+	[[ $avocado_data_dir ]] || return 0
+
+	log_cmd rm -rf $avocado_data_dir
+	log_cmd mkdir -p $(dirname $avocado_data_dir) || return
+	log_cmd cp -r /lkp/benchmarks/avocado/data $(dirname $avocado_data_dir)/
+
+	log_cmd sed -i "s|data_dir = .*|data_dir = $avocado_data_dir|g" "$avocado_conf_file"
 }
 
 run_test()
