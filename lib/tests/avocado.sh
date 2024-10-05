@@ -50,6 +50,7 @@ run_test()
 
 setup_env()
 {
+	log_cmd cat /sys/module/kvm_intel/parameters/tdx
 	[[ $(cat /sys/module/kvm_intel/parameters/tdx) = Y ]] || {
 		log_cmd modprobe -rv kvm_intel kvm
 		log_cmd modprobe -v kvm_intel tdx=1
