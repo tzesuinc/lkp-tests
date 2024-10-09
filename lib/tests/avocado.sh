@@ -50,11 +50,13 @@ run_test()
 
 setup_env()
 {
-	log_cmd cat /sys/module/kvm_intel/parameters/tdx
-	[[ $(cat /sys/module/kvm_intel/parameters/tdx) = Y ]] || {
+	local kvm_intel_parameters_tdx=/sys/module/kvm_intel/parameters/tdx
+
+	log_cmd cat $kvm_intel_parameters_tdx
+	[[ $(cat $kvm_intel_parameters_tdx) = Y ]] || {
 		log_cmd modprobe -rv kvm_intel kvm
 		log_cmd modprobe -v kvm_intel tdx=1
-		log_cmd cat /sys/module/kvm_intel/parameters/tdx
+		log_cmd cat $kvm_intel_parameters_tdx
 	}
 
 	# required for lkvs
