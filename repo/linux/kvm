@@ -12,6 +12,4 @@ branch_denylist: auto-next
 non_rebaseable_branch: next
 mail_cc:
 - kvm@vger.kernel.org
-- Robert Hu <robert.hu@intel.com>
 - Farrah Chen <farrah.chen@intel.com>
-- Danmei Wei <danmei.wei@intel.com>
