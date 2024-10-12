@@ -5,3 +5,18 @@ category: functional
 lkvs:
   test:
     - topology-server
+
+---
+lkvs:
+  test: cstate-server # require GNR and above
+
+perf-stat:
+
+timeout: 1h
+
+---
+lkvs:
+  test:
+    - rapl-server # require GNR and above
+
+timeout: 1h

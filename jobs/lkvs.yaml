@@ -22,6 +22,7 @@ lkvs:
     - pstate
     - pt
     - sdsi
+    - splitlock # require SPR and above
     - tdx-compliance
     - tdx-guest
     # - tdx-osv-sanity
@@ -33,3 +34,4 @@ lkvs:
     - umip
     - workload-xsave
     - xsave
+    - ufs # require GNR and above
