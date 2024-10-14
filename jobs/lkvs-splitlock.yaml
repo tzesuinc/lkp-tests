@@ -1,7 +1,0 @@
-suite: lkvs
-testcase: lkvs
-category: functional
-
-lkvs:
-  test:
-    - splitlock
