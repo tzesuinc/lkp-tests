@@ -13,4 +13,4 @@ private_report_branch: .*
 mail_to: Otavio Salvador <otavio@ossystems.com.br>
 test_old_branches: .*
 branch_denylist: pr/.*
-no_merge_branch: 6.6.*.x+fslc
+no_merge_branch: 6.*.x+fslc|6.6-2.1.x-imx
