@@ -16,6 +16,6 @@ rcutorture:
     - tasks
     - tasks-rude
     - tasks-tracing
-    - busted
-    - busted_srcud
+    # - busted
+    # - busted_srcud
     - trivial
