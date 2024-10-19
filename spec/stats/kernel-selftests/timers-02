@@ -1,0 +1,17 @@
+# selftests: timers: posix_timers
+# TAP version 13
+# 1..18
+# # Testing posix timers. False negative may happen on CPU execution
+# # based timers if other threads run on the CPU...
+# ok 1 ITIMER_VIRTUAL
+# not ok 7 check_sig_ign SIGEV_SIGNAL
+# # Totals: pass:15 fail:3 xfail:0 xpass:0 skip:0 error:0
+not ok 1 selftests: timers: posix_timers # exit=1
+# timeout set to 0
+# selftests: timers: nsleep-lat
+# TAP version 13
+# 1..9
+# ok 1 CLOCK_REALTIME
+# ok 3 # SKIP CLOCK_MONOTONIC_RAW
+# # Totals: pass:6 fail:0 xfail:0 xpass:0 skip:3 error:0
+ok 3 selftests: timers: nsleep-lat

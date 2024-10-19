@@ -3,11 +3,6 @@ make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-822
 # Check itimer virtual... [OK]
 # Check timer_create() per process... [OK]
 ok 1 selftests: timers: posix_timers
-# selftests: timers: nanosleep
-# Nanosleep CLOCK_MONOTONIC                 [OK]
-# Nanosleep CLOCK_MONOTONIC_RAW             [UNSUPPORTED]
-# Nanosleep CLOCK_BOOTTIME                  [OK]
-ok 2 selftests: timers: nanosleep
 # selftests: timers: nsleep-lat
 # nsleep latency CLOCK_MONOTONIC            [OK]
 # nsleep latency CLOCK_MONOTONIC_RAW        [UNSUPPORTED]
@@ -20,12 +15,6 @@ ok 3 selftests: timers: nsleep-lat
 # CLOCK_REALTIME_ALARM   RELTIME ONE-SHOT timer fired early:       0 : [OK]
 # CLOCK_TAI              RELTIME ONE-SHOT count:                   1 : [OK]
 ok 4 selftests: timers: set-timer-lat
-# selftests: timers: mqueue-lat
-# Mqueue latency :                          [OK]
-ok 5 selftests: timers: mqueue-lat
-# selftests: timers: inconsistency-check
-# Consistent CLOCK_MONOTONIC                [OK]
-ok 6 selftests: timers: inconsistency-check
 # selftests: timers: raw_skew
 # Estimating clock drift: 0.0(est) 0.0(act)     [OK]
 # # Pass 0 Fail 0 Xfail 0 Xpass 0 Skip 0 Error 0

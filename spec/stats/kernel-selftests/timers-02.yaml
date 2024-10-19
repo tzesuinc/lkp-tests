@@ -1,0 +1,7 @@
+timers.make.pass: 1
+timers.posix_timers.ITIMER_VIRTUAL.pass: 1
+timers.posix_timers.check_sig_ign_SIGEV_SIGNAL.fail: 1
+timers.posix_timers.fail: 1
+timers.nsleep-lat.CLOCK_REALTIME.pass: 1
+timers.nsleep-lat.CLOCK_MONOTONIC_RAW.skip: 1
+timers.nsleep-lat.pass: 1
