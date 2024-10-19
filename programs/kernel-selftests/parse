@@ -573,16 +573,26 @@ end
 class MmStater < Stater
   def stat(line, stats)
     case line
-    when /^#\s+running\s+(.+)/
+    when /^#\s+running:?\s+(.+)/
       # running hugepage-shm
       # running ./va_128TBswitch
+      # running: gup_test -u # get_user_pages_fast() benchmark
       @test_case = $1.sub(/^\.\//, '')
-    when /^#\s+running: (\S+)(.+)# (\S+)/
-      handle_running_test_case_with_details($1, $3)
-    when /^#\s+\[(PASS|FAIL)\]/, /^#\s+LKP (SKIP)/
-      handle_test_result($1, stats)
+      @test_subcase = nil
+    when /^#\s+\[(PASS|FAIL|SKIP)\]/, /^#\s+LKP (SKIP)/
+      assert @test_case, "invalid test case #{@test_case.inspect}"
+
+      stats.add test_name(@test_prefix, @test_case.tr('-', '_')), $1, overwrite: true
+
+      @test_case = nil
+      @test_subcase = nil
     when /^# ([a-zA-Z].*): [0-9a-z]+ - (OK|FAIL)/
-      handle_sub_test($1, $2, stats)
+      assert @test_case, "invalid test case #{@test_case.inspect}"
+
+      # mmap(HIGH_ADDR, MAP_FIXED): 0xffffffffffffffff - FAILED
+      # mmap(ADDR_SWITCH_HINT - PAGE_SIZE, PAGE_SIZE): 0x7fe8ef2a4000 - OK
+      # mmap(ADDR_SWITCH_HINT - PAGE_SIZE, PAGE_SIZE): 0x7fe8ef29d000 - OK
+      stats.add test_name(@test_prefix, @test_case, $1), $2, overwrite: true
     when /^# # \[RUN\]\s(.*)/
       # selftests: mm: madv_populate
       # # [RUN] test_prot_read
@@ -593,29 +603,6 @@ class MmStater < Stater
     else
       super(line, stats)
     end
-  end
-
-  def handle_test_result(result, stats)
-    return unless @test_case
-
-    test_name = "#{@test_prefix}.#{@test_case}".tr('-', '_')
-    stats.add test_name, result unless stats.key?(test_name)
-    @test_case = nil
-  end
-
-  def handle_sub_test(test_desc, result, stats)
-    # mmap(HIGH_ADDR, MAP_FIXED): 0xffffffffffffffff - FAILED
-    test_name = "#{@test_prefix}.#{@test_case}.#{test_desc}"
-    # treat below subtests as same
-    # mmap(ADDR_SWITCH_HINT - PAGE_SIZE, PAGE_SIZE): 0x7fe8ef2a4000 - OK
-    # mmap(ADDR_SWITCH_HINT - PAGE_SIZE, PAGE_SIZE): 0x7fe8ef29d000 - OK
-    stats.add test_name, result unless stats.key?(test_name)
-  end
-
-  def handle_running_test_case_with_details(test_case_name, sub_case_name)
-    # running: gup_test -u # get_user_pages_fast() benchmark
-    # mm.run_vmtests.sh.gup_test.get_user_pages_fast.pass: 1
-    @test_case = "#{test_case_name}.#{sub_case_name}"
   end
 
   def test_name(*parts)
@@ -666,7 +653,7 @@ class MmStater < Stater
     # # [RUN] test_softdirty
     # ok 17 range is not softdirty
     # ok 19 range is not softdirty
-    stats.add test_name, test_result unless stats.key?(test_name)
+    stats.add test_name, test_result, overwrite: true
   end
 end
 
