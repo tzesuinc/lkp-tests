@@ -3,8 +3,6 @@ testcase: kernel-selftests
 category: functional
 
 need_memory: 3G
-need_cpuid: 158
-
 kernel-selftests:
   group:
     - sgx
