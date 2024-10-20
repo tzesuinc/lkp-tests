@@ -127,7 +127,11 @@ class Stater
     stats.add "#{@test}.#{test_case}", result
   end
 
-  def parse_sub_test_result(result, skip_indicator, test_details, stats)
+  SUBTEST_RESULT_PATTERN = /^# (ok|not ok) \d+\s(# SKIP |)(.+)/.freeze
+
+  def parse_subtest_result(line, stats)
+    return unless line =~ SUBTEST_RESULT_PATTERN
+
     # if it has '# # [RUN]' level
 
     ## @test_case, @test_subcase, test_details
@@ -164,9 +168,10 @@ class Stater
     # TAP version 13
     # 1..5
     # ok 1 Test test_simple
-    test_name = test_name @test_prefix, @test_case, @test_subcase, test_details
 
-    test_result = skip_indicator['SKIP'] ? 'skip' : result
+    test_result = $2['SKIP'] ? 'skip' : $1
+    test_name = test_name @test_prefix, @test_case, @test_subcase, $3
+
     # ignore below duplication
     # # [RUN] test_softdirty
     # ok 17 range is not softdirty
@@ -649,8 +654,8 @@ class MmStater < Stater
       # # [RUN] test_prot_read
       # ok 1 MADV_POPULATE_READ with PROT_READ
       @test_subcase = $1
-    when /^# (ok|not ok) \d+\s(# SKIP |)(.*)/
-      parse_sub_test_result($1, $2, $3, stats)
+    when SUBTEST_RESULT_PATTERN
+      parse_subtest_result(line, stats)
     else
       super(line, stats)
     end
@@ -882,8 +887,8 @@ class TimersStater < Stater
       # Estimating clock drift: 0.0(est) 0.0(act)     [OK]
       # CLOCK_TAI              RELTIME ONE-SHOT count:                   1 : [OK]
       stats.add "#{@test_prefix}.#{$1}", $3
-    when /^# (ok|not ok) \d+\s(# SKIP |)(.*)/
-      parse_sub_test_result($1, $2, $3, stats)
+    when SUBTEST_RESULT_PATTERN
+      parse_subtest_result(line, stats)
     else
       super(line, stats)
     end
