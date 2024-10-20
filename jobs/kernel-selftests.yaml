@@ -11,27 +11,159 @@ need_memory: 2G
 
 kernel-selftests:
   group:
-    - group-00
-    - group-03
+    - acct
+    - alsa
+    # - amd-pstate
+    # - arm64
+    - breakpoints
+    - cachestat
+    - capabilities
+    - clone3
+    - connector
+    - core
+    - cpu-hotplug
+    - cpufreq
+
+    - damon
+    - devices
+    - dma
+    - dmabuf-heaps
+    - drivers
+    - dt
+    - efivarfs
+    - exec
+    - fchmodat2
+    - filelock
+    - filesystems
+    - firmware
+    - fpu
+    - futex
+    - gpio
+    - hid
+    - ia64
+    - intel_pstate
+    - iommu
+    - ipc
+    - ir
+    - kcmp
+    - kexec
+    - kmod
+    - landlock
+    - lib
     - livepatch
+    # - lkdtm
+    - lsm
+
+    # - media_tests # require special peripheral and it can not be run with "make run_tests"
+    - membarrier
+    - memfd
+    - memory-hotplug
+    - mincore
+    - mount
+    - mount_setattr
+    - move_mount_set_group
+    - mqueue
+    - nci
+    - nolibc
+    - nsfs
+    - ntb
+    - openat2
+    - perf_events
+    - pid_namespace
+    - pidfd
+    - power_supply
+    # - powerpc
+    - prctl
+    - proc
+    - ptp
+    - ptrace
+
+    - ring-buffer
+    - riscv
+    - rlimits
     - rseq
+    - rtc
+
+    - safesetid
+    - sched
+    - sched_ext
+    - seccomp
+    - sigaltstack
+    - size
+    # - sparc64
+    - splice
+    - static_keys
+    - sync
+    - syscall_user_dispatch
+    - sysctl
+
+    - tc-testing
+    - tdx
+    - thermal
+    - timens
+    - timers
+    - tmpfs
+    - tpm2
+    - tty
+    - turbostat
+    - uevent
     - user_events
+    - vDSO
+
+    # require special peripheral
+    # 1. requires /dev/watchdog device, but not all tbox have this device
+    # 2. /dev/watchdog: need support open/ioctl etc file ops, but not all watchdog support it
+    # 3. this test will not complete until issue Ctrl+C to abort it
+    # - watchdog
+
+    - wireguard
+    - zram
+
+---
+# a large number cpus host cannot finish in 30 min
+need_cpu: -32
+
+kernel-selftests:
+  group:
+    - locking
+
+---
+sysctl:
+  sc_nr_hugepages: 2
+
+kernel-selftests:
+  group:
+    - mm
+# memfd_secret default is disable, should add kernel cmdline to enable
+# kernel_cmdline: secretmem.enable=1
+
+---
+kernel-selftests:
+  group:
+    - resctrl
+
+kernel_cmdline: "rdt=cmt,mbmtotal,mbmlocal,l3cat,l3cdp,l2cat,l2cdp,mba,smba,bmec"
+
+---
+kernel-selftests:
+  group:
+    - pstore
+
 # never register ERST as pstore backend
 kernel_cmdline: erst_disable
 
 ---
-need_memory: 3G
+oom-killer:
+  ignored: 1
+
+# cgroup controllers can only be mounted in one hierarchy (v1 or v2).
+# If a controller mounted on a legacy v1, then it won't show up in cgroup2.
+# the v1 controllers are automatically mounted under /sys/fs/cgroup.
+# systemd automatically creates such mount points. mount_cgroup dosen't work.
+# not all controllers (like memory) become available even after unmounting all v1 cgroup filesystems.
+# To avoid this behavior, boot with the systemd.unified_cgroup_hierarchy=1.
 kernel-selftests:
   group:
-    - group-02
-    - group-s
-    - pidfd
+    - cgroup
 
----
-kernel-selftests:
-  group:
-    - group-01
-    - lib
-    # - lkdtm
-
-kernel_cmdline: kvm-intel.unrestricted_guest=0
+kernel_cmdline: systemd.unified_cgroup_hierarchy=1

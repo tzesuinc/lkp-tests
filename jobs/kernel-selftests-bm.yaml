@@ -1,8 +1,0 @@
-suite: kernel-selftests
-testcase: kernel-selftests
-category: functional
-
-kernel-selftests:
-  group:
-    - cpufreq
-    - firmware

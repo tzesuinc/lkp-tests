@@ -10,5 +10,3 @@ need_cpu: 2
 kernel-selftests:
   group:
     - x86
-# never register ERST as pstore backend
-kernel_cmdline: erst_disable

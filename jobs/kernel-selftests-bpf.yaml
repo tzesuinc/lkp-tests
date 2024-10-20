@@ -10,5 +10,3 @@ need_cpu: 2
 kernel-selftests-bpf:
   group:
     - bpf
-# never register ERST as pstore backend
-kernel_cmdline: erst_disable
