@@ -1,5 +1,5 @@
 pkgname=fio
-pkgver=3.33
+pkgver=3.38
 pkgrel=1
 pkgdesc="Fio is a tool that will spawn a number of threads or processes doing a particular type of I/O action as specified by the user."
 arch=('i386' 'x86_64' 'riscv64' 'aarch64')
