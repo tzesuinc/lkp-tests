@@ -454,32 +454,9 @@ fixup_damon()
 	chmod +x damon/*.sh damon/*.py
 }
 
-# media_tests: requires special peripheral and it can not be run with "make run_tests"
-# watchdog: requires special peripheral
-# 	1. requires /dev/watchdog device, but not all tbox have this device
-# 	2. /dev/watchdog: need support open/ioctl etc file ops, but not all watchdog support it
-# 	3. this test will not complete until issue Ctrl+C to abort it
 prepare_for_selftest()
 {
-	if [ "$group" = "group-00" ]; then
-		# bpf is slow
-		selftest_mfs=$(ls -d [a-b]*/Makefile | grep -v -e ^amd-pstate -e ^bpf -e ^arm64)
-	elif [ "$group" = "group-01" ]; then
-		# subtest lib cause kselftest incomplete run, it's a kernel issue
-		# report [LKP] [software node] 7589238a8c: BUG:kernel_NULL_pointer_dereference,address
-		# lkdtm is unstable [validated 1] f825d3f7ed
-		selftest_mfs=$(ls -d [c-l]*/Makefile | grep -v -e ^ftrace -e ^livepatch -e ^lib -e ^cpufreq -e ^cgroup -e ^kvm -e ^firmware -e ^lkdtm -e ^locking)
-	elif [ "$group" = "group-02" ]; then
-		# m* is slow
-		# pidfd caused soft_timeout in kernel-selftests.splice.short_splice_read.sh.fail.v5.9-v5.10-rc1.2020-11-06.132952
-		selftest_mfs=$(ls -d [m-r]*/Makefile | grep -v -e ^media_tests -e ^rseq -e ^resctrl -e ^mm -e ^net -e ^netfilter -e ^rcutorture -e ^powerpc -e ^pidfd -e ^memory-hotplug -e ^rust)
-	elif [ "$group" = "group-03" ]; then
-		selftest_mfs=$(ls -d [t-z]*/Makefile | grep -v -e ^x86 -e ^tc-testing -e ^vm -e ^user_events -e ^watchdog)
-	elif [ "$group" = "group-s" ]; then
-		selftest_mfs=$(ls -d s*/Makefile | grep -v -e ^sgx -e ^sparc64)
-	elif [ "$group" = "memory-hotplug" ]; then
-		selftest_mfs=$(ls -d memory-hotplug/Makefile)
-	elif [ "$group" = "net/netfilter" ]; then
+	if [ "$group" = "net/netfilter" ]; then
 		selftest_mfs=$(ls -d net/netfilter/Makefile)
 		[ "$selftest_mfs" ] || selftest_mfs=$(ls -d netfilter/Makefile)
 	else
@@ -714,9 +691,6 @@ run_tests()
 		if [[ $test =~ ^vmalloc\-(performance|stress)$ ]]; then
 			log_cmd mm/test_vmalloc.sh ${test##vmalloc-} 2>&1
 			log_cmd dmesg | grep -E '(Summary|All test took)' 2>&1
-		elif [[ $test =~ ^protection_keys ]]; then
-			echo "# selftests: mm: $test"
-			log_cmd mm/$test 2>&1
 		elif [[ $group = resctrl ]]; then
 			log_cmd resctrl/resctrl_tests 2>&1
 		elif [[ $group = bpf ]]; then
