@@ -11,7 +11,7 @@ require "#{LKP_SRC}/lib/assert"
 stats = LKP::Stats.new
 
 class Stater
-  SUBTEST_RESULT_PATTERN = /^# (ok|not ok) \d+\s(# SKIP |)(.+)/.freeze
+  SUBTEST_RESULT_PATTERN = /^# (?<result>ok|not ok) \d+\s(?<skip># SKIP |)(?<extra>.+)/.freeze
 
   def initialize(test, test_script)
     @test = test
@@ -108,7 +108,8 @@ class Stater
   end
 
   def parse_subtest_result(line, stats)
-    return unless line =~ SUBTEST_RESULT_PATTERN
+    m = line.match SUBTEST_RESULT_PATTERN
+    return unless m
 
     # if it has '# # [RUN]' level
     #
@@ -153,8 +154,8 @@ class Stater
     #
     # not ok 7 test_memcg_max
     # ok 10 # SKIP test_memcg_swap_max
-    test_result = $2['SKIP'] ? 'skip' : $1
-    test_name = test_name @test_prefix, @test_case, @test_subcase, $3
+    test_result = m[:skip]['SKIP'] ? 'skip' : m[:result]
+    test_name = test_name @test_prefix, @test_case, @test_subcase, m[:extra], @arguments
 
     # ignore below duplication
     # # [RUN] test_softdirty
@@ -719,6 +720,19 @@ class X86Stater < Stater
 end
 
 class FutexStater < Stater
+  def stat(line, stats)
+    case line
+    when /Arguments: (.+)/
+      # # futex_requeue_pi: Test requeue functionality
+      # # 	Arguments: broadcast=0 locked=0 owner=0 timeout=0ns
+      # ok 1 futex-requeue-pi
+      @arguments = $1
+    else
+      super(line, stats)
+
+      @arguments = nil if line =~ SUBTEST_RESULT_PATTERN
+    end
+  end
 end
 
 class ResctrlStater < Stater
