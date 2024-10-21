@@ -186,7 +186,6 @@ skip_standalone_net_tests()
 	for i in $(echo $skip_from_net)
 	do
 		sed -i "s/$i//" net/Makefile
-		echo "LKP SKIP net.$i"
 	done
 }
 
@@ -240,19 +239,19 @@ fixup_net()
 fixup_efivarfs()
 {
 	[[ -d "/sys/firmware/efi" ]] || {
-		echo "LKP SKIP efivarfs | no /sys/firmware/efi"
+		echo "$FUNCNAME: no /sys/firmware/efi"
 		return 1
 	}
 
 	grep -q -F -w efivarfs /proc/filesystems || modprobe efivarfs || {
-		echo "LKP SKIP efivarfs"
+		echo "$FUNCNAME: modprobe efivarfs fails"
 		return 1
 	}
 	# if efivarfs is built-in, "modprobe efivarfs" always returns 0, but it does not means
 	# efivarfs is supported since this requires some specified hardwares, such as booting from
 	# uefi, so check again
 	log_cmd mount -t efivarfs efivarfs /sys/firmware/efi/efivars || {
-		echo "LKP SKIP efivarfs"
+		echo "$FUNCNAME: mount -t efivarfs fails"
 		return 1
 	}
 }
@@ -326,9 +325,7 @@ fixup_lkdtm()
 	# But the kernel's overall performance will degrade by roughly 5-10%.
 	# So instead of enable UNWINDER_FRAME_POINTER, comment out USERCOPY_STACK_FRAME_TO and USERCOPY_STACK_FRAME_FROM.
 	sed -i '/USERCOPY_STACK_FRAME_TO/d' lkdtm/tests.txt
-	echo "LKP SKIP USERCOPY_STACK_FRAME_TO"
 	sed -i '/USERCOPY_STACK_FRAME_FROM/d' lkdtm/tests.txt
-	echo "LKP SKIP USERCOPY_STACK_FRAME_FROM"
 }
 
 cleanup_for_firmware()
