@@ -1,11 +1,4 @@
-x86.sigreturn_32.Valid_sigreturn_32-bit_CS_73_32-bit_SS_7b_GDT.pass: 1
-x86.sigreturn_32.Valid_sigreturn_16-bit_CS_37_32-bit_SS_7b_GDT.pass: 1
-x86.sigreturn_32.Valid_sigreturn_32-bit_CS_73_16-bit_SS_3f.pass: 1
-x86.sigreturn_32.Valid_sigreturn_16-bit_CS_37_16-bit_SS_3f.pass: 1
-x86.sigreturn_32.32-bit_CS_73_bogus_SS_47.pass: 1
-x86.sigreturn_32.16-bit_CS_37_bogus_SS_47.pass: 1
-x86.sigreturn_32.32-bit_CS_73_bogus_SS_73.pass: 1
-x86.sigreturn_32.16-bit_CS_37_bogus_SS_73.pass: 1
-x86.sigreturn_32.32-bit_CS_4f_bogus_SS_7b.pass: 1
-x86.sigreturn_32.32-bit_CS_73_bogus_SS_57.pass: 1
 x86.sigreturn_32.pass: 1
+x86.unwind_vdso_32.pass: 1
+x86.check_initial_reg_state_32.pass: 1
+x86.check_initial_reg_state_64.pass: 1

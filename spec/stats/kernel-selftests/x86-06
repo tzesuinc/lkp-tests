@@ -28,3 +28,31 @@
 # [RUN]	32-bit CS (73), bogus SS (57)
 # [OK]	Got #IRET(0x0) (i.e. Illegal instruction)
 ok 6 selftests: x86: sigreturn_32
+# selftests: x86: unwind_vdso_32
+# 	AT_SYSINFO is 0xf7f3e540
+# [OK]	AT_SYSINFO maps to linux-gate.so.1, loaded at 0x0xf7f3e000
+# [RUN]	Set TF and check a fast syscall
+# 	In vsyscall at 0xf7f3e540, returning to 0xf7dfd0c7
+# 	SIGTRAP at 0xf7f3e540
+# 	  0xf7f3e540
+# 	  0xf7dfd0c7
+# [OK]	  NR = 20, args = 1, 2, 3, 4, 5, 6
+# 	SIGTRAP at 0xf7f3e541
+# 	  0xf7f3e541
+# 	  0xf7dfd0c7
+# [OK]	  NR = 3428, args = 1, 2, 3, 4, 5, 6
+# 	SIGTRAP at 0xf7f3e54c
+# 	  0xf7f3e54c
+# 	  0xf7dfd0c7
+# [OK]	  NR = 3428, args = 1, 2, 3, 4, 5, 6
+# 	Vsyscall is done
+# [OK]	All is well
+ok 16 selftests: x86: unwind_vdso_32
+# selftests: x86: check_initial_reg_state_32
+# [OK]	All GPRs except SP are 0
+# [OK]	FLAGS is 0x202
+ok 5 selftests: x86: check_initial_reg_state_32
+# selftests: x86: check_initial_reg_state_64
+# [OK]	All GPRs except SP are 0
+# [OK]	FLAGS is 0x202
+ok 27 selftests: x86: check_initial_reg_state_64
