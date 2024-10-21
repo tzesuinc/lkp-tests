@@ -1,3 +1,7 @@
 membarrier.make.pass: 1
+membarrier.membarrier_test_single_thread.sys_membarrier_available.pass: 1
+membarrier.membarrier_test_single_thread.sys_membarrier_invalid_command_test_command_=_-1_flags_=_0_errno_=_22._Failed_as_expected.pass: 1
+membarrier.membarrier_test_single_thread.sys_membarrier_MEMBARRIER_CMD_GLOBAL_EXPEDITED_test_flags_=_0.pass: 1
 membarrier.membarrier_test_single_thread.pass: 1
+membarrier.membarrier_test_multi_thread.sys_membarrier_available.pass: 1
 membarrier.membarrier_test_multi_thread.pass: 1

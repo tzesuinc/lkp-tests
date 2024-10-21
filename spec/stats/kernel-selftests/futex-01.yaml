@@ -1,2 +1,6 @@
 futex.make.pass: 1
+futex.run.sh.futex-requeue-pi.pass: 1
+futex.run.sh.futex-requeue-pi-signal-restart.pass: 1
+futex.run.sh.futex-wait-timeout.pass: 1
+futex.run.sh.futex-wait-wouldblock.pass: 1
 futex.run.sh.pass: 1

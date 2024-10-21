@@ -1,4 +1,10 @@
 capabilities.make.pass: 1
+capabilities.test_execve.Tests_with_uid_==_0.Passed.pass: 1
+capabilities.test_execve.Tests_with_uid_==_0.PR_CAP_AMBIENT_RAISE_failed_on_non-inheritable_cap.pass: 1
+capabilities.test_execve.Tests_with_uid_==_0.PR_CAP_AMBIENT_RAISE_failed_on_non-permitted_cap.pass: 1
 capabilities.test_execve.Tests_with_uid_==_0.pass: 1
+capabilities.test_execve.Tests_with_uid_!=_0.Passed.pass: 1
+capabilities.test_execve.Tests_with_uid_!=_0.PR_CAP_AMBIENT_RAISE_failed_on_non-inheritable_cap.pass: 1
+capabilities.test_execve.Tests_with_uid_!=_0.PR_CAP_AMBIENT_RAISE_failed_on_non-permitted_cap.pass: 1
 capabilities.test_execve.Tests_with_uid_!=_0.pass: 1
 capabilities.test_execve.pass: 1

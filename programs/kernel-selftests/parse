@@ -11,6 +11,8 @@ require "#{LKP_SRC}/lib/assert"
 stats = LKP::Stats.new
 
 class Stater
+  SUBTEST_RESULT_PATTERN = /^# (ok|not ok) \d+\s(# SKIP |)(.+)/.freeze
+
   def initialize(test, test_script)
     @test = test
     @test_script = test_script
@@ -19,11 +21,8 @@ class Stater
   end
 
   def stat(line, stats)
-    if line =~ /^# (ok|not ok) \d+ (.*)/
-      # some tests under tools/testing/selftests use same result format:
-      # selftests: seccomp: seccomp_bpf
-      # ok 1 global.kcmp
-      parse_ok_result($2, $1, stats)
+    if line =~ SUBTEST_RESULT_PATTERN
+      parse_subtest_result(line, stats)
 
       return
     end
@@ -64,25 +63,6 @@ class Stater
 
   def test_name(*parts)
     parts.compact.join('.')
-  end
-
-  def parse_ok_result(test_case, result, stats)
-    return unless %w{cgroup seccomp sigaltstack syscall_user_dispatch core landlock}.include? @test
-
-    if test_case =~ /SKIP/
-      # selftests: cgroup: test_stress.sh
-      # ok 4 # SKIP test_cgcore_no_internal_process_constraint_on_threads
-      test_case = "#{@test_prefix}.#{test_case.split(' SKIP ').last}"
-      stats.add test_case, 'skip', overwrite: true
-    else
-      # cgroup will repeatedly output below subtests, ignore the duplicates.
-      # selftests: cgroup: test_kmem
-      # not ok 1 test_kmem_basic
-      # not ok 1 test_kmem_basic
-      # not ok 1 test_kmem_basic
-      test_case = "#{@test_prefix}.#{test_case}"
-      stats.add test_case, result, overwrite: true
-    end
   end
 
   def parse_make_result(result, stats)
@@ -127,13 +107,11 @@ class Stater
     stats.add "#{@test}.#{test_case}", result
   end
 
-  SUBTEST_RESULT_PATTERN = /^# (ok|not ok) \d+\s(# SKIP |)(.+)/.freeze
-
   def parse_subtest_result(line, stats)
     return unless line =~ SUBTEST_RESULT_PATTERN
 
     # if it has '# # [RUN]' level
-
+    #
     ## @test_case, @test_subcase, test_details
     #
     # selftests: mm: run_vmtests.sh
@@ -168,7 +146,13 @@ class Stater
     # TAP version 13
     # 1..5
     # ok 1 Test test_simple
-
+    #
+    # selftests: seccomp: seccomp_bpf
+    # ok 1 global.kcmp
+    # selftests: cgroup: test_memcontrol
+    #
+    # not ok 7 test_memcg_max
+    # ok 10 # SKIP test_memcg_swap_max
     test_result = $2['SKIP'] ? 'skip' : $1
     test_name = test_name @test_prefix, @test_case, @test_subcase, $3
 
@@ -176,6 +160,10 @@ class Stater
     # # [RUN] test_softdirty
     # ok 17 range is not softdirty
     # ok 19 range is not softdirty
+    #
+    # selftests: cgroup: test_kmem
+    # not ok 1 test_kmem_basic
+    # not ok 1 test_kmem_basic
     stats.add test_name, test_result, overwrite: true
   end
 end
