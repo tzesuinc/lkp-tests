@@ -3,8 +3,6 @@ KERNEL SELFTESTS: linux_headers_dir is /usr/src/linux-headers-x86_64-rhel-8.3-ks
 2021-06-25 10:01:58 sed -i s/default_timeout=45/default_timeout=300/ kselftest/runner.sh
 2021-06-25 10:01:58 sed -i s/default_timeout=45/default_timeout=300/ /kselftests/kselftest/runner.sh
 source /lkp/lkp/src/lib/tests/kernel-selftests-ext.sh
-LKP SKIP net.l2tp.sh
-LKP SKIP net.tls
 2021-06-25 10:01:59 /kselftests/run_kselftest.sh -c net
 TAP version 13
 1..49

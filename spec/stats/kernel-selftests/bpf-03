@@ -1,6 +1,3 @@
-LKP SKIP bpf.test_lirc_mode2_user
-LKP SKIP bpf.test_tc_tunnel.sh
-LKP SKIP bpf.test_lwt_seg6local.sh
 2020-05-14 10:32:44 make run_tests -C bpf
 make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-bpf-lsm-2-2ef96a5bb12be62ef75b5828c0aab838ebb29cb8/tools/testing/selftests/bpf'
 TAP version 13
@@ -21,9 +18,9 @@ ok 2 selftests: bpf: test_tag
 ok 3 selftests: bpf: test_maps
 # selftests: bpf: test_lru_map
 # nr_cpus:2
-# 
+#
 # test_lru_sanity0 (map_type:9 map_flags:0x0): Pass
-# 
+#
 ok 4 selftests: bpf: test_lru_map
 # selftests: bpf: test_lpm_map
 # test_lpm: OK
@@ -91,15 +88,15 @@ ok 17 selftests: bpf: test_netcnt
 ok 18 selftests: bpf: test_tcpnotify_user
 # selftests: bpf: test_sock_fields
 # srv_sa6.sin6_port:44775 cli_sa6.sin6_port:51983
-# 
+#
 # listen_sk: state:10 bound_dev_if:0 family:10 type:1 protocol:6 mark:0 priority:0 src_ip4:600007f(127.0.0.6) src_ip6:0:0:0:1000000(::1) src_port:44775 dst_ip4:0(0.0.0.0) dst_ip6:0:0:0:0(::) dst_port:0
-# 
+#
 # PASS
 ok 19 selftests: bpf: test_sock_fields
 # selftests: bpf: test_sysctl
 # libbpf: load bpf program failed: Permission denied
 # libbpf: -- BEGIN DUMP LOG ---
-# libbpf: 
+# libbpf:
 # ; int sysctl_tcp_mem(struct bpf_sysctl *ctx)
 # libbpf: -- END LOG --
 # libbpf: failed to load program 'cgroup/sysctl'
@@ -147,10 +144,10 @@ ok 24 selftests: bpf: urandom_read
 ok 25 selftests: bpf: test_kmod.sh
 # selftests: bpf: test_xdp_redirect.sh
 # [15] DATASEC license size=0 vlen=1 size == 0
-# 
+#
 # PING 10.1.1.22 (10.1.1.22) 56(84) bytes of data.
 # 64 bytes from 10.1.1.22: icmp_seq=1 ttl=64 time=0.081 ms
-# 
+#
 # --- 10.1.1.22 ping statistics ---
 # 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 # rtt min/avg/max/mdev = 0.081/0.081/0.081/0.000 ms
@@ -169,7 +166,7 @@ ok 27 selftests: bpf: test_xdp_meta.sh
 # selftests: bpf: test_xdp_veth.sh
 # [11] VAR _license type_id=9 linkage=1
 # [12] DATASEC license size=0 vlen=1 size == 0
-# 
+#
 # --- 10.1.1.33 ping statistics ---
 # 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 # rtt min/avg/max/mdev = 0.060/0.060/0.060/0.000 ms
@@ -196,7 +193,7 @@ ok 30 selftests: bpf: test_sock_addr.sh
 # [1] PTR (anon) type_id=2
 # [4] INT unsigned int size=4 bits_offset=0 nr_bits=32 encoding=(none)
 # [65] DATASEC license size=0 vlen=1 size == 0
-# 
+#
 # PING ::11(::11) 56 data bytes
 # --- ::11 ping statistics ---
 # 5 packets transmitted, 3 received, 40% packet loss, time 4131ms
@@ -204,7 +201,7 @@ ok 30 selftests: bpf: test_sock_addr.sh
 # PING 10.1.1.100 (10.1.1.100) 56(84) bytes of data.
 # [64] VAR _license type_id=63 linkage=1
 # [65] DATASEC license size=0 vlen=1 size == 0
-# 
+#
 # PING 10.1.1.100 (10.1.1.100) 56(84) bytes of data.
 # --- 10.1.1.200 ping statistics ---
 # 3 packets transmitted, 3 received, 0% packet loss, time 2065ms
@@ -268,15 +265,15 @@ ok 37 selftests: bpf: test_lwt_ip_encap.sh
 # BTF debug data section '.BTF' rejected: Invalid argument (22)!
 #  - Length:       3290
 # [26] DATASEC license size=0 vlen=1 size == 0
-# 
+#
 # ok
 ok 38 selftests: bpf: test_tcp_check_syncookie.sh
 # selftests: bpf: test_tc_edt.sh
-# 
+#
 # 	gso_segs type_id=3 bits_offset=1312
 # 	(anon) type_id=12 bits_offset=1344
 # [22] DATASEC license size=0 vlen=1 size == 0
-# 
+#
 # elapsed: 20 sec; bps difference: -0.06%
 # PASS
 ok 39 selftests: bpf: test_tc_edt.sh
@@ -288,25 +285,25 @@ ok 40 selftests: bpf: test_xdping.sh
 # selftests: bpf: test_bpftool_build.sh
 # Trying to build bpftool
 # ... through kbuild
-# 
+#
 # skip:    make tools/bpf (no .config found)
-# 
+#
 # $PWD:    /usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-bpf-lsm-2-2ef96a5bb12be62ef75b5828c0aab838ebb29cb8
 # command: make -s -C tools/bpf/bpftool OUTPUT=/tmp/tmp.unc5H2e1n4/ >/dev/null
 # jit_disasm.c: In function ‘disasm_print_insn’:
 #   BUILD_BUG_ON(ARRAY_SIZE(func_id_str) != __BPF_FUNC_MAX_ID);
 #   ^~~~~~~~~~~~
 # binary:  /tmp/tmp.u8tqAULt0j/bpftool
-# 
+#
 ok 41 selftests: bpf: test_bpftool_build.sh
 # selftests: bpf: test_bpftool.sh
 # test_feature_dev_json (test_bpftool.TestBpftool) ... ok
 # test_feature_kernel (test_bpftool.TestBpftool) ... ok
 # test_feature_macros (test_bpftool.TestBpftool) ... ok
-# 
+#
 # ----------------------------------------------------------------------
 # Ran 5 tests in 1.293s
-# 
+#
 # OK
 ok 42 selftests: bpf: test_bpftool.sh
 make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-bpf-lsm-2-2ef96a5bb12be62ef75b5828c0aab838ebb29cb8/tools/testing/selftests/bpf'

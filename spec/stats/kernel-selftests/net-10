@@ -1,7 +1,5 @@
 KERNEL SELFTESTS: linux_headers_dir is /usr/src/linux-headers-x86_64-rhel-8.3-kselftests-62fb9874f5da54fdb243003b386128037319b219
 2021-07-12 10:33:47 sed -i s/default_timeout=45/default_timeout=300/ /kselftests/kselftest/runner.sh
-LKP SKIP net.l2tp.sh
-LKP SKIP net.tls
 2021-07-12 10:33:49 /kselftests/run_kselftest.sh -c net
 TAP version 13
 1..49

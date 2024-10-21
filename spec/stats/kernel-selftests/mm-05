@@ -37,9 +37,5 @@ make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-822
 # bounces: 0, mode:, userfaults: 5213 4802
 # testing signal delivery: done.
 # [PASS]
-# -----------------------
-# running compaction_test
-# -----------------------
-# LKP SKIP[PASS]
 ok 1 selftests: mm: run_vmtests
 make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-8223a71d1963d25cbec67dba3cecce6d3b09bd7d/tools/testing/selftests/mm'

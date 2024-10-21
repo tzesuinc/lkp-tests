@@ -4,5 +4,4 @@ mm.run_vmtests.gup_test_-u_#_get_user_pages_fast_benchmark.pass: 1
 mm.run_vmtests.gup_test_-a_#_pin_user_pages_fast_benchmark.pass: 1
 mm.run_vmtests.gup_test_-ct_-F_0x1_0_19_0x1000_#_dump_page_test.pass: 1
 mm.run_vmtests.userfaultfd.pass: 1
-mm.run_vmtests.compaction_test.skip: 1
 mm.run_vmtests.pass: 1
