@@ -35,6 +35,7 @@ RSpec::Core::RakeTask.new do |t|
 
   spec = ENV['spec'] || '*'
   t.pattern = "spec/**{,/*/**}/#{spec}_spec.rb"
+  t.rspec_opts = "--example '#{ENV['example']}'" if ENV['example']
 end
 
 if ENV['GENERATE_REPORTS'] == 'true'
