@@ -630,16 +630,12 @@ class MemoryHotplugStater < Stater
   def stat(line)
     case line
     when /^selftests: memory-hotplug \[FAIL\]/
-      # selftests: memory-hotplug [FAIL]
-      stats.add @test_prefix.to_s, 'fail'
-      @test_script = nil
-    when %r{make: Leaving directory .*/(.*)'}
-      # do not add stats here if it has below 2 lines
       # ok 1 selftests: memory-hotplug: mem-on-off-test.sh
       # selftests: memory-hotplug [FAIL]
-      return unless @test_script
-
-      stats.add @test_prefix.to_s, 'pass', overwrite: true
+      @test_result = 'fail'
+      stats.add @test_prefix, @test_result
+    when %r{make: Leaving directory .*/(.*)'}
+      stats.add @test_prefix, 'pass', overwrite: true unless @test_result
     else
       super(line)
     end
@@ -652,15 +648,15 @@ class MountStater < Stater
     case line
     when /^WARN: No \/proc\/self\/uid_map exist, test skipped/
       # WARN: No /proc/self/uid_map exist, test skipped.
-      stats.add @test_prefix.to_s, 'skip'
-      @test_script = nil
+      @test_result = 'skip'
+      stats.add @test_prefix, @test_result
     when /(^(MS.+|Default.+) malfunctions$)|(^Mount flags unexpectedly changed after remount$)/
       # Mount flags unexpectedly changed after remount
-      stats.add @test_prefix.to_s, 'fail'
-      @test_script = nil
+      @test_result = 'fail'
+      stats.add @test_prefix, @test_result
     when %r{make: Leaving directory .*/(.*)'}
-      # test pass if it's not skip or fail
-      stats.add @test_prefix.to_s, 'pass' if @test_script
+      # test is pass if it's not skip or fail
+      stats.add @test_prefix, 'pass' unless @test_result
     else
       super(line)
     end
