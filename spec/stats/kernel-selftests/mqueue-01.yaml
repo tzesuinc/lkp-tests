@@ -7,4 +7,4 @@ mqueue.mq_open_tests.Queue_open_with_total_size_>_2GB_when_euid_=_0_failed.pass:
 mqueue.mq_open_tests.Queue_open_with_total_size_>_2GB_when_euid_=_99_failed.pass: 1
 mqueue.mq_open_tests.pass: 1
 mqueue.mq_perf_tests.pass: 1
-mqueue.nsec_per_msg: 457
+mqueue.nsec_per_msg: 6285

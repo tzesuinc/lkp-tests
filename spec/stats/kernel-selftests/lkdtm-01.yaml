@@ -1,6 +1,7 @@
 lkdtm.PANIC.sh.skip: 1
 lkdtm.BUG.sh.pass: 1
 lkdtm.WARNING.sh.pass: 1
+lkdtm.FORTIFIED_SUBOBJECT.sh.FORTIFIED_SUBOBJECT_missing_'call_trace_'.fail: 1
 lkdtm.FORTIFIED_SUBOBJECT.sh.fail: 1
 lkdtm.PPC_SLB_MULTIHIT.sh.skip: 1
 lkdtm.stack-entropy.sh.pass: 1

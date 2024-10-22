@@ -1,0 +1,11 @@
+mm.make.pass: 1
+mm.run_vmtests.sh.hugepage-mmap.Read_same_data.pass: 1
+mm.run_vmtests.sh.hugepage-mmap.pass: 1
+mm.run_vmtests.sh.bash_./va_high_addr_switch.sh.skip: 1
+mm.run_vmtests.sh.va_high_addr_switch.sh.skip: 1
+mm.run_vmtests.sh.madv_populate.test_prot_read.MADV_POPULATE_READ_with_PROT_READ.pass: 1
+mm.run_vmtests.sh.madv_populate.test_prot_read.MADV_POPULATE_WRITE_with_PROT_READ.pass: 1
+mm.run_vmtests.sh.madv_populate.test_prot_read.pass: 1
+mm.run_vmtests.sh.madv_populate.pass: 1
+mm.run_vmtests.sh.PKEY_tests_for_unsupported_CPU/OS.pass: 1
+mm.run_vmtests.sh.protection_keys_64.pass: 1

@@ -1,1 +1,8 @@
+exec.make.pass: 1
+exec.execveat.Check_success_of_execveat_5_'../execveat'_0.pass: 1
+exec.execveat.Check_success_of_execveat_7_'execveat'_0.pass: 1
+exec.execveat.Check_success_of_execveat_9_'execveat'_0.pass: 1
+exec.execveat.Check_failure_of_execveat_-100_'/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-18d808b739cf1793f46cf51c3420c0c0a68a0f7b/tools/testing/selftests/exec/execveat.symlink'_256_with_ELOOP.pass: 1
 exec.execveat.pass: 1
+exec.non-regular.file.S_IFLNK.exec_errno.pass: 1
+exec.non-regular.file.S_IFDIR.exec_errno.pass: 1

@@ -1,13 +1,22 @@
-make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-2d16cf4817bc6944a2adb5bf4db607c8258e87da/tools/testing/selftests/exec'
-selftests: exec: execveat
-Check success of execveat(8, 'execveat', 0)... [OK]
-Check success of execveat(-100, '/usr/src/perf_selfte...ftests/exec/execveat', 0)... [OK]
-Check success of execveat(21, '', 4096)... [OK]
-Check failure of execveat(99, 'execveat', 0) with EBADF... [OK]
-Check failure of execveat(10, 'execveat', 0) with ENOTDIR... [OK]
-Check success of execveat(7, 'usr/src/perf_selftes...yyyyyyyyyyyyyyyyyyyy', 0)... [OK]
-Invoke copy of 'script' via filename of length 4094:
-Check success of execveat(22, '', 4096)... [OK]
-Check success of execveat(7, 'usr/src/perf_selftes...yyyyyyyyyyyyyyyyyyyy', 0)... [OK]
-ok 1..1 selftests: exec: execveat [PASS]
-make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-2d16cf4817bc6944a2adb5bf4db607c8258e87da/tools/testing/selftests/exec'
+TAP version 13'
+1..11
+# timeout set to 300
+# selftests: exec: execveat
+# TAP version 13
+# 1..51
+# ok 1 Check success of execveat(5, '../execveat', 0)...
+# ok 2 Check success of execveat(7, 'execveat', 0)...
+# ok 3 Check success of execveat(9, 'execveat', 0)...
+# ok 21 Check failure of execveat(-100, '/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-18d808b739cf1793f46cf51c3420c0c0a68a0f7b/tools/testing/selftests/exec/execveat.symlink', 256) with ELOOP
+ok 1 selftests: exec: execveat
+# timeout set to 300
+# selftests: exec: non-regular
+# TAP version 13
+# 1..6
+# # Starting 6 tests from 6 test cases.
+# #  RUN           file.S_IFLNK.exec_errno ...
+# #            OK  file.S_IFLNK.exec_errno
+# ok 1 file.S_IFLNK.exec_errno
+# #  RUN           file.S_IFDIR.exec_errno ...
+# #            OK  file.S_IFDIR.exec_errno
+# ok 2 file.S_IFDIR.exec_errno

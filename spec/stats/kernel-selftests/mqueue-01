@@ -15,26 +15,26 @@ make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-d6d
 # Queue open with total size > 2GB when euid = 99 failed:                       PASS
 ok 1 selftests: mqueue: mq_open_tests
 # selftests: mqueue: mq_perf_tests
-        Test #2b: Time send/recv message, queue full, increasing prio
-:
-                (100000 iterations)
-                Filling queue...done.           0.23502215s
-                Testing...done.
-                Send msg:                       0.48443412s total time
-                                                484 nsec/msg
-                Recv msg:                       0.42612149s total time
-                                                426 nsec/msg
-                Draining queue...done.          0.17199103s
-
-        Test #2c: Time send/recv message, queue full, decreasing prio
-:
-                (100000 iterations)
-                Filling queue...done.           0.23586541s
-                Testing...done.
-                Send msg:                       0.49698382s total time
-                                                496 nsec/msg
-                Recv msg:                       0.42457983s total time
-                                                424 nsec/msg
-                Draining queue...done.          0.17599680s
+#       Started mqueue performance test thread on CPU 35
+#               Max priorities:                 32768
+#               Clock resolution:               1 nsec
+#
+#       Test #1: Time send/recv message, queue empty
+#               (10000000 iterations)
+#               Send msg:                       55.101691917s total time
+#                                               5510 nsec/msg
+#               Recv msg:                       87.965111631s total time
+#                                               8796 nsec/msg
+#
+#       Test #2a: Time send/recv message, queue full, constant prio
+# :
+#               (100000 iterations)
+#               Filling queue...done.           0.238412854s
+#               Testing...done.
+#               Send msg:                       0.550173229s total time
+#                                               5501 nsec/msg
+#               Recv msg:                       0.533627962s total time
+#                                               5336 nsec/msg
+#               Draining queue...done.          0.231280506s
 ok 2 selftests: mqueue: mq_perf_tests
 make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-d6d5df1db6e9d7f8f76d2911707f7d5877251b02/tools/testing/selftests/mqueue'

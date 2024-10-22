@@ -5,10 +5,10 @@
 # # New child: 2634, fd: 6
 # # waitpid WEXITSTATUS=0
 # # waitpid WEXITSTATUS=0
-# ok 1  test: Passed
+# ok 1 pidfd check for NSpid in fdinfo test: Passed
 # # New child: 2635, fd: 5
 # # waitpid WEXITSTATUS=0
-# ok 2  test: Passed
+# ok 2 pidfd check fdinfo for dead process test: Passed
 # # Totals: pass:2 fail:0 xfail:0 xpass:0 skip:0 error:0
 ok 2 selftests: pidfd: pidfd_fdinfo_test
 # selftests: pidfd: pidfd_wait

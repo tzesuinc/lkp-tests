@@ -1,0 +1,43 @@
+2024-10-22 23:37:59 make quicktest=1 run_tests -C mm
+make: Entering directory '/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-18d808b739cf1793f46cf51c3420c0c0a68a0f7b/tools/testing/selftests/mm'
+TAP version 13
+1..1
+# timeout set to 600
+# selftests: mm: run_vmtests.sh
+# TAP version 13
+# # -----------------------
+# # running ./hugepage-mmap
+# # -----------------------
+# # TAP version 13
+# # 1..1
+# # # Returned address is 0x7fd210e00000
+# # # First hex is 0
+# # # First hex is 3020100
+# # ok 1 Read same data
+# # # Totals: pass:1 fail:0 xfail:0 xpass:0 skip:0 error:0
+# # [PASS]
+# ok 1 hugepage-mmap
+# # -------------------------------------
+# # running bash ./va_high_addr_switch.sh
+# # -------------------------------------
+# # ./va_high_addr_switch.sh: CPU does not have the necessary la57 flag to support page table level 5
+# # [SKIP]
+# ok 32 va_high_addr_switch.sh # SKIP
+# # -----------------------
+# # running ./madv_populate
+# # -----------------------
+# # TAP version 13
+# # 1..21
+# # # [RUN] test_prot_read
+# # ok 1 MADV_POPULATE_READ with PROT_READ
+# # ok 2 MADV_POPULATE_WRITE with PROT_READ
+# # # Totals: pass:21 fail:0 xfail:0 xpass:0 skip:0 error:0
+# # [PASS]
+# ok 36 madv_populate
+# # ----------------------------
+# # running ./protection_keys_64
+# # ----------------------------
+# # has pkeys: 0
+# # running PKEY tests for unsupported CPU/OS
+# # [PASS]
+# ok 48 protection_keys_64

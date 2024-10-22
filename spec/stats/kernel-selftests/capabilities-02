@@ -16,17 +16,6 @@ TAP version 13
 # ok 3 PR_CAP_AMBIENT_RAISE failed on non-permitted cap
 # # [RUN]       Root +i => eip
 # ok 6 Passed
-# # [RUN]       UID 0 +ia => eipa
-# ok 7 Passed
-# # [RUN]       Root +ia, suidroot => eipa
-# ok 8 Passed
-# # [RUN]       Root +ia, suidnonroot => ip
-# ok 9 Passed
-# # [RUN]       Root +ia, sgidroot => eipa
-# ok 10 Passed
-# ok 11 Passed
-# # [RUN]       Root +ia, sgidnonroot => eip
-# ok 12 Passed
 # # Totals: pass:12 fail:0 xfail:0 xpass:0 skip:0 error:0
 # # validate_cap:: Capabilities after execve were correct
 # # validate_cap:: Capabilities after execve were correct
@@ -40,10 +29,6 @@ TAP version 13
 # # Check cap_ambient manipulation rules
 # ok 2 PR_CAP_AMBIENT_RAISE failed on non-inheritable cap
 # ok 3 PR_CAP_AMBIENT_RAISE failed on non-permitted cap
-# # [RUN]       Non-root +i => i
-# ok 6 Passed
-# # [RUN]       UID 1 +ia => eipa
-# ok 7 Passed
 # # [RUN]       Non-root +ia, sgidnonroot => i
 # ok 8 Passed
 # ok 9 Passed

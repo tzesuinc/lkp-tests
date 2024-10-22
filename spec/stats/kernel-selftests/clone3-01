@@ -1,23 +1,53 @@
-2022-06-09 17:49:51 make run_tests -C clone3
-make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-8.3-kselftests-4b0986a3613c92f4ec1bdc7f60ec66fea135991f/tools/testing/selftests/clone3'
-TAP version 13
+2024-10-21 08:18:54 sed -i s/default_timeout=45/default_timeout=300/ kselftest/runner.sh
+2024-10-21 08:18:54 make -j36 -C clone3
+make: Entering directory '/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-8e929cb546ee42c9a61d24fae60605e9e3192354/tools/testing/selftests/clone3'
+  CC       clone3_clear_sighand
+  CC       clone3_set_tid
+  CC       clone3_cap_checkpoint_restore
+make: Leaving directory '/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-8e929cb546ee42c9a61d24fae60605e9e3192354/tools/testing/selftests/clone3':54 make quicktest=1 run_tests -C clone3
+make: Entering directory '/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-8e929cb546ee42c9a61d24fae60605e9e3192354/tools/testing/selftests/clone3'
 1..4
+# timeout set to 300
 # selftests: clone3: clone3
 # TAP version 13
-# 1..17
+# 1..19
 # # clone3() syscall supported
-# # [1246] Trying clone3() with flags 0 (size 0)
-# # I am the parent (1246). My child's pid is 1247
-# # [1246] clone3() with flags says: 0 expected 0
-# ok 1 [1246] Result (0) matches expectation (0)
-# # [1246] Trying clone3() with flags 0 (size 0)
-# # Invalid argument - Failed to create new process
-# # [1246] clone3() with flags says: -22 expected -22
-# ok 6 [1246] Result (-22) matches expectation (-22)
-# # [1246] Trying clone3() with flags 0 (size 0)
-# # Invalid argument - Failed to create new process
-# # [1246] clone3() with flags says: -22 expected -22
-# ok 7 [1246] Result (-22) matches expectation (-22)
-# # Totals: pass:17 fail:0 xfail:0 xpass:0 skip:0 error:0
+# # Running test 'simple clone3()'
+# # [1914] Trying clone3() with flags 0 (size 0)
+# # I am the parent (1914). My child's pid is 1915
+# # I am the child, my PID is 1915
+# # [1914] clone3() with flags says: 0 expected 0
+# ok 1 simple clone3()
+# # Running test 'clone3() in a new PID_NS'
+# # [1914] Trying clone3() with flags 0x20000000 (size 0)
+# # I am the parent (1914). My child's pid is 1916
+# # I am the child, my PID is 1
+# # [1914] clone3() with flags says: 0 expected 0
+# ok 2 clone3() in a new PID_NS
 ok 1 selftests: clone3: clone3
+# timeout set to 300
+# selftests: clone3: clone3_clear_sighand
+# TAP version 13
+# 1..1
+# # clone3() syscall supported
+# ok 1 Cleared signal handlers for child process
+# # Totals: pass:1 fail:0 xfail:0 xpass:0 skip:0 error:0
+ok 2 selftests: clone3: clone3_clear_sighand
+# timeout set to 300
+# selftests: clone3: clone3_cap_checkpoint_restore
+# TAP version 13
+# 1..1
+# # Starting 1 tests from 1 test cases.
+# #  RUN           global.clone3_cap_checkpoint_restore ...
+# # clone3() syscall supported
+# # clone3_cap_checkpoint_restore.c:151:clone3_cap_checkpoint_restore:Child has PID 1985
+# cap_set_proc: Operation not permitted
+# # clone3_cap_checkpoint_restore.c:160:clone3_cap_checkpoint_restore:Expected set_capability() (-1) == 0 (0)
+# # clone3_cap_checkpoint_restore.c:161:clone3_cap_checkpoint_restore:Could not set CAP_CHECKPOINT_RESTORE
+# # clone3_cap_checkpoint_restore: Test terminated by assertion
+# #          FAIL  global.clone3_cap_checkpoint_restore
+# not ok 1 global.clone3_cap_checkpoint_restore
+# # FAILED: 0 / 1 tests passed.
+# # Totals: pass:0 fail:1 xfail:0 xpass:0 skip:0 error:0
+not ok 4 selftests: clone3: clone3_cap_checkpoint_restore # exit=1
 make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-8.3-kselftests-4b0986a3613c92f4ec1bdc7f60ec66fea135991f/tools/testing/selftests/clone3'

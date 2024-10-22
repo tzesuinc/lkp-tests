@@ -5,9 +5,4 @@
 # -------------------
 # TEST: Flush by unspecified destination IP - IPv4                    [ OK ]
 # TEST: Flush by specified destination IP - IPv6                      [ OK ]
-# TEST: Flush by unspecified destination IP - IPv6                    [ OK ]
-# TEST: Flush by specified destination VNI                            [ OK ]
-# TEST: Flush by unspecified destination VNI                          [ OK ]
-# TEST: Flush by destination VNI equal to source VNI                  [ OK ]
-# TEST: Flush by unspecified destination VNI                          [ OK ]
-# TEST: Flush by VLAN ID                                              [ OK ]
+

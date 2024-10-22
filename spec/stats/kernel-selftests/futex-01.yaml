@@ -1,7 +1,7 @@
 futex.make.pass: 1
-futex.run.sh.futex-requeue-pi.broadcast=0_locked=0_owner=0_timeout=0ns.pass: 1
-futex.run.sh.futex-requeue-pi.broadcast=1_locked=0_owner=0_timeout=0ns.pass: 1
-futex.run.sh.futex-requeue-pi-signal-restart.<none>.pass: 1
-futex.run.sh.futex-wait-timeout.timeout=100000ns.pass: 1
+futex.run.sh.broadcast=0_locked=0_owner=0_timeout=0ns.futex-requeue-pi.pass: 1
+futex.run.sh.broadcast=1_locked=0_owner=0_timeout=0ns.futex-requeue-pi.pass: 1
+futex.run.sh.<none>.futex-requeue-pi-signal-restart.pass: 1
+futex.run.sh.timeout=100000ns.futex-wait-timeout.pass: 1
 futex.run.sh.futex-wait-wouldblock.pass: 1
 futex.run.sh.pass: 1

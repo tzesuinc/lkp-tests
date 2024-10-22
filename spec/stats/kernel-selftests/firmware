@@ -1,5 +1,17 @@
-make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-da0c9ea146cbe92b832f1b0f694840ea8eb33cce/tools/testing/selftests/firmware'
+2024-10-22 20:14:52 make -j36 -C firmware
+make: Entering directory '/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-18d808b739cf1793f46cf51c3420c0c0a68a0f7b/tools/testing/selftests/firmware'
+  CC       fw_namespace
+make: Leaving directory '/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-18d808b739cf1793f46cf51c3420c0c0a68a0f7b/tools/testing/selftests/firmware'
+2024-10-22 20:14:52 make quicktest=1 run_tests -C firmware
+make: Entering directory '/usr/src/perf_selftests-x86_64-dcg_x86_64_defconfig-kselftests-18d808b739cf1793f46cf51c3420c0c0a68a0f7b/tools/testing/selftests/firmware'
+TAP version 13
+1..1
+# timeout set to 300
 # selftests: firmware: fw_run_tests.sh
+# Running namespace test:
+# Testing with firmware in parent namespace (assumed to be same file system as PID1)
+# Testing with firmware in child namespace
+# OK
 # -----------------------------------------------------
 # Running kernel configuration test 1 -- rare
 # Emulates:
@@ -8,59 +20,31 @@ make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-da0
 # CONFIG_FW_LOADER_USER_HELPER_FALLBACK=n
 # ./fw_filesystem.sh: filesystem loading works
 # ./fw_filesystem.sh: async filesystem loading works
-# 
+#
 # Testing with the file present...
 # Batched request_firmware() normal try #1: OK
 # Batched request_firmware_into_buf() normal try #1: OK
+# Batched request_firmware_direct() normal try #1: OK
 # Batched request_firmware_direct() normal try #5: OK
-# Batched request_firmware_nowait(uevent=true) normal try #1: OK
-# 
+# Test request_partial_firmware_into_buf() off=0 size=10: OK
+# Test request_partial_firmware_into_buf() off=0 size=5: OK
+#
 # Testing with the file missing...
-# Batched request_firmware() nofile try #5: OK
-# Batched request_firmware_into_buf() nofile try #1: OK
-# Batched request_firmware_direct() nofile try #5: OK
 # Batched request_firmware_nowait(uevent=true) nofile try #1: OK
 # Batched request_firmware_nowait(uevent=false) nofile try #2: OK
 # -----------------------------------------------------
 # Running kernel configuration test 2 -- distro
-# Emulates:
-# CONFIG_FW_LOADER=y
-# CONFIG_FW_LOADER_USER_HELPER=y
-# CONFIG_FW_LOADER_USER_HELPER_FALLBACK=n
-# ./fw_filesystem.sh: timeout works
-# ./fw_filesystem.sh: filesystem loading works
-# ./fw_filesystem.sh: async filesystem loading works
-# 
-# Testing with the file present...
-# Batched request_firmware() normal try #5: OK
-# Batched request_firmware_into_buf() normal try #5: OK
-# Batched request_firmware_direct() normal try #1: OK
-# Batched request_firmware_nowait(uevent=true) normal try #1: OK
-# Batched request_firmware_nowait(uevent=false) normal try #1: OK
-# 
-# Testing with the file missing...
-# Batched request_firmware() nofile try #5: OK
-# Batched request_firmware_into_buf() nofile try #1: OK
-# Batched request_firmware_direct() nofile try #5: OK
-# Batched request_firmware_nowait(uevent=true) nofile try #1: OK
-# -----------------------------------------------------
-# Running kernel configuration test 3 -- android
-# Emulates:
-# CONFIG_FW_LOADER=y
-# CONFIG_FW_LOADER_USER_HELPER=y
-# CONFIG_FW_LOADER_USER_HELPER_FALLBACK=y
-# ./fw_filesystem.sh: timeout works
-# ./fw_filesystem.sh: filesystem loading works
-# ./fw_filesystem.sh: async filesystem loading works
-# 
+#
 # Testing with the file present...
 # Batched request_firmware() normal try #1: OK
-# Batched request_firmware_into_buf() normal try #1: OK
-# Batched request_firmware_nowait(uevent=false) normal try #5: OK
-# 
-# Testing with the file missing...
-# Batched request_firmware_into_buf() nofile try #5: OK
-# Batched request_firmware_direct() nofile try #1: OK
-# ./fw_fallback.sh: cancelling custom fallback mechanism works
-ok 1 selftests: firmware: fw_run_tests.sh
+# Batched request_firmware() normal try #2: OK
+#
+# Testing with both plain and XZ files present...
+# Batched request_firmware() both try #1: OK
+# Batched request_firmware_nowait(uevent=false) componly try #5: OK
+# usermode helper disabled so ignoring test
+# ./fw_upload.sh: firmware upload cancellation works
+# ./fw_upload.sh: oversized firmware error handling works
+# ./fw_upload.sh: firmware upload for fw1 works
+not ok 1 selftests: firmware: fw_run_tests.sh # exit=1
 make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-da0c9ea146cbe92b832f1b0f694840ea8eb33cce/tools/testing/selftests/firmware'

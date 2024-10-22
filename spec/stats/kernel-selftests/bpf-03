@@ -36,10 +36,6 @@ ok 5 selftests: bpf: test_lpm_map
 not ok 7 selftests: bpf: test_align # exit=1
 # selftests: bpf: test_verifier_log
 # Test log_level 0...
-# Test log_size < 128...
-# Test log_buff = NULL...
-# Test oversized buffer...
-# Test exact buffer...
 # Test undersized buffers...
 # test_verifier_log: OK
 ok 8 selftests: bpf: test_verifier_log
@@ -77,22 +73,6 @@ ok 14 selftests: bpf: get_cgroup_id_user
 # selftests: bpf: test_socket_cookie
 # PASSED
 ok 15 selftests: bpf: test_socket_cookie
-# selftests: bpf: test_cgroup_storage
-# test_cgroup_storage:PASS
-ok 16 selftests: bpf: test_cgroup_storage
-# selftests: bpf: test_netcnt
-# test_netcnt:PASS
-ok 17 selftests: bpf: test_netcnt
-# selftests: bpf: test_tcpnotify_user
-# PASSED!
-ok 18 selftests: bpf: test_tcpnotify_user
-# selftests: bpf: test_sock_fields
-# srv_sa6.sin6_port:44775 cli_sa6.sin6_port:51983
-#
-# listen_sk: state:10 bound_dev_if:0 family:10 type:1 protocol:6 mark:0 priority:0 src_ip4:600007f(127.0.0.6) src_ip6:0:0:0:1000000(::1) src_port:44775 dst_ip4:0(0.0.0.0) dst_ip6:0:0:0:0(::) dst_port:0
-#
-# PASS
-ok 19 selftests: bpf: test_sock_fields
 # selftests: bpf: test_sysctl
 # libbpf: load bpf program failed: Permission denied
 # libbpf: -- BEGIN DUMP LOG ---
@@ -108,7 +88,6 @@ not ok 20 selftests: bpf: test_sysctl # exit=255
 # selftests: bpf: test_hashmap
 # test_hashmap_empty: OK
 ok 21 selftests: bpf: test_hashmap
-test_progs-no_alu32
 # selftests: bpf: test_progs-no_alu32
 # Switching to flavor 'no_alu32' subdirectory...
 # #1 attach_probe:OK
@@ -119,9 +98,6 @@ test_progs-no_alu32
 # #45/45 sockmap IPv4/TCP LOOPBACK test_syncookie:OK
 # #45 select_reuseport:OK
 # test_test_lsm:PASS:skel_load 0 nsec
-# test_test_lsm:PASS:attach 0 nsec
-# test_test_lsm:PASS:exec_cmd 0 nsec
-# test_test_lsm:FAIL:bprm_count bprm_count = 0
 # test_test_lsm:FAIL:stack_mprotect want err=EPERM, got 22
 # #70 test_lsm:FAIL
 # Summary: 77/472 PASSED, 4 SKIPPED, 5 FAILED
@@ -180,29 +156,12 @@ ok 29 selftests: bpf: test_offload.py
 # libbpf: load bpf program failed: Permission denied
 # libbpf: -- BEGIN DUMP LOG ---
 # Test case: sendmsg6: deny call .. [PASS]
-# Test case: recvmsg4: return code ok .. [PASS]
-# Test case: recvmsg6: return code !ok .. [PASS]
 # Test case: recvmsg4: rewrite IP & port (asm) .. [PASS]
 # Summary: 35 PASSED, 0 FAILED
 ok 30 selftests: bpf: test_sock_addr.sh
 # selftests: bpf: test_tunnel.sh
 # Testing GRE tunnel...
 # Skipped 109 bytes, use 'verb' option for the full verbose log.
-# [...]
-# tal_size: 6820
-# [1] PTR (anon) type_id=2
-# [4] INT unsigned int size=4 bits_offset=0 nr_bits=32 encoding=(none)
-# [65] DATASEC license size=0 vlen=1 size == 0
-#
-# PING ::11(::11) 56 data bytes
-# --- ::11 ping statistics ---
-# 5 packets transmitted, 3 received, 40% packet loss, time 4131ms
-# rtt min/avg/max/mdev = 0.052/0.073/0.084/0.016 ms
-# PING 10.1.1.100 (10.1.1.100) 56(84) bytes of data.
-# [64] VAR _license type_id=63 linkage=1
-# [65] DATASEC license size=0 vlen=1 size == 0
-#
-# PING 10.1.1.100 (10.1.1.100) 56(84) bytes of data.
 # --- 10.1.1.200 ping statistics ---
 # 3 packets transmitted, 3 received, 0% packet loss, time 2065ms
 # rtt min/avg/max/mdev = 0.096/0.120/0.152/0.026 ms
@@ -222,88 +181,4 @@ ok 32 selftests: bpf: test_lirc_mode2.sh
 # [23] DATASEC license size=0 vlen=1 size == 0
 # [PASS]
 ok 33 selftests: bpf: test_skb_cgroup_id.sh
-# selftests: bpf: test_flow_dissector.sh
-# Testing global flow dissector...
-# Error: failed prog attach to map
-# inner.source6: ::1
-# pkts: tx=10 rx=10
-# selftests: test_flow_dissector [PASS]
-ok 34 selftests: bpf: test_flow_dissector.sh
-# selftests: bpf: test_xdp_vlan_mode_generic.sh
-# --- 100.64.41.2 ping statistics ---
-# 2 packets transmitted, 2 received, 0% packet loss, time 202ms
-# rtt min/avg/max/mdev = 0.050/0.064/0.078/0.014 ms
-# selftests: xdp_vlan_mode_generic [PASS]
-ok 35 selftests: bpf: test_xdp_vlan_mode_generic.sh
-# selftests: bpf: test_xdp_vlan_mode_native.sh
-# Cannot get device udp-fragmentation-offload settings: Operation not supported
-# [21] VAR _license type_id=20 linkage=1
-# [22] DATASEC license size=0 vlen=1 size == 0
-# selftests: xdp_vlan_mode_native [PASS]
-ok 36 selftests: bpf: test_xdp_vlan_mode_native.sh
-# selftests: bpf: test_lwt_ip_encap.sh
-# starting egress IPv4 encap test
-# [11] INT long long unsigned int size=8 bits_offset=0 nr_bits=64 encoding=(none)
-# [12] UNION (anon) size=8 vlen=1
-# 	sk type_id=13 bits_offset=0
-# ping: sendmsg: No route to host
-# PASS
-# starting ingress IPv4 encap test vrf red
-# 	sk type_id=13 bits_offset=0
-# [13] PTR (anon) type_id=24
-# PASS
-# passed tests: 8
-# failed tests: 0
-ok 37 selftests: bpf: test_lwt_ip_encap.sh
-# selftests: bpf: test_tcp_check_syncookie.sh
-# net.ipv4.tcp_syncookies = 2
-# net.ipv4.tcp_window_scaling = 0
-# Wait for IP 127.0.0.1 to become available . OK
-# Wait for IP ::1 to become available . OK
-# ok
-# Testing XDP...
-# BTF debug data section '.BTF' rejected: Invalid argument (22)!
-#  - Length:       3290
-# [26] DATASEC license size=0 vlen=1 size == 0
-#
-# ok
-ok 38 selftests: bpf: test_tcp_check_syncookie.sh
-# selftests: bpf: test_tc_edt.sh
-#
-# 	gso_segs type_id=3 bits_offset=1312
-# 	(anon) type_id=12 bits_offset=1344
-# [22] DATASEC license size=0 vlen=1 size == 0
-#
-# elapsed: 20 sec; bps difference: -0.06%
-# PASS
-ok 39 selftests: bpf: test_tc_edt.sh
-# selftests: bpf: test_xdping.sh
-# Test client args '-I veth1 -S'; server args ''
-# Running server on veth0; press Ctrl+C to exit...
-# OK. All tests passed
-ok 40 selftests: bpf: test_xdping.sh
-# selftests: bpf: test_bpftool_build.sh
-# Trying to build bpftool
-# ... through kbuild
-#
-# skip:    make tools/bpf (no .config found)
-#
-# $PWD:    /usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-bpf-lsm-2-2ef96a5bb12be62ef75b5828c0aab838ebb29cb8
-# command: make -s -C tools/bpf/bpftool OUTPUT=/tmp/tmp.unc5H2e1n4/ >/dev/null
-# jit_disasm.c: In function ‘disasm_print_insn’:
-#   BUILD_BUG_ON(ARRAY_SIZE(func_id_str) != __BPF_FUNC_MAX_ID);
-#   ^~~~~~~~~~~~
-# binary:  /tmp/tmp.u8tqAULt0j/bpftool
-#
-ok 41 selftests: bpf: test_bpftool_build.sh
-# selftests: bpf: test_bpftool.sh
-# test_feature_dev_json (test_bpftool.TestBpftool) ... ok
-# test_feature_kernel (test_bpftool.TestBpftool) ... ok
-# test_feature_macros (test_bpftool.TestBpftool) ... ok
-#
-# ----------------------------------------------------------------------
-# Ran 5 tests in 1.293s
-#
-# OK
-ok 42 selftests: bpf: test_bpftool.sh
 make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-bpf-lsm-2-2ef96a5bb12be62ef75b5828c0aab838ebb29cb8/tools/testing/selftests/bpf'

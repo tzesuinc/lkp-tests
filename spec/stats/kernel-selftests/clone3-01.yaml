@@ -1,4 +1,8 @@
 clone3.make.pass: 1
-clone3.clone3.clone3_with_flags_0_size_0_.Result_0_matches_expectation_0.pass: 1
-clone3.clone3.clone3_with_flags_0_size_0_.Result_-22_matches_expectation_-22.pass: 1
+clone3.clone3.simple_clone3.pass: 1
+clone3.clone3.clone3_in_a_new_PID_NS.pass: 1
 clone3.clone3.pass: 1
+clone3.clone3_clear_sighand.Cleared_signal_handlers_for_child_process.pass: 1
+clone3.clone3_clear_sighand.pass: 1
+clone3.clone3_cap_checkpoint_restore.global.clone3_cap_checkpoint_restore.fail: 1
+clone3.clone3_cap_checkpoint_restore.fail: 1

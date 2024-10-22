@@ -1,75 +1,38 @@
 2021-05-04 05:24:11 /kselftests/run_kselftest.sh -c prctl
 TAP version 13
 1..12
+# timeout set to 300
 # selftests: prctl: disable-tsc-ctxt-sw-stress-test
-# [No further output means we're allright]
+# [No further output means we're all right]
+IPMI BMC is not supported on this machine, skip bmc-watchdog setup!
 ok 1 selftests: prctl: disable-tsc-ctxt-sw-stress-test
-# selftests: prctl: disable-tsc-ctxt-sw-stress-test
-# [No further output means we're allright]
-ok 2 selftests: prctl: disable-tsc-ctxt-sw-stress-test
-# selftests: prctl: disable-tsc-on-off-stress-test
-# [No further output means we're allright]
-ok 3 selftests: prctl: disable-tsc-on-off-stress-test
-# selftests: prctl: disable-tsc-on-off-stress-test
-# [No further output means we're allright]
-ok 4 selftests: prctl: disable-tsc-on-off-stress-test
+# timeout set to 300
+# [No further output means we're all right]
+ok 2 selftests: prctl: disable-tsc-on-off-stress-test
+# timeout set to 300
 # selftests: prctl: disable-tsc-test
-# rdtsc() == 1583379865128878
+# rdtsc() == 34276683311683
 # prctl(PR_GET_TSC, &tsc_val); tsc_val == PR_TSC_ENABLE
-# rdtsc() == 1583379865471631
+# rdtsc() == 34276683686143
 # prctl(PR_SET_TSC, PR_TSC_ENABLE)
-# rdtsc() == 1583379865482184
+# rdtsc() == 34276683700451
 # prctl(PR_SET_TSC, PR_TSC_SIGSEGV)
 # rdtsc() == [ SIG_SEGV ]
 # prctl(PR_GET_TSC, &tsc_val); tsc_val == PR_TSC_SIGSEGV
 # prctl(PR_SET_TSC, PR_TSC_ENABLE)
-# rdtsc() == 1583379865540225
-ok 5 selftests: prctl: disable-tsc-test
-# selftests: prctl: disable-tsc-test
-# rdtsc() == 1583380036106643
-# prctl(PR_GET_TSC, &tsc_val); tsc_val == PR_TSC_ENABLE
-# rdtsc() == 1583380036454019
-# prctl(PR_SET_TSC, PR_TSC_ENABLE)
-# rdtsc() == 1583380036466059
-# prctl(PR_SET_TSC, PR_TSC_SIGSEGV)
-# rdtsc() == [ SIG_SEGV ]
-# prctl(PR_GET_TSC, &tsc_val); tsc_val == PR_TSC_SIGSEGV
-# prctl(PR_SET_TSC, PR_TSC_ENABLE)
-# rdtsc() == 1583380036526427
-ok 6 selftests: prctl: disable-tsc-test
-# selftests: prctl: disable-tsc-ctxt-sw-stress-test
-# [No further output means we're allright]
-ok 7 selftests: prctl: disable-tsc-ctxt-sw-stress-test
-# selftests: prctl: disable-tsc-ctxt-sw-stress-test
-# [No further output means we're allright]
-ok 8 selftests: prctl: disable-tsc-ctxt-sw-stress-test
-# selftests: prctl: disable-tsc-on-off-stress-test
-# [No further output means we're allright]
-ok 9 selftests: prctl: disable-tsc-on-off-stress-test
-# selftests: prctl: disable-tsc-on-off-stress-test
-# [No further output means we're allright]
-ok 10 selftests: prctl: disable-tsc-on-off-stress-test
-# selftests: prctl: disable-tsc-test
-# rdtsc() == 1583512082556765
-# prctl(PR_GET_TSC, &tsc_val); tsc_val == PR_TSC_ENABLE
-# rdtsc() == 1583512082923990
-# prctl(PR_SET_TSC, PR_TSC_ENABLE)
-# rdtsc() == 1583512082934471
-# prctl(PR_SET_TSC, PR_TSC_SIGSEGV)
-# rdtsc() == [ SIG_SEGV ]
-# prctl(PR_GET_TSC, &tsc_val); tsc_val == PR_TSC_SIGSEGV
-# prctl(PR_SET_TSC, PR_TSC_ENABLE)
-# rdtsc() == 1583512082991790
-ok 11 selftests: prctl: disable-tsc-test
-# selftests: prctl: disable-tsc-test
-# rdtsc() == 1583512211217590
-# prctl(PR_GET_TSC, &tsc_val); tsc_val == PR_TSC_ENABLE
-# rdtsc() == 1583512211675366
-# prctl(PR_SET_TSC, PR_TSC_ENABLE)
-# rdtsc() == 1583512211686417
-# prctl(PR_SET_TSC, PR_TSC_SIGSEGV)
-# rdtsc() == [ SIG_SEGV ]
-# prctl(PR_GET_TSC, &tsc_val); tsc_val == PR_TSC_SIGSEGV
-# prctl(PR_SET_TSC, PR_TSC_ENABLE)
-# rdtsc() == 1583512211744685
-ok 12 selftests: prctl: disable-tsc-test
+# rdtsc() == 34276683798161
+ok 3 selftests: prctl: disable-tsc-test
+# timeout set to 300
+# selftests: prctl: set-anon-vma-name-test
+# TAP version 13
+# 1..1
+# # Starting 1 tests from 1 test cases.
+# #  RUN           vma.renaming ...
+# # set-anon-vma-name-test.c:93:renaming:Try to rename the VMA with correct parameters
+# # set-anon-vma-name-test.c:97:renaming:Try to pass invalid name (with non-printable character \1) to rename the VMA
+# # set-anon-vma-name-test.c:100:renaming:Try to rename non-anonymous VMA
+# #            OK  vma.renaming
+# ok 1 vma.renaming
+# # PASSED: 1 / 1 tests passed.
+# # Totals: pass:1 fail:0 xfail:0 xpass:0 skip:0 error:0
+ok 4 selftests: prctl: set-anon-vma-name-test

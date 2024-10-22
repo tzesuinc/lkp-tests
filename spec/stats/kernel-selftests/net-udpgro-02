@@ -19,17 +19,9 @@ TAP version 13
 # ok
 #  no GRO chk cmsg                         object file doesn't contain sec xdp_dummy
 # ok
-#  GRO                                     object file doesn't contain sec xdp_dummy
-# ok
 #  GRO chk cmsg                            object file doesn't contain sec xdp_dummy
 # ok
 #  GRO with custom segment size            object file doesn't contain sec xdp_dummy
-# ok
-#  GRO with custom segment size cmsg       object file doesn't contain sec xdp_dummy
-# ok
-#  bad GRO lookup                          object file doesn't contain sec xdp_dummy
-# ok
-#  multiple GRO socks                      object file doesn't contain sec xdp_dummy
 # ok
 # ipv6
 #  no GRO                                  object file doesn't contain sec xdp_dummy

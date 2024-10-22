@@ -59,15 +59,6 @@ ok 15 selftests: net: fib-onlink-tests.sh
 #     TEST: rule4 check: oif dummy0                             [ OK ]
 #
 #     TEST: rule4 del by pref: oif dummy0                       [ OK ]
-# ######################################################################
-# TEST SECTION: IPv6 fib rule
-# ######################################################################
-#     TEST: rule6 check: ipproto ipv6-icmp                      [ OK ]
-#
-#     TEST: rule6 del by pref: ipproto ipv6-icmp                [ OK ]
-#
-# Tests passed:  32
-# Tests failed:   0
 ok 20 selftests: net: fib_rule_tests.sh
 # selftests: net: fib_nexthops.sh
 #

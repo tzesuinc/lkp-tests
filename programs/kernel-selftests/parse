@@ -2,547 +2,282 @@
 
 LKP_SRC = ENV['LKP_SRC'] || File.dirname(File.dirname(File.dirname(File.realpath($PROGRAM_NAME))))
 
+require 'ostruct'
 require "#{LKP_SRC}/lib/statistics"
 require "#{LKP_SRC}/lib/string"
 require "#{LKP_SRC}/lib/array"
 require "#{LKP_SRC}/lib/tests/stats"
 require "#{LKP_SRC}/lib/assert"
 
+# # selftests: vDSO: vdso_test_correctness    <= level 0
+# # [RUN] Testing clock_gettime for clock...  <= level 1
+# # [OK]  Test Passed.
+
+# # selftests: mm: run_vmtests.sh             <= level 0
+# # -----------------------
+# # running ./madv_populate                   <= level 1
+# # -----------------------
+# # # TAP version 13
+# # 1..21
+# # # [RUN] test_prot_read                    <= level 1
+# # ok 1 MADV_POPULATE_READ with PROT_READ    <= level 1
+
+# # selftests: mm: run_vmtests.sh             <= level 0
+# # running ./memfd_secret                    <= level 1
+# # ----------------------
+# # page_size: 4096, mlock.soft: 8388608
+# # TAP version 13
+# # 1..4
+# # ok 2 # SKIP memfd_secret is not supported <= level 1
+
+# # selftests: mm: madv_populate              <= level 0
+# # TAP version 13
+# # 1..21
+# # # [RUN] test_prot_read                    <= level 1
+# # ok 1 MADV_POPULATE_READ with PROT_READ    <= level 1
+
+# # selftests: sgx: test_sgx                  <= level 0
+# # TAP version 13
+# # #  RUN           enclave.unclobbered      <= level 1
+# # ok 3 # SKIP System does not support SGX2  <= level 1
+
+# # selftests: mm: soft-dirty                 <= level 0
+# # TAP version 13
+# # 1..5
+# # ok 1 Test test_simple                     <= level 1
+
+# # selftests: cgroup: test_memcontrol        <= level 0
+# # not ok 7 test_memcg_max                   <= level 1
+# # ok 10 # SKIP test_memcg_swap_max          <= level 1
 class Stater
   # ok 1 selftests: clone3: clone3
   # ok 18 selftests: kvm: kvm_create_max_vcpus
   # not ok 2 selftests: pstore: pstore_post_reboot_tests # SKIP
-  MAIN_TEST_RESULT_PATTERN = /^(?<result>ok|not ok).*selftests: (?<test_dir>\S+): (?<main_test>\S+)(?<skip> # SKIP)?(?: \[)?/.freeze
-  # # ok 6 [1246] Result (-22) matches expectation (-22)
-  SUBTEST_RESULT_PATTERN = /^# (?<result>ok|not ok) \d+ (?<skip># SKIP )?(?<extra>.+)/.freeze
+  LEVEL_0_TEST_RESULT_PATTERN = /^(?<result>ok|not ok).*selftests: (?<test_parts>.+)/.freeze
 
-  attr_reader :stats
+  # # ok 6 [1246] Result (-22) matches expectation (-22)
+  # # ok 3 # SKIP System does not support SGX2
+  # # ok 117 # SKIP write_invalid.NVidia.11
+  # # ok 11 enclave.augment_via_eaccept # SKIP SGX2 not supported
+  # # ok 2 MADV_POPULATE_WRITE with PROT_READ
+  # # ok 1 [RUN]	test_alloc_timeline
+  LEVEL_N_TEST_RESULT_PATTERN = /^(?:# )+(?<result>ok|not ok) \d+ (?<test_parts>.+)/.freeze
+
+  attr_reader :stats, :test_level
 
   def initialize(test_dir, test_script, stats)
     @test_dir = test_dir
     @test_script = test_script
 
-    @test_prefix = test_name(@test_dir, @test_script)
+    @test_level = 0
+
+    @tests = Hash.new { |h, k| h[k] = OpenStruct.new(parts: []) }
+    curr_test.parts = [[@test_dir, @test_script].compact.join('.')]
 
     @stats = stats
   end
 
   def stat(line)
     case line
-    when MAIN_TEST_RESULT_PATTERN
-      parse_main_test_result(line)
-    when SUBTEST_RESULT_PATTERN
-      parse_subtest_result(line)
     when /TAP version 13/
-      # The test will start running only after the 'make' is successful. During this process, this 'TAP' line will be outputted.
+      @test_level = count_leading_hashes(line)
+
+      # The test will start running only after the 'make' is successful.
+      # During this process, this 'TAP' line will be outputted.
       parse_make_result('pass')
+    when /^# selftests: (.+): (.+)/
+      assert test_level.zero?, "logic error: test_level #{test_level} not equal 0"
+
+      @test_level = 1
+    when LEVEL_0_TEST_RESULT_PATTERN
+      @test_level = 0
+
+      parse_tap_0_test_result(Regexp.last_match)
+    when LEVEL_N_TEST_RESULT_PATTERN
+      @test_level = count_leading_hashes(line)
+
+      parse_test_result(Regexp.last_match)
+    when /^(?:# )+(?<test_parts>.*)\.\.\.\s*\[?(?<result>ok|OK|not ok|pass|PASS|fail|skip|SKIPPING)\]?$/, # TEST: multiple livepatches ... ok
+         /^(?:# )+(?<test_parts>.*)\s*\[ ?(?<result>OK|PASS|FAIL|SKIP|UNSUPPORTED) ?\]$/, # Estimating clock drift: 0.0(est) 0.0(act)     [OK]
+         /^(?:# )+(?<test_parts>.*):\s*(?<result>OK|PASS|FAIL|SKIP)$/, # Queue open with mq_maxmsg > limit when euid = 0 succeeded:            PASS
+         /^(?<result>not ok|ok|fail|skip)\s\d+\s(?<test_parts>.*)/,
+         /^(?:# )+(?<result>OK|PASS|FAIL|SKIP): (?<test_parts>.+)/, # # PASS: /dev/mem 0x0-0xa0000 is readable
+         /^#  (?<test_parts>.*)\s+(?<result>ok|fail)$/
+      parse_test_result(Regexp.last_match)
+    when /^# Running test: (\w+_\d+) - run #(\d+)/, # # Running test: kmod_test_0005 - run #1
+         /^(?:# )+\s*\[?RUN\]?\s(.+)/, # # # [RUN] test_prot_read
+         /^# Running (.+)/, # # Running kernel configuration test 1 -- rare
+         /^# # Testing (.+):/ # # # Testing allocation and importing:
+      curr_test.parts = [test_name($1, $2)]
     when /: recipe for target.+failed$/,
          /^make: \*\*\* (.*) (Error \d+|Stop\.)$/
       # Makefile:47: recipe for target 'sysret_ss_attrs_64' failed
       # make: *** No rule to make target .*, needed by 'all'.  Stop.
       parse_make_result('fail')
-    when /^*selftests:\s*(\S*) (\[|\[ )(PASS|FAIL|SKIP)/
-      # selftests: mpx-mini-test_64 [PASS]
-
-      # ignore below '[PASS]' to avoid duplication
-      # selftests: bpf: test_xdp_vlan_mode_generic.sh
-      # selftests: xdp_vlan_mode_generic [PASS]
-      # ok 35 selftests: bpf: test_xdp_vlan_mode_generic.sh
-
-      # ignore detail stats of futex to avoid duplication
-      # c0e64368308a ("stats/kernel-selftests: rm detail stats for futex")
-      parse_selftests_result($1, $3)
     when %r{make: Leaving directory .*/(.*)'}
-      @test_dir = @test_script = @test_prefix = @test_case = @subtest = nil
+      @test_dir = @test_script = nil
+
+      @test_level = 0
+      @tests.clear
     end
   end
 
+  def curr_test
+    @tests[test_level]
+  end
+
+  # rli9 FIXME is uniq a must
   def test_name(*parts)
-    parts.compact.join('.')
+    parts.compact.map(&:strip).reject(&:empty?).uniq.join('.')
+  end
+
+  # # ok 3 # SKIP System does not support SGX2
+  def count_leading_hashes(line)
+    line.scan(/^(?:# )+/).first.to_s.scan(/# /).size
   end
 
   def parse_make_result(result)
-    stats.add "#{@test_dir}.make", result, overwrite: true
+    stats.add test_name(@test_dir, 'make'), result, overwrite: true
   end
 
-  def parse_main_test_result(line)
-    m = line.match MAIN_TEST_RESULT_PATTERN
-    return unless m
+  def parse_tap_0_test_result(m)
+    test_name = test_name m[:test_parts].sub(': ', '.').sub(/# .+$/, '')
 
-    test_result = m[:skip] ? 'skip' : m[:result]
+    add_test_result(m, test_name)
+  end
 
-    test_name = test_name m[:test_dir], m[:main_test]
-    # assert @test_prefix == test_name, "'#{@test_prefix}' not equals to '#{test_name}'"
+  def parse_test_result(m)
+    test_parts = Array(curr_test.parts) + Array(m[:test_parts].split(/# SKIP/))
+    test_parts = fixup_test_parts(test_parts)
 
+    test_name = test_name(test_prefix, *test_parts)
+
+    add_test_result(m, test_name)
+  end
+
+  def fixup_test_parts(test_parts)
+    # Testing clock_gettime for clock CLOCK_REALTIME (0)...
+    test_parts.compact.map { |part| part.sub(/(^| )TEST: /, '').sub(/\.+$/, '') }
+  end
+
+  # leading test name of current test level
+  def test_prefix
+    parts = @tests.values.first(test_level).map(&:parts).flatten
+    test_name(*parts)
+  end
+
+  private
+
+  def add_test_result(m, test_name)
+    test_result = m[:test_parts] =~ /# SKIP/ ? 'skip' : m[:result]
+
+    # # # [RUN] test_softdirty
+    # # ok 17 range is not softdirty
+    # # ok 19 range is not softdirty
+    #
     # ok 1 selftests: lkdtm: PANIC.sh # SKIP
     # ok 1 selftests: lkdtm: PANIC.sh # SKIP
     stats.add test_name, test_result, overwrite: true
   end
+end
 
-  def parse_selftests_result(test_case, result)
-    return if %w(bpf futex).include? @test_dir
-
-    stats.add "#{@test_dir}.#{test_case}", result
-  end
-
-  def parse_subtest_result(line)
-    m = line.match SUBTEST_RESULT_PATTERN
-    return unless m
-
-    # if it has '# # [RUN]' level
-    #
-    ## @test_case, @subtest, extra
-    #
-    # selftests: mm: run_vmtests.sh
-    # -----------------------
-    # running ./madv_populate
-    # -----------------------
-    # TAP version 13
-    # 1..21
-    # # [RUN] test_prot_read
-    # ok 1 MADV_POPULATE_READ with PROT_READ
-
-    ## @test_case, extra
-    #
-    # running ./memfd_secret
-    # ----------------------
-    # page_size: 4096, mlock.soft: 8388608, mlock.hard: 8388608
-    # TAP version 13
-    # 1..4
-    # ok 2 # SKIP memfd_secret is not supported
-
-    ## @subtest extra
-    #
-    # selftests: mm: madv_populate
-    # TAP version 13
-    # 1..21
-    # # [RUN] test_prot_read
-    # ok 1 MADV_POPULATE_READ with PROT_READ
-
-    ## extra
-    #
-    # selftests: mm: soft-dirty
-    # TAP version 13
-    # 1..5
-    # ok 1 Test test_simple
-    #
-    # selftests: seccomp: seccomp_bpf
-    # ok 1 global.kcmp
-    #
-    # selftests: cgroup: test_memcontrol
-    # not ok 7 test_memcg_max
-    # ok 10 # SKIP test_memcg_swap_max
-    test_result = m[:skip] ? 'skip' : m[:result]
-    test_name = test_name @test_prefix, @test_case, @subtest, m[:extra], @arguments
-
-    # ignore below duplication
-    # # [RUN] test_softdirty
-    # ok 17 range is not softdirty
-    # ok 19 range is not softdirty
-    #
-    # selftests: cgroup: test_kmem
-    # not ok 1 test_kmem_basic
-    # not ok 1 test_kmem_basic
-    stats.add test_name, test_result, overwrite: true
+class SigaltstackStater < Stater
+  def stat(line)
+    case line
+    when /^# # \[RUN\]\s(.*)/,
+         /^# # \[(OK|ok|PASS)\]/
+      # ignore
+    else
+      super
+    end
   end
 end
 
 class NetStater < Stater
   def stat(line)
     case line
+    when /^# \[\s*(?<result>OK|FAIL|SKIP)\s*\]\s+(?<test_parts>.*)/, # # [OK]   !(flowlabel_get(fd, 1, 255, 0))
+         /^# (?<test_parts>.*)(?<result>OK|ok|PASS)$/
+      parse_test_result(Regexp.last_match)
     when /^# TEST SECTION: (.*)/,
+        /^# ((Control|Data) path: .+)/, # # Control path: Large scale MDB dump - IPv6 overlay / IPv6 underlay
+         /^# (ipv\d.*)$/i, # # ipv4
          /^# (.*qdisc on VRF device)/,
-         /RUN\s+([^\s]+)/,
-         /^# (ipv4|ipv6)$/,
-         /^# (running|run) ([^\s]+) test/,
-         /^# (ipv\d [^:]+)$/,
-         /(OUTPUT tests|INPUT tests)/,
-         /^# (dgram.*|raw.*)$/
-      # selftests: net: fib-onlink-tests.sh
-      # TEST SECTION: IPv4 onlink
-      # selftests: net: vrf-xfrm-tests.sh
-      # No qdisc on VRF device
-      # netem qdisc on VRF device
-      # #  RUN           global.tls_v6ops ...
-      # selftests: net: udpgro.sh
-      # ipv4
-      #  no GRO                                  ok
-
-      # selftests: net: run_afpackettests
-      # running psock_fanout test
-      # [PASS]
-
-      # selftests: net: msg_zerocopy.sh
-      # ipv4 tcp -t 1
-      # ok
-
-      # selftests: net: psock_snd.sh
-      # dgram
-      # OK
-      @test_case = $2 || $1
-    when /^# TEST SUBSECTION: (.*)/,
-         /#     (.*tart point)/,
-         /#     (.*device deleted)/,
-         /#     (Route deleted on down)/,
+         /^# (dgram.*|raw.*)$/,
          /#     (.*device.* down.*)/,
          /#     (.*arrier)/,
-         /#  (\w.*)object file doesn't contain sec xdp_dummy/
-      # selftests: net: fib-onlink-tests.sh
-      # TEST SUBSECTION: Valid onlink commands
-      #     Start point
-      #     Verify start point
-      # selftests: net: fib_tests.sh
-      # selftests: net: udpgro.sh
-      # ipv4
-      #  no GRO                                  object file doesn't contain sec xdp_dummy
-      @subtest = $1
-    when /^# TEST: (.*) \[ ?(PASS|OK|FAIL|SKIP) ?\]/
-      parse_subtest3_result $1, $2
-    when /^# (Single|Multipath|Single|Admin|Local|Single|FIB|IPv4|IPv6|Basic|Legacy|Routing) (.*)/
-      # selftests: net: icmp_redirect.sh
-      # Routing with nexthop objects and VRF
-      @test_case = "#{$1} #{$2}" if %w(icmp_redirect.sh fib_tests.sh fib_nexthops.sh vrf_route_leaking.sh).include? @test_script
-
-      # empty @subtest when get new @test_case
-      @subtest = nil if @test_script == 'fib_tests.sh'
-    when /^#\s+(PASS|SKIP|FAIL): (.*)/
-      stats_key = if @test_case
-                    # selftests: net: vrf_route_leaking.sh
-                    #
-                    # ###########################################################################
-                    # IPv4 (sym route): VRF ICMP error route lookup traceroute
-                    # ###########################################################################
-                    #
-                    # SKIP: Could not run IPV4 test without traceroute
-                    "#{@test_case}.#{$2}"
-                  elsif $2 == 'fdb get tests: iproute2 too old'
-                    # selftests: net: netdevice.sh
-                    # SKIP: eth0: interface already up
-
-                    # below rtnetlink.sh's subtest will repeate twice thus cause duplication
-                    # SKIP: fdb get tests: iproute2 too old
-                    # and it's passed stat will be
-                    # PASS: bridge fdb get
-                    'bridge_fdb_get'
-                  elsif $2.include?('set ifalias') && $2.include?('for test-dummy0')
-                    # PASS: set ifalias 82e318f8-b9c2-490c-b15d-28a5a51f8f67 for test-dummy0
-                    # PASS: set ifalias 6099b132-422e-4720-a085-0dc64832052a for test-dummy0
-                    'set ifalias for test-dummy0'
-                  else
-                    $2
-                  end
-
-      stats.add "#{@test_prefix}.#{stats_key}", $1, overwrite: true
-    when /^# \[\s*(OK|FAIL|SKIP)\s*\]\s+(.*)/
-      # selftests: net: tls
-      # [       OK ] tls_basic.base_base
-      # [       OK ] tls.sendfile
-
-      # ignore below duplication
-      # selftests: net: ipv6_flowlabel.sh
-      # TEST management
-      # [OK]   flowlabel_get(fd, 1, 255, 1)
-      # [OK]   flowlabel_get(fd, 1, 255, 0)
-      # [OK]   flowlabel_get(fd, 1, 255, 1)
-      stats.add "#{@test_prefix}.#{$2}", $1, overwrite: true
-    when /^#     TEST: (.*) \[ ?(OK|FAIL|SKIP) ?\]$/
-      if @subtest
-        # selftests: net: fib-onlink-tests.sh
-        # ######################################################################
-        # TEST SECTION: IPv4 onlink
-        # ######################################################################
-        #
-        # #########################################
-        # TEST SUBSECTION: Valid onlink commands
-        #
-        # #########################################
-        # TEST SUBSECTION: default VRF - main table
-        #     TEST: unicast connected                                   [ OK ]
-        stats.add "#{@test_prefix}.#{@test_case}.#{@subtest}.#{$1}", $2
-      elsif @test_case != 'IPv4 route with IPv6 gateway tests'
-        # selftests: net: fib_rule_tests.sh
-        #
-        # ######################################################################
-        # TEST SECTION: IPv4 fib rule
-        # ######################################################################
-        #
-        #     TEST: rule4 check: oif dummy0                             [ OK ]
-
-        # ignore some detail stats of fib_tests.sh to avoid duplication
-        # selftests: net: fib_tests.sh
-        #
-        # IPv4 route with IPv6 gateway tests
-        #    TEST:     Multipath route delete exact match                        [ OK ]
-        #    TEST: Multipath route add - v4 nexthop then v6                      [ OK ]
-        #    TEST:     Multipath route delete - nexthops in wrong order          [ OK ]
-        #    TEST:     Multipath route delete exact match                        [ OK ]
-        stats.add "#{@test_prefix}.#{@test_case}.#{$1}", $2, overwrite: true
-      end
-    when /^# (UDP|TCP|DCCP) (.*) \.\.\. (pass|fail|skip)/
-      # selftests: net: reuseport_addr_any.sh
-      # UDP IPv4 ... pass
-      stats.add "#{@test_prefix}.#{$1} #{$2}", $3
-    when /^# ok \d+ (.+) # SKIP$/
-      # selftests: net: bpf_offload.py
-      # # Failed importing `ynl` library from kernel sources
-      # # No module named 'net'
-      # ok 1 bpf_offload # SKIP
-      # ok 93 selftests: net: bpf_offload.py # SKIP
-      stats.add "#{@test_prefix}.#{$1}", 'skip'
-    when /^# (ok|fail|skip|not ok) \d+ ([^#]+)/
-      # selftests: net: reuseaddr_ports_exhausted.sh
-      # ok 1 global.reuseaddr_ports_exhausted_unreusable
-      # ok 17 ip_local_port_range.ip4_stcp.late_bind # XPASS unknown
-      assert $2.strip == @test_case, "'#{$2}' not equals to '#{@test_case}'"
-
-      stats.add "#{@test_prefix}.#{@test_case}", $1
-      @test_case = nil
-    when /^# ok \d+ # SKIP .+/
-      # ok 22 # SKIP no TLS support
-      stats.add "#{@test_prefix}.#{@test_case}", 'skip'
-      @test_case = nil
-    when /^# \[(PASS|FAIL|SKIP)\]$/,
-         /^# (OK|ok|PASS)$/
-      stats.add test_name(@test_prefix, @test_case, @subtest), $1 if @test_case
-    when /^#\s(.*)\[\s*(OK|FAIL|SKIP)\s*\]/
-      # selftests: net: test_vxlan_under_vrf.sh
-      # Checking HV connectivity                                           [ OK ]
-      stats.add "#{@test_prefix}.#{$1}", $2
-    when /^#  (.*)(\s+ok|fail)$/
-      stats.add "#{@test_prefix}.#{@test_case}.#{$1}", $2
-    when /^# (\w.*)(ok $|fail )/
-      # selftests: net: veth.sh
-      # default - gro flag                                           ok
-      #         - peer gro flag                                      ok
-      # default channels                                             fail rx:1:1 tx:1:1 combined:n/a:0
-      #
-      # ignore below duplication
-      # 6404 # setting invalid channels nr                                  ok
-      # 6408 # setting invalid channels nr                                  ok
-      stats.add "#{@test_prefix}.#{$1.split('-')[0]}", $2
-    else
-      super
-    end
-  end
-
-  def parse_subtest3_result(subtest3, result)
-    # @test_case = IPv4 ping
-    # @subtest1 = No VRF
-    # @subtest2 = SYSCTL: ne.ipv4.raw_l3mdev_accept=0
-    # subtest3 = TEST: ping out - ns-B IP
-    # @subcase_stat = OK
-    if @test_case
-      # selftests: net: vrf_route_leaking.sh
-      #
-      # ###########################################################################
-      # IPv4 (sym route): VRF ICMP ttl error route lookup ping
-      # ###########################################################################
-      #
-      # TEST: Basic IPv4 connectivity                                      [ OK ]
-
-      # ignore detail stats of fib_nexthops.sh to avoid duplication
-      # selftests: net: fib_nexthops.sh
-      # IPv4 groups functional
-      # ----------------------
-      # TEST: IPv6 nexthop with IPv4 route                                  [ OK ]
-      # TEST: IPv6 nexthop with IPv4 route                                  [ OK ]
-      # IPv4 functional runtime
-      # TEST: IPv6 nexthop with IPv4 route                                  [ OK ]
-      # TEST: IPv4 route with mixed v4-v6 multipath route                   [ OK ]
-      # TEST: IPv6 nexthop with IPv4 route                                  [ OK ]
-
-      # Here we use the mode of '11' as the mode of '12' to avoid duplication
-      # TEST: Trace type with bit 11 only (inline mode)                     [ OK ]
-      # TEST: Trace type with bit 12 only                                   [ OK ]
-      # ...
-      # TEST: Trace type with bit 11 only (encap mode)                      [ OK ]
-      # TEST: Trace type with bit 12 only                                   [ OK ]
-      stats_key = "#{@test_prefix}.#{@test_case}.#{subtest3}"
-      if subtest3 =~ /(inline mode|encap mode)/
-        @old_mode = $1
-      else
-        stats_key += " (#{@old_mode})"
-      end
-
-      stats.add stats_key, result unless %w(fib_nexthops.sh).include? @test_script
-    else
-      # selftests: net: pmtu.sh
-      # TEST: ipv4: PMTU exceptions                                        [ OK ]
-
-      # ignore below duplication
-      # selftests: net: fib_nexthop_multiprefix.sh
-      # TEST: IPv4: host 0 to host 1, mtu 1300                              [ OK ]
-      # TEST: IPv6: host 0 to host 1, mtu 1300                              [FAIL]
-      #
-      # TEST: IPv4: host 0 to host 2, mtu 1350                              [ OK ]
-      # TEST: IPv6: host 0 to host 2, mtu 1350                              [FAIL]
-      #
-      # TEST: IPv4: host 0 to host 3, mtu 1400                              [ OK ]
-      # TEST: IPv6: host 0 to host 3, mtu 1400                              [FAIL]
-      #
-      # TEST: IPv4: host 0 to host 1, mtu 1300                              [ OK ]
-      # TEST: IPv6: host 0 to host 1, mtu 1300                              [FAIL]
-      stats.add "#{@test_prefix}.#{subtest3}", result, overwrite: true
-    end
-  end
-end
-
-class NetFcnalTestStater < NetStater
-  def stat(line)
-    case line
-    # begain for net.fcnal-test.sh
-    when /(IPv4 ping|IPv4\/TCP|IPv4\/UDP|IPv4 Netfilter)/,
-         /(IPv6 ping|IPv6\/TCP|IPv6\/UDP|IPv6 Netfilter)/,
-         /(IPv6 address binds|IPv4 address binds)/,
+         /(OUTPUT tests|INPUT tests|GLOBAL tests)/,
+         /^# (?:running|run) ([^\s]+) test/,
+         /^# ((Single|Multipath|Single|Admin|Local|Single|FIB|IPv4|IPv6|Basic|Legacy|Routing) (.*))/,
          /(Use cases)/,
          /(Run time tests - ipv4)/
-      # IPv4 ping
-      # No VRF
-      #
-      # SYSCTL: net.ipv4.raw_l3mdev_accept=0
-      #
-      # TEST: ping out - ns-B IP                                        [ OK ]
-
-      # Run time tests - ipv4
-      #
-      # TEST: Device delete with active traffic - ping in - ns-A IP     [ OK ]
-      @test_case = $1
-      @subtest1 = @subtest2 = nil if @test_case =~ /Run time tests - ipv(4|6)/
-    when /^# (No VRF|With VRF)/,
-         /(Device enslaved to bridge|Ping LLA with multiple interfaces)/,
-         /(TCP reset|ICMP unreachable)/
-      # Device enslaved to bridge
-      #
-      # TEST: Bridge into VRF - IPv4 ping out                           [ OK ]
-      @subtest1 = $1
-      @subtest2 = nil if @subtest1 =~ /Device enslaved to bridge|Ping LLA with multiple interfaces|TCP reset|ICMP unreachable/
-
-      # start a new @subtest1, thus reset @sysctl
-      @sysctl = false
+      curr_test.parts = [$1]
+    when /^# TEST SUBSECTION: (.*)/
+      curr_test.parts << $1
+    when /^# (No VRF|With VRF|TCP reset|ICMP unreachable|Device enslaved to bridge|Ping LLA with multiple interfaces)/,
+         /#  (\w.*)object file doesn't contain sec xdp_dummy/ # #  no GRO                                  object file doesn't contain sec xdp_dummy
+      curr_test.parts[1] = $1
     when /^# SYSCTL: (.*)/
-      # there may be indefinite num of 'SYSCTL' like below,
-      # here we use @sysctl flag to combine all 'SYSCTL'.
-      # SYSCTL: net.ipv4.raw_l3mdev_accept=0
-      #
-      # TEST: ping out - ns-B IPv6                                    [ OK ]
-      # ...
-      # SYSCTL: net.ipv4.ping_group_range=0 2147483647
-      #
-      # SYSCTL: net.ipv4.raw_l3mdev_accept=0
-      #
-      # TEST: ping out - ns-B IPv6                                    [ OK ]
-      @subtest2 = if @sysctl
-                    # net.ipv4.ping_group_range=0_2147483647.net.ipv4.raw_l3mdev_accept=0
-                    "#{@subtest2}.#{$1}"
-                  else
-                    # net.ipv4.raw_l3mdev_accept=0
-                    $1
-                  end
-      # here we met one 'SYSCTL', thus set below flag to true
-      @sysctl = true
-    when /^# TEST: (.*) \[ ?(PASS|OK|FAIL|SKIP) ?\]/
-      # end for net.fcnal-test.sh
-      # this 'TEST' line means current 'SYSCTL' is done,
-      # and next time we capture 'SYSCTL' will be a new one.
-      @sysctl = false
-
-      # IPv4 ping
-      # No VRF
-      #
-      # SYSCTL: net.ipv4.raw_l3mdev_accept=0
-      #
-      # TEST: ping out - ns-B IP                                        [ OK ]
-
-      # @test_case = IPv4 ping
-      # @subtest1 = No VRF
-      # @subtest2 = SYSCTL: ne.ipv4.raw_l3mdev_accept=0
-      # subtest3 = TEST: ping out - ns-B IP
-      # @subcase_stat = OK
-      subtest3 = $1
-
-      # IPv4 ping
-      # No VRF
-      # SYSCTL: net.ipv4.raw_l3mdev_accept=0
-      # TEST: ping out - ns-B IP                                      [ OK ]
-      #
-      # Device enslaved to bridge
-      # TEST: Bridge into VRF - IPv4 ping out                         [ OK ]
-      stats.add test_name(@test_prefix, @test_case, @subtest1, @subtest2, subtest3), $2
+      curr_test.parts[2] = $1
     else
       super
     end
   end
-end
 
-class NetTestVxlanMdbStater < NetStater
-  def stat(line)
-    # selftests: net: test_vxlan_mdb.sh
-    case line
-    when /^# TEST: (Flush by unspecified UDP destination port)\s+\[\s*(OK|FAIL|SKIP)\s*\]/,
-         /^# TEST: (Flush by unspecified destination VNI)\s+\[\s*(OK|FAIL|SKIP)\s*\]/
-      # Control path: Flush
-      # -------------------
-      # TEST: Flush by unspecified destination IP - IPv6                    [ OK ]
-      # TEST: Flush by specified UDP destination port                       [ OK ]
-      # TEST: Flush by unspecified UDP destination port                     [ OK ]   <--
-      # TEST: Flush by device's UDP destination port                        [ OK ]
-      # TEST: Flush by unspecified UDP destination port                     [ OK ]   <--
-      # TEST: Flush by specified destination VNI                            [ OK ]
-      # TEST: Flush by specified destination VNI                            [ OK ]
-      stats.add "#{@test_prefix}.#{@test_case}.#{$1}", $2, overwrite: true
-    when /^# TEST: (.+?)\s+\[\s*(OK|FAIL|SKIP)\s*\]/
-      # TEST: IP multicast - first VTEP                                     [ OK ]
-      stats.add "#{@test_prefix}.#{@test_case}.#{$1}", $2
-    when /^# (.+: .+)$/
-      # Data path: (*, G) INCLUDE - IR - IPv4 overlay / IPv4 underlay
-      @test_case = $1
-    when /^(ok|not ok) .* selftests: net: test_vxlan_mdb.sh/
-      stats.add @test_prefix, $1
+  def fixup_test_parts(test_parts)
+    test_parts = Array(test_parts).map do |part|
+      case part
+      when 'fdb get tests: iproute2 too old'
+        # selftests: net: netdevice.sh
+        # SKIP: eth0: interface already up
+
+        # below rtnetlink.sh's level_1_test will repeate twice thus cause duplication
+        # SKIP: fdb get tests: iproute2 too old
+        #
+        # If it's passed stat will be
+        # PASS: bridge fdb get
+        'bridge_fdb_get'
+      when /set ifalias \S+ for test-dummy0/
+        # set ifalias 82e318f8-b9c2-490c-b15d-28a5a51f8f67 for test-dummy0
+        # set ifalias 6099b132-422e-4720-a085-0dc64832052a for test-dummy0
+        'set ifalias for test-dummy0'
+      when /no TLS support/ # ["", " no TLS support"]
+        nil
+      when /ns\d+-\w+/
+        # ns1-Ip028vuy connection on port 2121 has ftp helper attached
+        # ns1-IpVmXxqi can reach ns2-IpVmXxqi
+        part.gsub(/(ns\d+)-\w+/, ' \1')
+      when /(.+)\s+\d+s/ # nft_concat_range.sh
+        # "  net,port                              8s                              "
+        part.sub(/\d+s/, '')
+      else
+        part
+      end
     end
+
+    super(test_parts)
   end
 end
 
 class NetVethStater < NetStater
   def stat(line)
-    # selftests: net: veth.sh
     case line
-    when /^# (\s+?) - (.+?)\s+\b(ok|fail)\b/
+    when /^# .+ (ok|fail)\b/
       #         - peer gro flag                                      ok
-      subtest = $2
-      result = $3
-      test_name = "#{@test_prefix}.#{@test_case}.#{subtest}"
-    when /^# (.+?) - (.+?)\s+\b(ok|fail)\b/
-      # default - gro flag                                           ok
-      @test_case = $1
-      subtest = $2
-      result = $3
-      test_name = "#{@test_prefix}.#{@test_case}.#{subtest}"
-    when /^# (.*?)\s+\b(ok|fail)\b/
-      # default channels                                             fail rx:1:1 tx:1:1 combined:n/a:0
-      @test_case = $1
-      result = $2
-      test_name = "#{@test_prefix}.#{@test_case}"
-    when /^(ok|not ok) .* selftests: net: veth.sh/
-      test_name = @test_prefix
-      result = $1
+      # ignore
     else
-      return
+      super
     end
-
-    stats.add test_name, result, overwrite: true
   end
 end
 
-class NetUdpgroFwdStater < NetStater
+class NetUdpgsoStater < NetStater
   def stat(line)
     case line
-    when /^# (IPv4|IPv6)$/
-      # IPv4
-      @test_case = $1
-    when /^# (.*GRO.*)\s+(ok$|fail |skip )/
-      return unless @test_case
-
-      stats.add "#{@test_prefix}.#{@test_case}.#{$1}", $2
+    when /^# (ipv\d [^:]+)$/i
+      curr_test.parts = [$1]
+    when /^# (ipv\d)/i
+      # ignore
     else
       super
     end
@@ -551,41 +286,12 @@ end
 
 class VdsoStater < Stater
   def stat(line)
-    if line =~ /^# \[(OK|FAIL|SKIP)\]\s+/ && @runtest_case
-      # [OK]  Test Passed.
-      stats.add "#{@test_prefix}.#{@runtest_case}", $1
-      @runtest_case = nil
-      return
-    end
-
     case line
-    when /^# clock_id: (.*) \[(PASS|FAIL|SKIP)\]/
-      # clock_id: CLOCK_REALTIME [PASS]
-      stats.add "#{@test_prefix}.#{$1}", $2
-    when /^# clock_id: (.*)/
-      # clock_id: CLOCK_REALTIME
-      @subtest = $1
-    when /^# \[RUN\]\s+Testing (.*)\.\.\./
-      # [RUN] Testing clock_gettime for clock CLOCK_REALTIME (0)...
-      @runtest_case = $1
-    when /^# (.*): ?(PASS|OK|FAIL|SKIP|Pass|Fail|Skip)/
-      check_vdso($1, $2)
+    when /^# (?<test_parts>.*)\[(?<result>OK|FAIL|SKIP)\]\s/
+      # [OK]  Test Passed.
+      parse_test_result(Regexp.last_match)
     else
-      super(line)
-    end
-  end
-
-  def check_vdso(test_case, result)
-    if test_case =~ /vdso_test_clock_gettime/ && @subtest
-      # vdso_test_clock_gettime(): PASS
-      stats.add "#{@test_prefix}.#{test_case}.#{@subtest}", result
-      @subtest = nil
-    elsif test_case =~ /vdso_test_clock_getres/
-      # vdso_test_clock_getres(): PASS
-      stats.add "#{@test_prefix}.#{test_case}", result, overwrite: true
-    else
-      # vdso_test_gettimeofday(): PASS
-      stats.add "#{@test_prefix}.#{test_case}", result
+      super
     end
   end
 end
@@ -593,94 +299,38 @@ end
 class MmStater < Stater
   def stat(line)
     case line
-    when /^#\s+running:?\s+(.+)/
+    when /# running:?\s+(.+)/
       # running hugepage-shm
       # running ./va_128TBswitch
       # running: gup_test -u # get_user_pages_fast() benchmark
-      @test_case = $1.sub(/^\.\//, '')
-      @subtest = nil
-    when /^#\s+\[(PASS|FAIL|SKIP)\]/
-      assert @test_case, "invalid test case #{@test_case.inspect}"
+      curr_test.parts = [$1.sub(/^\.\//, '')]
+    when /^(?:# )+(?<test_parts>.*)\[(?<result>PASS|FAIL|SKIP)\]/
+      parse_test_result(Regexp.last_match)
 
-      stats.add test_name(@test_prefix, @test_case), $1, overwrite: true
-
-      @test_case = nil
-      @subtest = nil
-    when /^# ([a-zA-Z].*): [0-9a-z]+ - (OK|FAIL)/
-      assert @test_case, "invalid test case #{@test_case.inspect}"
-
+      curr_test.parts.clear
+    when /^# (?<test_parts>[a-zA-Z].*): [0-9a-z]+ - (?<result>OK|FAIL)/
       # mmap(HIGH_ADDR, MAP_FIXED): 0xffffffffffffffff - FAILED
       # mmap(ADDR_SWITCH_HINT - PAGE_SIZE, PAGE_SIZE): 0x7fe8ef2a4000 - OK
       # mmap(ADDR_SWITCH_HINT - PAGE_SIZE, PAGE_SIZE): 0x7fe8ef29d000 - OK
-      stats.add test_name(@test_prefix, @test_case, $1), $2, overwrite: true
-    when /^# # \[RUN\]\s(.*)/
-      # selftests: mm: madv_populate
-      # # [RUN] test_prot_read
-      # ok 1 MADV_POPULATE_READ with PROT_READ
-      @subtest = $1
-    when SUBTEST_RESULT_PATTERN
-      parse_subtest_result(line)
+      parse_test_result(Regexp.last_match)
     else
-      super(line)
+      super
     end
   end
 end
 
-class MemoryHotplugStater < Stater
-  def stat(line)
-    case line
-    when /^selftests: memory-hotplug \[FAIL\]/
-      # ok 1 selftests: memory-hotplug: mem-on-off-test.sh
-      # selftests: memory-hotplug [FAIL]
-      @test_result = 'fail'
-      stats.add @test_prefix, @test_result
-    when %r{make: Leaving directory .*/(.*)'}
-      stats.add @test_prefix, 'pass', overwrite: true unless @test_result
-    else
-      super(line)
-    end
-  end
-end
-
-# for kernel < v4.18-rc1
 class MountStater < Stater
   def stat(line)
     case line
     when /^WARN: No \/proc\/self\/uid_map exist, test skipped/
       # WARN: No /proc/self/uid_map exist, test skipped.
-      @test_result = 'skip'
-      stats.add @test_prefix, @test_result
+      stats.add @test_dir, 'skip'
     when /(^(MS.+|Default.+) malfunctions$)|(^Mount flags unexpectedly changed after remount$)/
       # Mount flags unexpectedly changed after remount
-      @test_result = 'fail'
-      stats.add @test_prefix, @test_result
-    when %r{make: Leaving directory .*/(.*)'}
-      # test is pass if it's not skip or fail
-      stats.add @test_prefix, 'pass' unless @test_result
+      stats.add @test_dir, 'fail'
     else
-      super(line)
+      super
     end
-  end
-end
-
-class X86Stater < Stater
-  def stat(line)
-    case line
-    when /can not run MPX/
-      # processor lacks MPX XSTATE(s), can not run MPX tests
-      @mpx_result = 'skip'
-    when /^selftests.*: (.*) \[(PASS|FAIL|SKIP)\]/
-      # selftests: mpx-mini-test_64 [PASS]
-      test_script = $1
-      result = $2
-      result = @mpx_result if test_script =~ /mpx-mini-test/ && @mpx_result
-
-      stats.add "#{@test_dir}.#{test_script}", result
-    else
-      super(line)
-    end
-
-    @test_case = nil if line =~ /\[OK\]\s+(All is well|all registers okay)/
   end
 end
 
@@ -691,54 +341,11 @@ class FutexStater < Stater
       # # futex_requeue_pi: Test requeue functionality
       # # 	Arguments: broadcast=0 locked=0 owner=0 timeout=0ns
       # ok 1 futex-requeue-pi
-      @arguments = $1
+      curr_test.parts = [$1]
     else
-      super(line)
+      super
 
-      @arguments = nil if line =~ SUBTEST_RESULT_PATTERN
-    end
-  end
-end
-
-class ResctrlStater < Stater
-  def stat(line)
-    case line
-    when /# Starting\s+(.*).../
-      # Starting CAT test ...
-      @test_script = $1
-    when /# Pass: Check\s+(.*)/
-      # Pass: Check MBM diff within 5%
-      # The following line is repeated 3 times
-      # Pass: Check resctrl mountpoint "/sys/fs/resctrl" exists
-      add_cat_results('pass', $1)
-    when /# SKIP\s+(.*)/
-      # The following line is repeated 3 times
-      # ok 4 # SKIP Hardware does not support CAT or CAT is disabled
-      add_cat_results('skip', @test_script)
-    when /^(not ok|ok)\s+(.*)/
-      parse_cat_results($1, $2)
-    else
-      super(line)
-    end
-  end
-
-  def add_cat_results(result, test_script)
-    stats.add "#{@test_dir}.#{test_script}", result, overwrite: true
-  end
-
-  def parse_cat_results(result, test_script)
-    # Splitting through numbers
-    # not ok 3 CMT: test
-    # ok 2 MBA: schemata change
-    test_script = test_script.split(' ', 2)[1] if %w{1 2 3 4}.include? test_script.split(' ', 2)[0]
-
-    if result == 'not ok'
-      # not ok CAT: cache miss rate within 4%
-      add_cat_results('fail', test_script)
-    else
-      # ok CAT: test
-      # ok writing benchmark parameters to resctrl FS
-      add_cat_results('pass', test_script)
+      curr_test.parts.clear if line =~ LEVEL_N_TEST_RESULT_PATTERN
     end
   end
 end
@@ -746,55 +353,23 @@ end
 class MptcpStater < Stater
   def stat(line)
     case line
-    when /^# (.*) ?\[ (OK|FAIL|SKIP| ok |fail) \]/
-      # selftests: net/mptcp: diag.sh
-      # no msk on netns creation                          [  ok  ]
-
-      # for "ns1 MPTCP -> ns1 (10.0.1.1:10000      ) MPTCP (duration    75ms) [ OK ]"
-      # it's @result is "OK"
-      # it's @test_case is "ns1 MPTCP -> ns1 (10.0.1.1:10000      ) MPTCP"
-      @result = $2
-      @test_case = $1.gsub(/\(duration(.*)\)/, '')
-      @test_case = @test_case.gsub(/[0-9]+\s+max\s+[0-9]+/, '')
-      if @test_script == 'mptcp_connect.sh'
-        # ns1 MPTCP -> ns1 (10.0.1.1:10000      ) MPTCP (duration    75ms) [ OK ]
-
-        # to reduce below situation
-        # ns2 MPTCP -> ns4 (dead:beef:3::1:10023) MPTCP copyfd_io_poll: poll timed out (events: POLLIN 1, POLLOUT 0)
-        # (duration 30429ms) [ FAIL ] client exit code 0, server 2
-        # but not exclude below line
-        # setsockopt(..., TCP_ULP, "mptcp", ...) blocked  [ OK ]
-        stats.add "#{@test_prefix}.#{@test_case}", @result if @test_case =~ /MPTCP|mptcp/
-      else
-        # defaults addr list                                 [ OK ]
-
-        # ignore below duplication
-        # msk in use statistics                             [  ok  ]
-        # msk in use statistics                             [  ok  ]
-        test_name = "#{@test_prefix}.#{@test_case}"
-        stats.add test_name, @result, overwrite: true
-      end
-    when /^# (PASS|FAIL|SKIP): (.*)/
-      # selftests: net/mptcp: mptcp_sockopt.sh
-      # PASS: all packets had packet mark set
-      stats.add "#{@test_prefix}.#{$2}", $1 if @test_script == 'mptcp_sockopt.sh'
+    when /^#\s+(?<result>ok|not ok) \d+ - (?<test_parts>.*)/
+      parse_test_result(Regexp.last_match)
+    when /\[\s*(OK|FAIL|SKIP)\s*\]$/i
+      # 03 ns1 MPTCP -> ns1 (10.0.1.1:10000      ) MPTCP     (duration    46ms) [ OK ]
+      # ignore
     else
-      super(line)
+      super
     end
   end
-end
 
-class LivepatchStater < Stater
-  def stat(line)
-    case line
-    when /^# TEST: (.*) \.\.\. (ok|fail|skip)/
-      # TEST: multiple livepatches ... ok
-      @result = $2
-      @test_case = $1.gsub(/\(duration(.*)\)/, '')
-      stats.add "#{@test_prefix}.#{@test_case}", @result
-    else
-      super(line)
+  def fixup_test_parts(test_parts)
+    test_parts = Array(test_parts).map do |part|
+      # mptcp_connect: loopback v4: ns1 MPTCP -> ns1 (10.0.1.1:10000      ) MPTCP # time=46ms
+      part.sub(/ # time=\d+ms$/, '')
     end
+
+    super(test_parts)
   end
 end
 
@@ -803,63 +378,17 @@ class TimensStater < Stater
     case line
     when /# SKIP CLOCK_BOOTTIME_ALARM isn't supported/ # rubocop:disable Lint/EmptyWhen
       # ignore below skip, cause there's no test name when it skipped,
-      # thus it's meaningless for auto-bisect
-      # selftests: timens: timens
       # ok 3 # SKIP CLOCK_BOOTTIME_ALARM isn't supported
       # ok 4 # SKIP CLOCK_BOOTTIME_ALARM isn't supported
-
-      # below shows their name when test passed,
-      # can't unite the stats name between skip & pass
-      # ok 3 Passed for CLOCK_BOOTTIME_ALARM (syscall)
-      # ok 4 Passed for CLOCK_BOOTTIME_ALARM (vdso)
-
-      # same as timerfd
-      # selftests: timens: timerfd
-      # ok 3 clockid=9
-
-      # ok 3 # SKIP CLOCK_BOOTTIME_ALARM isn't supported
-    when /# (ok|fail|skip) \d+ (.*):(.*)/
-      # ok 1 clockid: 1 abs:0
-      @test_case = "#{$2}:#{$3}"
-      stats.add "#{@test_prefix}.#{@test_case}", $1
-    when /# (ok|fail|skip) \d+ (.*)/
-      # ok 1 Passed for CLOCK_BOOTTIME (syscall)
-      stats.add "#{@test_prefix}.#{$2}", $1
     else
-      super(line)
+      super
     end
   end
-end
 
-class TimersStater < Stater
-  def stat(line)
-    case line
-    when /^# (.+\w)(\.\.\.)?\s+\[(OK|FAIL|SKIP|UNSUPPORTED)\]/,
-         /^# ([^:]+\w)(\s?:.+)\[(OK|FAIL|SKIP|UNSUPPORTED)\]/
-      # Check itimer virtual... [OK]
-      # Nanosleep CLOCK_MONOTONIC                 [OK]
-      # Mqueue latency :                          [OK]
-      # Testing consistency with 8 threads for 30 seconds: [OK]
-      # Estimating clock drift: 0.0(est) 0.0(act)     [OK]
-      # CLOCK_TAI              RELTIME ONE-SHOT count:                   1 : [OK]
-      stats.add "#{@test_prefix}.#{$1}", $3
-    when SUBTEST_RESULT_PATTERN
-      parse_subtest_result(line)
-    else
-      super(line)
-    end
-  end
-end
-
-class PstoreStater < Stater
-  def stat(line)
-    case line
-    when /^# (.*) \.\.\. (ok|fail|skip)/
-      # Checking pstore backend is registered ... ok
-      stats.add "#{@test_prefix}.#{$1}", $2
-    else
-      super(line)
-    end
+  def fixup_test_parts(test_parts)
+    # ignore the 'Passed' part
+    # # ok 2 Passed for CLOCK_BOOTTIME (vdso)
+    super(test_parts.map { |part| part.sub(/^Passed/, '') })
   end
 end
 
@@ -869,311 +398,69 @@ class DmaStater < Stater
     when /^# average (map|unmap) latency\(us\):(.*) standard deviation:(.*)/
       # average unmap latency(us):0.6 standard deviation:1.1
       # average map latency(us):0.8 standard deviation:1.2
-      @test_case = "average_#{$1}_latency"
-      stats.add "#{@test_prefix}.#{@test_case}", $2.to_f
-      stats.add "#{@test_prefix}.#{@test_case}_stddev", $3.to_f
+      stats.add test_name(test_prefix, "average_#{$1}_latency"), $2.to_f
+      stats.add test_name(test_prefix, "average_#{$1}_latency_stddev"), $3.to_f
     else
-      super(line)
+      super
     end
   end
 end
 
 class PidfdStater < Stater
-  def stat(line)
-    case line
-    when /# (ok|fail|skip) \d+ (.*)/
-      # ok 1 global.wait_simple
-      result = $1
-      test_case = $2
-      if test_case =~ /SKIP/
-        # ok 8 # SKIP pidfd_send_signal signal recycled pid test: Skipping test
-        # ksft_test_result_skip("%s test: Skipping test\n", test_name);
-        test_case = test_case.split(' SKIP ').last.split(' test: Skipping').first
-        result = 'skip'
-      end
-
-      if @test_script =~ /^(pidfd_test|pidfd_fdinfo_test)$/
-        # pidfd_test will run twice subtest and output the result twice,
-        # ignore the duplication of line 30, line 32771 and line 32776.
-        # selftests: pidfd: pidfd_test
-        # 25 # ok 1 pidfd_poll check for premature notification on child thread exec test: Passed
-        # 30 # ok 2 pidfd_poll check for premature notification on child thread exec test: Passed
-        # 32771 # ok 1 pidfd_poll check for premature notification on child thread exec test: Passed
-        # 32776 # ok 2 pidfd_poll check for premature notification on child thread exec test: Passed
-        stats.add "#{@test_prefix}.#{test_case}", result, overwrite: true
-      else
-        stats.add "#{@test_prefix}.#{test_case}", result
-      end
-    else
-      super(line)
-    end
+  def fixup_test_parts(test_parts)
+    # ignore the 'Passed' part
+    # # ok 2 pidfd check fdinfo for dead process test: Passed
+    # # ok 1 pidfd poll test: pass
+    super(test_parts.map { |part| part.sub(/: (pass(ed)?|Skipping test)$/i, '') })
   end
 end
 
 class SgxStater < Stater
-  def stat(line)
-    case line
-    when /RUN\s+([^\s]+)/
-      # #  RUN           enclave.augment_via_eaccept ...
-      @test_case = $1
-    when /^# ok \d+ ([^#]*)# SKIP .*/
-      # ok 3 # SKIP System does not support SGX2
-      # ok 9 enclave.epcm_permissions # SKIP System does not support SGX2
-      assert $1.strip == @test_case, "#{$1.strip.inspect} != #{@test_case.inspect}" unless $1.empty?
-
-      stats.add "#{@test_prefix}.#{@test_case}", 'skip'
-      @test_case = nil
-    when /^# (ok|not ok) \d+ ([^#]+)/
-      # not ok 1 enclave.unclobbered_vdso
-      assert $2.strip == @test_case, "#{$2.strip.inspect} != #{@test_case.inspect}"
-
-      stats.add "#{@test_prefix}.#{@test_case}", $1
-      @test_case = nil
-    else
-      # ok 1 selftests: sgx: test_sgx
-      super(line)
-    end
-  end
-end
-
-class Clone3Stater < Stater
-  def stat(line)
-    case line
-    when /Trying (.*)/
-      # # [1246] Trying clone3() with flags 0x20000000 (size 0)
-      @test_case = $1
-    when /^# (ok|not ok) \d+ \[[0-9]+\] (.*)/
-      # ok 2 [1246] Result (0) matches expectation (0)
-
-      # below 'ok 6' is the same as 'ok 7', thus ignore the duplication
-      # # [1246] Trying clone3() with flags 0 (size 0)
-      # # Invalid argument - Failed to create new process
-      # # [1246] clone3() with flags says: -22 expected -22
-      # ok 6 [1246] Result (-22) matches expectation (-22)
-      # # [1246] Trying clone3() with flags 0 (size 0)
-      # # Invalid argument - Failed to create new process
-      # # [1246] clone3() with flags says: -22 expected -22
-      # ok 7 [1246] Result (-22) matches expectation (-22)
-      stats.add "#{@test_prefix}.#{@test_case}.#{$2}", $1, overwrite: true
-    else
-      super(line)
-    end
-  end
-end
-
-class DmabufHeapsStater < Stater
-  def stat(line)
-    case line
-    when /^#   (Testing .*):  (OK|FAIL)/
-      #   Testing allocation and importing:   OK
-      stats.add "#{@test_prefix}.#{$1}", $2
-    else
-      super(line)
-    end
-  end
-end
-
-class FirmwareStater < Stater
-  def stat(line)
-    case line
-    when /# Running kernel configuration test \d+ -- (.*)/
-      # Running kernel configuration test 1 -- rare
-      @test_case = $1
-    when /^# Testing with the (file .*)\.\.\.$/
-      # Testing with the file missing...
-      @subtest = $1
-    when /^# (.*): ?(PASS|OK|FAIL|SKIP|Pass|Fail|Skip)/
-      # Batched request_firmware_into_buf() nofile try #1: OK
-      stats.add "#{@test_prefix}.#{@test_case}.#{@subtest}.#{$1}", $2
-    else
-      super(line)
-    end
+  def fixup_test_parts(test_parts)
+    # ignore the 2nd part which is SKIP reason if exists
+    #   ["", "System does not support SGX2"]
+    super [test_parts.first]
   end
 end
 
 class CapabilitiesStater < Stater
   def stat(line)
     case line
-    when /\[RUN\].*(Tests with uid .*) +++/
-      # [RUN] +++ Tests with uid == 0 +++
-      # # [RUN] +++ Tests with uid != 0 +++
-      @test_case = $1
-    when /^Pass (\d+) Fail (\d+) Xfail (\d+) Xpass (\d+) Skip (\d+) Error (\d+)/,
-         /^# # Totals: pass:(\d+) fail:(\d+) xfail:(\d+) xpass:(\d+) skip:(\d+) error:(\d+)/
-      handle_result($2, $3, $6)
+    when /^# # \[RUN\].*(Tests with uid .*) +++/
+      # # # [RUN] +++ Tests with uid != 0 +++
+      curr_test.parts = [$1]
+    when /^# # \[RUN\]\s+(.+)/
+      # # # [RUN]       Root => ep
+      curr_test.parts[1] = $1
     else
-      super(line)
+      super
     end
   end
 
-  private
-
-  def handle_result(fail, xfail, error)
-    # Pass 9 Fail 0 Xfail 0 Xpass 0 Skip 0 Error 0
-    # # Totals: pass:9 fail:0 xfail:0 xpass:0 skip:0 error:0
-    @result = 'skip'
-    @result = 'fail' if fail != '0' || xfail != '0' || error != '0'
-    @result = 'pass' if fail == '0' && xfail == '0' && error == '0'
-    stats.add "#{@test_prefix}.#{@test_case}", @result
-  end
-end
-
-class AndroidStater < Stater
-  def stat(line)
-    case line
-    when /^(ion_test.sh: .*) - \[(PASS|FAIL|SKIP)\]$/
-      # ion_test.sh: heap_type: 0 - [FAIL]
-      stats.add "#{@test_prefix}.#{$1}", $2
-    else
-      super(line)
-    end
-  end
-end
-
-class BreakpointsStater < Stater
-  def stat(line)
-    case line
-    when /(ok|fail|skip) \d+ (Test .*)/
-      # ok 1 Test breakpoint 0 with local: 0 global: 1
-      stats.add "#{@test_prefix}.#{$2}", $1
-    when /No such collection '(breakpoints)'/
-      # No such collection 'breakpoints'
-      stats.add $1.to_s, 'fail'
-    else
-      super(line)
-    end
-  end
-end
-
-class Ia64Stater < Stater
-  def stat(line)
-    case line
-    when /^(# )?(PASS|FAIL|SKIP): (.*)/
-      # PASS: /dev/mem 0xc0000-0x100000 is readable
-      # # PASS: /dev/mem 0x0-0xa0000 is readable
-      stats.add "#{@test_prefix}.#{$3}", $2
-    else
-      super(line)
-    end
+  def fixup_test_parts(test_parts)
+    # ignore the 'Passed'
+    super(test_parts.reject { |part| part =~ /Passed/ })
   end
 end
 
 class KmodStater < Stater
   def stat(line)
     case line
-    when /^# Running test: (kmod_test.*) - run/
-      # below a test may run several times, regard them as one test
-      # Running test: kmod_test_0005 - run #1
-      # kmod_test_0005: OK! - loading kmod test
-      # kmod_test_0005: OK! - Return value: 0 (SUCCESS), expected SUCCESS
-      # Tue Sep 15 17:57:54 UTC 2020
-      # Running test: kmod_test_0005 - run #2
-      # kmod_test_0005: OK! - loading kmod test
-      # kmod_test_0005: OK! - Return value: 0 (SUCCESS), expected SUCCESS
-      running_multiple_test($1)
-
-    when /^# (kmod_test.*|kmod_check_visibility): (OK|FAIL|SKIP)/
-      # if any single test fails, regard the whole subtest fail
-      @test_case_result = $2 if @test_case_result != 'FAIL'
-      # when all @test_case_result are 'SKIP', regard the subtest as 'skip'
-      @all_test_case_skip = @test_case_result == 'SKIP' if @all_test_case_skip
-    when /^# Test completed/
-      # '# Test completed' marks the whole kmod tests finished
-      stats.add "#{@test_prefix}.#{@test_case}", @test_case_result
+    when /^# (?<test_parts>.*)(?:kmod_test_.+|kmod_check_visibility): (?<result>OK|FAIL|SKIP)/
+      parse_test_result(Regexp.last_match)
     else
-      super(line)
+      super
     end
-  end
-
-  def running_multiple_test(test_case)
-    last_test_case = @test_case
-    @test_case = test_case if test_case
-
-    return unless @test_case != last_test_case && !last_test_case.nil?
-
-    # regard whole subtest as 'pass' if @test_case is 'OK' or 'SKIP'
-    @test_case_result = 'pass' if @test_case_result != 'FAIL' && !@all_test_case_skip
-    stats.add "#{@test_prefix}.#{last_test_case}", @test_case_result
-    # reset @test_case_result and all_subtest_case_skip for new test_case
-    @test_case_result = nil
-    @all_test_case_skip = true
   end
 end
 
-class NetfilterStater < Stater
+class NetfilterStater < NetStater
   def stat(line)
     case line
-    when /^# TEST: (.*)/
-      # selftests: netfilter: nft_concat_range.sh
-      # TEST: reported issues
-      parse_test_message($1)
-    when /^#   (.+)\[( OK|FAIL|SKIP)/
-      #   Add two elements, flush, re-add                               [ OK ]
-      parse_subtest_result($1, $2)
-    when /^#     (baseline .+|set with .+):\s*(\S*)pps/
-      #     baseline (drop from netdev hook):               1612678pps
-      parse_pps_result($1, $2)
-    when /^# (PASS|FAIL|SKIP): (ns\d)-\S+ (connection on port.*)/
-      # selftests: netfilter: nft_conntrack_helper.sh
-      # PASS: ns1-Ip028vuy connection on port 2121 has ftp helper attached
-      # PASS: ns2-Ip028vuy connection on port 2121 has ftp helper attached
-      # PASS: ns1-Ip028vuy connection on port 2121 has ftp helper attached
-      # PASS: ns2-Ip028vuy connection on port 2121 has ftp helper attached
-      stats.add "#{@test_prefix}.#{$2}_#{$3}", $1, overwrite: true
-    when /^# (PASS|FAIL|SKIP|OK): (.*)/
-      # PASS: ipsec tunnel mode for ns1/ns2
-
-      # 46 # selftests: netfilter: nft_flowtable.sh
-      # 52 # FAIL: file mismatch for ns1 -> ns2
-      # 78 # FAIL: file mismatch for ns1 -> ns2
-      parse_general_test_result($2, $1)
+    when /^# TEST: (.+)/ # # TEST: reported issues
+      curr_test.parts = [$1]
     else
-      super(line)
-    end
-  end
-
-  def parse_test_message(test_case)
-    return unless @test_script == 'nft_concat_range.sh'
-
-    @test_case = test_case
-  end
-
-  def parse_subtest_result(test_case, result)
-    return unless @test_script == 'nft_concat_range.sh'
-
-    @subtest_case = test_case.strip
-    stats.add "#{@test_prefix}.#{@test_case}.#{test_case}", result
-  end
-
-  def parse_pps_result(test_case, result)
-    return unless @test_script == 'nft_concat_range.sh'
-
-    stats.add "#{@test_prefix}.#{@test_case}.#{@subtest_case}.#{test_case}.packets_per_sec", result.to_i
-  end
-
-  def parse_general_test_result(test_case, result)
-    # selftests: netfilter: nft_queue.sh
-    # PASS: ns1-IpVmXxqi can reach ns2-IpVmXxqi
-    # rm -IpVmXxqi
-    test_case = test_case.gsub($1, '') if test_case =~ /ns\d+(-\w+)/
-
-    test_name = "#{@test_prefix}.#{test_case}"
-    stats.add test_name, result, overwrite: true
-  end
-end
-
-class ExecStater < Stater
-  def stat(line)
-    case line
-    when /^(Check .*)... \[(OK|FAIL|SKIP)\]/
-      # Check success of execveat(8, 'execveat', 0)... [OK]
-      subname = "#{@test_prefix}.#{$1}"
-      res = $2
-
-      # ignore detail stats of execveat to avoid duplication
-      stats.add subname, res unless @test_script =~ /execveat/
-    else
-      super(line)
+      super
     end
   end
 end
@@ -1189,9 +476,6 @@ class MqueueStater < Stater
 
   def stat(line)
     case line
-    when /^# (.*):.*(PASS|FAIL|SKIP)/
-      # Queue open with mq_maxmsg > limit when euid = 0 succeeded:            PASS
-      stats.add "#{@test_prefix}.#{$1}", $2
     when /Test #([1-9].*):/
       # Test #2b: Time send/recv message, queue full, increasing prio
       @mqueue_test = Regexp.last_match[1]
@@ -1202,26 +486,9 @@ class MqueueStater < Stater
       # 484 nsec/msg
       @mqueue_speed["#{@mqueue_test}.#{@io}"] = Regexp.last_match[1].to_i
     when /make: Leaving.*mqueue'/
-      stats.add "#{@test_dir}.nsec_per_msg", @mqueue_speed.values.average.to_i unless @mqueue_speed.empty?
+      stats.add test_name(@test_dir, 'nsec_per_msg'), @mqueue_speed.values.average.to_i unless @mqueue_speed.empty?
     else
-      super(line)
-    end
-  end
-end
-
-class PrctlStater < Stater
-  def stat(line)
-    case line
-    when /^(ok|not ok) (\d+) selftests: (\S*): (\S*)/
-      # selftests: prctl: disable-tsc-ctxt-sw-stress-test
-      # [No further output means we're allright]
-      # ok 1 selftests: prctl: disable-tsc-ctxt-sw-stress-test
-      # selftests: prctl: disable-tsc-ctxt-sw-stress-test
-      # [No further output means we're allright]
-      # ok 2 selftests: prctl: disable-tsc-ctxt-sw-stress-test
-      stats.add "#{@test_dir}.#{$2}.#{$4}", $1
-    else
-      super(line)
+      super
     end
   end
 end
@@ -1229,119 +496,27 @@ end
 class BpfStater < Stater
   def stat(line)
     case line
-    when /^(#| ) #(\d+|\d+\/\d+)\s+([^:]+):(OK|FAIL|SKIP)/
-      handle_numbered_test_case($3, $4)
-    when /^# selftests:\s(.*)\s\[(PASS|SKIP|FAIL)/, /^# Test case:\s(.*)\s\.\.\s\[(PASS|FAIL)\]/
-      # Notes for selftests:... condition
-      # echo "selftests: test_xdp_redirect $xdpmode [FAILED]";
-      # echo "selftests: test_xdp_redirect $xdpmode [SKIP]"
-      # echo "selftests: test_xdp_redirect $xdpmode [PASS]";
-
-      # Notes for Test case:... condition
-      # selftests: bpf: test_sysctl
-      # Test case: sysctl wrong attach_type .. [PASS]
-      # printf("[%s]\n", err ? "FAIL" : "PASS");
-      handle_status($1, $2)
-    when /^# (fail|Pass):\s(.*)/
-      # selftests: bpf: test_xdp_redirect_multi.sh
-      # fail: xdpgeneric arp(F_BROADCAST) ns1-1
-      # Pass: xdpgeneric IPv6 (no flags) ns1-2
-      handle_status($2, $1)
-    when /^# #([0-9]+)\/([up])\s(.*)\s(SKIP|OK)/
-      handle_test_verifier($1, $2, $3, $4)
-    when /^# main:(PASS|FAIL):(.*)/
-      # selftests: bpf: get_cgroup_id_user
-      # main:PASS:cgroup_setup_and_join
-      # main:PASS:bpf_find_map
-      # main:PASS:bpf_find_map
-      handle_cgroup($2, $1)
-    when /^# (test_lru_sanity\d+)\s(\(.*\)): (Pass)/
-      handle_lru($1, $2, $3)
-    when /^# starting (egress|ingress)\s(.*)/
-      handle_lwt($1, $2)
-    when /^# (PASS|FAIL)$/
-      handle_result($1)
+    when /^# (?<result>fail|Pass):\s(?<test_parts>.*)/, # # fail: xdpgeneric arp(F_BROADCAST) ns1-1
+         /^# Test case:\s(?<test_parts>.*)\s\.\.\s\[(?<result>PASS|FAIL)\]/, # Test case: sysctl wrong attach_type .. [PASS]
+         /^(?:#| ) #(?:\d+|\d+\/\d+)\s+(?<test_parts>[^:]+):(?<result>OK|FAIL|SKIP)/, # #1/11 variable subtraction:OK
+         /^# selftests:\s(?<test_parts>.*)\s\[(?<result>PASS|SKIP|FAIL)/, # selftests: test_xdp_redirect $xdpmode [FAILED]
+         /^# main:(?<result>PASS|FAIL):(?<test_parts>.*)/, # main:PASS:cgroup_setup_and_join
+         /^# #\d+\/(?<test_parts>[up]\s.*)\s(?<result>SKIP|OK)/, # #0/u invalid and of negative number SKIP
+         /^# (?<test_parts>.*)(?<result>PASS|FAIL|Pass)$/
+      parse_test_result(Regexp.last_match)
+    when /^# starting ((?:egress|ingress)\s.*)/
+      curr_test.parts = [$1]
     else
       # not ok 6 selftests: bpf: test_progs # exit=1
-      super(line)
+      super
     end
   end
 
-  def handle_numbered_test_case(test_name, result)
-    # #1/11 variable subtraction:OK
-    # # #1/12 pointer variable subtraction:OK
-    # # #1 align:OK
-    # # #2 atomic_bounds:OK
-    # # #3/1 add:OK
-    # # #3/2 sub:OK
-    # # #3/3 and:OK
-    r = result == 'OK' ? 'ok' : 'not ok'
-    pattern1 = if test_name.include? '/'
-                 # selftests: bpf: test_progs
-                 # #1/1     align/mov:OK
-                 # #1/2     align/shift:OK
-                 test_name.split('/')[1]
-               else
-                 # selftests: bpf: test_progs
-                 # #1/1 mov:OK
-                 # #1/2 shift:OK
-                 test_name
-               end
-    subname = "#{@test_prefix}.#{pattern1.tr(' ', '_')}"
-    stats.add subname, r, overwrite: true
-  end
+  def fixup_test_parts(test_parts)
+    # "Test   0: mov ... "
+    test_parts = Array(test_parts).map { |part| part.sub(' ...', '') }
 
-  def handle_status(test_name, result)
-    stats.add "#{@test_prefix}.#{test_name}", result
-  end
-
-  def handle_cgroup(test_name, result)
-    stats.add "#{@test_prefix}.#{test_name}", result, overwrite: true
-  end
-
-  def handle_test_verifier(test_number, up_or_down, test_name, result)
-    # selftests: bpf: test_verifier
-    # #0/u invalid and of negative number SKIP
-    # #0/p invalid and of negative number OK
-    stats.add "#{@test_prefix}.#{test_number}/#{up_or_down}.#{test_name}", result
-  end
-
-  def handle_lru(test_name, test_desc, result)
-    # selftests: bpf: test_lru_map
-    # test_lru_sanity0 (map_type:9 map_flags:0x0): Pass
-    stats.add "#{@test_prefix}.#{test_name}_#{test_desc}", result
-  end
-
-  def handle_lwt(test_name, test_desc)
-    # selftests: bpf: test_lwt_ip_encap.sh
-    # starting egress IPv4 encap test
-    # PASS
-    # starting egress IPv6 encap test
-    #     test_ping failed: expected: 0; got 1
-    # FAIL
-    @test_case = "#{test_name}_#{test_desc}"
-  end
-
-  def handle_result(result)
-    stats.add "#{@test_prefix}.#{@test_case}", result if @test_case
-  end
-end
-
-class FtraceStater < Stater
-  def stat(line)
-    case line
-      # # [1] Basic trace file check    [PASS]
-      # # [2] Basic test for tracers    [PASS]
-      # # [3] Basic trace clock test    [PASS]
-      # # [4] Basic event tracing check [PASS]
-    when /^# \[\d+\] (.*)\[(.*)\]/
-      pattern1 = $1
-      result = $2
-      subname = "ftrace.#{pattern1.tr(' ', '_')}"
-      stats.add subname, result, overwrite: true
-    else
-      super(line)
-    end
+    super(test_parts)
   end
 end
 
@@ -1356,21 +531,14 @@ class VmallocStater < Stater
 
   def stat(line)
     case line
-    when /(Check the kernel ring buffer to see the summary|Ccheck the kernel message buffer to see the summary)/
-      stats.add @test_prefix.to_s, 'PASS'
-    # vmalloc test stat: (stress test worker number = nr_threads)
-    # [  223.093027] Summary: fix_size_alloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 5861476 usec
-    # [  223.103232] Summary: full_fit_alloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 5878630 usec
-    # [  223.113422] Summary: long_busy_list_alloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 60293287 usec
-    # [  223.124222] Summary: random_size_alloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 31075131 usec
-    # [  223.134778] Summary: fix_align_alloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 7383628 usec
-    # [  223.145064] Summary: random_size_align_alloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 9595644 usec
-    # [  223.156057] Summary: align_shift_alloc_test passed: 0 failed: 1 repeat: 1 loops: 1000000 avg: 402157 usec
-    # [  223.166406] Summary: pcpu_alloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 278274 usec
-    # [  223.176299] Summary: kvfree_rcu_1_arg_vmalloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 6248522 usec
-    # [  223.187358] Summary: kvfree_rcu_2_arg_vmalloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 6333619 usec
-    # [  223.198414] All test took worker0=441656368064 cycles
+    when /(Check the kernel ring buffer to see the summary|Check the kernel message buffer to see the summary)/
+      stats.add @test_dir, 'pass'
     when /Summary: (.+) passed: (.+) failed: (.+) repeat: (.+) loops: (.+) avg: (.+) usec/
+      # vmalloc test stat: (stress test worker number = nr_threads)
+      # [  223.093027] Summary: fix_size_alloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 5861476 usec
+      # [  223.176299] Summary: kvfree_rcu_1_arg_vmalloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 6248522 usec
+      # [  223.187358] Summary: kvfree_rcu_2_arg_vmalloc_test passed: 1 failed: 0 repeat: 1 loops: 1000000 avg: 6333619 usec
+      # [  223.198414] All test took worker0=441656368064 cycles
       result = 'fail'
       if $3.to_i.zero?
         @tmp_stats["#{$1}.usec_per_loop"] = $6.to_i
@@ -1379,126 +547,55 @@ class VmallocStater < Stater
 
       @tmp_stats[$1] = result
     when /All test took (.+)=(.+) cycles/
-      raise "unexpected summary: #{@test_prefix}.#{$1}" if @tmp_stats.empty?
+      raise "unexpected summary: #{@test_dir}: #{line}" if @tmp_stats.empty?
 
       @tmp_stats.each do |key, value|
-        stats.add "#{@test_prefix}.#{$1}.#{key}", value
+        stats.add test_name(@test_dir, $1, key), value
       end
       @tmp_stats = {}
     else
-      super(line)
-    end
-  end
-end
-
-class MmProtectionKeysStater < Stater
-  def stat(line)
-    case line
-    when /done \(all tests OK\)/
-      stats.add @test_prefix.to_s, 'pass'
-    when /protection_keys\.c:.* Assertion /, /assert\(\) at protection_keys.c:/
-      stats.add @test_prefix.to_s, 'fail'
-    when /running PKEY tests for unsupported CPU\/OS/
-      stats.add @test_prefix.to_s, 'skip'
-    else
-      super(line)
+      super
     end
   end
 end
 
 class SyncStater < Stater
-  def stat(line)
-    case line
-    when /^# (ok|not ok) \d+ \[RUN\]\s+(.*)/
-      # ok 1 [RUN]    test_alloc_timeline
-      stats.add "#{@test_prefix}.#{$2}", $1
-    else
-      # ok 1 selftests: sync: sync_test
-      super(line)
-    end
-  end
-end
-
-class SysctlStater < Stater
-  def stat(line)
-    case line
-    when /^# (Checking production write strict setting) ... (ok|not ok)/
-      # Checking production write strict setting ... ok
-      stats.add "#{@test_prefix}.#{$1}", $2
-    when /^# Running test: (sysctl_test_[0-9]+) - run #([0-9]+)/
-      # Running test: sysctl_test_0001 - run #0
-      @test_case = "#{$1}.#{$2}"
-    when /^# ([^.]*)\s*...\s*(ok|not ok)/
-      # Checking bitmap handler... ok
-      test_name = "#{@test_prefix}.#{@test_case}.#{$1}"
-
-      # ignore duplication
-      # 1609 # Running test: sysctl_test_0002 - run #0
-      # 1869 # Running test: sysctl_test_0002 - run #0
-      stats.add test_name, $2, overwrite: true
-    else
-      # ok 1 selftests: sysctl: sysctl.sh
-      super(line)
-    end
+  def fixup_test_parts(test_parts)
+    super(test_parts.map { |part| part.sub(/\[RUN\]\s+/, '') })
   end
 end
 
 stats = LKP::Stats.new
 
 while (line = $stdin.gets)
-  line = line.resolve_invalid_bytes
+  line = line.resolve_invalid_bytes.chomp
 
   case line
-  when /^# selftests: net: (udpgro_fwd|veth|test_vxlan_mdb|fcnal-test)\.sh/
+  when /^# selftests: net: (udpgso|veth)\.sh/
     test_script = $1
     stater = Object.const_get("Net#{test_script.split(/[-_]/).map(&:capitalize).join}Stater")
                    .new('net', "#{test_script}.sh", stats)
-  when /^# selftests: mm: (protection_keys.*)/
-    stater = MmProtectionKeysStater.new('mm', $1, stats)
-  when /\.\/(.*\.sh).*(memory-hotplug)/
-    # ./mem-on-off-test.sh -r 2 || echo "selftests: memory-hotplug [FAIL]"
-    stater = MemoryHotplugStater.new($2, $1, stats)
-  when /gcc -Wall -O2 (.*).c -o/
-    # gcc -Wall -O2 unprivileged-remount-test.c -o unprivileged-remount-test
-    stater = MountStater.new('mount', $1, stats)
-  when /^make: Entering.*(x86)'/
-    # for mpx.skip
-    # processor lacks MPX XSTATE(s), can not run MPX tests
-    stater = X86Stater.new($1, nil, stats)
-  when /kernel supports (resctrl) filesystem/
-    # Pass: Check kernel supports resctrl filesystem
-    # ok kernel supports resctrl filesystem
-    stater = ResctrlStater.new($1, nil, stats)
-  when /^# selftests: (net\/mptcp): (.*\.sh)/
+  when /^# selftests: (net\/(mptcp|netfilter)): (.*\.sh)/
     # selftests: net/mptcp: mptcp_connect.sh
-    stater = MptcpStater.new($1, $2, stats)
-  when /^(# |)selftests: (capabilities|breakpoints|ia64|exec|android): (.*)/
-    # selftests: capabilities: test_execve
-    stater = Object.const_get("#{$2.capitalize}Stater")
-                   .new($2, $3, stats)
-  when /make run_tests -C (android)/
-    # for below situation:
-    # not ok 1 selftests: android: run.sh # SKIP
-    stater = AndroidStater.new($1, 'run.sh', stats)
-  when /run_kselftest\.sh -c (breakpoints)/
-    # for below situation:
-    # No such collection 'breakpoints'
-    stater = BreakpointsStater.new($1, nil, stats)
-  when /^# selftests: (net|mm|kmod|netfilter|mqueue|prctl|bpf|sgx|clone3|sync|sysctl|pidfd|firmware|dma|pstore|timers|timens|livepatch|futex|x86|vDSO|ftrace|dmabuf-heaps|memory-hotplug): (.*)/
+    stater = Object.const_get("#{$2.split('-').map(&:capitalize).join}Stater")
+                   .new($1, $3, stats)
+  when /^# selftests: (.+): (.+)/,
+       /make: Entering directory .*\/(.*)'/
     # selftests: kmod: kmod.sh
-    stater = Object.const_get("#{$1.split('-').map(&:capitalize).join}Stater")
-                   .new($1, $2, stats)
-  when /^# selftests: (.+): (.+)/
-    stater = Stater.new($1, $2, stats)
-  when %r{make: Entering directory .*/(.*)'}
-    stater = Stater.new($1, nil, stats)
+    stater_cls = begin
+      Object.const_get("#{$1.split('-').map(&:capitalize).join}Stater")
+    rescue NameError
+      Stater
+    end
+
+    stater = stater_cls.new $1, $2, stats
   when /mm\/test_vmalloc.sh (stress|performance)/
-    stater = VmallocStater.new('mm.test_vmalloc.sh', $1, stats)
+    stater = VmallocStater.new("mm.test_vmalloc.sh.#{$1}", nil, stats)
   else
     next unless stater
-
-    stater.stat(line)
   end
+
+  stater.stat(line)
 end
 
-stats.dump('ok' => 'pass', 'not_ok' => 'fail')
+stats.dump('ok' => 'pass', 'not_ok' => 'fail', 'skipping' => 'skip')

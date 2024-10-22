@@ -1,5 +1,6 @@
 pidfd.make.pass: 1
-pidfd.pidfd_fdinfo_test._test_Passed.pass: 1
+pidfd.pidfd_fdinfo_test.pidfd_check_for_NSpid_in_fdinfo_test.pass: 1
+pidfd.pidfd_fdinfo_test.pidfd_check_fdinfo_for_dead_process_test.pass: 1
 pidfd.pidfd_fdinfo_test.pass: 1
 pidfd.pidfd_wait.global.wait_simple.pass: 1
 pidfd.pidfd_wait.global.wait_states.pass: 1

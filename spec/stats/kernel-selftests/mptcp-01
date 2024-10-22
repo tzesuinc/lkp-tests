@@ -1,31 +1,34 @@
-make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-8223a71d1963d25cbec67dba3cecce6d3b09bd7d/tools/testing/selftests/net/mptcp'
+# timeout set to 1800
 # selftests: net/mptcp: mptcp_connect.sh
-# Created /tmp/tmp.rZSP7CfbsA (size 6943603) containing data sent by server
-# New MPTCP socket can be blocked via sysctl		[ OK ]
-# setsockopt(..., TCP_ULP, "mptcp", ...) blocked	[ OK ]
-# INFO: Using loss of 0.17% delay 87 ms reorder 99% 83% on ns3eth4
-# ns1 MPTCP -> ns1 (10.0.1.1:10000      ) MPTCP	(duration   117ms) [ OK ]
-# ns1 MPTCP -> ns1 (10.0.1.1:10001      ) TCP  	(duration   113ms) [ OK ]
-# ns4 MPTCP -> ns3 (10.0.3.2:10040      ) MPTCP	(duration   185ms) [ OK ]
-# ns4 MPTCP -> ns3 (dead:beef:3::2:10041) MPTCP	(duration   204ms) [ OK ]
+# INFO: set ns3-66711c9c-7KHCcg dev ns3eth2: ethtool -K tso off
+# INFO: set ns4-66711c9c-7KHCcg dev ns4eth3: ethtool -K tso off
+# Created /tmp/tmp.ECI6ECrW74 (size 1604032     /tmp/tmp.ECI6ECrW74) containing data sent by client
+# Created /tmp/tmp.PUQo4xhVrX (size 1535839     /tmp/tmp.PUQo4xhVrX) containing data sent by server
+# 01 New MPTCP socket can be blocked via sysctl                           [ OK ]
+# 02 Validating network environment with pings                            [ OK ]
+# INFO: Using loss of 0.31% delay 31 ms on ns3eth4
+# 03 ns1 MPTCP -> ns1 (10.0.1.1:10000      ) MPTCP     (duration    46ms) [ OK ]
+# 68 ns1 TCP   -> ns1 (dead:beef:1::1:20006) MPTCP     (duration     9ms) [ OK ]
+# Time: 20 seconds
+#
+# TAP version 13
+# 1..68
+# ok 1 - mptcp_connect: New MPTCP socket can be blocked via sysctl
+# ok 2 - mptcp_connect: ping tests
+# ok 3 - mptcp_connect: loopback v4: ns1 MPTCP -> ns1 (10.0.1.1:10000      ) MPTCP # time=46ms
+# ok 68 - mptcp_connect: full disconnect: ns1 TCP   -> ns1 (dead:beef:1::1:20006) MPTCP # time=9ms
 ok 1 selftests: net/mptcp: mptcp_connect.sh
-# selftests: net/mptcp: pm_netlink.sh
-# defaults addr list                                 [ OK ]
-# defaults limits                                    [ OK ]
-# simple add/get addr                                [ OK ]
-# dump addrs                                         [ OK ]
-# simple del addr                                    [ OK ]
-# dump addrs after del                               [ OK ]
-# duplicate addr                                     [ OK ]
-# id addr increment                                  [ OK ]
-# hard addr limit                                    [ OK ]
-# above hard addr limit                              [ OK ]
-# id limit                                           [ OK ]
-# flush addrs                                        [ OK ]
-# rcv addrs above hard limit                         [ OK ]
-# subflows above hard limit                          [ OK ]
-# set limits                                         [ OK ]
-# set ids                                            [ OK ]
-# wrap-around ids                                    [ OK ]
-ok 2 selftests: net/mptcp: pm_netlink.sh
-make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-7.6-kselftests-8223a71d1963d25cbec67dba3cecce6d3b09bd7d/tools/testing/selftests/net/mptcp'
+# timeout set to 1800
+# selftests: net/mptcp: mptcp_join.sh
+# 001 no JOIN
+#       syn                                 [ OK ]
+#       synack                              [ OK ]
+#       ack                                 [ OK ]
+# 002 single subflow, limited by client
+#       syn                                 [ OK ]
+#       synack                              [ OK ]
+#       ack                                 [ OK ]
+# TAP version 13
+# 1..118
+# ok 1 - mptcp_join: no JOIN
+# ok 2 - mptcp_join: single subflow, limited by client

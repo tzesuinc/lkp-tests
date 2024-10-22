@@ -9,6 +9,11 @@ TAP version 13
 # ipv4 tx:64 gso:1
 # ipv4 tx:65 gso:1 (fail)
 # OK
+# ipv4 setsockopt
+# ipv4 tx:1 gso:0
+# ipv4 tx:1472 gso:0
+# ipv4 tx:1473 gso:0 (fail)
+# OK
 # ipv6 cmsg
 # device mtu (orig): 65536
 # device mtu (test): 1500

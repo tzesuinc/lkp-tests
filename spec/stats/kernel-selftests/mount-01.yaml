@@ -1,1 +1,1 @@
-mount.unprivileged-remount-test.skip: 1
+mount.skip: 1

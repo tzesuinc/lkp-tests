@@ -1,1 +1,3 @@
+net.udpgro_fwd.sh.IPv4.pass: 1
+net.udpgro_fwd.sh.IPv6.pass: 1
 net.udpgro_fwd.sh.pass: 1

@@ -19,5 +19,16 @@ TAP version 13
 # Running test: sysctl_test_0002 - run #0
 # == Testing sysctl behavior against /proc/sys/debug/test_sysctl/string_0001 ==
 # Writing test file ... ok
+# Mon Oct 21 08:56:23 UTC 2024
+# Running test: sysctl_test_0007 - run #0
+# Testing if /proc/sys/debug/test_sysctl/boot_int is set to 1 ... SKIPPING
+# Test only possible if sysctl_test is built-in, not module:
+# CONFIG_TEST_SYSCTL=m
+# Mon Oct 21 08:56:22 UTC 2024
+# Running test: sysctl_test_0006 - run #47
+# Checking bitmap handler ... OK
+# Mon Oct 21 08:56:22 UTC 2024
+# Running test: sysctl_test_0006 - run #48
+# Checking bitmap handler ... OK
 ok 1 selftests: sysctl: sysctl.sh
 make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-8.3-kselftests-3d7cb6b04c3f3115719235cc6866b10326de34cd/tools/testing/selftests/sysctl'

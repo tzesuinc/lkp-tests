@@ -7,39 +7,24 @@ make[1]: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-8.3-kselftests-d
 TAP version 13
 1..1
 # selftests: net: fcnal-test.sh
-# 
+#
 # ###########################################################################
 # IPv4 address binds
 # ###########################################################################
-# 
-# 
+#
+#
 # #################################################################
 # No VRF
-# 
+#
 # TEST: Raw socket bind to local address - ns-A IP                              [ OK ]
-# TEST: Raw socket bind to local address after device bind - ns-A IP            [ OK ]
-# TEST: Raw socket bind to local address - ns-A loopback IP                     [ OK ]
-# TEST: Raw socket bind to local address after device bind - ns-A loopback IP   [ OK ]
-# TEST: TCP socket bind to local address - ns-A IP                              [ OK ]
 # TEST: TCP socket bind to local address after device bind - ns-A IP            [ OK ]
-# 
+#
 # #################################################################
 # With VRF
-# 
+#
 # TEST: Raw socket bind to local address - ns-A IP                              [ OK ]
-# TEST: Raw socket bind to local address after device bind - ns-A IP            [ OK ]
-# TEST: Raw socket bind to local address after VRF bind - ns-A IP               [ OK ]
-# TEST: Raw socket bind to local address - VRF IP                               [FAIL]
-# TEST: Raw socket bind to local address after device bind - VRF IP             [ OK ]
-# TEST: Raw socket bind to local address after VRF bind - VRF IP                [ OK ]
-# TEST: Raw socket bind to out of scope address after VRF bind - ns-A loopback IP  [ OK ]
-# TEST: TCP socket bind to local address - ns-A IP                              [ OK ]
-# TEST: TCP socket bind to local address after device bind - ns-A IP            [ OK ]
-# TEST: TCP socket bind to local address - VRF IP                               [ OK ]
-# TEST: TCP socket bind to local address after device bind - VRF IP             [ OK ]
-# TEST: TCP socket bind to invalid local address for VRF - ns-A loopback IP     [ OK ]
 # TEST: TCP socket bind to invalid local address for device bind - ns-A loopback IP  [ OK ]
-# 
+#
 # Tests passed:  18
 # Tests failed:   1
 ok 1 selftests: net: fcnal-test.sh

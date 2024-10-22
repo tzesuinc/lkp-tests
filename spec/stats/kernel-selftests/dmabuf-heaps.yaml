@@ -1,7 +1,9 @@
 dmabuf-heaps.make.pass: 1
-dmabuf-heaps.dmabuf-heap.Testing_alloced_4k_buffers_are_zeroed.pass: 1
-dmabuf-heaps.dmabuf-heap.Testing_alloced_1024k_buffers_are_zeroed.pass: 1
-dmabuf-heaps.dmabuf-heap.Testing_theoretical_older_alloc_compat.pass: 1
-dmabuf-heaps.dmabuf-heap.Testing_theoretical_newer_alloc_compat.pass: 1
-dmabuf-heaps.dmabuf-heap.Testing_expected_error_cases.pass: 1
+dmabuf-heaps.dmabuf-heap.allocation_and_importing.Could_not_open_vgem_-1.skip: 1
+dmabuf-heaps.dmabuf-heap.allocation_and_importing.test_alloc_and_import_dmabuf_sync_succeeded.pass: 1
+dmabuf-heaps.dmabuf-heap.alloced_4k_buffers_are_zeroed.Allocate_and_fill_a_bunch_of_buffers.pass: 1
+dmabuf-heaps.dmabuf-heap.alloced_4k_buffers_are_zeroed.Allocate_and_validate_all_buffers_are_zeroed.pass: 1
+dmabuf-heaps.dmabuf-heap.alloced_1024k_buffers_are_zeroed.Allocate_and_fill_a_bunch_of_buffers.pass: 1
+dmabuf-heaps.dmabuf-heap.alloced_1024k_buffers_are_zeroed.Allocate_and_validate_all_buffers_are_zeroed.pass: 1
+dmabuf-heaps.dmabuf-heap.expected_error_cases.Error_expected_on_invalid_fd_-1.pass: 1
 dmabuf-heaps.dmabuf-heap.pass: 1
