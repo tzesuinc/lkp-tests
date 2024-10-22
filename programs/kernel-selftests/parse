@@ -34,10 +34,7 @@ class Stater
     when SUBTEST_RESULT_PATTERN
       parse_subtest_result(line)
     when /TAP version 13/
-      # only after 'make' passed will test start to run,
-      # and when test start to run, it will output this line
-
-      # ignore the duplication since some test such as futex may output repeatedly
+      # The test will start running only after the 'make' is successful. During this process, this 'TAP' line will be outputted.
       parse_make_result('pass')
     when /: recipe for target.+failed$/,
          /^make: \*\*\* (.*) (Error \d+|Stop\.)$/
@@ -643,9 +640,6 @@ class MemoryHotplugStater < Stater
       return unless @test_script
 
       stats.add @test_prefix.to_s, 'pass', overwrite: true
-    when %r{: recipe for target.+failed}
-      # Makefile:47: recipe for target 'sysret_ss_attrs_64' failed
-      stats.add "#{@test_dir}.make", 'fail'
     else
       super(line)
     end
@@ -686,9 +680,6 @@ class X86Stater < Stater
       result = @mpx_result if test_script =~ /mpx-mini-test/ && @mpx_result
 
       stats.add "#{@test_dir}.#{test_script}", result
-    when %r{: recipe for target.+failed}
-      # Makefile:47: recipe for target 'sysret_ss_attrs_64' failed
-      stats.add "#{@test_dir}.make", 'fail', overwrite: true
     else
       super(line)
     end
@@ -1185,10 +1176,6 @@ class ExecStater < Stater
 
       # ignore detail stats of execveat to avoid duplication
       stats.add subname, res unless @test_script =~ /execveat/
-    when /: recipe for target.+failed$/,
-         /^make: \*\*\* (.*) (Error \d+|Stop\.)$/
-      # make: *** No rule to make target .*, needed by 'all'.  Stop.
-      stats.add "#{@test_dir}.make", 'fail'
     else
       super(line)
     end
