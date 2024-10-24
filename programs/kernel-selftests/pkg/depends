@@ -80,6 +80,7 @@ pkg-config
 python
 python-docutils
 python-scapy
+python-jsonschema
 rsync
 sendip
 socat
