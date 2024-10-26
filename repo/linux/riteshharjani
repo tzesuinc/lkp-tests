@@ -9,3 +9,6 @@ integration_testing_branches:
 owner:
 - Ritesh Harjani (IBM) <ritesh.list@gmail.com>
 - Ritesh Harjani <riteshh@linux.ibm.com>
+mail_to:
+- Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+- Ritesh Harjani <riteshh@linux.ibm.com>
