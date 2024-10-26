@@ -679,7 +679,6 @@ run_tests()
 
 		check_test_group_kconfig $group
 
-		(
 		fixup_test_group $group || die "fixup_$group failed"
 
 		if grep -E -q -m 1 "^TARGETS \+?=  ?$group" Makefile; then
@@ -733,7 +732,6 @@ run_tests()
 		fi
 
 		cleanup_test_group $group
-		)
 	done
 }
 
