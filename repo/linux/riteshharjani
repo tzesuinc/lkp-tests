@@ -1,1 +1,11 @@
 url: https://github.com/riteshharjani/linux
+notify_build_success_branch: .*
+private_report_branch: .*
+branch_denylist: .*
+branch_allowlist: .*for-next|.*fixes|.*0day.*
+integration_testing_branches:
+- for-next
+- fixes
+owner:
+- Ritesh Harjani (IBM) <ritesh.list@gmail.com>
+- Ritesh Harjani <riteshh@linux.ibm.com>
