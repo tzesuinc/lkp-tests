@@ -79,8 +79,8 @@ pesign
 pkg-config
 python
 python-docutils
-python-scapy
 python-jsonschema
+python-scapy
 rsync
 sendip
 socat
