@@ -3,3 +3,4 @@ owner: Sasha Levin <sashal@kernel.org>
 mail_to: Sasha Levin <sashal@kernel.org>
 test_old_branches: .*
 private_report_branch: .*
+belongs_to: stable
