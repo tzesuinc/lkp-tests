@@ -8,4 +8,3 @@ subsystems:
 - fs
 - nfs
 - list_lru
-test_old_branches: .*
