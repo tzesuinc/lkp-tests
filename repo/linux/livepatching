@@ -1,3 +1,2 @@
 url: https://git.kernel.org/pub/scm/linux/kernel/git/livepatching/livepatching.git
 owner: Jiri Kosina <jkosina@suse.cz>
-test_old_branches: .*

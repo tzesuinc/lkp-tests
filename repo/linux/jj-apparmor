@@ -5,4 +5,3 @@ subsystems:
 - apparmor
 - sauce
 - fix
-test_old_branches: .*

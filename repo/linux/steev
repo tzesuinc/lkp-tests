@@ -1,4 +1,3 @@
 url: https://github.com/steev/linux
-test_old_branches: .*
 mail_to: Steev Klimaszewski <steev@kali.org>
 private_report_branch: .*

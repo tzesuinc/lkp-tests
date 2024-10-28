@@ -3,4 +3,3 @@ owner: David Sterba <dsterba@suse.cz>
 subsystems:
 - btrfs-progs
 - autoconf
-test_old_branches: .*

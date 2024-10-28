@@ -9,4 +9,3 @@ subsystems:
 - backport
 - devel
 - copy
-test_old_branches: .*

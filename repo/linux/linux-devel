@@ -5,4 +5,3 @@ priority: high
 belongs_to: 0day
 no_merge_branch: .*
 branch_denylist: master|revert-.*
-test_old_branches: .*

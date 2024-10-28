@@ -1,4 +1,2 @@
 url: https://github.com/AsahiLinux/linux
 branch_denylist: bits/210-gpu
-test_old_branches: .*
-no_merge_branch: .*

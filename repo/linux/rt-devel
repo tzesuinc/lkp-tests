@@ -5,8 +5,6 @@ owner:
 git_am_branch: for-kbuild-bot/current-stable
 subsystems:
 - rt
-test_old_branches: .*
-branch_denylist: linux-5\..+\.y-rt
 no_merge_branch: .*
 patch_based_on_branch:
   '\[.+ (RT|rt|-rt)( .+)?\]': for-kbuild-bot/current-stable

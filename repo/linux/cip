@@ -1,6 +1,4 @@
 url: https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git
-test_old_branches: .*
 mail_to:
 - Nobuhiro Iwamatsu <nobuhiro1.iwamatsu@toshiba.co.jp>
 private_report_branch: .*
-no_merge_branch: .*

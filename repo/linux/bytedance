@@ -4,6 +4,7 @@ arch_denylist: .*
 arch_allowlist: x86_64|arm64|loongarch
 branch_allowlist: 5.15-velinux|6.6-velinux
 branch_denylist: .*
+no_merge_branch: .*
 compiler: gcc
 mail_to:
 - jason.zeng@intel.com

@@ -43,5 +43,4 @@ subsystems:
 - generic
 - davinci
 - atmel
-test_old_branches: .*
 non_rebaseable_branch: .*

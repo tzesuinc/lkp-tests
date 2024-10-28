@@ -7,4 +7,3 @@ subsystems:
 - rtc
 - fs
 - tiny
-test_old_branches: .*

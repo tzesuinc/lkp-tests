@@ -11,4 +11,5 @@ private_report_branch: .*
 too_old_relative_commit_date: month|year|^[4-9]+ weeks
 arch_denylist: .*
 arch_allowlist: x86_64|i386|arm|arm64
+test_old_branches: .*
 no_merge_branch: .*

@@ -1,3 +1,1 @@
 url: git://git.samba.org/ksmbd.git
-test_old_branches: .*
-no_merge_branch: 5.15-stable-.*

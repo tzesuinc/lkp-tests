@@ -2,5 +2,3 @@ url: https://github.com/smfrench/smb3-kernel.git
 owner: Steve French <stfrench@microsoft.com>
 mail_to: Steve French <stfrench@microsoft.com>
 private_report_branch: .*
-test_old_branches: .*
-no_merge_branch: 5.15-stable-full-cifs-backport

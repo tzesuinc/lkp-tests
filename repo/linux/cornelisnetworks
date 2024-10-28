@@ -1,5 +1,4 @@
 url: https://github.com/cornelisnetworks/linux.git
 notify_build_success_branch: .*
-test_old_branches: .*
 mail_cc:
   - Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>

@@ -6,6 +6,5 @@ mail_cc:
 - dri-devel@lists.freedesktop.org
 owner: Daniel Vetter <daniel.vetter@intel.com>
 belongs_to: i915
-test_old_branches: .*
 patch_based_on_branch:
   '\[Intel-gfx\]': drm-tip

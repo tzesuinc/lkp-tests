@@ -8,4 +8,3 @@ subsystems:
 - x86
 - usb
 - i915
-test_old_branches: .*
