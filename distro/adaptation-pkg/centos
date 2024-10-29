@@ -89,6 +89,7 @@ pmbench::
 pmu-tools::
 postmark::
 pybench::
+qat::
 qperf::
 reaim::
 redis-server::
