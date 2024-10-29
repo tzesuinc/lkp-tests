@@ -1,0 +1,11 @@
+url: https://github.com/spacemit-com/linux
+branch_denylist: .*
+branch_allowlist: .*for-next|.*fixes
+integration_testing_branches:
+- for-next
+- fixes
+notify_build_success_branch: .*
+owner:
+- Yixun Lan <dlan@gentoo.org>
+mail_cc:
+- Yixun Lan <dlan@gentoo.org>
