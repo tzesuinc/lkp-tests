@@ -416,7 +416,12 @@ fixup_kexec()
 	local kernel_image=/boot/vmlinuz-$(uname -r)
 	[[ -e $kernel_image ]] || {
 		kernel_image=/opt/rootfs/tmp$(grep -o "/pkg/linux/.*/vmlinuz-[^ ]*" /proc/cmdline)
-		[[ -e $kernel_image ]] && sed -i "s|/boot/vmlinuz-\`uname -r\`|$kernel_image|g" kexec/kexec_common_lib.sh
+		[[ -e $kernel_image ]] || {
+			echo "kernel image $kernel_image doesn't exist"
+			return 1
+		}
+
+		sed -i "s|/boot/vmlinuz-\`uname -r\`|$kernel_image|g" kexec/kexec_common_lib.sh
 	}
 }
 
