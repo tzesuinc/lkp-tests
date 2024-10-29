@@ -457,11 +457,10 @@ fixup_damon()
 
 prepare_for_selftest()
 {
-	if [ "$group" = "net/netfilter" ]; then
-		selftest_mfs=$(ls -d net/netfilter/Makefile)
-		[ "$selftest_mfs" ] || selftest_mfs=$(ls -d netfilter/Makefile)
-	else
+	if [[ "$group" =~ ^net ]]; then
 		selftest_mfs=$(ls -d $group/Makefile)
+	else
+		selftest_mfs=$(find $group -name Makefile)
 	fi
 }
 
