@@ -17,7 +17,7 @@ device-dax: ndctl
 eatmem: vm-scalability
 ebizzy::
 energy: perf
-f2fs-tools:: 
+f2fs-tools::
 filebench::
 fsmark:
 ftq::
@@ -37,7 +37,7 @@ kvm-kernel-boot-test::
 kvm-unit-tests::
 leaking-addresses::
 lib-micro::
-libfdt-dev:: 
+libfdt-dev::
 libhugetlbfs-test::
 liblz-dev: lzlib
 liboop-dev: liboop
@@ -83,23 +83,23 @@ phoronix-test-suite::
 phpbench::
 piglit::
 pixz::
-plzip:: 
+plzip::
 pm-qa::
 pmbench::
 pmu-tools::
-postmark:: 
+postmark::
 pybench::
 qperf::
 reaim::
 redis-server::
 rocksdb::
 rt-app::
-rt-tests:: 
+rt-tests::
 schbench::
 simd-stress::
 sockperf::
 stream::
-stress-ng:: 
+stress-ng::
 stutter::
 swapin: vm-scalability
 sysbench-fileio::
@@ -111,12 +111,12 @@ toplev: pmu-tools
 trace-cmd::
 trinity-static-i386::
 trinity-static-x86_64::
-trinity:: 
+trinity::
 turbostat: kernel-tools
 unixbench::
 uperf::
 v4l2::
-vm-scalability:: 
+vm-scalability::
 vmem::
 will-it-scale::
 xfstests::

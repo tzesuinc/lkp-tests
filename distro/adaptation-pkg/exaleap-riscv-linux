@@ -106,7 +106,7 @@ turbostat::
 unixbench::
 uperf::
 v4l2::
-vm-scalability:: 
+vm-scalability::
 will-it-scale::
 xfstests::
 ycsb::
