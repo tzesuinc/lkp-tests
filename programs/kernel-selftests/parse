@@ -193,6 +193,19 @@ class SigaltstackStater < Stater
   end
 end
 
+class BreakpointsStater < Stater
+  def stat(line)
+    case line
+    when /^# (ok|not ok) \d+ CPU \d+/
+      # # ok 1 CPU 0
+      # # not ok 3 CPU 2
+      # ignore
+    else
+      super
+    end
+  end
+end
+
 class NetStater < Stater
   def stat(line)
     case line
