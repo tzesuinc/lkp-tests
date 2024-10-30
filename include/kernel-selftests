@@ -73,6 +73,8 @@ need_kconfig:
 - NET_NS: y
 - CGROUPS: y
 - CHECKPOINT_RESTORE: y
+% elsif ___.group == "tdx"
+- TDX_GUEST_DRIVER
 % elsif ___.group == "group-00"
 - ANDROID: y
 - DRM
@@ -194,7 +196,6 @@ need_kconfig:
 - NET: y
 - VIRT_DRIVERS: y
 - INTEL_TDX_GUEST: y
-- TDX_GUEST_DRIVER
 - TEST_USER_COPY
 - TIME_NS: y
 - USERFAULTFD: y
