@@ -64,7 +64,7 @@ kernel-selftests:
     - move_mount_set_group
     - mqueue
     - nci
-    - nolibc
+    # - nolibc # not enabled yet
     - nsfs
     # - ntb
     - openat2
