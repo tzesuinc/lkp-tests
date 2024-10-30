@@ -77,6 +77,22 @@ need_kconfig:
 - ION: y
 - ION_SYSTEM_HEAP: y
 - STAGING: y
+% elsif ___.group == "landlock"
+- CGROUPS
+- CGROUP_SCHED
+- INET
+- IPV6
+- KEYS
+- NET
+- NET_NS
+- OVERLAY_FS
+- PROC_FS
+- SECURITY
+- SECURITY_LANDLOCK
+- SHMEM
+- SYSFS
+- TMPFS
+- TMPFS_XATTR
 % elsif ___.group == "group-01"
 - DAMON: y
 - DAMON_VADDR: y
@@ -86,7 +102,6 @@ need_kconfig:
 - DAMON_LRU_SORT: y
 - DAMON_RECLAIM: y
 - SECURITY_PATH: y
-- SECURITY_LANDLOCK: y
 - UDMABUF: y
 - DMABUF_HEAPS: y
 - DMABUF_HEAPS_SYSTEM: y
@@ -314,6 +329,5 @@ need_kconfig:
 - PERF_EVENTS: y
 - SCHED_DEBUG: y
 - SHMEM: y
-- TMPFS_XATTR: y
 - TMPFS: y
 % end
