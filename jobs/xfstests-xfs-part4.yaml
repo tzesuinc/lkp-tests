@@ -31,6 +31,7 @@ xfstests:
     - xfs-group-60
     - xfs-group-61
     - xfs-group-62
+    - xfs-group-63
     - xfs-group-71
     - xfs-group-78
     - xfs-group-79

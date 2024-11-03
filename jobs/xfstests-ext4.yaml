@@ -15,6 +15,7 @@ xfstests:
     - ext4-group-00
     - ext4-group-01
     - ext4-group-02
+    - ext4-group-03
     - ext4-group-13
     - ext4-group-15
 
