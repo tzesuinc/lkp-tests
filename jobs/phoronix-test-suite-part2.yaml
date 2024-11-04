@@ -77,7 +77,7 @@ phoronix-test-suite:
     # - uvg266-1.0.0 # uvg266-1.0.0 is not installed
     # - v-ray-1.0.2 # 3rd party url is N/A
     # - viennacl-1.1.0 # viennacl-1.1.0 is not installed
-    - vvenc-1.9.1
+    # - vvenc-1.9.1 # is not installed
     # - webp-1.2.0 # webp-1.2.0 is not installed
     # - whisper-cpp-1.0.0 # The test quit with a non-zero exit status.
     # - x264-2.5.0 # not an available test
