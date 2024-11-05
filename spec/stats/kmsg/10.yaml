@@ -1,0 +1,13 @@
+
+# LKP: .* Kernel tests: Boot OK!
+LKP:ttyS0:#:Kernel_tests:Boot_OK: 1
+message:LKP:ttyS0:#:Kernel_tests:Boot_OK: LKP: ttyS0: 239: Kernel tests: Boot OK!
+pattern:LKP:ttyS0:#:Kernel_tests:Boot_OK: LKP: .* Kernel tests: Boot OK!
+
+# LKP: stdout: .* Kernel tests: Boot OK!
+LKP:stdout:#:Kernel_tests:Boot_OK: 1
+message:LKP:stdout:#:Kernel_tests:Boot_OK: [   37.252019][  T255] LKP: stdout: 239: Kernel tests: Boot OK!
+pattern:LKP:stdout:#:Kernel_tests:Boot_OK: LKP: stdout: .* Kernel tests: Boot OK!
+
+timestamp:last: 173.467111
+timestamp:LKP:stdout:#:Kernel_tests:Boot_OK: 37.252019

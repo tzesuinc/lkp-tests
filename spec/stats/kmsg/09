@@ -1,0 +1,26 @@
+LKP: ttyS1: 239: skip deploy intel ucode as no ucode is specified
+LKP: ttyS1: 239: Kernel tests: Boot OK!
+LKP: ttyS1: 239: HOSTNAME vm-snb-i386, MAC 52:54:00:12:34:56, kernel 6.12.0-rc5-wt-ath-15420-gba8f58314bb7 1
+LKP: ttyS1: 239:  /lkp/lkp/src/bin/run-lkp /lkp/jobs/scheduled/vm-meta-143/rcutorture-300s-default-tasks-tracing-debian-11.1-i386-20220923.cgz-i386-randconfig-002-20241031-ba8f58314bb7-20241031-44969-1ubgs3r-0.yaml
+kern  :notice: [    0.000000] Linux version 6.12.0-rc5-wt-ath-15420-gba8f58314bb7 (kbuild@9d2b8267a300) (clang version 19.1.3 (git://gitmirror/llvm_project ab51eccf88f5321e7c60591c5546b254b6afab99), LLD 19.1.3 (git://gitmirror/llvm_project ab51eccf88f5321e7c60591c5546b254b6afab99)) #1 SMP PREEMPT Thu Oct 31 08:42:36 CST 2024
+kern  :info  : [    0.000000] BIOS-provided physical RAM map:
+kern  :info  : [    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+kern  :info  : [    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+kern  :info  : [    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+kern  :debug : [   16.824480]     riscv_isa_fallback=1
+daemon:info  : [   16.859940] systemd[1]: RTC configured in localtime, applying delta of 0 minutes to system time.
+kern  :notice: [   18.369041] random: crng init done
+user  :notice: [   34.439240] is_virt=true
+user  :notice: [   36.565505] lkp: kernel tainted state: 131072
+user  :notice: [   37.252019] LKP: stdout: 239: Kernel tests: Boot OK!
+kern  :err   : [   43.132720] genirq: Flags mismatch irq 11. 00200080 (eth0) vs. 00200000 (wdt501p)
+kern  :err   : [   43.138757] e1000 0000:00:03.0 eth0: Unable to allocate interrupt Error: -16
+kern  :err   : [   43.213742] genirq: Flags mismatch irq 11. 00200080 (eth0) vs. 00200000 (wdt501p)
+kern  :err   : [   43.215259] e1000 0000:00:03.0 eth0: Unable to allocate interrupt Error: -16
+user  :notice: [   43.557563] LKP: stdout: 239: HOSTNAME vm-snb-i386, MAC 52:54:00:12:34:56, kernel 6.12.0-rc5-wt-ath-15420-gba8f58314bb7 1
+user  :notice: [   43.566077] install debs round one: dpkg -i --force-confdef --force-depends /opt/deb/gawk_1%3a5.1.0-1_i386.deb
+user  :notice: [  165.002836] NO_NETWORK=1
+user  :notice: [  173.420894] LKP: stdout: 239:  /lkp/lkp/src/bin/run-lkp /lkp/jobs/scheduled/vm-meta-143/rcutorture-300s-default-tasks-tracing-debian-11.1-i386-20220923.cgz-i386-randconfig-002-20241031-ba8f58314bb7-20241031-44969-1ubgs3r-0.yaml
+user  :notice: [  173.435291] RESULT_ROOT=/result/rcutorture/300s-default-tasks-tracing/vm-snb-i386/debian-11.1-i386-20220923.cgz/i386-randconfig-002-20241031/clang-19/ba8f58314bb7939e8b9b576008ccc490c6020e51/0
+user  :notice: [  173.448959] job=/lkp/jobs/scheduled/vm-meta-143/rcutorture-300s-default-tasks-tracing-debian-11.1-i386-20220923.cgz-i386-randconfig-002-20241031-ba8f58314bb7-20241031-44969-1ubgs3r-0.yaml
+user  :notice: [  173.467111] run-job /lkp/jobs/scheduled/vm-meta-143/rcutorture-300s-default-tasks-tracing-debian-11.1-i386-20220923.cgz-i386-randconfig-002-20241031-ba8f58314bb7-20241031-44969-1ubgs3r-0.yaml

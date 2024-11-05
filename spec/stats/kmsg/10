@@ -1,0 +1,18 @@
+[   16.824480][    T1]     riscv_isa_fallback=1
+[   16.859940][    T1] systemd[1]: RTC configured in localtime, applying delta of 0 minutes to system time.
+LKP: ttyS0: 239: skip deploy intel ucode as no ucode is specified
+[  OK  ] Started OpenBSD Secure Shell server.
+LKP: ttyS0: 239: Kernel tests: Boot OK!
+LKP: ttyS0: 239: HOSTNAME vm-snb-i386, MAC 52:54:00:12:34:56, kernel 6.12.0-rc5-wt-ath-15420-gba8f58314bb7 1
+[   34.439240][  T255] is_virt=true
+[   34.439277][  T255]
+[   36.565505][  T255] lkp: kernel tainted state: 131072
+[   36.565539][  T255]
+[   37.252019][  T255] LKP: stdout: 239: Kernel tests: Boot OK!
+[   37.252147][  T255]
+[   43.132720][  T336] genirq: Flags mismatch irq 11. 00200080 (eth0) vs. 00200000 (wdt501p)
+[   43.138757][  T336] e1000 0000:00:03.0 eth0: Unable to allocate interrupt Error: -16
+[   43.213742][  T337] genirq: Flags mismatch irq 11. 00200080 (eth0) vs. 00200000 (wdt501p)
+[   43.215259][  T337] e1000 0000:00:03.0 eth0: Unable to allocate interrupt Error: -16
+[   43.557563][  T255] LKP: stdout: 239: HOSTNAME vm-snb-i386, MAC 52:54:00:12:34:56, kernel 6.12.0-rc5-wt-ath-15420-gba8f58314bb7 1
+[  173.467111][  T255] run-job /lkp/jobs/scheduled/vm-meta-143/rcutorture-300s-default-tasks-tracing-debian-11.1-i386-20220923.cgz-i386-randconfig-002-20241031-ba8f58314bb7-20241031-44969-1ubgs3r-0.yaml

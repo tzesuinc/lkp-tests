@@ -163,6 +163,7 @@ def grep_printk_errors(kmsg_file, kmsg)
       sed -r 's/\\x1b\\[([0-9;]+m|[mK])//g' |
       grep -a -v -E -f #{LKP_SRC_ETC}/oops-pattern |
       grep -a -v -F -f #{LKP_SRC_ETC}/kmsg-denylist.raw;
+      grep "Kernel tests: Boot OK" #{kmsg_file};
       grep -Eo "[^ ]* runtime error:.*" #{kmsg_file} | sed 's/^/sanitizer./g';
       grep -Eo -e "Direct leak of .*allocated from:" -e "Indirect leak of .*allocated from:" -e "#[0-5] 0x[0-9a-z]{12} in .*" #{kmsg_file} |
       sed 's/^Indirect leak.*/|sanitizer.indirect_leak/g' | sed 's/^Direct leak.*/|sanitizer.direct_leak/g' |
@@ -173,7 +174,8 @@ def grep_printk_errors(kmsg_file, kmsg)
     # the dmesg file is from serial console
     oops = `#{grep} -a -F -f #{KTEST_USER_GENERATED_DIR}/printk-error-messages #{kmsg_file} |
       grep -a -v -E -f #{LKP_SRC_ETC}/oops-pattern |
-      grep -a -v -F -f #{LKP_SRC_ETC}/kmsg-denylist.raw`
+      grep -a -v -F -f #{LKP_SRC_ETC}/kmsg-denylist.raw;
+      grep "Kernel tests: Boot OK" #{kmsg_file};`
     oops += `grep -a -E -f #{LKP_SRC_ETC}/ext4-crit-pattern #{kmsg_file}` if kmsg.index 'EXT4-fs ('
     oops += `grep -a -E -f #{LKP_SRC_ETC}/xfs-alert-pattern #{kmsg_file}` if kmsg.index 'XFS ('
     oops += `grep -a -E -f #{LKP_SRC_ETC}/btrfs-crit-pattern #{kmsg_file}` if kmsg.index 'btrfs: '

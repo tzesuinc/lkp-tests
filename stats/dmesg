@@ -108,7 +108,7 @@ oops_map.each do |bug_to_bisect, line|
   line.chomp!
 
   begin
-    timestamp = $2 if line =~ /^(<[0-9]+>|....  :..... : )?\[ *(\d{1,6}\.\d{6})\]( |\[)/
+    timestamp = $2 if line =~ /^(<[0-9]+>|....  :......: )?\[ *(\d{1,6}\.\d{6})\]( |\[)/
   rescue ArgumentError # invalid byte sequence in UTF-8
     next
   end

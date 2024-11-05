@@ -1,0 +1,8 @@
+
+# Kernel tests: Boot OK!
+Kernel_tests:Boot_OK: 1
+message:Kernel_tests:Boot_OK: [   24.922868] Kernel tests: Boot OK!
+pattern:Kernel_tests:Boot_OK: Kernel tests: Boot OK!
+
+timestamp:last: 24.925901
+timestamp:Kernel_tests:Boot_OK: 24.922868

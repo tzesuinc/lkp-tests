@@ -1,0 +1,19 @@
+
+# Unable to allocate interrupt Error:
+e1000#:#:#eth#:Unable_to_allocate_interrupt_Error: 1
+message:e1000#:#:#eth#:Unable_to_allocate_interrupt_Error: kern  :err   : [   43.138757] e1000 0000:00:03.0 eth0: Unable to allocate interrupt Error: -16
+pattern:e1000#:#:#eth#:Unable_to_allocate_interrupt_Error: Unable to allocate interrupt Error:
+
+# LKP: .* Kernel tests: Boot OK!
+LKP:ttyS1:#:Kernel_tests:Boot_OK: 1
+message:LKP:ttyS1:#:Kernel_tests:Boot_OK: LKP: ttyS1: 239: Kernel tests: Boot OK!
+pattern:LKP:ttyS1:#:Kernel_tests:Boot_OK: LKP: .* Kernel tests: Boot OK!
+
+# LKP: stdout: .* Kernel tests: Boot OK!
+LKP:stdout:#:Kernel_tests:Boot_OK: 1
+message:LKP:stdout:#:Kernel_tests:Boot_OK: user  :notice: [   37.252019] LKP: stdout: 239: Kernel tests: Boot OK!
+pattern:LKP:stdout:#:Kernel_tests:Boot_OK: LKP: stdout: .* Kernel tests: Boot OK!
+
+timestamp:last: 43.215259
+timestamp:e1000#:#:#eth#:Unable_to_allocate_interrupt_Error: 43.138757
+timestamp:LKP:stdout:#:Kernel_tests:Boot_OK: 37.252019
