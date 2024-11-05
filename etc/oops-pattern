@@ -37,7 +37,7 @@ INFO: task .* blocked for more than .* seconds
 INFO: trying to register non-static key.
 initcall .* returned with .*
 Initiating system reboot
-Initramfs unpacking failed: 
+Initramfs unpacking failed:
 invoked oom-killer: gfp_mask=0x
 IP-Config: Auto-configuration of network failed
 KASAN: .*
@@ -53,12 +53,12 @@ neighbour: Destroying alive neighbour.*
 no CFI hash found at.*
 Oops: .*
 Out of memory and no killable processes
-Out of memory: Kill process 
+Out of memory: Kill process
 page allocation failure: order:[0-9]+, mode:0x.*
 pagealloc: memory corruption
 pagealloc: single bit error
-PANIC: double fault, 
-PANIC: early exception 
+PANIC: double fault,
+PANIC: early exception
 refcount_t: underflow; use-after-free
 RIP: [0-9a-f]{4}:[a-zA-Z0-9._]+\+0x.*/0x.*
 RIP: [0-9a-f]{4}:\[.*\] [a-zA-Z0-9._]+\+0x.*/0x.*
@@ -68,10 +68,10 @@ S0Box: more than 5 loops in s0box_interrupt
 saturated; leaking memory
 segfault at .* ip .* sp .* error .* likely on CPU .*
 smp: csd: Re-sending CSD lock
-sysctl could not get directory: 
-sysctl duplicate entry: 
-sysctl link missing during unregister: 
-sysctl table check failed: 
+sysctl could not get directory:
+sysctl duplicate entry:
+sysctl link missing during unregister:
+sysctl table check failed:
 sysfs: cannot create duplicate filename
 UBSAN: .*
 Unknown interrupt or fault at:
@@ -97,5 +97,5 @@ Wrong destination address
 \[ BUG: [^b].*! \]
 \[ INFO: [^i].* \]
 \[ {0,4}[A-Z][0-9]{1,5}\] BUG: .*
-\[drm:.*\[i915\]\] 
+\[drm:.*\[i915\]\]
 ^BUG: .*
