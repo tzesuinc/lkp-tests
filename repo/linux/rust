@@ -4,3 +4,5 @@ notify_build_success_branch: .*
 mail_cc:
 - Miguel Ojeda <ojeda@kernel.org>
 - Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+integration_testing_branches:
+- rust-next
