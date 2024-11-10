@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'timeout'
 require "#{LKP_SRC}/lib/yaml"
+require "#{LKP_SRC}/lib/ruby"
 
 TEST_YAML_FILE = '/tmp/test.yaml'.freeze
 
@@ -92,11 +93,7 @@ contents: &borrow-1d
 EOF
 
   yaml = yaml_merge_included_files(yaml_merge_spec, File.dirname(__FILE__))
-  expects = if Psych::VERSION > '4.0'
-              YAML.safe_load(yaml, aliases: true, permitted_classes: [Symbol])
-            else
-              YAML.load(yaml)
-            end
+  expects = YAML.unsafe_load(yaml)
 
   expects.each do |k, v|
     next unless k.instance_of?(Symbol)

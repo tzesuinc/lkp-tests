@@ -5,6 +5,7 @@ LKP_SRC ||= ENV['LKP_SRC'] || File.dirname(__dir__)
 require "#{LKP_SRC}/lib/common"
 require "#{LKP_SRC}/lib/log"
 require "#{LKP_SRC}/lib/erb"
+require "#{LKP_SRC}/lib/ruby"
 require "#{LKP_SRC}/lib/assert"
 require 'fileutils'
 require 'yaml'
