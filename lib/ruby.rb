@@ -13,3 +13,15 @@ if RUBY_VERSION < '2.4'
     end
   end
 end
+
+if RUBY_VERSION < '2.7'
+  require 'pathname'
+
+  class File
+    class << self
+      def absolute_path?(file_name)
+        Pathname.new(file_name).absolute?
+      end
+    end
+  end
+end
