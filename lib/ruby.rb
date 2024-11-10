@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'psych'
+
 if RUBY_VERSION < '2.4'
   class Hash
     def transform_values
@@ -22,6 +24,17 @@ if RUBY_VERSION < '2.7'
       def absolute_path?(file_name)
         Pathname.new(file_name).absolute?
       end
+    end
+  end
+end
+
+if Psych::VERSION < '4.0'
+  require 'yaml'
+
+  module YAML
+    class << self
+      alias unsafe_load load
+      alias unsafe_load_file load_file
     end
   end
 end
