@@ -11,8 +11,10 @@ build()
 {
 	cd $srcdir/$pkgname
 
-	# make failed when using gcc-7, no error with using gcc-6.
-	sed -i "s/CWFLAGS = -Wall -Werror/CWFLAGS = -Wall/" Makefile
+	# Remove -Werror to avoid
+	#   <command-line>: error: "_FORTIFY_SOURCE" redefined [-Werror]
+	#   cc1: all warnings being treated as errors
+	sed -i "s/CWFLAGS ?= -Wall -Werror/CWFLAGS = -Wall/" Makefile
 
 	make test
 }
