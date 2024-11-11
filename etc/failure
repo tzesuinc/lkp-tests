@@ -1,6 +1,5 @@
 .+killed_by.*
 .+\.(error|warn|fail)[^_]*$
-.+\..+\.make_fail
 dmesg.*
 kmemleak\..+unreferenced_object\..+
 kmsg.*
