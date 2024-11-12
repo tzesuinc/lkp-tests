@@ -22,7 +22,6 @@ lkvs:
     - pstate
     - pt
     - sdsi
-    - splitlock # require SPR and above
     - tdx-compliance
     - tdx-guest
     # - tdx-osv-sanity
@@ -35,3 +34,11 @@ lkvs:
     - workload-xsave
     - xsave
     - ufs # require GNR and above
+
+---
+
+need_cpuid: 106
+
+lkvs:
+  test:
+    - splitlock # require ICL and above
