@@ -550,8 +550,8 @@ def __get_changed_stats(a, b, is_incomplete_run, options)
       # base rt stats should contain 'packetdrill.packetdrill/gtests/net/tcp/mtu_probe/basic-v6_ipv6.pass'
       stat_base = k.sub(/\.[^.]*$/, '')
       # only consider pass and fail temporarily
-      next if k =~ /\.fail$/ && b.keys.none? { |stat| stat == "#{stat_base}.pass" }
-      next if k =~ /\.pass$/ && b.keys.none? { |stat| stat == "#{stat_base}.fail" }
+      next if k =~ /\.(error|warn|fail)$/ && b.keys.none? { |stat| stat == "#{stat_base}.pass" }
+      next if k =~ /\.pass$/ && b.keys.none? { |stat| stat =~ /^#{stat_base}\.(error|warn|fail)$/ }
     end
 
     is_latency_stat = latency_stat?(k)
