@@ -1,3 +1,5 @@
 url: https://github.com/esmil/linux
 owner: Emil Renner Berthing <kernel@esmil.dk>
 branch_denylist: visionfive-[0-9].*
+private_report_branch: .*
+mail_to: Emil Renner Berthing <kernel@esmil.dk>
