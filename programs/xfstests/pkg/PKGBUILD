@@ -4,7 +4,7 @@ pkgrel=1
 url='https://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git'
 arch=('i386' 'x86_64' 'aarch64')
 license=('GPL')
-source=('https://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git' 'https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git' 'https://git.kernel.org/pub/scm/linux/kernel/git/djwong/e2fsprogs.git')
+source=('https://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git' 'https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git' 'https://git.kernel.org/pub/scm/linux/kernel/git/djwong/e2fsprogs.git' 'https://github.com/koverstreet/bcachefs-tools.git')
 md5sums=('SKIP' 'SKIP' 'SKIP')
 
 . $LKP_SRC/lib/tests/common.sh
@@ -21,6 +21,13 @@ build_install_xfstests()
 	## Currently, ./configure file can't work with "--prefix" option correctly,
 	## so we just use the "make" command to generate the execuable file.
 	make
+}
+
+build_install_bcachefs_tools()
+{
+	cd ${srcdir}/bcachefs-tools || return
+	make || return
+	make install DESTDIR="${pkgdir}"
 }
 
 build_install_f2fs_tools()

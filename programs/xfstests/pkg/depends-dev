@@ -15,3 +15,6 @@ libuuid1
 pkg-config
 uuid-dev
 xfslibs-dev
+libzstd-dev
+liblz4-dev
+libkeyutils-dev
