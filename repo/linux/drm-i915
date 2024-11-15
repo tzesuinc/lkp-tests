@@ -1,1 +1,10 @@
 url: https://gitlab.freedesktop.org/drm/i915/kernel
+integration_testing_branches:
+- for-linux-next
+- for-linux-next-fixes
+subsystems:
+- drm
+- i915
+- bxt
+- gen8
+belongs_to: i915
