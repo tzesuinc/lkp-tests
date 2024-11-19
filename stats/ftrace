@@ -5,9 +5,10 @@ LKP_SRC = ENV['LKP_SRC'] || File.dirname(File.dirname(File.realpath($PROGRAM_NAM
 require 'fileutils'
 require 'yaml'
 require "#{LKP_SRC}/lib/lkp_path"
+require "#{LKP_SRC}/lib/ruby"
 
 RESULT_ROOT = ENV['RESULT_ROOT']
-TIME_DELTA  = YAML.load_file("#{RESULT_ROOT}/job.yaml")['time_delta'].to_f
+TIME_DELTA  = YAML.unsafe_load_file("#{RESULT_ROOT}/job.yaml")['time_delta'].to_f
 FMT_DIR     = "#{RESULT_ROOT}/trace_event/".freeze
 
 KEY_PREFIX_MAPPING = YAML.load_file(LKP::Path.src('etc', 'ftrace_key_prefix'))
