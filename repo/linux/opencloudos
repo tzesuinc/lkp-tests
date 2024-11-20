@@ -16,7 +16,7 @@ mail_to:
 - flyingpeng@tencent.com
 - jingqunli@tencent.com
 - jason.zeng@intel.com
-- wu.zheng@intel.com
+- lin.x.wang@intel.com
 - yingbao.jia@intel.com
 - pei.p.jia@intel.com
 no_merge_branch: .*
@@ -29,5 +29,5 @@ tests:
       kconfig: x86_64-oc_stream_base_config
       base_commit: v6.6.6
       mail_to:
-        - wu.zheng@intel.com
+        - lin.x.wang@intel.com
         - oliver.sang@intel.com

@@ -8,7 +8,7 @@ no_merge_branch: .*
 compiler: gcc
 mail_to:
 - jason.zeng@intel.com
-- wu.zheng@intel.com
+- lin.x.wang@intel.com
 - pei.p.jia@intel.com
 private_report_branch: .*
 notify_build_success_branch: .*
@@ -18,12 +18,12 @@ tests:
       kconfig: x86_64-bytedance-6.6-velinux
       base_commit: v6.6.40
       mail_to:
-        - wu.zheng@intel.com
+        - lin.x.wang@intel.com
         - oliver.sang@intel.com
   - branch: 5.15-velinux
     parameters:
       kconfig: x86_64-bytedance-5.15-velinux
       base_commit: v5.15.152
       mail_to:
-        - wu.zheng@intel.com
+        - lin.x.wang@intel.com
         - oliver.sang@intel.com
