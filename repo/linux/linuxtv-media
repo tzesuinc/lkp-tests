@@ -1,0 +1,4 @@
+url: https://git.linuxtv.org/media.git
+owner: Mauro Carvalho Chehab <mchehab@kernel.org>
+notify_build_success_branch: .*
+mail_cc: linux-media@vger.kernel.org

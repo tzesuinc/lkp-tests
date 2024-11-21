@@ -1,4 +1,4 @@
-url: https://git.linuxtv.org/media_stage.git
+url: https://git.linuxtv.org/media-ci/media-pending.git
 owner: Mauro Carvalho Chehab <mchehab@kernel.org>
 notify_build_success_branch: .*
 integration_testing_branches: master
