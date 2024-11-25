@@ -1,0 +1,22 @@
+2024-11-12 11:39:04 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-1f1da0cc3ec77b61ddf74ad7df27428df97ad257/tools/perf/perf test 1
+  1: vmlinux symtab matches kallsyms                                 : Running (1 active)
+  1: vmlinux symtab matches kallsyms                                 : Ok
+2024-11-12 11:40:01 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-1f1da0cc3ec77b61ddf74ad7df27428df97ad257/tools/perf/perf test 11
+ 11: Hwmon PMU                                                       :
+ 11.1: Basic parsing test                                            : Running (3 active)
+ 11.1: Basic parsing test                                            : Ok
+ 11.2: Parsing without PMU name                                      : FAILED!
+ 11.3: Parsing with PMU name                                         : FAILED!
+2024-11-12 11:40:01 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-1f1da0cc3ec77b61ddf74ad7df27428df97ad257/tools/perf/perf test 12
+ 12: Tool PMU                                                        :
+ 12.1: Parsing without PMU name                                      : Running (2 active)
+ 12.1: Parsing without PMU name                                      : Ok
+ 12.2: Parsing with PMU name                                         : Ok
+2024-11-12 11:40:42 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-1f1da0cc3ec77b61ddf74ad7df27428df97ad257/tools/perf/perf test 75
+ 75: x86 hybrid                                                      : Running (1 active)
+ 75: x86 hybrid                                                      : Skip (not hybrid)
+2024-11-12 11:40:42 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-1f1da0cc3ec77b61ddf74ad7df27428df97ad257/tools/perf/perf test 71
+ 71: Intel PT                                                        :
+ 71.1: Intel PT packet decoder                                       : Running (2 active)
+ 71.1: Intel PT packet decoder                                       : Ok
+ 71.2: Intel PT hybrid CPU compatibility                             : Skip

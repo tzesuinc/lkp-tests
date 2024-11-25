@@ -4,16 +4,26 @@ LKP_SRC = ENV['LKP_SRC'] || File.dirname(File.dirname(File.dirname(File.realpath
 
 require "#{LKP_SRC}/lib/tests/stats"
 
+def test_name(*parts)
+  parts.compact.map(&:strip).reject(&:empty?).join('.')
+end
+
 stats = LKP::Stats.new
 
 while (line = $stdin.gets)
   case line
-  when /([\d.]+:) (.*): FAILED!$/
-    stats.add $2, 'fail'
-  when /([\d.]+:) (.*): Ok$/
-    stats.add $2, 'pass'
-  when /([\d.]+:) (.*): (Skip$|Skip .*)/
-    stats.add $2, 'skip'
+  when /[\d.]+: (.*):$/
+    #  11: Hwmon PMU                                                       :
+    test_prefix = $1
+  when /perf test \d+$/
+    # 2024-11-12 11:40:42 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-1f1da0cc3ec77b61ddf74ad7df27428df97ad257/tools/perf/perf test 71
+    test_prefix = nil
+  when /[\d.]+: (.*): FAILED!$/
+    stats.add test_name(test_prefix, $1), 'fail'
+  when /[\d.]+: (.*): Ok$/
+    stats.add test_name(test_prefix, $1), 'pass'
+  when /[\d.]+: (.*): (Skip$|Skip .*)/
+    stats.add test_name(test_prefix, $1), 'skip'
   when /make PERF passed/
     stats.add 'perf.make', 'pass'
   when /make PERF failed/

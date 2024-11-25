@@ -1,0 +1,9 @@
+vmlinux_symtab_matches_kallsyms.pass: 1
+Hwmon_PMU.Basic_parsing_test.pass: 1
+Hwmon_PMU.Parsing_without_PMU_name.fail: 1
+Hwmon_PMU.Parsing_with_PMU_name.fail: 1
+Tool_PMU.Parsing_without_PMU_name.pass: 1
+Tool_PMU.Parsing_with_PMU_name.pass: 1
+x86_hybrid.skip: 1
+Intel_PT.Intel_PT_packet_decoder.pass: 1
+Intel_PT.Intel_PT_hybrid_CPU_compatibility.skip: 1

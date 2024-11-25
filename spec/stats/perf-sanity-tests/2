@@ -5,32 +5,6 @@
 2021-02-10 21:30:05 sudo /usr/bin/perf test 63
 63: Test libpfm4 support                                            : Skip (not compiled in)
 2021-02-10 21:30:05 sudo /usr/bin/perf test 64
-64: Test api io                                                     : Ok
-2021-02-10 21:30:05 sudo /usr/bin/perf test 65
-65: maps__merge_in                                                  : FAILED!
-2021-02-10 21:30:05 sudo /usr/bin/perf test 66
-66: Demangle Java                                                   : Ok
-2021-02-10 21:30:05 sudo /usr/bin/perf test 67
-67: Parse and process metrics                                       : Ok
-2021-02-10 21:30:05 sudo /usr/bin/perf test 68
-68: PE file support                                                 : FAILED!
-2021-02-10 21:30:05 sudo /usr/bin/perf test 69
-69: Event expansion for cgroups                                     : Ok
-2021-02-10 21:30:05 sudo /usr/bin/perf test 70
-70: Convert perf time to TSC                                        : FAILED!
-2021-02-10 21:30:05 sudo /usr/bin/perf test 71
-71: x86 rdpmc                                                       : Ok
-2021-02-10 21:30:06 sudo /usr/bin/perf test 72
-72: DWARF unwind                                                    : FAILED!
-2021-02-10 21:30:06 sudo /usr/bin/perf test 73
-73: x86 instruction decoder - new instructions                      : Ok
-2021-02-10 21:30:06 sudo /usr/bin/perf test 74
-74: Intel PT packet decoder                                         : Ok
-2021-02-10 21:30:06 sudo /usr/bin/perf test 75
-75: x86 bp modify                                                   : Ok
-2021-02-10 21:30:06 sudo /usr/bin/perf test 76
-76: probe libc's inet_pton & backtrace it with ping                 : Ok
-2021-02-10 21:30:08 sudo /usr/bin/perf test 77
 77: Check Arm CoreSight trace data recording and synthesized samples: Skip
 2021-02-10 21:30:08 sudo /usr/bin/perf test 79
 79: Zstd perf.data compression/decompression                        : FAILED!
