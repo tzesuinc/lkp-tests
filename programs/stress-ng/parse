@@ -32,6 +32,7 @@ class StressorStater
     bogo_ops = items[4]
 
     # stress-ng: info:  [2659] splice                0      0.00      0.00      0.00         0.00         0.00
+    # stress-ng: metrc: [5961] uprobe                0     60.00      0.21      0.87         0.00           0.00         0.01          1792
     if bogo_ops == '0'
       puts "#{stressor}.fail: 1"
     else
@@ -51,6 +52,7 @@ class StressorStater
     # stress-ng: metrc: [5237] udp-flood           1097.62 sendto calls per sec (geometric mean of 128 instances)
     # stress-ng: metrc: [5237] udp-flood            100.00 % sendto calls succeeded (geometric mean of 128 instances)
     # stress-ng: metrc: [4382] flock               1883.42 nanosecs per flock unlock call (harmonic mean of 6 instances)
+    # stress-ng: metrc: [5961] uprobe                 0.00 MB trace data per second (harmonic mean of 224 instances)
     items = line.sub(/ \((average|geometr?ic mean|harmonic mean).*\)$/, '')
                 .split
 
@@ -59,7 +61,7 @@ class StressorStater
 
     stressor = items[3]
 
-    if items[4] == '0'
+    if items[4] == '0' || items[4] == '0.00'
       puts "#{stressor}.#{unit}.fail:"
     else
       puts "#{stressor}.#{unit}.pass: 1"
@@ -75,11 +77,14 @@ while (line = $stdin.gets)
 
   case line
   when /(this stressor is not implemented on this system)/,
-       /(No stress workers invoked)/,
-       /(all bogo-op counters are zero, data may be incorrect)/
-    # stress-ng: warn:  [4124] metrics-check: all bogo-op counters are zero, data may be incorrect
+       /(No stress workers invoked)/
     log_warn $1
-    exit 1
+    break
+  when /all bogo-op counters are zero, data may be incorrect/
+    # stress-ng: warn:  [4124] metrics-check: all bogo-op counters are zero, data may be incorrect
+    # stress-ng: metrc: [5961] uprobe                0     60.00      0.21      0.87         0.00           0.00         0.01          1792
+    # later stat_major_metrics() will process the line like "uprobe 0" to generate fail stat
+    next
   when /stress-ng: fail:.*sigaction signal/
     # stress-ng: fail:  [5780] stress-ng: sigaction signal 6 'SIGABRT': errno=22 (Invalid argument)
     puts 'sigaction.fail: 1'
