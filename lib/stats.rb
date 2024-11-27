@@ -57,7 +57,7 @@ class LinuxTestcasesTableSet
        qemu rcuscale rcutorture suspend suspend-stress trinity ndctl nfs-test hwsim
        idle-inject mdadm-selftests nvml test-bpf mce-log perf-sanity-tests
        update-ucode reboot cat libhugetlbfs-test ocfs2test
-       perf-test fxmark kvm-kernel-boot-test bkc_ddt rdma-pyverbs
+       perf-test fxmark kvm-kernel-boot-test rdma-pyverbs
        xfstests packetdrill avocado v4l2 vmem perf-stat-tests cgroup2-test].freeze
   OTHER_TESTCASES =
     %w[convert-lkpdoc-to-html convert-lkpdoc-to-html-css rsync-rootfs
