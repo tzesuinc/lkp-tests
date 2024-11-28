@@ -220,7 +220,7 @@ phoronix-test-suite:
 
   - test: startup-time-1.4.1
     option_a: # Background I/O Mix
-      - Only Sequential Reads # need more than 1h
+      # - Only Sequential Reads # need more than 1h. GNOME_Terminal-_opt_rootfs. E: df: write error: Broken pipe
       - Sequential Reads + Writes
     option_b: # Application To Start
       - GNOME Terminal
