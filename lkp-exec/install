@@ -190,9 +190,17 @@ makepkg_install_packages() {
 
 makepkg_install_benchmark() {
 	local pkg=$1
+	local distro=$2
+
 	if grep -w "^$pkg:" "$LKP_SRC/distro/adaptation-pkg/$distro"; then
-		makepkg_install "$pkg" || echo "Install $pkg failed"
+		makepkg_install "$pkg" && return
+
+		echo "Install $pkg failed"
+	else
+		echo "Cannot find $pkg in $LKP_SRC/distro/adaptation-pkg/$distro"
 	fi
+
+	return 1
 }
 
 install_packages() {
@@ -416,7 +424,7 @@ do
 
 		benchmark_package=$(get_adaptation_pkg $distro "$script")
 		if [ -n "$FORCE_MODE" ] || ! verify_install "$benchmark_package"; then
-			makepkg_install_benchmark "$script"
+			makepkg_install_benchmark "$script" $distro || exit 1
 		fi
 
 		[ -n "$FORCE_MODE" ] && install_opt="-f"
