@@ -197,14 +197,11 @@ makepkg_install_benchmark() {
 	local pkg=$1
 	local distro=$2
 
-	if grep -w "^$pkg:" "$LKP_SRC/distro/adaptation-pkg/$distro"; then
-		makepkg_install "$pkg" && return
+	grep -w "^$pkg:" "$LKP_SRC/distro/adaptation-pkg/$distro" || return 0
 
-		echo "Install $pkg failed"
-	else
-		echo "Cannot find $pkg in $LKP_SRC/distro/adaptation-pkg/$distro"
-	fi
+	makepkg_install "$pkg" && return
 
+	echo "Install $pkg failed"
 	return 1
 }
 
