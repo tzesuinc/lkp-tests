@@ -176,16 +176,21 @@ makepkg_install_packages() {
 	packages="$(get_dependency_packages ${distro} ${script} pkg)"
 	dev_packages="$(get_dependency_packages ${distro} ${script}-dev pkg)"
 	packages="$(echo $packages $dev_packages | tr '\n' ' ')"
-	[ -n "$packages" ] && [ "$packages" != " " ] || return
 
 	for pkg in $packages; do
 		[ "$pkg" = "$script" ] && continue
-		if ! verify_install $pkg; then
-			install_packages "$pkg" "$distro"
-			makepkg_install_packages "$pkg" "$distro"
-			makepkg_install "$pkg" || echo "Install $pkg failed"
-		fi
+
+		verify_install $pkg && continue
+
+		install_packages "$pkg" "$distro"
+		makepkg_install_packages "$pkg" "$distro" || return
+		makepkg_install "$pkg" || {
+			echo "Install $pkg failed"
+			return 1
+		}
 	done
+
+	return 0
 }
 
 makepkg_install_benchmark() {
@@ -420,7 +425,7 @@ do
 		}
 
 		install_packages "$script" $distro
-		makepkg_install_packages "$script" $distro
+		makepkg_install_packages "$script" $distro || exit 1
 
 		benchmark_package=$(get_adaptation_pkg $distro "$script")
 		if [ -n "$FORCE_MODE" ] || ! verify_install "$benchmark_package"; then
