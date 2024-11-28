@@ -49,8 +49,8 @@ end
 
 describe 'Check need_kconfig from' do
   # Check the config format in include/ dir
-  files = Dir.glob("#{LKP_SRC}/include/**/*").select { |file| File.file?(file) }
-  files.each do |file|
+  Dir["#{LKP_SRC}/include/**/*", "#{LKP_SRC}/programs/*/include"].select { |file| File.file?(file) }
+                                                                 .each do |file|
     begin
       yaml_data = load_yaml_with_conditionals(file)
       # next if yaml_data.nil? || !yaml_data.is_a?(Hash) || is_erb_file(file)

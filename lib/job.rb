@@ -269,13 +269,21 @@ class Job
     Dir["#{lkp_src}/include/*"].map do |d|
       key = File.basename d
       @include_files[key] = {}
+
       Dir["#{lkp_src}/include/#{key}",
           "#{lkp_src}/include/#{key}/*"].each do |f|
-            next if File.directory? f
+        next if File.directory? f
 
-            @include_files[key][File.basename(f)] = f
-          end
+        @include_files[key][File.basename(f)] = f
+      end
     end
+
+    Dir["#{lkp_src}/programs/*/include"].map do |f|
+      key = File.basename(File.dirname(f))
+      @include_files[key] = {}
+      @include_files[key][key] = f
+    end
+
     @include_files
   end
 
