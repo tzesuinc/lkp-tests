@@ -9,3 +9,11 @@ hdd_partitions:
  /dev/disk/by-id/ata-WDC_WD10EACS-22D6B0_WD-WCAU45298688-part*
 rootfs_partition: /dev/disk/by-id/ata-INTEL_SSDSC2BB800G4_PHWL42040066800RGN-part1
 brand: Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
+netconsole_port: 6672
+ucode: "0x21"
+need_kconfig_hw:
+- PTP_1588_CLOCK: y
+- IGB: y
+- E1000E: y
+- SATA_AHCI
+- DRM_I915

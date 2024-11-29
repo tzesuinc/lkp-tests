@@ -10,3 +10,9 @@ rootfs_partition: /dev/disk/by-id/wwn-0x55cd2e404c39bfc5-part2
 brand: Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz
 cpu_info: skylake i7-6700
 bios_version: 1.2.8
+need_kconfig_hw:
+- PTP_1588_CLOCK: y
+- E1000E: y
+- SATA_AHCI
+- DRM_I915
+ucode: "0xf0"

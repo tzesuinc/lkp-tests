@@ -14,3 +14,10 @@ hdd_partitions:
 swap_partitions: /dev/disk/by-id/ata-ST4000NM0035-1V4107_ZC127QJQ-part6
 rootfs_partition: /dev/disk/by-id/ata-ST4000NM0035-1V4107_ZC127QJQ-part5
 brand: Intel(R) Core(TM) i3-3220 CPU @ 3.30GHz
+netconsole_port: 6673
+ucode: "0x21"
+need_kconfig_hw:
+- NET_VENDOR_REALTEK: y
+- R8169: y
+- SATA_AHCI
+- DRM_I915

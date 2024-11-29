@@ -4,3 +4,5 @@ cpufreq_governor:
 # refer to arch/x86/configs/kvm_guest.config
 need_kconfig:
 - KVM_GUEST: y
+
+kernel_cmdline_hw: vmalloc=256M initramfs_async=0 page_owner=on carrier_timeout=60 rcupdate.rcu_self_test=0
