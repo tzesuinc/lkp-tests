@@ -48,7 +48,7 @@ need_kconfig:
 - EXPERT: y
 - PROC_FS: y
 
-- PTE_MARKER_UFFD_WP
+- PTE_MARKER_UFFD_WP: y
 - SYSVIPC: y
 - TEST_HMM: m
 - TEST_VMALLOC: m
@@ -63,7 +63,7 @@ need_kconfig:
 - FW_LOADER_USER_HELPER: y
 - IKCONFIG: y
 - IKCONFIG_PROC: y
-- TEST_FIRMWARE
+- TEST_FIRMWARE: m
 - FW_UPLOAD: y
 % elsif ___.group == "pidfd"
 - UTS_NS: y
@@ -87,21 +87,21 @@ need_kconfig:
 - ION_SYSTEM_HEAP: y
 - STAGING: y
 % elsif ___.group == "landlock"
-- CGROUPS
-- CGROUP_SCHED
-- INET
+- CGROUPS: y
+- CGROUP_SCHED: y
+- INET: y
 - IPV6
-- KEYS
-- NET
-- NET_NS
+- KEYS: y
+- NET: y
+- NET_NS: y
 - OVERLAY_FS
-- PROC_FS
-- SECURITY
-- SECURITY_LANDLOCK
-- SHMEM
-- SYSFS
-- TMPFS
-- TMPFS_XATTR
+- PROC_FS: y
+- SECURITY: y
+- SECURITY_LANDLOCK: y
+- SHMEM: y
+- SYSFS: y
+- TMPFS: y
+- TMPFS_XATTR: y
 % elsif ___.group == "group-01"
 - DAMON: y
 - DAMON_VADDR: y
@@ -135,7 +135,7 @@ need_kconfig:
 - LIRC: y # Depends on: RC_CORE
 - LKDTM: y
 - SECURITYFS: y
-- TEST_BITMAP
+- TEST_BITMAP: m
 - TEST_KMOD: m
 - TEST_LKM: m
 - TEST_PRINTF: m
@@ -197,7 +197,7 @@ need_kconfig:
 - NET: y
 - VIRT_DRIVERS: y
 - INTEL_TDX_GUEST: y
-- TEST_USER_COPY
+- TEST_USER_COPY: m
 - TIME_NS: y
 - USERFAULTFD: y
 - USER_NS: y
@@ -324,10 +324,10 @@ need_kconfig:
 - RUNTIME_TESTING_MENU: y
 - STAGING: y
 - SYNC_FILE: y
-- TEST_FIRMWARE
+- TEST_FIRMWARE: m
 - TEST_KMOD: m
 - TEST_LKM: m
-- TEST_USER_COPY
+- TEST_USER_COPY: m
 - TUN: m
 - XFS_FS: m # Depends on: BLOCK [: y]
 - OVERLAY_FS
