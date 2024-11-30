@@ -106,6 +106,7 @@ need_kconfig:
 
 - VCAP_KUNIT_TEST: y
 - VCAP: y
+- NET_VENDOR_MICROCHIP: y
 
 - USB4_KUNIT_TEST: y
 - USB4: y
@@ -203,7 +204,7 @@ need_kconfig:
 - SYNTH_EVENTS: y
 
 - NTB_MSI_TEST: m
-- NTB_MSI: y 
+- NTB_MSI: y
 
 - TEST_LIVEPATCH: m
 - LIVEPATCH: y
