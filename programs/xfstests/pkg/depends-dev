@@ -9,12 +9,12 @@ libfuse-dev
 libgdbm-dev
 libicu-dev
 libiscsi-dev
+libkeyutils-dev
+liblz4-dev
 libtool-bin
 liburing-dev
 libuuid1
+libzstd-dev
 pkg-config
 uuid-dev
 xfslibs-dev
-libzstd-dev
-liblz4-dev
-libkeyutils-dev
