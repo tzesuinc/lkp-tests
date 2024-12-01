@@ -48,7 +48,6 @@ kernel-selftests:
     - kcmp
     - kexec
     - kmod
-    - landlock
     - lib
     - livepatch
     # - lkdtm
@@ -167,3 +166,10 @@ kernel-selftests:
     - cgroup
 
 kernel_cmdline: systemd.unified_cgroup_hierarchy=1
+
+---
+kernel-selftests:
+  group:
+    - landlock
+
+kernel_cmdline: lsm=landlock
