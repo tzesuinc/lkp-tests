@@ -102,6 +102,12 @@ need_kconfig:
 - SYSFS: y
 - TMPFS: y
 - TMPFS_XATTR: y
+% elsif ___.group == "iommu"
+- FAULT_INJECTION_DEBUG_FS: y
+- FAULT_INJECTION: y
+- IOMMUFD
+- IOMMUFD_TEST: y
+- FAILSLAB: y
 % elsif ___.group == "group-01"
 - DAMON: y
 - DAMON_VADDR: y
@@ -144,8 +150,6 @@ need_kconfig:
 - XFS_FS: m
 - DMA_MAP_BENCHMARK: y
 - TEST_FPU: m
-- IOMMUFD
-- IOMMUFD_TEST: y
 - DEBUG_KERNEL: y
 - FAULT_INJECTION: y
 - FPROBE: y # Depends on: FTRACE && FUNCTION_TRACER && DYNAMIC_FTRACE_WITH_REGS && HAVE_RETHOOK
