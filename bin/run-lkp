@@ -56,7 +56,7 @@ if [ -x "$job_script" ]; then
 	-1000
 EOF" &
 	$LKP_DEBUG_PREFIX $job_script run_job
-	last_state_file=$RESULT_ROOT/last_state
+	last_state_file=$TMP_RESULT_ROOT/last_state
 	[ -f "$last_state_file" ] &&
 		exit_code=$(sed -ne "s/\(.*\)exit_code.\(.*\):\(.*\)/\\2/p" "$last_state_file")
 	run_job_exit_code=${exit_code:-0}

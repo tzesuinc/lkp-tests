@@ -92,11 +92,11 @@ wait_cluster_state()
 	done
 
 	wakeup_pre_test
-	echo "cluster.abort: 1" >> $RESULT_ROOT/last_state
+	echo "cluster.abort: 1" >> $TMP_RESULT_ROOT/last_state
 
 	[ "$i" -eq 100 ] && {
 		sync_cluster_state 'abort'
-		echo "cluster.timeout: 1" >> $RESULT_ROOT/last_state
+		echo "cluster.timeout: 1" >> $TMP_RESULT_ROOT/last_state
 	}
 
 	exit 1
@@ -171,8 +171,8 @@ check_exit_code()
 	# when setup scripts fail, the monitors should be wakeup
 	wakeup_pre_test
 
-	echo "${program_type}.${program}.exit_code.$exit_code: 1" >> $RESULT_ROOT/last_state
-	echo "exit_fail: 1"				>> $RESULT_ROOT/last_state
+	echo "${program_type}.${program}.exit_code.$exit_code: 1" >> $TMP_RESULT_ROOT/last_state
+	echo "exit_fail: 1"				>> $TMP_RESULT_ROOT/last_state
 	sync_cluster_state 'failed'
 	exit "$exit_code"
 }
