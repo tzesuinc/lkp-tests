@@ -39,7 +39,6 @@ kernel-selftests:
     - fpu
     - futex
     - gpio
-    - hid
     - ia64
     - intel_pstate
     - iommu

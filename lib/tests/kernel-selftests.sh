@@ -204,6 +204,13 @@ recover_sysctl_output()
 	sed -i "/\t\${NSA_CMD} sysctl -q -w net.ipv4.ping_group_range='0 2147483647'/i \\\techo \"SYSCTL: net.ipv4.ping_group_range=0 2147483647\"\n\techo" net/fcnal-test.sh
 }
 
+fixup_hid()
+{
+	# make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-9.4-kselftests-adc218676eef25575469234709c2d87185ca223a/tools/testing/selftests/hid'
+	# Makefile:93: *** Cannot find a vmlinux for VMLINUX_BTF at any of "  ../../../../vmlinux /sys/kernel/btf/vmlinux /boot/vmlinux-6.12.0".  Stop.
+	prepare_for_bpf
+}
+
 fixup_net()
 {
 	prepare_for_bpf

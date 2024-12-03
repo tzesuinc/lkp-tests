@@ -10,3 +10,4 @@ need_cpu: 2
 kernel-selftests-bpf:
   group:
     - bpf
+    - hid
