@@ -381,12 +381,14 @@ fixup_bpf()
 		sed -i "s/res)/res.decode('utf-8'))/" bpf/test_bpftool.py
 	fi
 
+	[[ -f bpf/test_xdp_veth.sh ]] && {
+		sed -i 's/\/redirect_map_0/\/xdp_redirect_map_0/g' bpf/test_xdp_veth.sh
+		sed -i 's/\/redirect_map_1/\/xdp_redirect_map_1/g' bpf/test_xdp_veth.sh
+		sed -i 's/\/redirect_map_2/\/xdp_redirect_map_2/g' bpf/test_xdp_veth.sh
+	}
+
 	# tools/testing/selftests/bpf/tools/sbin/bpftool
 	export PATH=$linux_selftests_dir/tools/testing/selftests/bpf/tools/sbin:$PATH
-
-	sed -i 's/\/redirect_map_0/\/xdp_redirect_map_0/g' bpf/test_xdp_veth.sh
-	sed -i 's/\/redirect_map_1/\/xdp_redirect_map_1/g' bpf/test_xdp_veth.sh
-	sed -i 's/\/redirect_map_2/\/xdp_redirect_map_2/g' bpf/test_xdp_veth.sh
 }
 
 fixup_kmod()
