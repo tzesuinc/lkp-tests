@@ -38,19 +38,22 @@ def kernel_match_kconfig?(kernel_kconfigs, expected_kernel_kconfig)
     config_name = "CONFIG_#{config_name}" unless config_name =~ /^CONFIG_/
 
     kernel_kconfigs =~ /# #{config_name} is not set/ || kernel_kconfigs !~ /^#{config_name}=[ym]$/
-  when /^([A-Za-z0-9_]+=[ym])$/, /^([A-Za-z0-9_]+=[0-9]+)$/
+  when /^([A-Za-z0-9_]+=(?:y|m|\d+|0[xX][A-Fa-f0-9]+|utf8))$/
     config_name = $1
     config_name = "CONFIG_#{config_name}" unless config_name =~ /^CONFIG_/
 
+    # CONFIG_PHYSICAL_ALIGN=0x1000000 in .config file
     kernel_kconfigs =~ /^#{config_name}$/
-  when /^([A-Za-z0-9_]+=0[xX][A-Fa-f0-9]+)$/
+  when /^([A-Za-z0-9_]+)=(utf8)$/
+    config_value = $2
+
     config_name = $1
     config_name = "CONFIG_#{config_name}" unless config_name =~ /^CONFIG_/
 
-    kernel_kconfigs =~ /^#{config_name}$/
-  when /^([A-Za-z0-9_]+)$/, /^([A-Za-z0-9_]+)=$/
-    # /^([A-Z0-9_]+)$/ is for "CRYPTO_HMAC"
-    # /^([A-Z0-9_]+)=$/ is for "DEBUG_INFO_BTF: v5.2"
+    # CONFIG_NLS_DEFAULT="utf8" in .config file
+    kernel_kconfigs =~ /^#{config_name}="#{config_value}"$/
+  when /^([A-Za-z0-9_]+)$/, # CRYPTO_HMAC
+       /^([A-Za-z0-9_]+)=$/ # DEBUG_INFO_BTF: v5.2
     config_name = $1
     config_name = "CONFIG_#{config_name}" unless config_name =~ /^CONFIG_/
 
@@ -74,7 +77,7 @@ def split_constraints(constraints)
   kernel_versions, constraints = constraints.partition { |constraint| constraint =~ /v\d+\.\d+/ }
   archs, constraints = constraints.partition { |constraint| constraint =~ /^(i386|x86_64)$/ }
 
-  types, constraints = constraints.partition { |constraint| constraint =~ /^(y|m|n|\d+|0[xX][A-Fa-f0-9]+)$/ }
+  types, constraints = constraints.partition { |constraint| constraint =~ /^(y|m|n|\d+|0[xX][A-Fa-f0-9]+|utf8)$/ }
   raise Job::SyntaxError, "Wrong syntax of kconfig setting: #{constraints}" if types.size > 1
 
   raise Job::SyntaxError, "Wrong syntax of kconfig setting: #{constraints}" unless constraints.empty?
