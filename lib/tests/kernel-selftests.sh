@@ -650,12 +650,13 @@ check_test_group_kconfig()
 	local kernel_config="/lkp/kernel-selftests-kernel-config"
 	get_kconfig "$kernel_config" || return
 
-	local group_config="$group/config"
-	[[ -s "$group_config" ]] && check_kconfig "$group_config" "$kernel_config"
-
-	# bpf/config.x86_64
-	group_config="$group/config.x86_64"
-	[[ -s "$group_config" ]] && check_kconfig "$group_config" "$kernel_config"
+	local group_config
+	for group_config in "$group/config" "$group/config.x86_64" "$group/config.common"
+	do
+		# bpf/config.x86_64
+		# hid/config.common
+		[[ -s "$group_config" ]] && check_kconfig "$group_config" "$kernel_config"
+	done
 
 	return 0
 }
