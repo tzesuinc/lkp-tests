@@ -38,7 +38,7 @@ def kernel_match_kconfig?(kernel_kconfigs, expected_kernel_kconfig)
     config_name = "CONFIG_#{config_name}" unless config_name =~ /^CONFIG_/
 
     kernel_kconfigs =~ /# #{config_name} is not set/ || kernel_kconfigs !~ /^#{config_name}=[ym]$/
-  when /^([A-Za-z0-9_]+=(?:y|m|\d+|0[xX][A-Fa-f0-9]+|utf8))$/
+  when /^([A-Za-z0-9_]+=(?:y|m|\d+|0[xX][A-Fa-f0-9]+))$/
     config_name = $1
     config_name = "CONFIG_#{config_name}" unless config_name =~ /^CONFIG_/
 
