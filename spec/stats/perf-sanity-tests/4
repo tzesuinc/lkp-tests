@@ -20,3 +20,14 @@
  71.1: Intel PT packet decoder                                       : Running (2 active)
  71.1: Intel PT packet decoder                                       : Ok
  71.2: Intel PT hybrid CPU compatibility                             : Skip
+2024-12-03 09:56:16 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-28398ce1726e5dfa74f6305dd842e0fb7e332ef1/tools/perf/perf test 114 -v
+114: perf metrics value validation:
+--- start ---
+test child forked, pid 73424
+Metric validation return with erros. Please check metrics reported with errors.
+---- end(-1) ----
+114: perf metrics value validation                                   : FAILED!
+2024-12-03 09:57:48 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-28398ce1726e5dfa74f6305dd842e0fb7e332ef1/tools/perf/perf test 115 -v
+115: Check Arm64 callgraphs are complete in fp mode                  : Skip
+2024-12-03 09:58:40 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-28398ce1726e5dfa74f6305dd842e0fb7e332ef1/tools/perf/perf test 121 -v
+121: Test data symbol                                                : Ok

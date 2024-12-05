@@ -12,11 +12,13 @@ stats = LKP::Stats.new
 
 while (line = $stdin.gets)
   case line
-  when /[\d.]+: (.*):$/
+  when /[\d.]+: (.+) :$/
     #  11: Hwmon PMU                                                       :
+    # 114: perf metrics value validation:
     test_prefix = $1
-  when /perf test \d+$/
+  when /perf test \d+/
     # 2024-11-12 11:40:42 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-1f1da0cc3ec77b61ddf74ad7df27428df97ad257/tools/perf/perf test 71
+    # 2024-12-03 09:58:40 sudo /usr/src/linux-perf-x86_64-rhel-8.3-bpf-28398ce1726e5dfa74f6305dd842e0fb7e332ef1/tools/perf/perf test 121 -v
     test_prefix = nil
   when /[\d.]+: (.*): FAILED!$/
     stats.add test_name(test_prefix, $1), 'fail'

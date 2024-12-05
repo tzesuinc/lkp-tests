@@ -7,3 +7,6 @@ Tool_PMU.Parsing_with_PMU_name.pass: 1
 x86_hybrid.skip: 1
 Intel_PT.Intel_PT_packet_decoder.pass: 1
 Intel_PT.Intel_PT_hybrid_CPU_compatibility.skip: 1
+perf_metrics_value_validation.fail: 1
+Check_Arm64_callgraphs_are_complete_in_fp_mode.skip: 1
+Test_data_symbol.pass: 1
