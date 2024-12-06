@@ -44,6 +44,7 @@ libdrm-dev
 libdw-dev
 libdwarf-dev
 libelf-dev
+libevdev2
 libfuse-dev
 libhugetlbfs-dev
 libkeyutils-dev
@@ -79,7 +80,10 @@ pesign
 pkg-config
 python
 python-docutils
+python-hid
 python-jsonschema
+python-pytest
+python-pyudev
 python-scapy
 rsync
 sendip

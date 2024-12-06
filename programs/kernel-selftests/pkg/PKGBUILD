@@ -14,6 +14,7 @@ md5sums=('SKIP' 'SKIP')
 # then restart the machine using the new kernel. Lastly, you can start to test it.
 
 . $LKP_SRC/lib/debug.sh
+. $LKP_SRC/lib/tests/pkgbuild.sh
 
 get_kernel_version()
 {
@@ -91,8 +92,14 @@ build()
 
 package()
 {
-	cd "${srcdir}/linux/tools/power/cpupower"
+	# for hid group
+	pip3 install --break-system-packages pytest-tap
+
+	# When using pip to install packages system-wide, they are usually installed
+	# in /usr/local/lib/python3.x/dist-packages or site-packages
+	cp_to_pkg /usr/local/lib
 
 	# install cpupower command and library
+	cd "${srcdir}/linux/tools/power/cpupower"
 	DESTDIR="$pkgdir" make install
 }

@@ -21,4 +21,5 @@ libudev-dev
 libudev1
 m4
 pkg-config
+python-pip
 systemd
