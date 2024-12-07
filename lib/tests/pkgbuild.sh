@@ -4,6 +4,49 @@
 . $LKP_SRC/lib/install.sh
 . $LKP_SRC/lib/reproduce-log.sh
 
+build_pahole()
+{
+	log_cmd cd "${srcdir}/pahole"
+
+	mkdir build
+	cd build
+
+	log_cmd mkdir -p $pkgdir/usr
+	log_cmd cmake -D__LIB=lib -DCMAKE_INSTALL_PREFIX=$pkgdir/usr ..
+	log_cmd make install
+}
+
+build_dropwatch()
+{
+	cd $srcdir/dropwatch
+
+	# when use latest 1.5.4 in Debian 10, compile error:
+	# configure: error: libreadline is required
+	# ==> ERROR: A failure occurred in build().
+	#    Aborting...
+	# so, keeps 1.5.3 in Debian 10/Debian 11.
+	local distro=$(basename $rootfs)
+	if [[ "$distro" =~ "debian-12" ]]; then
+		git checkout v1.5.4 || return
+	else
+		git checkout v1.5.3 || return
+	fi
+
+	./autogen.sh || return
+	./configure --prefix=$benchmark_path/$pkgname/dropwatch || return
+	make || return
+	make install
+}
+
+build_iproute2()
+{
+	cd $srcdir/iproute2-next
+
+	./configure || return
+	make || return
+	DESTDIR=$benchmark_path/$pkgname/iproute2-next make install
+}
+
 build_edk2()
 {
 	log_cmd cd "$srcdir/edk2"
