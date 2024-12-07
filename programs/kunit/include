@@ -296,4 +296,13 @@ need_kconfig:
 
 - KASAN_KUNIT_TEST: m
 - KASAN: y
+
+- DM_KUNIT_TEST: m
+- DRIVER_PE_KUNIT_TEST: m
+- OF_KUNIT_TEST: m
+- OF_OVERLAY_KUNIT_TEST: m
+- OF: y
+
+- PACKING_KUNIT_TEST: m
+- PACKING: y
 % end

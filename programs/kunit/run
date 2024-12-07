@@ -28,7 +28,8 @@ elif [[ "$group" = "group-01" ]]; then
 	            "test_vmalloc" "test_klp_state" "test_meminit" "test_printf" "test_maple_tree" "thunderbolt_dma_test" "clocksource-wdtest" \
 	            "crc32test" "atomic64_test" "snd-soc-avs-i2s-test" "test_dynamic_debug" "raid6test" "backtracetest")
 elif [[ "$group" = "group-03" ]]; then
-	test_array=("drm_buddy_test" "kasan_test" "kfence_test")
+	test_array=("drm_buddy_test" "kasan_test" "kfence_test" "platform-device-test" "property-entry-test" \
+				"of_test" "overlay-test" "packing_test")
 fi
 
 run_kunit_tests()
