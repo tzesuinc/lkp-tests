@@ -4,8 +4,8 @@ pkgrel=1
 arch=('i686' 'x86_64' 'aarch64')
 url="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
 license=('GPL')
-source=('https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git' 'https://git.kernel.org/pub/scm/devel/pahole/pahole.git')
-md5sums=('SKIP' 'SKIP')
+source=('https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git' 'https://git.kernel.org/pub/scm/devel/pahole/pahole.git' 'https://git.kernel.org/pub/scm/network/iproute2/iproute2-next.git' 'https://github.com/nhorman/dropwatch.git')
+md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 # Download kernel from git.kernel.org.
 # If the kernel has been download into the computer, you can copy it to ${srcdir}.
@@ -46,17 +46,6 @@ build_tools()
 	make
 }
 
-build_pahole()
-{
-	cd "${srcdir}/pahole"
-
-	mkdir build
-	cd build
-	mkdir -p $pkgdir/usr
-	cmake -D__LIB=lib -DCMAKE_INSTALL_PREFIX=$pkgdir/usr ..
-	make install
-}
-
 install_selftests()
 {
 	cd "${srcdir}/linux"
@@ -85,8 +74,10 @@ build()
 {
 	benchmark_path="${pkgdir}/lkp/benchmarks/${pkgname}"
 	mkdir -p "${benchmark_path}"
-	build_tools
-	build_pahole
+	build_iproute2 || return
+	build_tools || return
+	build_pahole || return
+	build_dropwatch || return
 	install_selftests
 }
 
