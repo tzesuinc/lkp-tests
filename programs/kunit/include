@@ -92,7 +92,7 @@ need_kconfig:
 - SOUND: m
 
 - FAT_KUNIT_TEST: m
-- FAT_FS: m
+- FAT_FS
 
 - STRING_HELPERS_KUNIT_TEST: m
 - STRING_KUNIT_TEST: m
