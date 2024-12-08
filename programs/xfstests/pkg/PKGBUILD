@@ -4,10 +4,14 @@ pkgrel=1
 url='https://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git'
 arch=('i386' 'x86_64' 'aarch64')
 license=('GPL')
-source=('https://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git' 'https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git' 'https://git.kernel.org/pub/scm/linux/kernel/git/djwong/e2fsprogs.git' 'https://github.com/koverstreet/bcachefs-tools.git')
-md5sums=('SKIP' 'SKIP' 'SKIP')
+source=('https://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git'
+	'https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git'
+	'https://git.kernel.org/pub/scm/linux/kernel/git/djwong/e2fsprogs.git'
+	'https://github.com/koverstreet/bcachefs-tools.git#tag=v1.13.0')
+md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 . $LKP_SRC/lib/tests/common.sh
+. $LKP_SRC/lib/tests/pkgbuild.sh
 . $LKP_SRC/lib/install.sh
 
 build_install_xfstests()
@@ -25,6 +29,10 @@ build_install_xfstests()
 
 build_install_bcachefs_tools()
 {
+	export CARGO_HOME=$pkgdir/cargo
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path || return
+	. "$CARGO_HOME/env"
+
 	cd ${srcdir}/bcachefs-tools || return
 	make || return
 	make install DESTDIR="${pkgdir}"
@@ -155,6 +163,7 @@ build()
 	cd $srcdir
 	build_install_xfstests || return
 	build_install_f2fs_tools || return
+	build_install_bcachefs_tools || return
 	build_install_e2fuzz
 }
 
@@ -162,6 +171,8 @@ package()
 {
 	benchmark_path="${pkgdir}/lkp/benchmarks/${pkgname}"
 	cp -af $srcdir/xfstests-dev/* $benchmark_path
+
+	cp_to_pkg $CARGO_HOME
 
 	wget --no-check-certificate -O $benchmark_path/tools/find-api-violations.sh https://git.kernel.org/pub/scm/fs/xfs/xfsprogs-dev.git/plain/tools/find-api-violations.sh || return
 

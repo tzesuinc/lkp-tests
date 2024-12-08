@@ -4,7 +4,6 @@ attr
 bc
 btrfs-progs
 btrfs-tools
-build-essential
 dbench
 devscripts
 dump
@@ -17,13 +16,17 @@ gawk
 indent
 libaio1
 libcap2-bin
+libclang1
 libfuse3
 libgdbm-compat4
 libgdbm6
 libicu
 libiscsi
 libreadline5
+libsodium23
 libssl
+libudev0
+liburcu8
 liburing
 locales
 lvm2
@@ -33,6 +36,8 @@ psmisc
 quota
 sed
 thin-provisioning-tools
+udev
 udftools
 uuid-runtime
 xfsdump
+zlib1g
