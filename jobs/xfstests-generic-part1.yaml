@@ -13,6 +13,7 @@ fs:
   - btrfs
   - f2fs
   - udf
+  - bcachefs
   # - ocfs2 # mount.ocfs2 known bug
 
 xfstests:
@@ -33,18 +34,6 @@ xfstests:
     - generic-group-14
     - generic-group-16
     - generic-group-18
-
----
-fs:
-  - ext2
-  - ext4
-  - xfs
-  - btrfs
-  - f2fs
-  - udf
-
-xfstests:
-  test:
     - generic-470
 
 ---
@@ -54,6 +43,7 @@ fs:
   - btrfs
   - f2fs
   - udf
+  - bcachefs
 
 xfstests:
   test:

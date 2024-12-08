@@ -13,6 +13,7 @@ fs:
   - btrfs
   - f2fs
   - udf
+  - bcachefs
   # - ocfs2 # mount.ocfs2 known bug
 
 xfstests:
@@ -44,6 +45,7 @@ fs:
   - xfs
   - btrfs
   - f2fs
+  - bcachefs
 
 xfstests:
   test:
@@ -53,6 +55,7 @@ xfstests:
 fs:
   - xfs
   - btrfs
+  - bcachefs
 
 xfstests:
   test:
