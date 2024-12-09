@@ -209,6 +209,9 @@ fixup_hid()
 	# make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-9.4-kselftests-adc218676eef25575469234709c2d87185ca223a/tools/testing/selftests/hid'
 	# Makefile:93: *** Cannot find a vmlinux for VMLINUX_BTF at any of "  ../../../../vmlinux /sys/kernel/btf/vmlinux /boot/vmlinux-6.12.0".  Stop.
 	prepare_for_bpf
+
+	# OSError: [Errno 24] Too many open files: '/sys/devices/virtual/misc/uhid/0003:0001:0002.0296/input'
+	ulimit -n 102400
 }
 
 fixup_net()
