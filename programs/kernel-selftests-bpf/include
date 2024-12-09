@@ -746,7 +746,6 @@ need_kconfig:
 - PLAYSTATION_FF: y
 - POSIX_MQUEUE: y
 - POWER_SUPPLY: y
-- PREEMPT: y
 - PRINTK_TIME: y
 - PROC_KCORE: y
 - PROFILING: y
