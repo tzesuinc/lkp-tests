@@ -243,7 +243,7 @@ end
 # When stats script is changed, some stats can be no longer existed.
 # Remove these stats when rts are re-processed.
 def unite_remove_empty_stats(matrix)
-  matrix.reject { |_k, v| v.empty? }
+  matrix.reject { |_k, v| v.empty? || v.all? { |item| item.instance_of?(Integer) && item.zero? } }
 end
 
 def unite_to(stats, matrix_root, max_cols = nil, delete: false)
