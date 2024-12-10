@@ -261,10 +261,11 @@ fixup_efivarfs()
 		echo "$FUNCNAME: modprobe efivarfs fails"
 		return 1
 	}
+
 	# if efivarfs is built-in, "modprobe efivarfs" always returns 0, but it does not means
 	# efivarfs is supported since this requires some specified hardwares, such as booting from
 	# uefi, so check again
-	log_cmd mount -t efivarfs efivarfs /sys/firmware/efi/efivars || {
+	mount | grep efivarfs || log_cmd mount -t efivarfs efivarfs /sys/firmware/efi/efivars || {
 		echo "$FUNCNAME: mount -t efivarfs fails"
 		return 1
 	}
