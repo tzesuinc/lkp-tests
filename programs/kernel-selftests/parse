@@ -181,7 +181,7 @@ class Stater
   end
 end
 
-class SigaltstackStater < Stater
+class SignalStater < Stater
   def stat(line)
     case line
     when /^# # \[RUN\]\s(.*)/,

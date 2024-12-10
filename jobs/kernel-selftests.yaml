@@ -86,7 +86,7 @@ kernel-selftests:
     - sched
     - sched_ext
     - seccomp
-    - sigaltstack
+    - signal
     - size
     # - sparc64
     - splice

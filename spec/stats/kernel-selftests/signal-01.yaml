@@ -1,0 +1,5 @@
+signal.make.pass: 1
+signal.sas.Initial_signal_state_was_SS_DISABLE.pass: 1
+signal.sas.signal_is_disabled_in_sighandler.pass: 1
+signal.sas.signal_is_still_SS_AUTODISARM_after_signal.pass: 1
+signal.sas.pass: 1
