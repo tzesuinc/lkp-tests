@@ -110,7 +110,8 @@ class Stater
          /^# # Testing (.+):/ # # # Testing allocation and importing:
       curr_test.parts = [test_name($1, $2)]
     when /: recipe for target.+failed$/,
-         /^make: \*\*\* (.*) (Error \d+|Stop\.)$/
+         /^make: \*\*\* (.*) (Error \d+|Stop\.)$/,
+         /Cannot find a vmlinux for VMLINUX_BTF/
       # Makefile:47: recipe for target 'sysret_ss_attrs_64' failed
       # make: *** No rule to make target .*, needed by 'all'.  Stop.
       parse_make_result('fail')

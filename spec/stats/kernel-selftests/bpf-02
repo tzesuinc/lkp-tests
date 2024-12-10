@@ -1,0 +1,5 @@
+2024-07-03 03:28:56 make -j36 -C bpf
+make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-8.3-kselftests-a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6/tools/testing/selftests/bpf'
+Makefile:192: *** Cannot find a vmlinux for VMLINUX_BTF at any of "  ../../../../vmlinux /sys/kernel/btf/vmlinux /boot/vmlinux-6.9.0".  Stop.
+make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-8.3-kselftests-a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6/tools/testing/selftests/bpf'
+2024-07-03 03:28:59 make -j36 -C net
