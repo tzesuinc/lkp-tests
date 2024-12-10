@@ -102,11 +102,12 @@ class Stater
          /^(?:# )+(?<test_parts>.*):\s*(?<result>OK|PASS|FAIL|SKIP)$/, # Queue open with mq_maxmsg > limit when euid = 0 succeeded:            PASS
          /^(?<result>not ok|ok|fail|skip)\s\d+\s(?<test_parts>.*)/,
          /^(?:# )+(?<result>OK|PASS|FAIL|SKIP): (?<test_parts>.+)/, # # PASS: /dev/mem 0x0-0xa0000 is readable
-         /^#  (?<test_parts>.*)\s+(?<result>ok|fail)$/
+         /^#  (?<test_parts>.*)\s+(?<result>ok|fail)$/,
+         /^#  (?<test_parts>.*)\s\[(?<result>PASS|SKIP|FAIL)\]$/ # #   [PASS]
       parse_test_result(Regexp.last_match)
     when /^# Running test: (\w+_\d+) - run #(\d+)/, # # Running test: kmod_test_0005 - run #1
          /^(?:# )+\s*\[?RUN\]?\s(.+)/, # # # [RUN] test_prot_read
-         /^# Running (.+)/, # # Running kernel configuration test 1 -- rare
+         /^# Running (.+)/i, # # Running kernel configuration test 1 -- rare
          /^# # Testing (.+):/ # # # Testing allocation and importing:
       curr_test.parts = [test_name($1, $2)]
     when /: recipe for target.+failed$/,

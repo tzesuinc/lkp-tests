@@ -1,0 +1,4 @@
+efivarfs.make.pass: 1
+efivarfs.efivarfs.sh.test_create.pass: 1
+efivarfs.efivarfs.sh.test_invalid_filenames.pass: 1
+efivarfs.efivarfs.sh.pass: 1

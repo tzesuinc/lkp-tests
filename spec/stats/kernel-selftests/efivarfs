@@ -1,0 +1,22 @@
+efivarfs on /sys/firmware/efi/efivars type efivarfs (rw,nosuid,nodev,noexec,relatime)
+2024-12-10 04:33:54 make -j128 -C efivarfs
+make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-9.4-kselftests-a5cdd70f96b5b05d79d9e8092300c175a81ece6f/tools/testing/selftests/efivarfs'
+  CC       open-unlink
+  CC       create-read
+make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-9.4-kselftests-a5cdd70f96b5b05d79d9e8092300c175a81ece6f/tools/testing/selftests/efivarfs'
+2024-12-10 04:33:54 make quicktest=1 run_tests -C efivarfs
+make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-9.4-kselftests-a5cdd70f96b5b05d79d9e8092300c175a81ece6f/tools/testing/selftests/efivarfs'
+TAP version 13
+1..1
+# timeout set to 300
+# selftests: efivarfs: efivarfs.sh
+# --------------------
+# running test_create
+# --------------------
+#   [PASS]
+# --------------------
+# running test_invalid_filenames
+# --------------------
+#   [PASS]
+ok 1 selftests: efivarfs: efivarfs.sh
+make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-9.4-kselftests-a5cdd70f96b5b05d79d9e8092300c175a81ece6f/tools/testing/selftests/efivarfs'
