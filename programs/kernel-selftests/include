@@ -123,7 +123,6 @@ need_kconfig:
 - BTRFS_FS: m
 - CHECKPOINT_RESTORE: y
 - DRM_DEBUG_SELFTEST: m
-- EFIVAR_FS
 - EXPERT: y
 - LEDS_CLASS_MULTICOLOR: y
 
@@ -313,11 +312,12 @@ need_kconfig:
 - MEMORY_NOTIFIER_ERROR_INJECT
 % elsif ___.group == "user_events"
 - USER_EVENTS: y
+% elsif ___.group == "efivarfs"
+- EFIVAR_FS # Depends on: EFI [: y]
+- EFI: y
 % else
 - BLOCK: y
 - BTRFS_FS: m
-- EFI: y
-- EFIVAR_FS # Depends on: EFI [: y]
 - FTRACE: y
 - IP_ADVANCED_ROUTER: y
 - IP_MULTIPLE_TABLES: y # Depends on: IP_ADVANCED_ROUTER [: y]
