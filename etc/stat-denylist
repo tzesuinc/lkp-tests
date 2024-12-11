@@ -94,10 +94,12 @@ Spectre_v2_mitigation
 ^dmesg\.sysctl_table_check_failed
 ^dmesg\.timestamp:.*
 ^dmesg\.UBSAN:shift\-out\-of\-bounds_in_lib/test_scanf\.c
+^dmesg\.UBSAN:signed-integer-overflow.*
 ^dmesg\.unittest\.of_unittest_overlay_high_level\(\)_overlay_base_root_not_initialized\.fail
 ^dmesg\.unittest\.of_unittest_pci_node\(\)_No_test_PCI_device_been_found\._Please_run_QEMU_with_'\-device_pci\-testdev'\.fail
 ^dmesg\.unittest\.of_unittest_pci_node\(\)_No_test_PCI_device_been_found\._Please_run_QEMU_with_\-device_pci\-testdev\.fail
 ^dmesg\.WARNING:at_arch/x86/kernel/cpu/aperfmperf\.c:#freq_invariance_enable
+^dmesg\.WARNING:at_arch/x86/kernel/cpu/cpuid-deps\.c:#do_clear_cpu_cap
 ^dmesg\.WARNING:at_arch/x86/kernel/module\.c:#apply_relocate_add
 ^dmesg\.WARNING:at_drivers/gpu/drm/drm_fb_helper\.c:#drm_fb_helper_damage_work\[drm_kms_helper\]
 ^dmesg\.WARNING:at_drivers/gpu/drm/drm_mode_object.c:#drm_object_attach_property
