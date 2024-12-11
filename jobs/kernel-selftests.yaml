@@ -30,7 +30,7 @@ kernel-selftests:
     - dmabuf-heaps
     - drivers
     - dt
-    - efivarfs
+    # - efivarfs # require uefi boot machine
     - exec
     - fchmodat2
     - filelock
