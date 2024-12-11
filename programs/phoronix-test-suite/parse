@@ -45,7 +45,7 @@ while (line = $stdin.gets)
   end
 
   case line
-  when /The test quit with a non-zero exit status|Wrong test option|testname is empty|PHP Parse error/
+  when /Wrong test option|testname is empty|PHP Parse error/
     log_warn line
     exit 1
   when %r{(pts|system)/(\S+)-[0-9.]+ is not installed}
@@ -114,7 +114,7 @@ while (line = $stdin.gets)
   when /(smart-[\d.]+seconds): ([\d.]+)/
     # smart-1.0.0.seconds: 7.252623981
     stats[$1] = $2
-  when /The test run did not produce a result/
+  when /The test run did not produce a result|The test quit with a non-zero exit status/
     # if there is a failed run, seems extra run will be done so that it still get 3 good runs.
     #
     # Unigine Tropics 1.3:
