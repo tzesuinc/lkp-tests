@@ -218,16 +218,16 @@ phoronix-test-suite:
       - 10 # Genetic Algorithm Using Jenetics + Futures
       - 11 # ALS Movie Lens
 
-  - test: startup-time-1.4.1
-    option_a: # Background I/O Mix
-      # - Only Sequential Reads # need more than 1h. GNOME_Terminal-_opt_rootfs. E: df: write error: Broken pipe
-      - Sequential Reads + Writes
-    option_b: # Application To Start
-      - GNOME Terminal
-      # - xterm
-      # - LibreOffice Writer
-    option_c: # Disk Target
-      - /opt/rootfs
+  # - test: startup-time-1.4.1 # The test run did not produce a result.
+  #   option_a: # Background I/O Mix
+  #     # - Only Sequential Reads # need more than 1h. GNOME_Terminal-_opt_rootfs. E: df: write error: Broken pipe
+  #     - Sequential Reads + Writes
+  #   option_b: # Application To Start
+  #     - GNOME Terminal
+  #     # - xterm
+  #     # - LibreOffice Writer
+  #   option_c: # Disk Target
+  #     - /opt/rootfs
 
   - test: helsing-1.0.2
     option_a:

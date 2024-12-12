@@ -6,4 +6,4 @@ need_memory: 8G
 
 phoronix-test-suite:
   test:
-  - idle-power-usage-1.0.0 # The test run did not produce a result
+  # - idle-power-usage-1.0.0 # The test run did not produce a result
