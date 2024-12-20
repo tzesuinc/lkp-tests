@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in $LKP_SRC/lib/*.rb; do
+for i in $(find $LKP_SRC/lib -type f -name "*.rb"); do
 	irb_options+="-r $i "
 done
 
