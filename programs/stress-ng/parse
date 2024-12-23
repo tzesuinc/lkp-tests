@@ -4,6 +4,7 @@ LKP_SRC = ENV['LKP_SRC'] || File.dirname(File.dirname(File.dirname(File.realpath
 
 require "#{LKP_SRC}/lib/log"
 require "#{LKP_SRC}/lib/string"
+require "#{LKP_SRC}/lib/tests/stats"
 
 class StressorStater
   def stat(line)
@@ -53,11 +54,12 @@ class StressorStater
     # stress-ng: metrc: [5237] udp-flood            100.00 % sendto calls succeeded (geometric mean of 128 instances)
     # stress-ng: metrc: [4382] flock               1883.42 nanosecs per flock unlock call (harmonic mean of 6 instances)
     # stress-ng: metrc: [5961] uprobe                 0.00 MB trace data per second (harmonic mean of 224 instances)
+    # stress-ng: metrc: [6413] x86syscall           120.82 nanosecs per call (excluding test overhead (harmonic mean of 224 instances)
     items = line.sub(/ \((average|geometr?ic mean|harmonic mean).*\)$/, '')
                 .split
 
     # unit is "write128_MB/sec" and it has variable length
-    unit = items[5..-1].join('_')
+    unit = LKP::Stats.normalize(items[5..-1].join('_'))
 
     stressor = items[3]
 
