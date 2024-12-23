@@ -11,14 +11,14 @@ module LKP
     end
 
     def key?(test_case)
-      @stats.key? normalize(test_case)
+      @stats.key? self.class.normalize(test_case)
     end
 
     def add(test_case, test_result, overwrite: false)
-      test_case = normalize(test_case)
+      test_case = self.class.normalize(test_case)
       raise "#{test_case} has already existed" if !overwrite && key?(test_case)
 
-      test_result = normalize(test_result.to_s.tr('.', '_').downcase) if test_result.instance_of?(String) || test_result.instance_of?(Symbol)
+      test_result = self.class.normalize(test_result.to_s.tr('.', '_').downcase) if test_result.instance_of?(String) || test_result.instance_of?(Symbol)
 
       @stats[test_case] = test_result
     end
@@ -49,15 +49,15 @@ module LKP
     #   self.exit "#{key} has already existed" if hash.key? key
     # end
 
-    private
-
-    def normalize(test_case)
-      test_case.to_s
-               .strip
-               .gsub(/[\s,"_\[\]():]+/, '_')
-               .gsub(/(^_+|_+$)/, '')
-               .gsub(/_{2,}/, '_') # replace continuous _ to single _
-               .gsub(/\.{4,}/, '.') # replace more than .... to single .
+    class << self
+      def normalize(test_case)
+        test_case.to_s
+                 .strip
+                 .gsub(/[\s,"_\[\]():]+/, '_')
+                 .gsub(/(^_+|_+$)/, '')
+                 .gsub(/_{2,}/, '_') # replace continuous _ to single _
+                 .gsub(/\.{4,}/, '.') # replace more than .... to single .
+      end
     end
   end
 end
