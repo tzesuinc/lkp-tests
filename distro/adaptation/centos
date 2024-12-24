@@ -97,6 +97,7 @@ libcap-dev: libcap-devel
 libcap-ng-dev: libcap-ng-devel
 libcap2-bin: libcap
 libcap2: libcap
+libcapstone-dev: capstone-devel
 libcilkrts5:
 libcomerr2: libcom_err
 libconfig-dev: libconfig-devel
@@ -429,4 +430,3 @@ xutils-dev: imake
 xz-utils: xz
 zlib1g-dev: zlib-devel
 zlib1g: zlib
-libcapstone-dev: capstone-devel
