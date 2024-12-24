@@ -1,9 +1,9 @@
 suite: stress-ng
 testcase: stress-ng
 category: benchmark
- 
+
 nr_threads: 100%
- 
+
 testtime:
   - 60s
 
@@ -57,6 +57,7 @@ stress-ng:
     - fd-race
     - fibsearch
     - fifo
+    - flipflop
     - flushcache
     - fma
     - fork
