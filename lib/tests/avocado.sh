@@ -37,7 +37,7 @@ run_test()
 	if [[ $config_file ]]; then
 		log_cmd avocado run --vt-config $config_file 2>&1
 	else
-		# avocado-vt type_specific.lkvs.td_disable_ept
+		# avocado-vt type_specific.lkvs.tdx_disable
 		# avocado-vt type_specific.io-github-autotest-qemu.blockdev_commit_backing_file
 		# avocado-vt io-github-autotest-qemu.vlan.vlan_connective_test
 		# avocado-vt type_specific.lkvs.boot_check.vm.16G.208_cpu
