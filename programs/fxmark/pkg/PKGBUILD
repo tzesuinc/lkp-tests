@@ -4,7 +4,7 @@ pkgrel=1
 url='https://github.com/sslab-gatech/fxmark'
 arch=('i386' 'x86_64' 'aarch64')
 license=('GPL')
-source=('https://github.com/filebench/filebench.git' 'https://github.com/sslab-gatech/fxmark.git')
+source=('https://github.com/sslab-gatech/fxmark.git' 'https://github.com/filebench/filebench.git')
 md5sums=('SKIP' 'SKIP')
 
 build()
@@ -15,7 +15,7 @@ build()
 	make || return
 
 	cd ../filebench || return
-	git checkout 1.4.9.1 || return 
+	git checkout 1.4.9.1 || return
 	libtoolize || return
 	aclocal || return
 	autoheader || return
