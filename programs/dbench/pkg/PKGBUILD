@@ -1,10 +1,10 @@
 pkgname=tbench
 pkgver=git
 pkgrel=1
-url='https://git.samba.org/sahlberg/dbench'
+url='https://github.com/sahlberg/dbench'
 arch=('i386' 'x86_64' 'aarch64' 'aarch64')
 license=('GPL')
-source=('https://git.samba.org/sahlberg/dbench.git')
+source=('https://github.com/sahlberg/dbench.git')
 md5sums=('SKIP')
 
 build()
