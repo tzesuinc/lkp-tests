@@ -1,17 +1,17 @@
 pkgname=openssl-speed
-pkgver=3.0.8
+pkgver=git
 pkgrel=1
 url='http://www.openssl.org/'
 arch=('i386' 'x86_64' 'riscv64' 'aarch64')
 license=('Apache License 2.0')
-source=("https://github.com/openssl/openssl.git#tag=openssl-$pkgver")
+source=("https://github.com/openssl/openssl.git")
 md5sums=('SKIP')
 
 build()
 {
 	cd $srcdir/openssl
-	git checkout openssl-3.0.1
-        ./config no-zlib
+
+	./config no-zlib
 	make -j $(nproc)
 }
 
