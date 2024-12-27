@@ -1,11 +1,11 @@
 pkgname=memtier_benchmark
-pkgver=1.4.0
+pkgver=git
 pkgrel=1
 arch=('i386' 'x86_64' 'aarch64')
 url="https://github.com/RedisLabs/memtier_benchmark"
 license=('GPL2 ')
 depends=()
-source=("https://github.com/RedisLabs/memtier_benchmark.git#tag=$pkgver")
+source=("https://github.com/RedisLabs/memtier_benchmark.git")
 sha256sums=('SKIP')
 
 build() {
