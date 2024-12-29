@@ -43,6 +43,7 @@ liblz-dev: lzlib
 liboop-dev: liboop
 linkbench::
 linpack::
+lkvs::
 lmbench3::
 ltp::
 lz4-test::

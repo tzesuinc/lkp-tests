@@ -43,6 +43,7 @@ lib-micro::
 libhugetlbfs-test::
 linkbench::
 linpack::
+lkvs::
 lmbench3::
 ltp::
 lz4-test::
