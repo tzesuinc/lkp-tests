@@ -422,7 +422,7 @@ setup_crosstool || {
 	opt_arch="ARCH=$ARCH"
 }
 
-[[ -f arch/$ARCH/boot/dts/Makefile ]] && make_dts="CONFIG_OF_ALL_DTBS=y CONFIG_DTC=y"
+[[ -f arch/$(src_arch $ARCH)/boot/dts/Makefile ]] && make_dts="CONFIG_OF_ALL_DTBS=y CONFIG_DTC=y"
 
 [[ -f .make-env ]] && source ./.make-env
 

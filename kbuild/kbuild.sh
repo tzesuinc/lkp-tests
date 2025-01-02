@@ -147,6 +147,28 @@ setup_llvm_ias()
 	fi
 }
 
+src_arch()
+{
+	local ARCH=$1
+
+	case $ARCH in
+		i386|x86_64)
+			echo x86;;
+		sparc32|sparc64)
+			echo sparc;;
+		parisc|parisc64)
+			echo parisc;;
+		sh64)
+			echo sh;;
+		tilepro|tilegx)
+			echo tile;;
+		powerpc64)
+			echo powerpc;;
+		*)
+			echo $ARCH;;
+	esac
+}
+
 get_config_value()
 {
 	local config=$1
