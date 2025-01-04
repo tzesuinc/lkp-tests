@@ -117,7 +117,6 @@ need_kconfig:
 - DAMON_LRU_SORT: y
 - DAMON_RECLAIM: y
 - SECURITY_PATH: y
-- UDMABUF: y
 - DMABUF_HEAPS: y
 - DMABUF_HEAPS_SYSTEM: y
 - BTRFS_FS: m
@@ -302,7 +301,7 @@ need_kconfig:
 - NET_SCH_FQ_PIE: m
 - CAN: m
 - ATM: y
-- NETDEVSIM: m
+- NETDEVSIM
 - PTP_1588_CLOCK_MOCK: m
 % elsif ___.group == "memory-hotplug"
 - MEMORY_HOTREMOVE: y
@@ -315,6 +314,20 @@ need_kconfig:
 % elsif ___.group == "efivarfs"
 - EFIVAR_FS # Depends on: EFI [: y]
 - EFI: y
+% elsif ___.group == "drivers"
+# drivers/net
+- IPV6
+- NETDEVSIM
+- CONFIGFS_FS
+- NETCONSOLE
+- NETCONSOLE_DYNAMIC: y
+- NETCONSOLE_EXTENDED_LOG: y
+
+# drivers/dma-buf
+- UDMABUF: y
+
+# drivers/platform/x86/intel/ifs
+- INTEL_IFS
 % else
 - BLOCK: y
 - BTRFS_FS: m
