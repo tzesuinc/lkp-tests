@@ -1,9 +1,9 @@
 suite: stress-ng
 testcase: stress-ng
 category: benchmark
- 
+
 nr_threads: 100%
- 
+
 testtime:
   - 60s
 
@@ -53,6 +53,7 @@ stress-ng:
     - rdrand
     - readahead
     - reboot
+    - regex
     - regs
     - remap
     - resched
