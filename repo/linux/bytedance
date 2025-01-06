@@ -11,6 +11,7 @@ mail_to:
 - lin.x.wang@intel.com
 - pei.p.jia@intel.com
 private_report_branch: .*
+report_picked_commit: .*
 notify_build_success_branch: .*
 tests:
   - branch: 6.6-velinux
