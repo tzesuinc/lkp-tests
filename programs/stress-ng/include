@@ -1,16 +1,16 @@
 need_kconfig:
-% if job['stress-ng']['class'] == "security" || job['stress-ng']['test'] == "apparmor"
+% if ___.class == "security" || ___.test == "apparmor"
 - SECURITY: y
 - NET: y
 - SECURITY_APPARMOR: y
-% elsif job['stress-ng']['test'] == "dccp"
+% elsif ___.test == "dccp"
 - IP_DCCP: y
-% elsif job['stress-ng']['test'] == "tun"
+% elsif ___.test == "tun"
 - TUN: m
-% elsif job['stress-ng']['test'] == "userfaultfd"
+% elsif ___.test == "userfaultfd"
 - USERFAULTFD: y
-% elsif job['stress-ng']['test'] == "module"
+% elsif ___.test == "module"
 - TEST_LKM: m
-% elsif job['stress-ng']['test'] == "sctp"
+% elsif ___.test == "sctp"
 - IP_SCTP: m
 % end
