@@ -4,7 +4,7 @@ pkgrel=1
 url='https://github.com/intel/lkvs.git'
 arch=('i386' 'x86_64')
 license=('GPL')
-source=('https://github.com/intel/lkvs.git' 'http://github.com/intel/libipt.git')
+source=('https://github.com/intel/lkvs.git' 'https://github.com/intel/libipt.git')
 md5sums=('SKIP' 'SKIP')
 
 build()
