@@ -1,6 +1,16 @@
-if ! rpm -q epel-release >/dev/null; then
-	yum install -y epel-release
-	yum makecache fast
+. $LKP_SRC/lib/detect-system.sh
+
+detect_system
+
+if (( $_system_version >= 8 )); then
+	package_manager=dnf
+else
+	package_manager=yum
 fi
 
-yum install -y $*
+if ! rpm -q epel-release >/dev/null; then
+	${package_manager} install -y epel-release
+	${package_manager} makecache fast
+fi
+
+${package_manager} install -y $*
