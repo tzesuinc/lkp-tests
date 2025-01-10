@@ -1,7 +1,7 @@
 # bookworm
 btrfs-tools: btrfs-progs
 crda:
-cython: 
+cython:
 dh-systemd: debhelper
 dwarves: pahole
 exfat-utils: exfatprogs
@@ -56,6 +56,6 @@ python3-crypto: python3-pycryptodome
 python3-gobject:
 python3-tox: tox
 python: python3
-qemu: 
+qemu:
 qt5-default: qtbase5-dev
 winpdb:

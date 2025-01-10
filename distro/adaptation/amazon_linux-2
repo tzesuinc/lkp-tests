@@ -18,8 +18,8 @@ libmariadb3:
 libobjc-7-dev: libobjc
 libopencryptoki0: opencryptoki-libs
 libpng12-dev: libpng12-devel
-libstdc++-7-dev: 
-libtsan0: 
+libstdc++-7-dev:
+libtsan0:
 libvirt-clients: libvirt-client
 libvirt-daemon-system: libvirt-client libvirt-daemon
 libvirt-dev: libvirt-devel
@@ -39,7 +39,7 @@ rt-tests: numactl-devel
 ruby-dev: ruby-devel
 rusersd: rusers-server rusers
 sg3-utils: sg3_utils
-stress-ng: 
+stress-ng:
 tshark: wireshark
 update-inetd: xinetd
 wireless-regdb: crda

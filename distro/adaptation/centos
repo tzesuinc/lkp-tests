@@ -17,19 +17,19 @@ comerr-dev: libcom_err-devel
 cron: cronie
 dbench=4.0-2: dbench
 dc: bc
-default-jdk: java-1.8.0-openjdk-devel 
+default-jdk: java-1.8.0-openjdk-devel
 devscripts:
 dh-exec:
 dh-python:
 dh-strip-nondeterminism:
 dh-systemd:
 dnsutils: bind-utils
-dpkg-dev: 
+dpkg-dev:
 e2fslibs-dev: e2fsprogs-devel
 exfat-fuse:
 f2fs-tools:
 freeglut3: freeglut
-fsmark: 
+fsmark:
 fsverity: fsverity-utils
 g++-multilib:
 gcc-4.9: gcc
@@ -46,7 +46,7 @@ init-system-helpers:
 initramfs-tools: dracut
 install-info: info
 intltool-debian: intltool
-iozone3: 
+iozone3:
 iproute2: iproute
 iputils-clockdiff: iputils
 iputils-tracepath: iputils
@@ -76,19 +76,19 @@ libbabeltrace-dev:
 libbinutils:
 libblas3: blas
 libblkid-dev: libblkid-devel
-libbsd-dev: 
-libbsd0: 
+libbsd-dev:
+libbsd0:
 libbz2-1.0:
 libbz2-dev: bzip2-devel
 libc-bin: glibc-common
 libc-dev-bin: glibc-common
 libc-dev: glibc-devel
 libc6-dbg:
-libc6-dev-i386: 
+libc6-dev-i386:
 libc6-dev-x32:
 libc6-dev: glibc-devel glibc-static
 libc6-dev:i386: glibc-devel.i686 glibc-static.i686
-libc6-i386: 
+libc6-i386:
 libc6-x32:
 libc6:
 libcairo2-dev: cairo-devel
@@ -168,7 +168,7 @@ libhugetlbfs:
 libhwloc-dev: hwloc-devel
 libhwloc5:
 libiberty-dev: binutils-devel
-libibverbs-dev: 
+libibverbs-dev:
 libibverbs1: libibverbs
 libicu-dev: libicu-devel
 libidn2-0: libidn2
@@ -265,7 +265,7 @@ libpython2.7:
 libpython3: python3-libs
 libqt5opengl5-dev:
 libquadmath0: libquadmath.x86_64
-librdmacm-dev: 
+librdmacm-dev:
 librdmacm1: librdmacm
 libreadline-dev: readline-devel
 libreadline5: readline
@@ -296,6 +296,7 @@ libtimedate-perl: perl-TimeDate
 libtirpc-dev: libtirpc-devel
 libtirpc3:
 libtool-bin: libtool
+libtraceevent-dev:
 libtracefs-dev: libtracefs-devel
 libtsan0: libtsan.x86_64
 libubsan:
@@ -333,7 +334,7 @@ libxmlrpc-core-c3-dev:
 libxmlrpc-core-c3:
 libxxhash-dev:
 libxxhash0:
-libyaml-cpp-dev: 
+libyaml-cpp-dev:
 libyaml-dev: libyaml-devel
 libzmq3-dev:
 libzmq5:

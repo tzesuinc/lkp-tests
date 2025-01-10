@@ -56,7 +56,7 @@ libc-bin: glibc-common
 libc-dev-bin: glibc-common
 libc-dev: glibc-devel
 libc-dev:i386:
-libc6-dbg: 
+libc6-dbg:
 libc6-dev-i386:
 libc6-dev: glibc-devel glibc-static
 libc6-dev:i386:
@@ -99,7 +99,7 @@ libgoogle-perftools-dev: gperftools-devel
 libgtk2.0-dev: gtk3-devel
 libhwloc-dev: hwloc-devel
 libiberty-dev: binutils-devel
-libibverbs-dev: 
+libibverbs-dev:
 libicu:
 libipc-run-perl: perl-IPC-Run
 libipsec-mb-dev:
@@ -129,7 +129,7 @@ libnl-route-3-dev: libnl3-devel
 libntfs:
 libnuma-dev: numactl-devel
 libnuma1: numactl
-liboath-dev: 
+liboath-dev:
 liboop-dev:
 libopenmpi-dev: openmpi-devel
 libopenmpi3: openmpi
@@ -153,12 +153,12 @@ libprotobuf-dev: protobuf-devel
 libpython2.7:
 libpython3: python3-libs
 libquadmath0: libquadmath
-librdmacm-dev: 
+librdmacm-dev:
 libreadline-dev: readline-devel
 libreadline5: readline
 libsctp-dev: lksctp-tools-devel
 libsctp1: lksctp-tools
-libseccomp2: 
+libseccomp2:
 libselinux1:
 libsigsegv2:
 libslang2-dev: slang-devel
@@ -176,9 +176,9 @@ libubsan:
 libudev-dev: systemd-devel
 libudev1: systemd-libs
 libunwind-dev: libunwind-devel
-libuuid1: libuuid 
+libuuid1: libuuid
 libuv1-dev: libuv-devel
-libwaffle-dev: 
+libwaffle-dev:
 libx11-dev: libX11-devel
 libx11-xcb-dev: libX11-devel
 libxkbcommon-dev: libxkbcommon-devel
@@ -189,18 +189,18 @@ linux-libc-dev: kernel-headers
 linux-libc-dev:i386: kernel-headers
 linux-perf: perf
 linux-tools: perf
-llvm-6.0: 
+llvm-6.0:
 llvm-dev: llvm-devel
 locales: glibc-common
 ncurses-bin: ncurses
 netcat-openbsd: nmap-ncat
-netpipe-lam: 
+netpipe-lam:
 netpipe-mpich2:
 netpipe-openmpi:
 netpipe-pvm:
 netpipe-tcp:
 nfs-kernel-server: nfs-utils
-ocfs2-tools-dev: 
+ocfs2-tools-dev:
 openjdk: java-17-amazon-corretto-devel
 perl-base: perl
 pixz:
