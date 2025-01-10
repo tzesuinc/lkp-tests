@@ -64,6 +64,7 @@ nvml::
 ocfs2test::
 oltp::
 openssl-speed::
+otc_ddt::
 packetdrill::
 pbzip2::
 pepc::
