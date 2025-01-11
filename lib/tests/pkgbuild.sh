@@ -101,10 +101,18 @@ EOT
 
 	cp_to_pkg "$avocado_conf_file"
 	cp_to_pkg "$avocado_data_dir"
-	cp_to_pkg /usr/lib/python3
+
+	# packages location
+	#   debian: /usr/lib/python3/dist-packages/ and /usr/local/lib/python3.x/dist-packages/
+	#   centos: /usr/lib/python3.x/site-packages/ and /usr/local/lib/python3.x/site-packages/
+	cp_to_pkg /usr/lib/python3*
 
 	# /usr/local/lib/python3.11/dist-packages# ls -d avocado*
 	# avocado  avocado_framework-107.0.egg-info  avocado_framework_plugin_vt-104.0.dist-info  avocado_vt
+	#
+	# # find / -name pytest
+	# /usr/local/bin/pytest
+	# /usr/local/lib/python3.9/site-packages/pytest
 	cp_to_pkg /usr/local
 }
 
