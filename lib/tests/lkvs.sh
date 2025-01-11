@@ -64,6 +64,9 @@ alias fixup_rapl_client=fixup_rapl_server
 
 runtests()
 {
+	# for glxgears on centos, which is located at /usr/lib64/mesa/glxgears
+	export PATH="$PATH:/usr/lib64/mesa"
+
 	cd $BENCHMARK_ROOT/$testcase/lkvs/BM || return
 
 	if [[ $(type -t "fixup_${test//-/_}") =~ (alias|function) ]]; then

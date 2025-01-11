@@ -20,6 +20,7 @@ libssl-dev
 libtool
 linux-perf
 m4
+mesa-utils
 msr-tools
 sshpass
 stress
