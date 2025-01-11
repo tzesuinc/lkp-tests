@@ -126,19 +126,26 @@ install_gcc7()
 	source /opt/rh/devtoolset-7/enable
 }
 
+download_rpm()
+{
+	local rpm=$1
+
+	install wget
+
+	mkdir -p /opt/rpms
+	wget -nc -P /opt/rpms $rpm
+}
+
 download_ocfs2_tools()
 {
 	local pkgs=$1
 
-	mkdir -p /opt/rpms
-	install wget
-
-	wget -nc -P /opt/rpms https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/ocfs2-tools-1.8.6-11.el7.x86_64.rpm
+	download_rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/ocfs2-tools-1.8.6-11.el7.x86_64.rpm
 
 	local download_pkgs="/opt/rpms/ocfs2-tools-1.8.6-11.el7.x86_64.rpm"
 
 	if echo "$pkgs" | grep -q 'ocfs2-tools-devel'; then
-		wget -nc -P /opt/rpms https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/ocfs2-tools-devel-1.8.6-11.el7.x86_64.rpm
+		download_rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/ocfs2-tools-devel-1.8.6-11.el7.x86_64.rpm
 		download_pkgs="$download_pkgs /opt/rpms/ocfs2-tools-devel-1.8.6-11.el7.x86_64.rpm"
 	fi
 
@@ -154,6 +161,5 @@ install_ocfs2_tools()
 
 	$LKP_SRC/distro/installer/$DISTRO /opt/rpms/ocfs2-tools-1.8.6-11.el7.x86_64.rpm
 
-	echo "$pkgs" | grep -q 'ocfs2-tools-devel' && \
-		$LKP_SRC/distro/installer/$DISTRO /opt/rpms/ocfs2-tools-devel-1.8.6-11.el7.x86_64.rpm
+	echo "$pkgs" | grep -q 'ocfs2-tools-devel' && $LKP_SRC/distro/installer/$DISTRO /opt/rpms/ocfs2-tools-devel-1.8.6-11.el7.x86_64.rpm
 }
