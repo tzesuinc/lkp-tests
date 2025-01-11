@@ -23,7 +23,6 @@ libzmq: libzmq5
 linux-cpupower: linux-tools-generic
 linux-perf: linux-tools-common
 linux-tools: linux-tools-generic
-nasm: nasm
 perl-modules-5: perl-modules-5.26
 pmdk: pmdk-tools
 which: debianutils

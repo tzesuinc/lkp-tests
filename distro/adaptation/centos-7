@@ -1,7 +1,6 @@
 cgroup-tools: libcgroup-tools
 default-jdk:
 g++: gcc-c++
-ibtraceevent-dev:
 libbabeltrace-ctf-dev:
 libbabeltrace-ctf1:
 libclang-dev:

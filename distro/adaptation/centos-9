@@ -8,6 +8,7 @@ cython3: python3-cython
 default-jdk:
 exfat-utils: exfatprogs
 freeglut3-dev: freeglut-devel-3.2.1
+grub-common: grub2-common
 libacl1: libacl-2.3.1
 libbabeltrace-ctf-dev: libbabeltrace-devel
 libbabeltrace-ctf1: libbabeltrace
@@ -17,12 +18,11 @@ libclang-dev: clang-devel
 libcunit1-dev: CUnit-devel
 libdw1: libdwarves1
 libevent-2.1: libevent-2.1.12
-libfdt-dev: libfdt-devel
+libfdt-dev: libfdt
 libgles2-mesa-dev: mesa-libGL-devel
 libgles2-mesa: mesa-libGLES
 libgles2: mesa-libGL
 libgoogle-perftools-dev:
-libipsec-mb:
 libjudy-dev: Judy-devel
 libjudydebian1: Judy
 libpfm4-dev: libpfm-devel
@@ -30,10 +30,8 @@ libpfm4: libpfm
 libpng12-dev:
 libpython2.7: python3-libs
 libpython3: python3-libs
-libtraceevent-dev: libtraceevent-devel
-libtraceevent1: libtraceevent
-libunwind-dev:
-libunwind:
+libusb-1.0-0-dev: libusbx-devel
+libusb-1.0-0: libusbx
 llvm-dev: llvm-devel
 openbsd-inetd:
 pkg-config:
@@ -48,6 +46,7 @@ python3-minimal: python3
 python3-nose:
 python3-openssl: python3-pyOpenSSL
 python3-pkg-resources:
+python3-pypillowfight: python3-pillow
 python3-pyrad:
 python3-six:
 python3-venv: python3-virtualenv
@@ -55,5 +54,6 @@ python: python3
 rng-tools5: rng-tools
 rstatd:
 rusersd:
+udhcpc: busybox
 update-inetd:
 xutils-dev:

@@ -11,7 +11,7 @@ btrfs-tools: btrfs-progs
 build-essential: make automake gcc gcc-c++ kernel-devel rpm-build
 cgroup-bin: libcgroup
 cgroupfs-mount:
-clang-6.0: clang.x86_64
+clang-6.0: clang
 cmake: cmake cmake3
 comerr-dev: libcom_err-devel
 cron: cronie
@@ -72,11 +72,13 @@ libasound2: alsa-lib
 libattr1-dev: libattr-devel
 libattr1: libattr
 libaudit-dev: audit-libs-devel
-libbabeltrace-dev:
+libbabeltrace-dev: libbabeltrace-devel
 libbinutils:
 libblas3: blas
 libblkid-dev: libblkid-devel
-libbsd-dev:
+libbrlapi-dev: brlapi-devel
+libbrlapi0.8: brlapi
+libbsd-dev: libbsd-devel
 libbsd0:
 libbz2-1.0:
 libbz2-dev: bzip2-devel
@@ -92,22 +94,32 @@ libc6-i386:
 libc6-x32:
 libc6:
 libcairo2-dev: cairo-devel
-libcairo2:
+libcairo2: cairo
 libcap-dev: libcap-devel
 libcap-ng-dev: libcap-ng-devel
+libcap-ng0: libcap-ng
 libcap2-bin: libcap
 libcap2: libcap
+libcapnp-dev: capnproto-devel
 libcapstone-dev: capstone-devel
+libcapstone4: capstone
+libcc1-0:
+libcdt5: graphviz
+libcgraph6: graphviz
 libcilkrts5:
+libclang1: clang
 libcomerr2: libcom_err
 libconfig-dev: libconfig-devel
 libcpupower-dev:
-libcrypto++-dev:
+libcrypto++-dev: cryptopp-devel
 libcurl4-openssl-dev: libcurl-devel
+libcurl4: libcurl
+libdatrie1: libdatrie
 libdaxctl-dev: daxctl-devel
 libdbd-mysql-perl: perl-DBD-MySQL
 libdbi-perl: perl-DBI
 libdbus-1-dev: dbus-devel
+libdpkg-perl:
 libdrm-amdgpu1:
 libdrm-dev: libdrm-devel
 libdrm-intel1:
@@ -126,22 +138,32 @@ libevent-dev: libevent-devel
 libexpat1-dev: expat-devel
 libfabric-dev: libfabric-devel
 libfabric1: libfabric
-libfdt-dev:
+libfdt-dev: libfdt-devel
+libfdt1: libfdt
 libffi-dev: libffi-devel
+libfftw3-bin: fftw
+libfftw3-dev: fftw-devel
+libfftw3-double3: fftw
+libfftw3-long3: fftw
+libfftw3-quad3: fftw
+libfftw3-single3: fftw
 libfile-stripnondeterminism-perl:
+libfontconfig1: fontconfig
+libfreetype6: freetype
 libfuse-dev: fuse-devel
 libfuse3: fuse3-libs
 libgbm-dev: mesa-libgbm-devel
 libgbm1: mesa-libgbm
-libgcc-7-dev: libgcc.x86_64
+libgcc-7-dev: libgcc
 libgcrypt-dev: libgcrypt-devel
 libgcrypt20: libgcrypt
+libgd3: gd
 libgdbm-compat4:
 libgdbm-dev: gdbm-devel
 libgdbm6:
 libgfapi0:
-libgflags-dev:
-libgflags2.2:
+libgflags-dev: gflags-devel
+libgflags2.2: gflags
 libgfrpc0:
 libgfxdr0:
 libgl1-mesa-dev: mesa-libGL-devel
@@ -150,17 +172,26 @@ libglib2.0-0: glib2
 libglib2.0-dev: glib2-devel
 libglu-dev: mesa-libGLU-devel
 libglusterfs0:
-libglut-dev:
-libglut3:
+libglut-dev: freeglut-devel
+libglut3: freeglut
 libgmp-dev: gmp-devel
 libgmp10:
-libgnutls28-dev:
-libgnutls30:
+libgnutls28-dev: gnutls-devel
+libgnutls30: gnutls
 libgomp1: libgomp
-libgsl-dev:
-libgsl:
+libgpm-dev: gpm-devel
+libgpm2: gpm-libs
+libgraphite2-3: graphite2
+libgsl-dev: gsl-devel
+libgsl: gsl
 libgssapi-krb5-2:
+libgtk-3-0: gtk3
+libgtk-3-dev: gtk3-devel
 libgtk2.0-dev: gtk2-devel
+libgts-0.7-5:
+libgvc6: graphviz
+libgvpr2: graphviz
+libharfbuzz0b: harfbuzz
 libhugetlbfs-bin:
 libhugetlbfs-dev:
 libhugetlbfs0:
@@ -170,13 +201,17 @@ libhwloc5:
 libiberty-dev: binutils-devel
 libibverbs-dev:
 libibverbs1: libibverbs
+libice6: libICE
 libicu-dev: libicu-devel
 libidn2-0: libidn2
 libiniparser-dev:
 libipc-run-perl: perl-IPC-Run
-libipsec-mb-dev:
-libipsec-mb:
+libipsec-mb-dev: intel-ipsec-mb-devel
+libipsec-mb: intel-ipsec-mb
 libiscsi-dev: libiscsi-devel
+libisl: isl
+libitm1: libitm
+libjbig0: jbigkit-libs
 libjpeg-dev: libjpeg-turbo-devel
 libjpeg62-turbo: libjpeg-turbo
 libjson-c-dev: json-c-devel
@@ -190,24 +225,32 @@ libkrb5-dbg:
 libldap-2.4-2:
 libldap2-dev: openldap-devel
 libleveldb-dev:
-liblsan0:
+libllvm: llvm-libs
+liblsan0: liblsan
+libltdl7: libtool-ltdl
 liblttng-ust-dev:
 liblz-dev:
 liblz4-1:
 liblz4-dev:
 liblzma-dev: xz-devel
 liblzma5:
+liblzo2-2: lzo
+liblzo2-dev: lzo-devel
+libmagic-mgc: file
 libmariadb-dev: mysql-devel
 libmariadb3: mariadb-connector-c
 libmnl-dev: libmnl-devel
 libmount-dev: libmount-devel
+libmpc3: libmpc
 libmpfr-dev: mpfr-devel
 libmpfr6: mpfr
 libmpx2:
 libncurses5-dev: ncurses-devel
-libncursesw5-dev:
+libncurses5: ncurses
+libncursesw5-dev: ncurses-devel
 libndctl-dev: ndctl-devel
 libnfs-dev: libnfs-devel
+libnfs13: libnfs
 libnl-3-200: libnl3
 libnl-3-dev: libnl3-devel
 libnl-cli-3-200: libnl3-cli
@@ -218,18 +261,24 @@ libnl-nf-3-200:
 libnl-route-3-200:
 libnl-route-3-dev: libnl3-devel
 libnl-utils: libnl3
+libnpth0-dev: npth-devel
+libnpth0: npth
 libnss3-dev:
 libntfs:
 libnuma-dev: numactl-devel
 libnuma1: numactl
 liboath-dev:
-libobjc-7-dev: libobjc.x86_64
+libobjc-7-dev: libobjc
 liboop-dev:
 liboop4:
 libopencryptoki0: opencryptoki-libs
 libopenmpi-dev: openmpi-devel
 libopenmpi3: openmpi
 libp11-kit0:
+libpango-1.0-0: pango
+libpangocairo-1.0-0: pango
+libpangoft2-1.0-0: pango
+libpathplan4: graphviz
 libpcap-dev: libpcap-devel
 libpcap0.8-dev: libpcap-devel
 libpcap0.8: libpcap
@@ -264,14 +313,19 @@ libpulse-dev: pulseaudio-libs-devel
 libpython2.7:
 libpython3: python3-libs
 libqt5opengl5-dev:
-libquadmath0: libquadmath.x86_64
+libquadmath0: libquadmath
+librbd-dev: librbd-devel
 librdmacm-dev:
 librdmacm1: librdmacm
 libreadline-dev: readline-devel
 libreadline5: readline
-libsasl2-2:
+libsamplerate0-dev: libsamplerate-devel
+libsamplerate0: libsamplerate
+libsasl2-2: cyrus-sasl
+libsasl2-dev: cyrus-sasl-devel
 libsctp-dev: lksctp-tools-devel
 libsctp1: lksctp-tools
+libsdl2-2.0-0: SDL2
 libsdl2-dev: SDL2-devel
 libseccomp-dev: libseccomp-devel
 libseccomp2:
@@ -280,26 +334,34 @@ libselinux1: libselinux
 libsigsegv2:
 libslang2-dev: slang-devel
 libslirp-dev: libslirp-devel
+libslirp0: libslirp
+libsm6: libSM
 libsmbclient-dev: libsmbclient-devel
 libsnappy-dev: snappy-devel
 libsnappy1v5: snappy
 libspice-protocol-dev: spice-protocol
 libspice-server-dev:
+libspice-server1:
 libsqlite3-0: libsqlite3x
 libsqlite3-dev: sqlite-devel
+libssh-4: libssh
+libssh-dev: libssh-devel
 libssl-dev: openssl-devel
 libssl: openssl-devel
-libstdc++-7-dev: libstdc++-devel.x86_64 libstdc++-static.x86_64
-libstdc++6: libstdc++.x86_64
+libstdc++-7-dev: libstdc++-devel libstdc++-static
+libstdc++6: libstdc++
 libtasn1-6:
+libthai-data: libthai
+libthai0: libthai
 libtimedate-perl: perl-TimeDate
+libtinfo-dev: ncurses-devel
 libtirpc-dev: libtirpc-devel
 libtirpc3:
 libtool-bin: libtool
-libtraceevent-dev:
+libtraceevent-dev: libtraceevent-devel
+libtraceevent1: libtraceevent
 libtracefs-dev: libtracefs-devel
-libtsan0: libtsan.x86_64
-libubsan:
+libtsan0: libtsan
 libudev-dev: systemd-devel
 libudev1: systemd-libs
 libunwind-dev: libunwind-devel
@@ -307,7 +369,10 @@ liburing-dev: liburing-devel
 libuuid1: libuuid
 libuv1-dev: libuv-devel
 libv4l-dev: libv4l-devel
+libvde-dev:
+libvde0:
 libvdeplug-dev:
+libvdeplug2:
 libvirt-clients: libvirt-client
 libvirt-daemon-system: libvirt-client libvirt-daemon
 libvirt-dev: libvirt-devel
@@ -317,6 +382,7 @@ libwayland-cursor0: libwayland-cursor
 libwayland-dev: wayland-devel
 libwayland-egl1: libwayland-egl
 libx11-6: libX11
+libx11-data: libX11-common
 libx11-dev: libX11-devel
 libx11-xcb-dev: libX11-devel
 libx32asan5:
@@ -327,11 +393,25 @@ libx32gomp1:
 libx32itm1:
 libx32quadmath0:
 libx32ubsan1:
+libxau6: libXau
+libxaw7: libXaw
+libxcb-render0: libxcb
+libxcb-shm0: libxcb
+libxcb1: libxcb
+libxdmcp6: libXdmcp
+libxdot4: graphviz
 libxen-dev:
+libxext6: libXext
 libxkbcommon-dev: libxkbcommon-devel
 libxml2-dev: libxml2-devel
+libxml2-utils: libxml2
 libxmlrpc-core-c3-dev:
 libxmlrpc-core-c3:
+libxmu6: libXmu
+libxpm4: libXpm
+libxrender1: libXrender
+libxslt1.1: libxslt
+libxt6: libXt
 libxxhash-dev:
 libxxhash0:
 libyaml-cpp-dev:
@@ -346,12 +426,13 @@ linux-libc-dev: kernel-headers
 linux-libc-dev:i386: kernel-headers
 linux-perf: perf
 linux-tools: perf
-llvm-6.0: llvm7.0.x86_64
+llvm-6.0: llvm7.0
 locales: glibc-common
+manpages-dev: man-pages
+mesa-utils: mesa-demos
 mpi-default-bin: mpich
 multipath-tools: device-mapper-multipath
 mysql-server: mariadb
-nasm: nasm.x86_64
 nbd-client: nbd
 nbd-server: nbd
 ncurses-bin: ncurses
@@ -407,6 +488,8 @@ rusersd: rusers-server
 samba-dev: samba-devel
 sendip:
 sg3-utils: sg3_utils
+sgml-base: sgml-common
+sgml-data: sgml-common
 snmp: net-snmp
 stress-ng: stress-ng
 systemtap-sdt-dev: systemtap-sdt-devel
@@ -423,8 +506,10 @@ wireless-regdb: crda
 wireshark-common: wireshark
 wpasupplicant: wpa_supplicant
 x11-apps:
+x11-common: xorg-x11-server-common
 xfslibs-dev: xfsprogs-devel
 xinit: xorg-x11-xinit
+xml-core: xml-common
 xorg:
 xsltproc: libxslt
 xutils-dev: imake

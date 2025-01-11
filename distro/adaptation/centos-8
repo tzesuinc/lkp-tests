@@ -10,8 +10,6 @@ libfdt-dev: libfdt-devel
 libgles2-mesa:
 libgoogle-perftools-dev:
 libpng12-dev:
-libtraceevent-dev: libtraceevent-devel
-libtraceevent1:
 libunwind-dev:
 libunwind:
 llvm-dev: llvm-devel
