@@ -4,6 +4,16 @@
 . $LKP_SRC/lib/install.sh
 . $LKP_SRC/lib/reproduce-log.sh
 
+pip3_install()
+{
+	local package=$1
+
+	local options
+	pip3 install -h | grep -q break-system-packages && options="--break-system-packages"
+
+	pip3 install $options $package
+}
+
 build_pahole()
 {
 	log_cmd cd "${srcdir}/pahole"
@@ -72,8 +82,8 @@ pack_avocado_vt()
 	local avocado_data_dir=$1
 	local avocado_conf_file=/etc/avocado/avocado.conf
 
-	pip3 install --break-system-packages avocado-framework
-	pip3 install --break-system-packages git+https://github.com/avocado-framework/avocado-vt
+	pip3_install avocado-framework
+	pip3_install git+https://github.com/avocado-framework/avocado-vt
 
 	log_cmd mkdir -p "$(dirname $avocado_conf_file)"
 	log_cmd mkdir -p "$avocado_data_dir"

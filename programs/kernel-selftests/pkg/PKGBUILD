@@ -84,7 +84,7 @@ build()
 package()
 {
 	# for hid group
-	pip3 install --break-system-packages pytest-tap
+	pip3_install pytest-tap
 
 	# When using pip to install packages system-wide, they are usually installed
 	# in /usr/local/lib/python3.x/dist-packages or site-packages
