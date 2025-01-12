@@ -6,6 +6,11 @@ shopt -s nullglob
 . $LKP_SRC/distro/common
 . $LKP_SRC/lib/debug.sh
 
+fixup_distro_mirror()
+{
+	dnf config-manager --set-enabled crb
+}
+
 install()
 {
 	local pkg="$1"
