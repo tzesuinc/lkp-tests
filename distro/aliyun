@@ -37,8 +37,6 @@ distro_install_depends()
 	local ocfs2_tools_name=$(echo "$packages" | grep 'ocfs2-tools')
 	[ -n "$ocfs2_tools_name" ] && install_ocfs2_tools "$ocfs2_tools_name"
 
-	echo "$packages" | grep -q nasm && install_nasm
-
 	for pkg in $packages
 	do
 		install $pkg
@@ -111,8 +109,6 @@ pack_benchmark_deps()
 		local ocfs2_tools_name=$(echo "$packages" | grep 'ocfs2-tools')
 		[ -n "$ocfs2_tools_name" ] && download_ocfs2_tools "$ocfs2_tools_name"
 
-		echo "$packages" | grep -q nasm && download_nasm
-
 		if download "$packages"; then
 			pack
 		else
@@ -171,16 +167,4 @@ install_ocfs2_tools()
 	$LKP_SRC/distro/installer/$DISTRO /opt/rpms/ocfs2-tools-1.8.6-11.el7.x86_64.rpm
 
 	echo "$pkgs" | grep -q 'ocfs2-tools-devel' && $LKP_SRC/distro/installer/$DISTRO /opt/rpms/ocfs2-tools-devel-1.8.6-11.el7.x86_64.rpm
-}
-
-download_nasm()
-{
-	download_rpm https://www.nasm.us/pub/nasm/releasebuilds/2.16/linux/nasm-2.16-0.fc36.x86_64.rpm
-}
-
-install_nasm()
-{
-	download_nasm
-
-	$LKP_SRC/distro/installer/$DISTRO /opt/rpms/nasm-2.16-0.fc36.x86_64.rpm
 }
