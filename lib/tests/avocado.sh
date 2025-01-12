@@ -4,10 +4,14 @@
 . $LKP_SRC/lib/debug.sh
 . $LKP_SRC/lib/env.sh
 . $LKP_SRC/lib/upload.sh
+. $LKP_SRC/lib/detect-system.sh
 
 avocado_conf_file="/etc/avocado/avocado.conf"
 avocado_data_dir="/lkp/benchmarks/avocado/data"
 avocado_result_dir="/tmp/avocado/result"
+
+detect_system
+distro=$_system_name_lowercase
 
 setup_conf()
 {
@@ -52,6 +56,8 @@ run_test()
 
 setup_env()
 {
+	echo "$FUNCNAME: distro=$distro"
+
 	local kvm_intel_parameters_tdx=/sys/module/kvm_intel/parameters/tdx
 
 	log_cmd cat $kvm_intel_parameters_tdx
@@ -64,6 +70,15 @@ setup_env()
 	# required for lkvs
 	lsmod | grep tun || modprobe tun
 
+	if [[ $distro =~ centos ]]; then
+		setup_env_for_centos
+	else
+		setup_env_for_debian
+	fi
+}
+
+setup_env_for_debian()
+{
 	# resolve libvirtd service issue
 	# 	libvirtd[9640]: libvirt version: 9.0.0, package: 9.0.0-4+deb12u1 (Debian)
 	# 	libvirtd[9640]: invalid argument: Failed to parse user 'libvirt-qemu'
@@ -85,6 +100,15 @@ setup_env()
 	log_cmd sed -i 's/openvswitch-switch/openvswitch/g' /lib/systemd/system/openvswitch.service
 	# to recognize the new service file
 	log_cmd systemctl daemon-reload
+}
+
+setup_env_for_centos()
+{
+	log_cmd systemctl restart libvirtd || return
+	sleep 60
+	log_cmd systemctl status libvirtd
+
+	ip ad|grep virbr0
 }
 
 install_lkvs_tests()
