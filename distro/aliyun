@@ -62,7 +62,10 @@ pack_benchmark()
 
 download()
 {
-	$LKP_SRC/distro/installer/$DISTRO --downloadonly $*
+	# use --allowerasing to resolve issue on centos 9
+	# Problem: problem with installed package libcurl-minimal-7.76.1-31.el9.x86_64
+	#  - package libcurl-minimal-7.76.1-31.el9.x86_64 from @System conflicts with libcurl(x86-64) provided by libcurl-7.76.1-31.el9.x86_64 from baseos
+	$LKP_SRC/distro/installer/$DISTRO --allowerasing --downloadonly $*
 }
 
 pack()
