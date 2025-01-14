@@ -7,6 +7,7 @@
 . $LKP_SRC/lib/ucode.sh
 . $LKP_SRC/lib/tbox.sh
 . $LKP_SRC/lib/network.sh
+. $LKP_SRC/lib/detect-system.sh
 
 # borrowed from linux/tools/testing/selftests/rcutorture/doc/initrd.txt
 # Author: Paul E. McKenney <paulmck@linux.vnet.ibm.com>
@@ -332,8 +333,14 @@ install_deb()
 install_rpms()
 {
 	[ -d /opt/rpms ] || return
-	echo "install $(ls /opt/rpms/*.rpm)"
-	rpm -ivh --force --ignoresize /opt/rpms/*.rpm
+
+	detect_system
+
+	if [ $_system_name_lowercase = 'centos' ] && (( $_system_version >= 8 )); then
+		dnf install -y --allowerasing --skip-broken --disablerepo=* /opt/rpms/*.rpm
+	else
+		rpm -ivh --force --ignoresize /opt/rpms/*.rpm
+	fi
 }
 
 try_get_and_set_distro()
