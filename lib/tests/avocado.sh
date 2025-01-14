@@ -79,6 +79,10 @@ setup_env()
 
 setup_env_for_debian()
 {
+	sed -i '/^Environment=LIBVIRTD_ARGS="--timeout/d' /lib/systemd/system/libvirtd.service
+
+	log_cmd systemctl daemon-reload
+
 	log_cmd systemctl restart libvirtd || return
 	sleep 60
 	log_cmd systemctl status libvirtd
@@ -96,6 +100,15 @@ setup_env_for_debian()
 
 setup_env_for_centos()
 {
+	# [Service]
+	# Type=notify
+	# Environment=LIBVIRTD_ARGS="--timeout 120"
+	# EnvironmentFile=-/etc/sysconfig/libvirtd
+	# ExecStart=/usr/sbin/libvirtd $LIBVIRTD_ARGS
+	sed -i '/^Environment=LIBVIRTD_ARGS="--timeout/d' /usr/lib/systemd/system/libvirtd.service
+
+	log_cmd systemctl daemon-reload
+
 	log_cmd systemctl restart libvirtd || return
 	sleep 60
 	log_cmd systemctl status libvirtd
