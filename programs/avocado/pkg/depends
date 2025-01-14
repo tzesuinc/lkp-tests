@@ -7,7 +7,7 @@ gdb
 gdbserver
 git
 iptables
-libvirt-clients
+libvirt-daemon
 libvirt-daemon-system
 msr-tools
 netcat-openbsd

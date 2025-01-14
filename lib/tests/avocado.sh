@@ -79,21 +79,13 @@ setup_env()
 
 setup_env_for_debian()
 {
-	# resolve libvirtd service issue
-	# 	libvirtd[9640]: libvirt version: 9.0.0, package: 9.0.0-4+deb12u1 (Debian)
-	# 	libvirtd[9640]: invalid argument: Failed to parse user 'libvirt-qemu'
-	# 	libvirtd[9640]: Initialization of QEMU state driver failed: invalid argument: Failed to parse user 'libvirt-qemu'
-	#	libvirtd[9640]: Driver state initialization failed
-	addgroup --system libvirt-qemu
-	adduser --system --ingroup libvirt-qemu --home /var/lib/libvirt --no-create-home --shell /bin/false libvirt-qemu
-
 	log_cmd systemctl restart libvirtd || return
 	sleep 60
 	log_cmd systemctl status libvirtd
 
 	# create virbr0 interface that is a virtual network bridge
-	log_cmd virsh net-define /usr/share/libvirt/networks/default.xml || return
 	log_cmd virsh net-start default
+	ip ad | grep virbr0 || return
 
 	# The standard package for Open vSwitch on Debian is named openvswitch-switch, while avocado-vt requires to restart the openvswitch service
 	log_cmd mv /lib/systemd/system/openvswitch-switch.service /lib/systemd/system/openvswitch.service
@@ -108,7 +100,7 @@ setup_env_for_centos()
 	sleep 60
 	log_cmd systemctl status libvirtd
 
-	ip ad|grep virbr0
+	ip ad | grep virbr0
 }
 
 install_lkvs_tests()

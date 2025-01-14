@@ -2,7 +2,6 @@ acpica-tools
 iptables
 libffi-dev
 libssl-dev
-libvirt-clients
 libvirt-dev
 libyaml-dev
 nasm

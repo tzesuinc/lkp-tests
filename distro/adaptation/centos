@@ -374,7 +374,8 @@ libvde0:
 libvdeplug-dev:
 libvdeplug2:
 libvirt-clients: libvirt-client
-libvirt-daemon-system: libvirt-client libvirt-daemon
+libvirt-daemon-system: libvirt-daemon
+libvirt-daemon: libvirt
 libvirt-dev: libvirt-devel
 libwaffle-dev: waffle-devel
 libwayland-client0: libwayland-client
