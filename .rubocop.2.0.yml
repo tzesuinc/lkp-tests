@@ -1,7 +1,3 @@
-
-AllCops:
-  TargetRubyVersion: 2.0
-
 Metrics/MethodLength:
   Max: 50
   Enabled: false
@@ -58,6 +54,9 @@ Metrics/ParameterLists:
 
 Metrics/ModuleLength:
   Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.0
 
 Metrics/LineLength:
   Enabled: false
@@ -131,10 +130,6 @@ Layout/IndentHeredoc:
 Lint/EmptyWhen:
   Exclude:
     - programs/kernel-selftests/parse
-
-Lint/Syntax:
-  Exclude:
-    - spec/xfstests_spec.rb
 
 Naming/AccessorMethodName:
   Exclude:
