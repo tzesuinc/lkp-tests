@@ -1,8 +1,8 @@
 cmake
 libacl1-dev
 libaio-dev
+libcap
 libcap-dev
-libcap2
 libgmp-dev
 libnuma-dev
 libtirpc-dev

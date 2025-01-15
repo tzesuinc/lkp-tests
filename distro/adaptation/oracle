@@ -5,23 +5,16 @@ binutils-dev: binutils-devel
 btrfs-tools: btrfs-progs
 build-essential: make automake gcc gcc-c++ kernel-uek-devel rpm-build
 cgroup-bin: libcgroup
-dbench=4.0-2: dbench
 dpkg-dev: dpkg-devel
 f2fs-tools:
-freeglut3: freeglut
 fsmark: fs_mark
-gcc-4.9: gcc
-gcc-5: gcc
-gcc-6: gcc
 gfortran: gcc-c++
 hpcc:
 initramfs-tools: dracut
 iozone3: gnuplot*
-iproute2: iproute
 klibc-utils:
 libacl1-dev: libacl-devel
 libaio-dev: libaio-devel
-libaio1: libaio libaio-devel
 libarchive-dev: libarchive-devel
 libattr1-dev: libattr-devel
 libaudit-dev: audit-libs-devel
@@ -32,7 +25,6 @@ libc6-dev:i386: glibc-devel.i686 glibc-static.i686
 libcairo2-dev: cairo-devel
 libcap-dev: libcap-devel
 libcap-ng-dev: libcap-ng-devel
-libcap2: libcap
 libdbd-mysql-perl: perl-DBD-MySQL
 libdbi-perl: perl-DBI
 libdbus-1-dev: dbus-devel
@@ -71,8 +63,6 @@ libnuma1: numactl
 liboop-dev:
 liboop-dev: liboop
 libpcap-dev: libpcap-devel
-libpcap0.8-dev: libpcap-devel
-libpcap0.8: libpcap
 libpciaccess-dev: libpciaccess-devel
 libperl5: perl-libs
 libpixman-1-dev: pixman-devel

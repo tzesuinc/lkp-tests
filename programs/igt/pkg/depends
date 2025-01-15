@@ -4,9 +4,9 @@ libc-dev-bin
 libc6
 libc6-dbg
 libcairo2
+libdrm
 libdrm-amdgpu1
 libdrm-nouveau2
-libdrm2
 libdw1
 libelf1
 libglib2.0-0

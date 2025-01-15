@@ -8,8 +8,8 @@ gdb
 git
 libc6-dbg
 libdaxctl-dev
+libfabric
 libfabric-dev
-libfabric1
 libfuse-dev
 libglib2.0-dev
 libibverbs-dev

@@ -1,9 +1,9 @@
 curl
 libgssapi-krb5-2
 libkrb5-dbg
-libldap-2.4-2
+libldap
 liblzma5
-libpcap0.8
+libpcap
 libsasl2-2
 openssl
 snmp

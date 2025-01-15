@@ -5,15 +5,12 @@ binutils-dev: binutils
 btrfs-tools: btrfs-progs
 build-essential: base-devel
 cgroup-bin: libcgroup cgmanager
-dbench=4.0-2: dbench-git
 dpkg-dev: dpkg
-freeglut3: freeglut
 initramfs-tools: mkinitcpio
 iozone3: iozone
 klibc-utils:
 libacl1-dev: acl
 libaio-dev: libaio
-libaio1: libaio
 libarchive-tools:
 libarchive13: libarchive
 libattr1-dev: attr
@@ -35,8 +32,7 @@ libnl-genl-3-200: libnl
 libnl-genl-3-dev: libnl
 libnuma1: numactl
 liboop-dev: liboop
-libpcap0.8-dev: libpcap
-libpcap0.8: libpcap
+libpcap-dev: libpcap
 libperl5:
 libpopt-dev: popt
 libpopt0: popt

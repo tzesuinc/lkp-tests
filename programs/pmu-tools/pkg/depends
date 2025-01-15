@@ -4,7 +4,7 @@ build-essential
 clang
 default-jdk
 flex
-iproute2
+iproute
 libaudit-dev
 libbabeltrace-dev
 libcap-dev
@@ -18,7 +18,7 @@ libnuma-dev
 libperl-dev
 libpfm4
 libpfm4-dev
-libpython2.7
+libpython2
 libpython3
 libslang2-dev
 libssl-dev

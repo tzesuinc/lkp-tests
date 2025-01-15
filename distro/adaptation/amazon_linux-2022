@@ -9,7 +9,6 @@ libbsd0: libbsd
 libc6-dev-x32:
 libcairo2-dev: cairo-devel
 libcap-dev: libcap-devel
-libcap2: libcap
 libdw-dev: elfutils-devel
 libelf-dev: elfutils-devel
 libgles2-mesa:
@@ -36,7 +35,6 @@ rstatd:
 ruby-dev:
 rusersd:
 sg3-utils:
-stress-ng: stress-ng
 tshark:
 update-inetd:
 wpasupplicant:

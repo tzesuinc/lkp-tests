@@ -5,6 +5,7 @@ libgcrypt-dev: libgcrypt20-dev
 libipsec-mb: libipsec-mb0
 libntfs: libntfs-3g883
 libperl5: libperl5.30
+libprocps: libprocps8
 libpython3: libpython3.9
 libssl: libssl1.1
 libtirpc: libtirpc3

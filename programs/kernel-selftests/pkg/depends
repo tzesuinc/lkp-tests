@@ -13,7 +13,7 @@ flex
 fuse
 gcc-multilib
 iperf3
-iproute2
+iproute
 iptables
 ipv6toolkit
 ipvsadm
@@ -44,7 +44,7 @@ libdrm-dev
 libdw-dev
 libdwarf-dev
 libelf-dev
-libevdev2
+libevdev
 libfuse-dev
 libhugetlbfs-dev
 libkeyutils-dev

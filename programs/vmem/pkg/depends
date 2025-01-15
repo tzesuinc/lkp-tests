@@ -6,8 +6,8 @@ file
 gdb
 git
 libc6-dbg
+libfabric
 libfabric-dev
-libfabric1
 libfuse-dev
 libglib2.0-dev
 libibverbs-dev

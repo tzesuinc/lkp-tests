@@ -1,6 +1,6 @@
 # These 2 packages require to version 5
 dc
-freeglut3
+freeglut
 libgl1-mesa-dri
 libglut3
 libperl5

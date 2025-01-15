@@ -1,6 +1,6 @@
 autoconf
 bc
-libevent-2
+libevent
 libevent-openssl-2
 libpcre3
 pkg-config

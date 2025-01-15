@@ -6,13 +6,13 @@ dh-systemd: debhelper
 exfat-utils: exfatprogs
 fuse: fuse3
 lib32gcc-dev: lib32gcc-12-dev
-libevent-2: libevent-2.1-7
 libevent-openssl-2: libevent-openssl-2.1-7
+libevent: libevent-2.1-7
 libgsl: libgsl27
 libhwloc5: libhwloc15
 libipsec-mb: libipsec-mb1
 libjson: libjson-c5
-libldap-2.4-2: libldap-2.5-0
+libldap: libldap-2.5-0
 libntfs: libntfs-3g89
 libperl5: libperl5.34
 libpolly-dev:

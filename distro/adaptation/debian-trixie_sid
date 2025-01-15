@@ -5,7 +5,7 @@ cython:
 dh-systemd: debhelper
 dwarves: pahole
 exfat-utils: exfatprogs
-freeglut3:
+freeglut:
 fuse: fuse3
 gcc: gcc-12
 lib32gcc-dev: lib32gcc-11-dev
@@ -14,8 +14,8 @@ lib64gcc-dev: lib64gcc-11-dev
 lib64gcc1: lib64gcc-s1
 libasan: libasan6
 libdw1: libdw1t64
-libevent-2: libevent-2.1-7
 libevent-openssl-2: libevent-openssl-2.1-7
+libevent: libevent-2.1-7
 libgcc-dev: libgcc-11-dev
 libgcrypt-dev: libgcrypt20-dev
 libglut3: libglut3.12
@@ -25,14 +25,14 @@ libhwloc5: libhwloc15
 libicu: libicu72
 libipsec-mb: libipsec-mb1
 libjson: libjson-c5
-libldap-2.4-2: libldap-2.5-0
+libldap: libldap-2.5-0
 libmysqlclient-dev: default-libmysqlclient-dev
 libntfs: libntfs-3g89
 libperl5: libperl5.36
 libpolly-dev: libpolly-14-dev
 libprocps-dev: libproc2-dev
 libprocps: libproc2-0
-libpython2.7:
+libpython2:
 libpython3: libpython3.11
 libreadline5: readline-common
 libssl: libssl3

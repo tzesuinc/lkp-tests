@@ -8,9 +8,9 @@ libc6-dbg
 libc6-dev
 libcairo2-dev
 libcurl4-openssl-dev
+libdrm
 libdrm-dev
 libdrm-intel1
-libdrm2
 libdw-dev
 libdw1
 libelf-dev

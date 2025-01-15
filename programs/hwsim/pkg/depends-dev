@@ -6,6 +6,6 @@ libiberty-dev
 libnl-3-dev
 libnl-genl-3-dev
 libnl-route-3-dev
-libpcap0.8-dev
+libpcap-dev
 libsqlite3-dev
 zlib1g-dev

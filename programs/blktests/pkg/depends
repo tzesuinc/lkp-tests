@@ -5,7 +5,7 @@ fio
 gawk
 git
 init-system-helpers
-iproute2
+iproute
 kpartx
 libc-bin
 libgfapi0

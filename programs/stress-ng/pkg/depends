@@ -1,9 +1,9 @@
-libacl1
-libaio1
+libacl
+libaio
 libapparmor1
-libattr1
+libattr
 libbsd0
-libcap2
+libcap
 libegl1
 libgbm1
 libgcrypt20

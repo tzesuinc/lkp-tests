@@ -14,7 +14,7 @@ fio
 fsverity
 gawk
 indent
-libaio1
+libaio
 libcap2-bin
 libclang1
 libfuse3
@@ -23,10 +23,10 @@ libgdbm6
 libicu
 libiscsi
 libreadline5
-libsodium23
+libsodium
 libssl
-libudev0
-liburcu8
+libudev1
+liburcu
 liburing
 locales
 lvm2

@@ -1,6 +1,5 @@
 autopoint: gettext-devel
 btrfs-tools: btrfs-progs
-cmake: cmake cmake3
 klibc-utils:
 libbabeltrace-ctf1:
 libbabeltrace-dev:
@@ -9,7 +8,6 @@ libbsd0:
 libc6-dev-x32:
 libcairo2-dev: cairo-devel
 libcap-dev: libcap-devel
-libcap2: libcap
 libdw-dev: libdwarf-devel
 libelf-dev: elfutils-libelf-devel
 libgles2-mesa: mesa-libGLES

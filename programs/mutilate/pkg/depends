@@ -1,4 +1,4 @@
-libevent-2
+libevent
 libhugetlbfs-bin
 libhugetlbfs0
 libzmq5

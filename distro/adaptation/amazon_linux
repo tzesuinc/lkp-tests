@@ -2,16 +2,13 @@ apache2: httpd
 apt-file:
 arping: iputils
 autotools-dev: autoconf
-bind9: bind
 binutils-dev: binutils-devel
 build-essential: make automake gcc gcc-c++ kernel-devel rpm-build
 cgroup-bin: libcgroup
 cgroup-tools: libcgroup-tools
 cgroupfs-mount:
-clang-6.0: clang
 cmake:
 cron: cronie
-dbench=4.0-2: dbench
 default-jdk: java-17-amazon-corretto
 dnsutils: bind-utils
 dpkg-dev:
@@ -19,14 +16,8 @@ e2fslibs-dev: e2fsprogs-devel
 exfat-fuse:
 f2fs-tools:
 fakeroot:
-freeglut3: freeglut
 fsmark:
 g++: gcc-c++
-gcc-4.9: gcc
-gcc-5: gcc
-gcc-6-multilib:
-gcc-6: gcc
-gcc-9: gcc
 gcc-multilib:
 gdbserver: gdb-gdbserver
 heirloom-mailx: mailx
@@ -34,19 +25,15 @@ hpcc:
 initramfs-tools: dracut
 install-info: info
 iozone3:
-iproute2: iproute
-junit4: junit
 klibc-utils:
 libacl1-dev: libacl-devel
 libaio-dev: libaio-devel
-libaio1: libaio
 libapparmor-dev:
 libapparmor1:
 libarchive-dev: libarchive-devel
 libarchive13: libarchive
 libasound2-dev: alsa-lib-devel
 libattr1-dev: libattr-devel
-libattr1: libattr
 libaudit-dev: audit-libs-devel
 libbinutils:
 libblas3: blas
@@ -76,7 +63,6 @@ libdw1: libdwarves1
 libedit-dev: libedit-devel
 libegl1-mesa-dev: mesa-libEGL-devel
 libelf1: elfutils-libelf
-libevent-2: libevent
 libevent-dev: libevent-devel
 libexpat1-dev: expat-devel
 libfabric-dev: libfabric-devel
@@ -84,7 +70,7 @@ libfdt-dev: libfdt-devel
 libffi-dev: libffi-devel
 libfuse-dev: fuse-devel
 libgbm-dev: mesa-libgbm-devel
-libgcc-7-dev: libgcc
+libgcc-dev: libgcc
 libgcrypt-dev: libgcrypt-devel
 libgcrypt20: libgcrypt
 libgdbm-dev: gdbm-devel
@@ -134,8 +120,6 @@ liboop-dev:
 libopenmpi-dev: openmpi-devel
 libopenmpi3: openmpi
 libpcap-dev: libpcap-devel
-libpcap0.8-dev: libpcap-devel
-libpcap0.8: libpcap
 libpci-dev: pciutils-devel
 libpci3: pciutils
 libpciaccess-dev: libpciaccess-devel
@@ -150,7 +134,7 @@ libpopt-dev: popt-devel
 libpopt0: popt
 libprocps-dev: procps-ng-devel
 libprotobuf-dev: protobuf-devel
-libpython2.7:
+libpython2:
 libpython3: python3-libs
 libquadmath0: libquadmath
 librdmacm-dev:
@@ -189,8 +173,8 @@ linux-libc-dev: kernel-headers
 linux-libc-dev:i386: kernel-headers
 linux-perf: perf
 linux-tools: perf
-llvm-6.0:
 llvm-dev: llvm-devel
+llvm:
 locales: glibc-common
 ncurses-bin: ncurses
 netcat-openbsd: nmap-ncat

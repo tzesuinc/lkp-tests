@@ -4,12 +4,12 @@ build-essential
 crda
 ebtables
 gtk3
-iproute2
+iproute
 iw
 libconfig-dev
 libcurl4-openssl-dev
 libdbus-1-dev
-libevent-2
+libevent
 libiberty-dev
 libnl-3-dev
 libnl-genl-3-dev

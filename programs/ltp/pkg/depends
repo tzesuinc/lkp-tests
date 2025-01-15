@@ -3,7 +3,7 @@ apache2
 arping
 at
 automake
-bind9
+bind
 binutils
 bsdmainutils
 build-essential
@@ -25,12 +25,12 @@ gdb
 genisoimage
 git
 ima-evm-utils
-iproute2
+iproute
 iptables
 iputils-clockdiff
 iputils-tracepath
 isc-dhcp-server
-libaio1
+libaio
 libntfs
 libopencryptoki0
 libtirpc

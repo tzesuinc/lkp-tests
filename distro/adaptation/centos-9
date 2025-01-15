@@ -7,9 +7,8 @@ cryptsetup-bin: cryptsetup
 cython3: python3-cython
 default-jdk:
 exfat-utils: exfatprogs
-freeglut3-dev: freeglut-devel-3.2.1
+freeglut3-dev: freeglut-devel
 grub-common: grub2-common
-libacl1: libacl-2.3.1
 libbabeltrace-ctf-dev: libbabeltrace-devel
 libbabeltrace-ctf1: libbabeltrace
 libbabeltrace-dev: libbabeltrace-devel
@@ -17,7 +16,6 @@ libbpf-dev: libbpf-devel-1.3.0
 libclang-dev: clang-devel
 libcunit1-dev: CUnit-devel
 libdw1: libdwarves1
-libevent-2.1: libevent-2.1.12
 libfdt-dev: libfdt
 libgles2-mesa-dev: mesa-libGL-devel
 libgles2-mesa: mesa-libGLES
@@ -28,7 +26,7 @@ libjudydebian1: Judy
 libpfm4-dev: libpfm-devel
 libpfm4: libpfm
 libpng12-dev:
-libpython2.7: python3-libs
+libpython2:
 libpython3: python3-libs
 libusb-1.0-0-dev: libusbx-devel
 libusb-1.0-0: libusbx
@@ -42,6 +40,9 @@ python3-csvkit:
 python3-dev: python3-devel
 python3-gi-cairo:
 python3-gi:
+python3-hid: python3-hidapi
+python3-mako: python-pyramid-mako
+python3-markupsafe: python34-markupsafe
 python3-minimal: python3
 python3-nose:
 python3-openssl: python3-pyOpenSSL
