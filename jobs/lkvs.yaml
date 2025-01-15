@@ -8,9 +8,12 @@ lkvs:
     - avx512vbmi
     - cet
     - cmpccxadd
+    - cstate
+    - dma
     - dsa
     - edac
     - fred
+    - hotplug
     # - guest-test # cause machine power down
     - idxd
     - ifs
@@ -18,9 +21,10 @@ lkvs:
     - isst
     - pcie
     - pmu
-    - prefetchi
     - pstate
     - pt
+    - rapl
+    - ras
     - sdsi
     - tdx-compliance
     - tdx-guest
@@ -28,12 +32,13 @@ lkvs:
     - telemetry
     - th
     - thermal
+    - topology
     - tpm
     - tpmi
+    - ufs # require GNR and above
     - umip
     - workload-xsave
     - xsave
-    - ufs # require GNR and above
 
 ---
 
