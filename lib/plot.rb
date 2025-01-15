@@ -237,7 +237,7 @@ class MMatrixPlotter < MatrixPlotterBase
         y_max = nil
         y_min = nil
         x_stat = []
-        y_stat = []
+
         y_stat_max = []
         y_stat_min = []
         z_stat = []
