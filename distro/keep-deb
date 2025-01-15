@@ -17,15 +17,12 @@ ftp
 g++
 gawk
 gcc
-gcc-10
-gcc-12
-gcc-9
 iptables
 libblas3
 liblapack3
 libmariadb3
-libntfs-3g871
-libssl1.1
+libntfs-3g
+libssl
 libvirt-daemon
 mariadb-server
 mime-support
