@@ -336,7 +336,7 @@ install_rpms()
 
 	detect_system
 
-	if [ $_system_name_lowercase = 'centos' ] && (( $_system_version >= 8 )); then
+	if [ $_system_name_lowercase = 'centos' ] && [ $_system_version -ge 8 ]; then
 		dnf install -y --allowerasing --skip-broken --disablerepo=* /opt/rpms/*.rpm
 	else
 		rpm -ivh --force --ignoresize /opt/rpms/*.rpm
