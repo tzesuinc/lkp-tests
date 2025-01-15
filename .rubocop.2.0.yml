@@ -127,6 +127,10 @@ Lint/BlockAlignment:
 Layout/IndentHeredoc:
   Enabled: false
 
+Lint/EmptyWhen:
+  Exclude:
+    - programs/kernel-selftests/parse
+
 Naming/AccessorMethodName:
   Exclude:
     - 'lib/compare.rb'

@@ -391,7 +391,7 @@ end
 class TimensStater < Stater
   def stat(line)
     case line
-    when /# SKIP CLOCK_BOOTTIME_ALARM isn't supported/ # rubocop:disable Lint/EmptyWhen
+    when /# SKIP CLOCK_BOOTTIME_ALARM isn't supported/
       # ignore below skip, cause there's no test name when it skipped,
       # ok 3 # SKIP CLOCK_BOOTTIME_ALARM isn't supported
       # ok 4 # SKIP CLOCK_BOOTTIME_ALARM isn't supported
