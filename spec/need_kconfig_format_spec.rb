@@ -12,7 +12,7 @@ def check_config_value(value)
   # 1. only contain n, m, y, or nothing
   # 2. only contain i386, x86_64, or nothing
   # 3. allow hexadecimal and integer
-  allowed_formats = /^(n|m|y|i386|x86_64|0x[0-9a-fA-F]+|\d+)$/
+  allowed_formats = /^(n|m|y|i386|x86_64|0x[0-9a-fA-F]+|\d+|utf8)$/
 
   # Check each value against allowed formats
   value.to_s.split(',').map(&:strip).all? do |v|
