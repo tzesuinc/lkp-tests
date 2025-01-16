@@ -10,7 +10,7 @@ describe 'xfstests' do
     def is_test_in_group(test, groups)
       groups = Array(groups).map { |group| "\"#{group}\"" }.join(' ')
 
-      Bash.call <<~EOF
+      Bash.call <<EOF
         source #{LKP_SRC}/lib/tests/xfstests.sh
 
         export BENCHMARK_ROOT=#{@benchmark_root}
@@ -18,7 +18,7 @@ describe 'xfstests' do
         is_test_in_group #{test} #{groups}
 
         echo $?
-      EOF
+EOF
     end
 
     [
