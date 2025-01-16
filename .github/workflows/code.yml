@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: ['centos/stream9', 'fedora/39', 'ubuntu/focal', 'ubuntu/jammy', 'ubuntu/noble', 'debian/bookworm']
+        image: ['centos/stream9', 'fedora/39', 'ubuntu/jammy', 'ubuntu/noble', 'debian/bookworm']
 
     steps:
       - uses: actions/checkout@v3
