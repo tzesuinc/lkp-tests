@@ -79,10 +79,10 @@ str.ops_per_sec: 967980.31
 stream.pass: 1
 stream.ops: 10344
 stream.ops_per_sec: 2067.19
-stream.memory_rate_(MB_per_sec).pass: 1
-stream.memory_rate_(MB_per_sec): 5372.21
-stream.memory_rate_(Mflop_per_sec).pass: 1
-stream.memory_rate_(Mflop_per_sec): 2148.88
+stream.memory_rate_MB_per_sec.pass: 1
+stream.memory_rate_MB_per_sec: 5372.21
+stream.memory_rate_Mflop_per_sec.pass: 1
+stream.memory_rate_Mflop_per_sec: 2148.88
 tlb-shootdown.pass: 1
 tlb-shootdown.ops: 1156
 tlb-shootdown.ops_per_sec: 228.92
