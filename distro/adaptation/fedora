@@ -89,7 +89,10 @@ libcairo2:
 libcap-dev: libcap-devel
 libcap-ng-dev: libcap-ng-devel
 libcap2-bin: libcap
+libcapstone-dev: capstone-devel
+libcapstone4: capstone
 libclang-dev: clang-devel
+libclang1: clang
 libcomerr2: libcom_err
 libconfig-dev: libconfig-devel
 libcpupower-dev:
@@ -114,6 +117,7 @@ libegl1: mesa-libEGL
 libelf-dev: elfutils-devel
 libelf1: elfutils-libelf
 libevent-dev: libevent-devel
+libevent-openssl-2:
 libexpat1-dev: expat-devel
 libfabric-dev: libfabric-devel
 libfdt-dev: libfdt-devel
@@ -267,6 +271,7 @@ libslirp-dev: libslirp-devel
 libsmbclient-dev:
 libsnappy-dev: snappy-devel
 libsnappy1v5: snappy
+libsodium-dev:
 libspice-protocol-dev: spice-protocol
 libspice-server-dev: spice-server-devel
 libsqlite3-0: libsqlite3x
@@ -284,6 +289,8 @@ libtracefs-dev: libtracefs-devel
 libudev-dev: systemd-devel
 libudev1: systemd-libs
 libunwind-dev: libunwind-devel
+liburcu-dev: userspace-rcu-devel
+liburcu: userspace-rcu
 liburing-dev: liburing-devel
 libuuid1: libuuid
 libuv1-dev: libuv-devel
@@ -328,6 +335,7 @@ linux-perf: perf
 linux-tools: perf
 llvm-dev: llvm-devel
 locales: glibc-common
+mesa-utils: mesa-demos
 mpi-default-bin: mpich
 multipath-tools: device-mapper-multipath
 mysql-server: mariadb
@@ -366,6 +374,7 @@ python-pkg-resources: python-setuptools
 python2-libs:
 python3-dev: python3-devel
 qemu-system: qemu
+qemu-utils: qemu-img
 qt5-default: qt5-qtbase
 qtbase5-dev: qt5-qtbase-devel
 reiserfsprogs:
