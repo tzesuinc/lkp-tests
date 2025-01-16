@@ -38,7 +38,8 @@ fi
 
 packages=$(map_packages)
 
-[[ "$distro" =~ (debian|ubuntu) ]] && opt_dry_run="--dry-run"
+[[ "$distro" =~ (debian|ubuntu) ]] && extra_option="--dry-run"
+[[ "$distro" =~ (centos) ]] && extra_option="--allowerasing"
 
-echo "$LKP_SRC/distro/installer/$distro $opt_dry_run" 1>&2
-$LKP_SRC/distro/installer/$distro $opt_dry_run $packages
+echo "$LKP_SRC/distro/installer/$distro $extra_option" 1>&2
+$LKP_SRC/distro/installer/$distro $extra_option $packages
