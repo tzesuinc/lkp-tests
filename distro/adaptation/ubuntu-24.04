@@ -3,17 +3,19 @@ crda:
 cython:
 dh-systemd: debhelper
 exfat-utils: exfatprogs
+freeglut:
 fuse: fuse3
 lib32gcc-dev: lib32gcc-12-dev
+libaio:
 libasound2:
 libdw1: libdw1t64
 libevent-openssl-2: libevent-openssl-2.1-7
 libevent: libevent-2.1-7
+libglut3: libglut3.12
 libgsl: libgsl27
 libhwloc5: libhwloc15
 libipsec-mb: libipsec-mb1
 libjson: libjson-c5
-libldap: libldap-2.5-0
 libldap: libldap2
 libntfs: libntfs-3g89
 libperl5:
@@ -26,6 +28,7 @@ libreadline5: readline-common
 libssl: libssl3
 libtirpc: libtirpc-common
 libunwind: libunwind-15
+liburcu:
 liburing: liburing2
 libx32gcc-dev: libx32gcc-12-dev
 libx32gcc1: libx32gcc-s1
