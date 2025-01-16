@@ -13,13 +13,12 @@ libevent-openssl-2: libevent-openssl-2.1-7
 libevent: libevent-2.1-7
 libglut3: libglut3.12
 libgsl: libgsl27
-libhwloc5: libhwloc15
 libipsec-mb: libipsec-mb1
 libjson: libjson-c5
 libldap: libldap2
 libntfs: libntfs-3g89
 libperl5:
-libpolly-dev:
+libpolly-dev: libpolly-18-dev
 libprocps-dev:
 libprocps:
 libpython2:
@@ -33,17 +32,14 @@ liburing: liburing2
 libx32gcc-dev: libx32gcc-12-dev
 libx32gcc1: libx32gcc-s1
 mariadb-server:mariadb-server-10.6
-mcelog: rasdaemon
 netpipe-lam:
 netpipe-mpich2:
 netpipe-openmpi:
 netpipe-pvm:
 netpipe-tcp:
-openjdk: openjdk-17-jdk
 perl-modules-5: perl-modules-5.38
 python3-crypto: python3-pycryptodome
 python3-gobject:
 python3-tox: tox
 python: python-is-python3
 qt5-default: qtbase5-dev
-winpdb:

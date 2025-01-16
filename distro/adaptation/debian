@@ -18,6 +18,7 @@ libgcrypt-dev: libgcrypt20-dev
 libiscsi: libiscsi7
 libldap: libldap-2.4-2
 libpcap: libpcap0.8
+libpipewire-dev: libpipewire-0.3-dev
 libsodium: libsodium23
 libssl: libssl1.1
 libtirpc: libtirpc1

@@ -8,7 +8,7 @@ libcap-ng-dev
 libfdt-dev
 libglib2.0-dev
 libnfs-dev
-libpipewire-0.3-dev
+libpipewire-dev
 libpixman-1-dev
 libpulse-dev
 libsdl2-dev

@@ -272,7 +272,7 @@ libperl5: perl-libs
 libpfm4-dev: libpfm-devel
 libpfm4: libpfm
 libpipeline1: libpipeline
-libpipewire-0.3-dev: pipewire-devel
+libpipewire-dev: pipewire-devel
 libpixman-1-0: pixman
 libpixman-1-dev: pixman-devel
 libpmem-dev: libpmem-devel
