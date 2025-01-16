@@ -1,5 +1,6 @@
 bind: bind9
 btrfs-tools: btrfs-progs
+freeglut: freeglut3
 gtk3: gir1.2-gtk-3.0
 iblz4-1: liblz4-dev
 iproute: iproute2
