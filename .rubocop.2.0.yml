@@ -130,6 +130,8 @@ Layout/IndentHeredoc:
 Lint/EmptyWhen:
   Exclude:
     - programs/kernel-selftests/parse
+    - programs/kernel-selftests-bpf/parse
+    - programs/kernel-selftests-rust/parse
 
 Naming/AccessorMethodName:
   Exclude:
