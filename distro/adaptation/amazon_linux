@@ -3,7 +3,7 @@ apt-file:
 arping: iputils
 autotools-dev: autoconf
 binutils-dev: binutils-devel
-build-essential: make automake gcc gcc-c++ kernel-devel rpm-build
+build-essential: make automake gcc gcc-c++ kernel-devel rpm-build rpmdevtools
 cgroup-bin: libcgroup
 cgroup-tools: libcgroup-tools
 cgroupfs-mount:
@@ -150,7 +150,6 @@ libsnappy-dev: snappy-devel
 libsqlite3-dev: sqlite-devel
 libssl-dev: openssl-devel
 libssl: openssl-devel
-libstdc++6: libstdc++
 libtirpc-dev: libtirpc-devel
 libtirpc:
 libtool-bin: libtool

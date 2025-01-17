@@ -2,6 +2,7 @@ build-essential:
 libc-dev: glibc-devel
 libc-dev:i386: glibc-devel-32bit
 libc6-dbg: glibc-debuginfo
+libc6-dev-i386: glibc-devel-32bit
 libc6-dev: glibc-devel
 libc6-dev:i386: glibc-devel-32bit
 libklibc-dev:

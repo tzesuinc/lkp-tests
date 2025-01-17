@@ -17,7 +17,7 @@ libopencryptoki0:
 libpng12-dev:
 libreadline5: compat-readline5
 libssl: openssl-devel
-libstdc++-7-dev: libstdc++-devel libstdc++-static
+libstdc++-dev: libstdc++-devel libstdc++-static
 libtsan0: libtsan
 libvirt-clients:
 libvirt-daemon-system:

@@ -1,5 +1,6 @@
 bind: bind9
 freeglut: freeglut3
+gcc-toolset:
 gtk3: gir1.2-gtk-3.0
 iproute: iproute2
 libacl: libacl1
@@ -26,6 +27,7 @@ libubsan: libubsan1
 libunistring: libunistring2
 libunwind: libunwind8
 liburcu: liburcu6
+minix-dev:
 mysql-server: default-mysql-server
 openjdk: openjdk-11-jdk
 which: debianutils

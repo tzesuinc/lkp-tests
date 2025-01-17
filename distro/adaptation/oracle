@@ -3,7 +3,7 @@ apt-file:
 autotools-dev: autoconf
 binutils-dev: binutils-devel
 btrfs-tools: btrfs-progs
-build-essential: make automake gcc gcc-c++ kernel-uek-devel rpm-build
+build-essential: make automake gcc gcc-c++ kernel-uek-devel rpm-build rpmdevtools
 cgroup-bin: libcgroup
 dpkg-dev: dpkg-devel
 f2fs-tools:
@@ -20,6 +20,7 @@ libattr1-dev: libattr-devel
 libaudit-dev: audit-libs-devel
 libblas3: liblas-libs
 libblkid-dev: libblkid-devel
+libc6-dev-i386: glibc-devel.i686 glibc-static.i686
 libc6-dev: glibc-devel glibc-static
 libc6-dev:i386: glibc-devel.i686 glibc-static.i686
 libcairo2-dev: cairo-devel

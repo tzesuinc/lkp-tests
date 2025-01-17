@@ -8,7 +8,7 @@ binutils-dev: binutils-devel
 bsdextrautils:
 bsdmainutils:
 btrfs-tools: btrfs-progs
-build-essential: make automake gcc gcc-c++ kernel-devel rpm-build
+build-essential: make automake gcc gcc-c++ kernel-devel rpm-build rpmdevtools
 cgroup-bin: libcgroup
 cgroup-tools: libcgroup-tools
 cgroupfs-mount:
