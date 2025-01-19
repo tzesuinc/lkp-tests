@@ -8,7 +8,6 @@ lkvs:
     - avx512vbmi
     - cet
     - cmpccxadd
-    - cstate
     - dma
     - dsa
     - edac
