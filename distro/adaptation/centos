@@ -41,6 +41,7 @@ install-info: info
 intltool-debian: intltool
 iozone3:
 iputils-clockdiff: iputils
+iputils-ping: iputils
 iputils-tracepath: iputils
 ipv6toolkit: thc-ipv6
 isc-dhcp-server: dhcp-server
@@ -340,6 +341,7 @@ libssl-dev: openssl-devel
 libssl: openssl-devel
 libstdc++-dev: libstdc++-devel libstdc++-static
 libtasn1-6:
+libteam-utils: teamd
 libthai-data: libthai
 libthai0: libthai
 libtimedate-perl: perl-TimeDate

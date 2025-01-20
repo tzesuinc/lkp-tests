@@ -42,6 +42,7 @@ install-info: info
 intltool-debian: intltool
 iozone3:
 iputils-clockdiff: iputils
+iputils-ping: iputils
 iputils-tracepath: iputils
 ipv6toolkit: thc-ipv6
 isc-dhcp-server: dhcp-server
@@ -279,6 +280,7 @@ libsqlite3-dev: libsqlite3x-devel
 libssl-dev: openssl-devel
 libssl: openssl-devel
 libtasn1-6:
+libteam-utils: teamd
 libtimedate-perl: perl-TimeDate
 libtirpc-dev: libtirpc-devel
 libtirpc3:

@@ -15,6 +15,7 @@ gcc-multilib
 iperf3
 iproute
 iptables
+iputils-ping
 ipv6toolkit
 ipvsadm
 jq
@@ -56,6 +57,7 @@ libpopt-dev
 libpopt0
 libreadline-dev
 libssl-dev
+libteam-utils
 liburing-dev
 libx32asan5
 libx32atomic1
