@@ -328,6 +328,10 @@ need_kconfig:
 
 # drivers/platform/x86/intel/ifs
 - INTEL_IFS
+
+# drivers/net/team/config
+- NET_TEAM_MODE_LOADBALANCE
+- NET_TEAM
 % else
 - BLOCK: y
 - BTRFS_FS: m
