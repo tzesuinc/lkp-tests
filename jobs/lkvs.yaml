@@ -22,7 +22,6 @@ lkvs:
     - pmu
     - pstate
     - pt
-    - rapl
     - ras
     - sdsi
     - tdx-compliance
@@ -31,7 +30,6 @@ lkvs:
     - telemetry
     - th
     - thermal
-    - topology
     - tpm
     - tpmi
     - ufs # require GNR and above
