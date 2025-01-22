@@ -29,6 +29,7 @@ fsmark:
 fsverity: fsverity-utils
 g++-multilib:
 gcc-multilib:
+gcc-toolset-binutils: gcc-toolset-14-binutils
 gcc-toolset: gcc-toolset-14
 gdbserver: gdb-gdbserver
 gettext-base: gettext
