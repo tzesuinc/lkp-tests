@@ -57,6 +57,12 @@ module LKP
           "#{LKP_SRC}/pkg/#{program}"
         ].find { |path| Dir.exist? path }
       end
+
+      def find_program_dir(program)
+        [
+          "#{PROGRAMS_ROOT}/#{program}"
+        ].find { |path| Dir.exist? path }
+      end
     end
   end
 end
