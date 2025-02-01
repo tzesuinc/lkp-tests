@@ -36,4 +36,4 @@ while (line = $stdin.gets)
   end
 end
 
-stats.dump('PASS' => 'pass', 'FAIL' => 'fail')
+stats.dump
