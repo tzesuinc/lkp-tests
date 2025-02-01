@@ -1,0 +1,12 @@
+perf.make.pass: 1
+vmlinux_symtab_matches_kallsyms.skip: 1
+Detect_openat_syscall_event.pass: 1
+mmap_interface_tests.Read_samples_using_the_mmap_interface.pass: 1
+mmap_interface_tests.User_space_counter_reading_of_cycles.pass: 1
+Test_data_source_output.pass: 1
+Parse_event_definition_strings.Test_event_parsing.fail: 1
+Parse_event_definition_strings.Parsing_of_all_PMU_events_from_sysfs.pass: 1
+Parse_event_definition_strings.Parsing_of_given_PMU_events_from_sysfs.pass: 1
+Parse_event_definition_strings.Parsing_of_aliased_events_from_sysfs.skip: 1
+test_perf_probe_of_function_from_different_CU.fail: 1
+Check_open_filename_arg_using_perf_trace_+_vfs_getname.skip: 1

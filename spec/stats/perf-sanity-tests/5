@@ -1,0 +1,50 @@
+gcc march setting is cooperlake
+valid
+2023-10-15 05:36:59 make -j224 WERROR=0 ARCH= DEBUG=1 EXTRA_CFLAGS=-fno-omit-frame-pointer -fsanitize=undefined -fsanitize=address -C /usr/src/linux-perf-x86_64-rhel-8.3-bpf-94f6f0550c625fab1f373bb86a6669b45e9748b3/tools/perf
+make: Entering directory '/usr/src/perf_selftests-x86_64-rhel-8.3-bpf-94f6f0550c625fab1f373bb86a6669b45e9748b3/tools/perf'
+  BUILD:   Doing 'make [33m-j224[m' parallel build
+  HOSTCC  fixdep.o
+  HOSTLD  fixdep-in.o
+  LINK    fixdep
+[0;33mWarning[0m: Kernel ABI header differences:
+
+Auto-detecting system features:
+...                                   dwarf: [ [32mon[m  ]
+...                      dwarf_getlocations: [ [32mon[m  ]
+...                                   glibc: [ [32mon[m  ]
+...                                  libbfd: [ [32mon[m  ]
+...                          libbfd-buildid: [ [32mon[m  ]
+...                                  libcap: [ [32mon[m  ]
+...                                  libelf: [ [32mon[m  ]
+...                                 libnuma: [ [32mon[m  ]
+...                  numa_num_possible_cpus: [ [32mon[m  ]
+...                                 libperl: [ [32mon[m  ]
+...                               libpython: [ [32mon[m  ]
+...                               libcrypto: [ [32mon[m  ]
+...                               libunwind: [ [32mon[m  ]
+...                      libdw-dwarf-unwind: [ [32mon[m  ]
+...                                    zlib: [ [32mon[m  ]
+...                                    lzma: [ [32mon[m  ]
+...                               get_cpuid: [ [32mon[m  ]
+...                                     bpf: [ [32mon[m  ]
+...                                  libaio: [ [32mon[m  ]
+...                                 libzstd: [ [32mon[m  ]
+
+  LINK    perf
+make: Leaving directory '/usr/src/perf_selftests-x86_64-rhel-8.3-bpf-94f6f0550c625fab1f373bb86a6669b45e9748b3/tools/perf'
+make PERF passed
+perf version 6.6.0-rc5
+2023-10-15 05:37:15 /usr/bin/perf test
+  1: vmlinux symtab matches kallsyms                                 : Skip
+  2: Detect openat syscall event                                     : Ok
+  4: mmap interface tests                                            :
+  4.1: Read samples using the mmap interface                         : Ok
+  4.3: User space counter reading of cycles                          : Ok
+  5: Test data source output                                         : Ok
+  6: Parse event definition strings                                  :
+  6.1: Test event parsing                                            : FAILED!
+  6.2: Parsing of all PMU events from sysfs                          : Ok
+  6.3: Parsing of given PMU events from sysfs                        : Ok
+  6.4: Parsing of aliased events from sysfs                          : Skip (no aliases in sysfs)
+116: test perf probe of function from different CU                   : FAILED!
+117: Check open filename arg using perf trace + vfs_getname          : Skip
