@@ -540,7 +540,7 @@ def stat_unittest(lines)
     end
   end
 
-  stats.dump(OK: :pass)
+  stats.dump('ok' => :pass)
 end
 
 # check possibly misplaced serial log
