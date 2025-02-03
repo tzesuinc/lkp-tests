@@ -4,6 +4,11 @@ detect_system
 
 if (( $_system_version >= 8 )); then
 	package_manager=dnf
+
+	# use --allowerasing to resolve issue on centos 9
+	# Problem: problem with installed package libcurl-minimal-7.76.1-31.el9.x86_64
+	#  - package libcurl-minimal-7.76.1-31.el9.x86_64 from @System conflicts with libcurl(x86-64) provided by libcurl-7.76.1-31.el9.x86_64 from baseos
+	extra_option="--allowerasing"
 else
 	package_manager=yum
 fi
@@ -13,4 +18,4 @@ if ! rpm -q epel-release >/dev/null; then
 	${package_manager} makecache fast
 fi
 
-${package_manager} install -y $*
+${package_manager} install -y "$extra_option" $*
