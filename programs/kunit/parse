@@ -25,7 +25,7 @@ while (line = $stdin.gets)
     result = $1
     stat = $2.sub(/-\s+/, '')
     stat = "#{subtest}.#{stat}" unless stat == subtest
-    stats.add stat, result unless stats.key? stat
+    stats.add stat, result, overwrite: true
   end
 end
 

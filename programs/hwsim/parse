@@ -19,7 +19,7 @@ while (line = $stdin.gets)
     #       |          ^~~~~~~~~~~~
     # compilation terminated.
     # make: *** [Makefile:19: libhostap_imc.so] Error 1
-    stats.add 'make', 'fail' unless stats.key? 'make'
+    stats.add 'make', 'fail', overwrite: true
   when /\.\/run-tests\.py/
     # 2023-04-07 09:44:01 ./build.sh
     # Building TNC testing tools

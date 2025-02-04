@@ -72,7 +72,7 @@ while (line = $stdin.gets)
       stat_result = 'test_skip'
     end
 
-    stats.add stat_name.to_s, stat_result.to_s unless stats.key? stat_name.to_s
+    stats.add stat_name.to_s, stat_result.to_s, overwrite: true
   end
 end
 

@@ -113,7 +113,7 @@ while (line = $stdin.gets)
     #  #4 [clone+0x3f]
     #  Subtest create-clear: CRASH (0.014s)
     #  Received signal SIGSEGV.
-    stats.add "#{test_name}.#{$2}", $3 unless stats.key? "#{test_name}.#{$2}"
+    stats.add "#{test_name}.#{$2}", $3, overwrite: true
   when /^Dynamic subtest (.*): (SUCCESS|FAIL|CRASH)/
     # a 'dynamic subtest' is such like a 2nd level subtest under 'subtest' as below
     # 2607 Starting subtest: exec-single-timeline
@@ -131,10 +131,10 @@ while (line = $stdin.gets)
     # 4 [clone+0x3f]
     # Dynamic subtest smem0: CRASH (0.013s)
     test_case = "#{test_name}.#{subtest_name}.dynamic.#{$1}"
-    stats.add test_case, $2 unless stats.key?(test_case)
+    stats.add test_case, $2, overwrite: true
   when /^LKP SKIP igt@(.*)@(.*)$/
     # LKP SKIP igt@gem_streaming_writes@batch-cpu
-    stats.add "#{$1}.#{$2}", 'skip' unless stats.key? "#{$1}.#{$2}"
+    stats.add "#{$1}.#{$2}", 'skip', overwrite: true
   end
 end
 
