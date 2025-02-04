@@ -42,7 +42,6 @@ Metrics/PerceivedComplexity:
 
 Metrics/BlockNesting:
   Exclude:
-    - programs/test-bpf/parse
     - lib/hash.rb
     - programs/suspend/parse
 
