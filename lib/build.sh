@@ -9,10 +9,10 @@ make()
 
 make_config()
 {
-        (
-        set -o pipefail
-        { yes ''; true; } | make "$@"
-        )
+	(
+	set -o pipefail
+	{ yes ''; true; } | make "$@"
+	)
 }
 
 build_complete()
