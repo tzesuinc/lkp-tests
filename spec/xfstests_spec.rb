@@ -75,7 +75,8 @@ EOF
       { fs: 'generic', pattern: 'holetest _require_xfs_stress_online_repair$', test: 'generic-holetest-xfs-stress-online-repair' }
     ].each do |entry|
       it "map #{entry[:fs]} #{entry[:pattern]}" do
-        expect(Bash.call("source #{LKP_SRC}/programs/xfstests/pkg/PKGBUILD; pattern_to_test \"#{entry[:fs]}\" \"#{entry[:pattern]}\"")).to eq(entry[:test])
+        pkg_dir = LKP::Programs.find_pkg_dir(:xfstests)
+        expect(Bash.call("source #{pkg_dir}/PKGBUILD; pattern_to_test \"#{entry[:fs]}\" \"#{entry[:pattern]}\"")).to eq(entry[:test])
       end
     end
   end
