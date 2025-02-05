@@ -1,0 +1,106 @@
+---
+
+#! /db/releases/20250120134802/lkp-src/jobs/ftq.yaml
+suite: ftq
+testcase: ftq
+category: noise-benchmark
+nr_task: 100%
+samples: 100000ss
+ftq:
+  test: add
+  freq: 10000
+job_origin: ftq.yaml
+arch: x86_64
+
+#! include/category/ALL
+cpufreq_governor: performance
+sanity-check:
+
+#! queue options
+queue_cmdline_keys: []
+queue: ktest-cyclic
+testbox: lkp-ivb-d04
+tbox_group: lkp-ivb-d04
+branch: linus/master
+commit: ffd294d346d185b70e28b1a28abe367bbfe53c04
+repeat_to: 1
+job_file: "/lkp/jobs/queued/ktest-cyclic/lkp-ivb-d04/ftq-performance-10000-100%-100000ss-add-debian-12-x86_64-20240206.cgz-ffd294d346d1-20250123-611007-2sqd4l-0.yaml"
+id: ad86f0776125269c943d861affd71b24f278ff1e
+queuer_version: "/zday/lkp"
+
+#! /db/releases/20250122170538/lkp-src/hosts/lkp-ivb-d04
+model: Ivy Bridge
+nr_node: 1
+nr_cpu: 4
+memory: 8G
+nr_ssd_partitions: 1
+nr_hdd_partitions: 4
+ssd_partitions: "/dev/disk/by-id/ata-INTEL_SSDSC2KB240G8_BTYF836606UQ240AGN-part1"
+hdd_partitions: "/dev/disk/by-id/ata-WDC_WD20EZRX-00D8PB0_WD-WCC4M0KTT6NK-part2 /dev/disk/by-id/ata-WDC_WD20EZRX-00D8PB0_WD-WCC4M0KTT6NK-part3
+  /dev/disk/by-id/ata-WDC_WD20EZRX-00D8PB0_WD-WCC4M0KTT6NK-part4 /dev/disk/by-id/ata-WDC_WD20EZRX-00D8PB0_WD-WCC4M0KTT6NK-part5"
+rootfs_partition: "/dev/disk/by-id/ata-WDC_WD20EZRX-00D8PB0_WD-WCC4M0KTT6NK-part1"
+brand: Intel(R) Core(TM) i3-3220 CPU @ 3.30GHz
+netconsole_port: 6676
+ucode: '0x21'
+
+#! /db/releases/20250122170538/lkp-src/include/category/ALL
+rootfs: debian-12-x86_64-20240206.cgz
+kconfig: x86_64-rhel-9.4
+compiler: gcc-12
+_rt: "/result/ftq/performance-10000-100%-100000ss-add/lkp-ivb-d04/debian-12-x86_64-20240206.cgz/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04"
+kernel: "/pkg/linux/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/vmlinuz-6.13.0"
+result_root: "/result/ftq/performance-10000-100%-100000ss-add/lkp-ivb-d04/debian-12-x86_64-20240206.cgz/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/0"
+
+#! schedule options
+user: lkp
+LKP_SERVER: internal-lkp-server
+scheduler_version: "/lkp/lkp/.src-20250122-221107"
+max_uptime: 2100
+initrd: "/osimage/debian/debian-12-x86_64-20240206.cgz"
+bootloader_append:
+- root=/dev/ram0
+- RESULT_ROOT=/result/ftq/performance-10000-100%-100000ss-add/lkp-ivb-d04/debian-12-x86_64-20240206.cgz/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/0
+- BOOT_IMAGE=/pkg/linux/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/vmlinuz-6.13.0
+- branch=linus/master
+- job=/lkp/jobs/scheduled/lkp-ivb-d04/ftq-performance-10000-100%-100000ss-add-debian-12-x86_64-20240206.cgz-ffd294d346d1-20250123-611007-2sqd4l-0.yaml
+- user=lkp
+- ARCH=x86_64
+- kconfig=x86_64-rhel-9.4
+- commit=ffd294d346d185b70e28b1a28abe367bbfe53c04
+- intremap=posted_msi
+- max_uptime=2100
+- LKP_SERVER=internal-lkp-server
+- nokaslr
+- selinux=0
+- debug
+- apic=debug
+- sysrq_always_enabled
+- rcupdate.rcu_cpu_stall_timeout=100
+- net.ifnames=0
+- printk.devkmsg=on
+- panic=-1
+- softlockup_panic=1
+- nmi_watchdog=panic
+- oops=panic
+- load_ramdisk=2
+- prompt_ramdisk=0
+- drbd.minor_count=8
+- systemd.log_level=err
+- ignore_loglevel
+- console=tty0
+- earlyprintk=ttyS0,115200
+- console=ttyS0,115200
+- vga=normal
+- rw
+modules_initrd: "/pkg/linux/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/modules.cgz"
+bm_initrd: "/osimage/deps/debian-12-x86_64-20240206.cgz/lkp_20241102.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/rsync-rootfs_20241102.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/run-ipconfig_20241102.cgz,/osimage/pkg/debian-12-x86_64-20240206.cgz/ftq-x86_64-0833481-1_20241103.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/hw_20241102.cgz"
+ucode_initrd: "/osimage/ucode/intel-ucode-20230906.cgz"
+lkp_initrd: "/osimage/user/lkp/lkp-x86_64.cgz"
+site: inn
+
+#! /db/releases/20250122170538/lkp-src/include/site/inn
+LKP_CGI_PORT: 80
+LKP_CIFS_PORT: 139
+oom-killer:
+watchdog:
+job_initrd: "/lkp/jobs/scheduled/lkp-ivb-d04/ftq-performance-10000-100%-100000ss-add-debian-12-x86_64-20240206.cgz-ffd294d346d1-20250123-611007-2sqd4l-0.cgz"

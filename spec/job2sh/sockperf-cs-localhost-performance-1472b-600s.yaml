@@ -1,0 +1,148 @@
+---
+
+#! /db/releases/20250120134802/lkp-src/jobs/sockperf.yaml
+suite: sockperf
+testcase: sockperf
+category: benchmark
+runtime: 600s
+cluster: cs-localhost
+if role server:
+  sockperf-server:
+if role client:
+  sockperf:
+    msg_size: 1472b
+job_origin: sockperf.yaml
+arch: x86_64
+node_roles: server client
+
+#! include/category/benchmark
+kmsg:
+boot-time:
+uptime:
+iostat:
+heartbeat:
+vmstat:
+numa-numastat:
+numa-vmstat:
+numa-meminfo:
+proc-vmstat:
+proc-stat:
+meminfo:
+slabinfo:
+interrupts:
+lock_stat:
+perf-sched:
+  lite_mode: 1
+softirqs:
+bdi_dev_mapping:
+diskstats:
+nfsstat:
+cpuidle:
+cpufreq-stats:
+turbostat:
+sched_debug:
+perf-stat:
+mpstat:
+perf-c2c:
+perf-profile:
+  debug_mode: 0
+
+#! include/category/ALL
+cpufreq_governor: performance
+sanity-check:
+
+#! queue options
+queue_cmdline_keys: []
+queue: ktest-cyclic
+testbox: lkp-icl-2sp8
+tbox_group: lkp-icl-2sp8
+branch: linus/master
+commit: ffd294d346d185b70e28b1a28abe367bbfe53c04
+repeat_to: 3
+job_file: "/lkp/jobs/queued/ktest-cyclic/lkp-icl-2sp8/sockperf-cs-localhost-performance-1472b-600s-debian-12-x86_64-20240206.cgz-ffd294d346d1-20250121-579497-1d7w3db-2.yaml"
+id: bb0809bf7d9530f2f4403f3479c5602bd5462353
+queuer_version: "/zday/lkp"
+
+#! /db/releases/20250120134802/lkp-src/hosts/lkp-icl-2sp8
+model: Ice Lake
+nr_node: 2
+nr_cpu: 64
+memory: 256G
+nr_ssd_partitions: 3
+nr_hdd_partitions: 6
+hdd_partitions: "/dev/disk/by-id/ata-WDC_WD20SPZX-22UA7T0_WD-WX82EA06CSLM-part*"
+ssd_partitions:
+- "/dev/disk/by-id/nvme-INTEL_SSDPE2KX020T8_PHLJ151400G62P0BGN-part1"
+- "/dev/disk/by-id/nvme-INTEL_SSDPE2KX020T8_PHLJ151400G62P0BGN-part2"
+- "/dev/disk/by-id/nvme-INTEL_SSDPE2KX020T8_PHLJ151400G62P0BGN-part3"
+rootfs_partition: "/dev/disk/by-id/nvme-INTEL_SSDPE2KX020T8_PHLJ151400G62P0BGN-part4"
+kernel_cmdline_hw: acpi_rsdp=0x6988d014
+result_service: tmpfs
+LKP_SERVER: 10.239.97.5
+avoid_nfs: 1
+brand: Intel(R) Xeon(R) Gold 6346 CPU @ 3.10GHz
+ucode: '0xd0003a5'
+
+#! /db/releases/20250120134802/lkp-src/include/category/benchmark
+
+#! /db/releases/20250120134802/lkp-src/include/category/ALL
+rootfs: debian-12-x86_64-20240206.cgz
+kconfig: x86_64-rhel-9.4
+compiler: gcc-12
+_rt: "/result/sockperf/cs-localhost-performance-1472b-600s/lkp-icl-2sp8/debian-12-x86_64-20240206.cgz/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04"
+kernel: "/pkg/linux/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/vmlinuz-6.13.0"
+result_root: "/result/sockperf/cs-localhost-performance-1472b-600s/lkp-icl-2sp8/debian-12-x86_64-20240206.cgz/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/1"
+
+#! schedule options
+user: lkp
+scheduler_version: "/lkp/lkp/.src-20250120-101558"
+max_uptime: 2100
+initrd: "/osimage/debian/debian-12-x86_64-20240206.cgz"
+bootloader_append:
+- root=/dev/ram0
+- RESULT_ROOT=/result/sockperf/cs-localhost-performance-1472b-600s/lkp-icl-2sp8/debian-12-x86_64-20240206.cgz/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/1
+- BOOT_IMAGE=/pkg/linux/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/vmlinuz-6.13.0
+- branch=linus/master
+- job=/lkp/jobs/scheduled/lkp-icl-2sp8/sockperf-cs-localhost-performance-1472b-600s-debian-12-x86_64-20240206.cgz-ffd294d346d1-20250121-579497-1d7w3db-2.yaml
+- user=lkp
+- ARCH=x86_64
+- kconfig=x86_64-rhel-9.4
+- commit=ffd294d346d185b70e28b1a28abe367bbfe53c04
+- intremap=posted_msi
+- acpi_rsdp=0x6988d014
+- max_uptime=2100
+- LKP_SERVER=10.239.97.5
+- nokaslr
+- selinux=0
+- debug
+- apic=debug
+- sysrq_always_enabled
+- rcupdate.rcu_cpu_stall_timeout=100
+- net.ifnames=0
+- printk.devkmsg=on
+- panic=-1
+- softlockup_panic=1
+- nmi_watchdog=panic
+- oops=panic
+- load_ramdisk=2
+- prompt_ramdisk=0
+- drbd.minor_count=8
+- systemd.log_level=err
+- ignore_loglevel
+- console=tty0
+- earlyprintk=ttyS0,115200
+- console=ttyS0,115200
+- vga=normal
+- rw
+modules_initrd: "/pkg/linux/x86_64-rhel-9.4/gcc-12/ffd294d346d185b70e28b1a28abe367bbfe53c04/modules.cgz"
+bm_initrd: "/osimage/deps/debian-12-x86_64-20240206.cgz/lkp_20241102.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/rsync-rootfs_20241102.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/run-ipconfig_20241102.cgz,/osimage/pkg/debian-12-x86_64-20240206.cgz/sockperf-x86_64-ed92afb-1_20240301.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/iostat_20241102.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/perf_20241102.cgz,/osimage/pkg/debian-12-x86_64-20240206.cgz/perf-x86_64-11066801dd4b-1_20241102.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/mpstat_20240221.cgz,/osimage/pkg/debian-12-x86_64-20240206.cgz/sar-x86_64-f3f2b1a4-1_20241102.cgz,/osimage/deps/debian-12-x86_64-20240206.cgz/hw_20241102.cgz"
+ucode_initrd: "/osimage/ucode/intel-ucode-20230906.cgz"
+lkp_initrd: "/osimage/user/lkp/lkp-x86_64.cgz"
+site: inn
+
+#! /db/releases/20250120134802/lkp-src/include/site/inn
+LKP_CGI_PORT: 80
+LKP_CIFS_PORT: 139
+oom-killer:
+watchdog:
+job_initrd: "/lkp/jobs/scheduled/lkp-icl-2sp8/sockperf-cs-localhost-performance-1472b-600s-debian-12-x86_64-20240206.cgz-ffd294d346d1-20250121-579497-1d7w3db-2.cgz"
