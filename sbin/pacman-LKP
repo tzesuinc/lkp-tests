@@ -161,8 +161,7 @@ deptest() {
 sync() {
 	local pkg=$1
 
-	local pkg_dir="$LKP_SRC/pkg/$pkg"
-	[ -d "$pkg_dir" ] || pkg_dir="$(get_pkg_dir $pkg)"
+	local pkg_dir="$(get_pkg_dir $pkg)"
 
 	if [ -d "$pkg_dir" ]; then
 		(

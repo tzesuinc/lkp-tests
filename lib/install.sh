@@ -205,8 +205,7 @@ get_pkg_dir()
 {
 	local pkg=$1
 
-	local pkg_dir="$LKP_SRC/pkg/$pkg"
-	[ -d "$pkg_dir" ] || pkg_dir="$LKP_SRC/programs/$pkg/pkg"
+	local pkg_dir="$LKP_SRC/programs/$pkg/pkg"
 	[ -d "$pkg_dir" ] && echo $pkg_dir
 }
 

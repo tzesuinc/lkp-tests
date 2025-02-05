@@ -53,8 +53,7 @@ module LKP
 
       def find_pkg_dir(program)
         [
-          "#{PROGRAMS_ROOT}/#{program}/pkg",
-          "#{LKP_SRC}/pkg/#{program}"
+          "#{PROGRAMS_ROOT}/#{program}/pkg"
         ].find { |path| Dir.exist? path }
       end
 
