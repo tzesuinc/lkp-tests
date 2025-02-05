@@ -7,9 +7,10 @@ license=('GPL')
 source=("https://gitlab.freedesktop.org/drm/igt-gpu-tools.git")
 sha256sums=('SKIP')
 
+. $LKP_SRC/lib/install.sh
+
 build()
 {
-
 	python3 -m venv $srcdir
 	. $srcdir/bin/activate
 
@@ -25,14 +26,16 @@ build()
 
 split_tests()
 {
-	cd $srcdir/igt-gpu-tools
+	cd $srcdir/igt-gpu-tools || return
+
+	local standalone="$(get_pkg_dir $pkgname)/addon/tests/standalone"
 	# standalone test
-	for test in $(cat $LKP_SRC/programs/${pkgname}/pkg/addon/tests/standalone | grep -v '^#')
+	for test in $(cat $standalone | grep -v '^#')
 	do
 		echo $test > ./$test
 	done
 
-	standalone_tests=`paste -sd '|' <(cat $LKP_SRC/programs/${pkgname}/pkg/addon/tests/standalone | grep -v '^#')`
+	standalone_tests=`paste -sd '|' <(cat $standalone | grep -v '^#')`
 	sed -n '2p' build/tests/test-list.txt | tr " " "\n" | grep -v amdgpu | grep -vE "$standalone_tests" | sort > all-tests
 
 	$LKP_SRC/tools/split-tests all-tests 25 group-
@@ -46,5 +49,6 @@ package()
 	mkdir -p $benchmark_path
 	cp -af "${srcdir}/igt-gpu-tools/"* $benchmark_path
 
-	cp -af $LKP_SRC/programs/${pkgname}/pkg/exclude $benchmark_path
+	local pkg_dir="$(get_pkg_dir $pkgname)"
+	cp -af ${pkg_dir}/exclude $benchmark_path
 }
