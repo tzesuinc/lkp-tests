@@ -10,6 +10,7 @@ QUERY=0
 REMOVE=0
 
 . $LKP_SRC/lib/lkp_path.sh
+. $LKP_SRC/lib/install.sh
 
 : "${PACMAN:=$0}"
 : "${BUILDDIR:=$LKP_SRC/tmp-pkg}"
@@ -141,7 +142,7 @@ upgrade() {
 			*)
 				cp -r "$INSTALL_DIR"/* / || exit 1 ;;
 		esac
-		
+
 		echo "$pkg_name" >> "$DBFILE"
 		echo install succeed
 	)
@@ -161,7 +162,7 @@ sync() {
 	local pkg=$1
 
 	local pkg_dir="$LKP_SRC/pkg/$pkg"
-	[ -d "$pkg_dir" ] || pkg_dir="$LKP_SRC/programs/$pkg/pkg"
+	[ -d "$pkg_dir" ] || pkg_dir="$(get_pkg_dir $pkg)"
 
 	if [ -d "$pkg_dir" ]; then
 		(
