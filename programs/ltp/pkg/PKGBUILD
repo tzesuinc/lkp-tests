@@ -5,7 +5,7 @@ url='https://github.com/linux-test-project/ltp'
 arch=('i386' 'x86_64' 'aarch64')
 license=('GPL')
 options=('!strip')
-source=('https://git.centos.org/r/rpms/rusers.git' 'https://github.com/PeterHuewe/tpm-emulator.git' 'https://github.com/numactl/numactl.git' 'https://github.com/linux-test-project/ltp.git')
+source=('https://github.com/linux-test-project/ltp.git' 'https://git.centos.org/r/rpms/rusers.git' 'https://github.com/PeterHuewe/tpm-emulator.git' 'https://github.com/numactl/numactl.git')
 md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 . $LKP_SRC/lib/tests/ltp.sh
@@ -17,10 +17,7 @@ build_rusers()
 
 	cd $srcdir/rusers || return
 
-	benchmark_path=${pkgdir}/lkp/benchmarks/${pkgname}
-
-	local branch=$(git branch -a | grep /c | tail -1 | awk -F/ '{print $NF}')
-	git checkout "$branch" || return
+	git checkout c7 || return
 
 	local rusers_version=$(grep ^Version: SPECS/rusers.spec | awk '{print $2}')
 
@@ -39,6 +36,8 @@ build_rusers()
 
 	# rpc*/ currently means rpc.rstatd-4.0.1/
 	cd rpc*/ || return
+
+	benchmark_path=${pkgdir}/lkp/benchmarks/${pkgname}
 	./configure --prefix="${benchmark_path}"/netkit-rusers
 
 	local distro=$(basename $rootfs)
