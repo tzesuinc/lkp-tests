@@ -114,6 +114,8 @@ get_toolchain_list()
 		show_url_hint
 		return 1
 	}
+
+	return 0
 }
 
 get_installed_cross_gcc()
@@ -139,7 +141,6 @@ get_installed_cross_clang()
 install_crosstool_clang()
 {
 	[[ $URL ]] || URL='https://cdn.kernel.org/pub/tools/llvm/files'
-	local list=/tmp/0day-ci-llvm-files
 
 	local cross_clang=$(get_installed_cross_clang)
 	[[ $cross_clang ]] && return
@@ -153,7 +154,9 @@ install_crosstool_clang()
 		# ./llvm-16.0.1-x86_64.tar.xz
 		# ./llvm-17.0.3-x86_64.tar.xz
 		# ./llvm-17.0.4-x86_64.tar.xz
-		get_toolchain_list
+		local list=/tmp/0day-ci-llvm-files
+		get_toolchain_list || return
+
 		file=$(grep -E "${COMPILER//clang/llvm}\..*-x86_64\.tar\.xz$" $list | tail -1)
 		rm $list
 	else
@@ -178,15 +181,16 @@ install_crosstool_gcc()
 	[[ $cross_gcc ]] && return
 
 	[[ $URL ]] || local URL='https://cdn.kernel.org/pub/tools/crosstool/files/bin/x86_64'
-	local list=/tmp/0day-ci-crosstool-files
 
-	get_toolchain_list
+	local list=/tmp/0day-ci-crosstool-files
+	get_toolchain_list || return
 
 	local file
 	local gcc_arch_pattern=$(echo "${crosstool}" | sed 's/*/.*/g')
 
 	local gcc_version
 	[[ $COMPILER =~ - ]] && gcc_version=${COMPILER##*-}
+
 	if [[ $gcc_version ]]; then
 		# for arch has more than 1 cross tool available, like x86_64-gcc-9.3.0-nolibc_arm-linux-gnueabi.tar.xz
 		# and x86_64-gcc-9.3.0-nolibc_arm-linux-gnueabihf.tar.xz for arm, match "arm-linux-gnueabi." instead of
@@ -195,6 +199,7 @@ install_crosstool_gcc()
 	else
 		file=$(grep "${gcc_arch_pattern}\..*tar\.xz$" $list | tail -1)
 	fi
+
 	[[ $file ]] || {
 		echo "Cannot find $gcc_arch_pattern under $URL check $list"
 		show_url_hint
