@@ -2,7 +2,7 @@ url: https://git.kernel.org/pub/scm/linux/kernel/git/kvmarm/kvmarm.git
 integration_testing_branches: next
 mail_cc:
 - linux-arm-kernel@lists.infradead.org
-- kvmarm@lists.cs.columbia.edu
+- kvmarm@lists.linux.dev
 owner: Christoffer Dall <christoffer.dall@linaro.org>
 subsystems:
 - kvm
