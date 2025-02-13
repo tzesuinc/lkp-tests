@@ -3,6 +3,7 @@ bison
 build-essential
 cmake
 cpuid
+dmidecode
 flex
 g++-multilib
 gcc-multilib
@@ -20,10 +21,13 @@ libssl-dev
 libtool
 linux-perf
 m4
+mcelog
 mesa-utils
 msr-tools
+screen
 sshpass
 stress
+sudo
 trace-cmd
 uuid-dev
 xmlto
