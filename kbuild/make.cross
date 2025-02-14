@@ -335,13 +335,11 @@ setup_crosstool_clang()
 	local kernel_version_minor=$(echo "$kernel_version" | cut -d. -f2)
 
 	# https://www.kernel.org/doc/html/latest/kbuild/llvm.html
-	local opt_default_cross="HOSTCC=$cross_clang CC=$cross_clang $opt_ldd $opt_objcopy \
-		AR=llvm-ar NM=llvm-nm STRIP=llvm-strip OBJDUMP=llvm-objdump OBJSIZE=llvm-size READELF=llvm-readelf HOSTCXX=clang++ HOSTAR=llvm-ar"
-
 	if is_llvm_equal_one_supported; then
 		opt_cross="LLVM=1"
 	else
-		opt_cross=$opt_default_cross
+		opt_cross="HOSTCC=$cross_clang CC=$cross_clang $opt_ldd $opt_objcopy \
+			AR=llvm-ar NM=llvm-nm STRIP=llvm-strip OBJDUMP=llvm-objdump OBJSIZE=llvm-size READELF=llvm-readelf HOSTCXX=clang++ HOSTAR=llvm-ar"
 	fi
 
 	# TODO: CROSS_COMPILE is not necessary for new kernel
