@@ -36,6 +36,7 @@ gettext-base: gettext
 gfortran: gcc-gfortran
 heirloom-mailx: mailx
 hpcc:
+hwloc: hwloc hwloc-gui
 init-system-helpers:
 initramfs-tools: dracut
 install-info: info
