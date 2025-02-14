@@ -40,6 +40,8 @@ build_lkvs()
 		return 1
 	}
 
+	[[ $test = ras ]] && log_cmd make install
+
 	return 0
 }
 
