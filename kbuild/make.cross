@@ -329,6 +329,11 @@ setup_crosstool_clang()
 
 	export PATH="$cross_clang_path:$PATH"
 	echo "PATH=$PATH"
+
+	local kernel_version=$(make kernelversion)
+	local kernel_version_major=$(echo "$kernel_version" | cut -d. -f1)
+	local kernel_version_minor=$(echo "$kernel_version" | cut -d. -f2)
+
 	# https://www.kernel.org/doc/html/latest/kbuild/llvm.html
 	local opt_default_cross="HOSTCC=$cross_clang CC=$cross_clang $opt_ldd $opt_objcopy \
 		AR=llvm-ar NM=llvm-nm STRIP=llvm-strip OBJDUMP=llvm-objdump OBJSIZE=llvm-size READELF=llvm-readelf HOSTCXX=clang++ HOSTAR=llvm-ar"
@@ -353,10 +358,6 @@ setup_crosstool_clang()
 
 setup_crosstool()
 {
-	local kernel_version=$(make kernelversion)
-	local kernel_version_major=$(echo "$kernel_version" | cut -d. -f1)
-	local kernel_version_minor=$(echo "$kernel_version" | cut -d. -f2)
-
 	if [[ "$COMPILER" =~ "clang" ]]; then
 		setup_crosstool_clang
 	else
