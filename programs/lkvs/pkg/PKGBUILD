@@ -9,7 +9,9 @@ md5sums=('SKIP' 'SKIP')
 
 build()
 {
-	:
+	cd $pkgname
+
+	git submodule update --init
 }
 
 package()
