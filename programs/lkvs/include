@@ -14,4 +14,11 @@ need_kconfig:
 % elsif ___.test == "ufs" || ___.test == "tpmi"
 - INTEL_TPMI: m
 - INTEL_VSEC: m
+% elsif ___.test == "ras"
+- EDAC_SKX: m
+- EDAC_IE31200: m
+- EDAC_IGEN6: m
+- EDAC_SBRIDGE: m
+- EDAC_I10NM: m
+- EDAC_I7CORE: m
 % end
