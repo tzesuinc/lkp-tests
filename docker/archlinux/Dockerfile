@@ -1,4 +1,6 @@
-FROM archlinux:base
+# base image can be archlinux:base and etc
+ARG base_image
+FROM ${base_image}
 
 # lkp install generates hosts/$HOSTNAME during create_host_config. Here it requires
 # user to pass hostname arg to specify a consistent name instead of the container

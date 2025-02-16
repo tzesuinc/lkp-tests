@@ -1,4 +1,6 @@
-FROM debian:buster
+# base image can be ubuntu:focal, ubuntu:noble and etc
+ARG base_image
+FROM ${base_image}
 
 # lkp install generates hosts/$HOSTNAME during create_host_config. Here it requires
 # user to pass hostname arg to specify a consistent name instead of the container
@@ -12,15 +14,17 @@ COPY . ./
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-    # linux-cpupower installs turbostat as default one
-    linux-cpupower \
+    # linux-tools-generic contains perf and turbostat
+    linux-tools-generic \
     make \
     # procps installs vmstat, sysctl, etc to partially persistent commonly used dependencies
     procps \
     sudo && \
     make install && \
     lkp install && \
-    # replace the wrapper /usr/bin/perf with the link to actual perf like perf_4.19 as default one
-    ln -sf $(echo /usr/bin/perf_* | cut -f1 -d" ") /usr/bin/perf
+    # replace the turbostat and perf wrappers in /usr/bin with the ones installed from linux-tools-generic
+    # because the wrappers have very restrictive kernel version dependency checks
+    ln -sf $(find /usr/lib -name turbostat | head -n 1) /usr/bin/turbostat && \
+    ln -sf $(find /usr/lib -name perf | head -n 1) /usr/bin/perf
 
 ENTRYPOINT ["bash", "-c", "sleep infinity"]

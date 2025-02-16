@@ -1,4 +1,6 @@
-FROM fedora:39
+# base image can be centos:stream9, centos:stream10 and etc
+ARG base_image
+FROM quay.io/centos/${base_image}
 
 # lkp install generates hosts/$HOSTNAME during create_host_config. Here it requires
 # user to pass hostname arg to specify a consistent name instead of the container

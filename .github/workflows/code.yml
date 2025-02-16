@@ -41,7 +41,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.5'
+      - run: bundle install
       - name: Build ${{ matrix.image }} image
-        run: docker build . -f docker/${{ matrix.image }}/Dockerfile -t lkp-tests/${{ matrix.image }}
+        run: bundle exec rake docker:build image=${{ matrix.image }}
       - name: Test packages on ${{ matrix.image }}
         run: docker run -e DEBIAN_FRONTEND=noninteractive --rm --entrypoint '' lkp-tests/${{ matrix.image }} tools/test-packages.sh

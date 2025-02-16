@@ -95,3 +95,13 @@ end
 
 desc 'Run code check'
 task code: %i[syntax shellcheck rubocop spec]
+
+namespace :docker do
+  desc 'Build docker image'
+  task :build do
+    # image is in the form of debian/buster
+    raise "ENV['image'] can't be #{ENV['image'].inspect}" unless ENV['image']
+
+    bash "docker build . -f docker/#{ENV['image'].split('/').first}/Dockerfile -t lkp-tests/#{ENV['image']} --build-arg base_image=#{ENV['image'].sub('/', ':')}"
+  end
+end
