@@ -17,21 +17,21 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  test-code:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby-version: ['2.0', '2.5', '2.7', '3.2']
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-    - run: bundle install
-    - run: rubocop -v
-    - run: bundle exec rake code
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+      - run: bundle install
+      - run: rubocop -v
+      - run: bundle exec rake code
 
   test-packages:
     runs-on: ubuntu-latest
