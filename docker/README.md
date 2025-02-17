@@ -20,6 +20,12 @@ consider to create image for interested test for easy reuse.
 	docker run --rm --entrypoint '' lkp-tests/${image} lkp help
 ```
 
+The alternative method to build the image is
+
+```
+	lkp docker build --image $image --hostname lkp-docker
+```
+
 ## Run one atomic job
 
 ```
@@ -45,4 +51,10 @@ consider to create image for interested test for easy reuse.
 	/lkp/lkp-tests# lkp run /lkp/jobs/hackbench-pipe-8-process-1600%.yaml
 
 	/lkp/lkp-tests# lkp rt hackbench
+```
+
+The alternative method to run the job is
+
+```
+	lkp docker test -i $image -j hackbench.yaml -g pipe-8-process-1600
 ```

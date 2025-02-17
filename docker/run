@@ -1,0 +1,59 @@
+#!/bin/bash
+
+[[ -n "$LKP_SRC" ]] || LKP_SRC=$(dirname $(dirname $(readlink -e -v $0)))
+
+exec_cmd()
+{
+	echo "$@"
+	"$@"
+}
+
+opt_hostname="lkp-docker"
+opt_test_dir="/home/$USER/lkp"
+
+while getopts "d:i:-:" opt; do
+	case $opt in
+		i)
+			opt_image="$OPTARG"
+			;;
+		d)
+			opt_test_dir="$OPTARG"
+			;;
+		-)
+			case "${OPTARG}" in
+				image)
+					opt_image="${!OPTIND}"
+					OPTIND=$((OPTIND + 1))
+					;;
+				hostname)
+					opt_hostname="${!OPTIND}"
+					OPTIND=$((OPTIND + 1))
+					;;
+				recreate)
+					opt_recreate=true
+					;;
+				*)
+					echo "Unknown option --${OPTARG}"
+					exit 1
+					;;
+			esac
+			;;
+	esac
+done
+
+shift $((OPTIND - 1))
+
+docker inspect $opt_hostname > /dev/null 2>&1 && {
+	echo "Container $opt_hostname already exists."
+
+	[[ "$opt_recreate" = true ]] || exit 0
+
+	exec_cmd docker rm -f $opt_hostname || exit
+}
+
+exec_cmd docker run -d -h $opt_hostname --name $opt_hostname \
+	-v $opt_test_dir/paths:/lkp/paths \
+	-v $opt_test_dir/benchmarks:/lkp/benchmarks \
+	-v $opt_test_dir/result:/lkp/result \
+	-v $opt_test_dir/jobs:/lkp/jobs \
+	lkp-tests/${opt_image}
