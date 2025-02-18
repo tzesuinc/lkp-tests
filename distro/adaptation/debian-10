@@ -27,6 +27,7 @@ libtiff: libtiff5
 libtirpc: libtirpc3
 libtraceevent-dev:
 libtraceevent1:
+libtracefs-dev:
 liburing:
 libwebp: libwebp6
 libx32gcc-dev: libx32gcc-8-dev
