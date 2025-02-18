@@ -50,6 +50,7 @@ kernel-selftests:
     - lib
     - livepatch
     # - lkdtm
+    - locking
     - lsm
 
     # - media_tests # require special peripheral and it can not be run with "make run_tests"
@@ -116,14 +117,6 @@ kernel-selftests:
 
     - wireguard
     - zram
-
----
-# a large number cpus host cannot finish in 30 min
-need_cpu: -32
-
-kernel-selftests:
-  group:
-    - locking
 
 ---
 sysctl:
