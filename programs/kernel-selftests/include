@@ -108,6 +108,9 @@ need_kconfig:
 - IOMMUFD
 - IOMMUFD_TEST: y
 - FAILSLAB: y
+% elsif ___.group == "filesystems"
+- ANDROID_BINDERFS: y
+- ANDROID_BINDER_IPC: y
 % elsif ___.group == "group-01"
 - DAMON: y
 - DAMON_VADDR: y
