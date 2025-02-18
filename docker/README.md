@@ -14,8 +14,9 @@ git clone https://github.com/intel/lkp-tests.git
 cd lkp-tests
 
 image=debian/buster
+hostname=lkp-docker.${image//\//.}
 
-docker build -f docker/${image%%/*}/Dockerfile -t lkp-tests/${image} -t lkp-tests/${image}:$(git log -1 --pretty=%h) --build-arg hostname=lkp-docker --build-arg base_image=${image//\//:} .
+docker build -f docker/${image%%/*}/Dockerfile -t lkp-tests/${image} -t lkp-tests/${image}:$(git log -1 --pretty=%h) --build-arg hostname=$hostname --build-arg base_image=${image//\//:} .
 
 docker run --rm --entrypoint '' lkp-tests/${image} lkp help
 ```
@@ -23,7 +24,7 @@ docker run --rm --entrypoint '' lkp-tests/${image} lkp help
 The alternative method to build the image is
 
 ```
-lkp docker build --image $image --hostname lkp-docker
+lkp docker build --image $image --hostname $hostname
 ```
 
 ## Run one atomic job
@@ -31,14 +32,14 @@ lkp docker build --image $image --hostname lkp-docker
 ```
 # Add --privileged option to allow privileged access like dmesg, sysctl. Use
 # this with caution.
-docker run -d -h lkp-docker --name lkp-docker \
+docker run -d -h $hostname --name $hostname \
            -v /home/$USER/lkp/paths:/lkp/paths \
            -v /home/$USER/lkp/benchmarks:/lkp/benchmarks \
            -v /home/$USER/lkp/result:/lkp/result \
            -v /home/$USER/lkp/jobs:/lkp/jobs \
            lkp-tests/${image}
 
-docker exec -it lkp-docker bash
+docker exec -it $hostname bash
 
 /lkp/lkp-tests# lkp split-job jobs/hackbench.yaml -o /lkp/jobs
 
@@ -56,5 +57,17 @@ docker exec -it lkp-docker bash
 The alternative method to run the job is
 
 ```
-lkp docker test -i $image -j hackbench.yaml -g pipe-8-process-1600
+lkp docker test -i $image -j hackbench.yaml -g pipe-8-process-1600 --hostname $hostname
+```
+
+## Test by lkp docker
+
+```
+image=debian/bookworm
+hostname=lkp-docker.${image//\//.}
+
+lkp docker init -i $image --hostname $hostname
+
+lkp docker build -t $hostname
+lkp docker test -t $hostname -j hackbench.yaml -g pipe-8-process-1600
 ```

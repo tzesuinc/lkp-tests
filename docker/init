@@ -6,20 +6,16 @@ set -e
 
 . $LKP_SRC/lib/docker.sh
 
-while getopts "i:t:-:" opt; do
+while getopts "d:i:-:" opt; do
 	case $opt in
+		d)
+			opt_test_dir="$OPTARG"
+			;;
 		i)
 			opt_image="$OPTARG"
 			;;
-		t)
-			opt_container="$OPTARG"
-			;;
 		-)
 			case "${OPTARG}" in
-				container)
-					opt_container="${!OPTIND}"
-					OPTIND=$((OPTIND + 1))
-					;;
 				image)
 					opt_image="${!OPTIND}"
 					OPTIND=$((OPTIND + 1))
@@ -46,14 +42,19 @@ shift $((OPTIND - 1))
 opt_hostname=${opt_hostname:-$LKP_DOCKER_HOSTNAME}
 opt_test_dir=${opt_test_dir:-$LKP_DOCKER_TEST_DIR}
 
-[[ $opt_container ]] && load_container "$opt_container"
-
-[[ $opt_image ]] || {
+[[ "$opt_image" ]] || {
 	echo "No image specified. Use --image <image_name> to specify an image."
 	exit 1
 }
 
-cmd="docker build . -f $LKP_SRC/docker/${opt_image%%/*}/Dockerfile -t lkp-tests/${opt_image} --build-arg hostname=${opt_hostname} --build-arg base_image=${opt_image//\//:}"
-[[ $opt_proxy ]] && cmd="$cmd --build-arg http_proxy=${opt_proxy} --build-arg https_proxy=${opt_proxy}"
+containers="$opt_test_dir/containers"
+mkdir -p "$containers"
 
-exec_cmd $cmd
+cat <<EOF > "$containers/$opt_hostname"
+image=$opt_image
+hostname=$opt_hostname
+test_dir=$opt_test_dir
+proxy=$opt_proxy
+EOF
+
+echo "Container file is stored at $containers/$opt_hostname"

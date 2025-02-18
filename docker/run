@@ -1,17 +1,12 @@
 #!/bin/bash
 
+set -e
+
 [[ -n "$LKP_SRC" ]] || LKP_SRC=$(dirname $(dirname $(readlink -e -v $0)))
 
-exec_cmd()
-{
-	echo "$@"
-	"$@"
-}
+. $LKP_SRC/lib/docker.sh
 
-opt_hostname="lkp-docker"
-opt_test_dir="/home/$USER/lkp"
-
-while getopts "d:i:-:" opt; do
+while getopts "d:i:t:-:" opt; do
 	case $opt in
 		i)
 			opt_image="$OPTARG"
@@ -19,14 +14,25 @@ while getopts "d:i:-:" opt; do
 		d)
 			opt_test_dir="$OPTARG"
 			;;
+		t)
+			opt_container="$OPTARG"
+			;;
 		-)
 			case "${OPTARG}" in
+				container)
+					opt_container="${!OPTIND}"
+					OPTIND=$((OPTIND + 1))
+					;;
 				image)
 					opt_image="${!OPTIND}"
 					OPTIND=$((OPTIND + 1))
 					;;
 				hostname)
 					opt_hostname="${!OPTIND}"
+					OPTIND=$((OPTIND + 1))
+					;;
+				test-dir)
+					opt_test_dir="${!OPTIND}"
 					OPTIND=$((OPTIND + 1))
 					;;
 				recreate)
@@ -43,13 +49,23 @@ done
 
 shift $((OPTIND - 1))
 
+opt_hostname=${opt_hostname:-$LKP_DOCKER_HOSTNAME}
+opt_test_dir=${opt_test_dir:-$LKP_DOCKER_TEST_DIR}
+
+[[ $opt_container ]] && load_container "$opt_container"
+
 docker inspect $opt_hostname > /dev/null 2>&1 && {
 	echo "Container $opt_hostname already exists."
 
 	[[ "$opt_recreate" = true ]] || exit 0
 
-	exec_cmd docker rm -f $opt_hostname || exit
+	exec_cmd docker rm -f $opt_hostname
 }
+
+for subdir in paths benchmarks result jobs
+do
+	mkdir -p "$opt_test_dir/$subdir"
+done
 
 exec_cmd docker run -d -h $opt_hostname --name $opt_hostname \
 	-v $opt_test_dir/paths:/lkp/paths \

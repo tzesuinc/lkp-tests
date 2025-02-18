@@ -2,16 +2,11 @@
 
 [[ -n "$LKP_SRC" ]] || LKP_SRC=$(dirname $(dirname $(readlink -e -v $0)))
 
-exec_cmd()
-{
-	echo "$@"
-	"$@"
-}
+set -e
 
-opt_hostname="lkp-docker"
-opt_test_dir="/home/$USER/lkp"
+. $LKP_SRC/lib/docker.sh
 
-while getopts "d:i:j:g:-:" opt; do
+while getopts "d:i:j:g:t:-:" opt; do
 	case $opt in
 		i)
 			opt_image="$OPTARG"
@@ -25,14 +20,29 @@ while getopts "d:i:j:g:-:" opt; do
 		g)
 			opt_pattern="$OPTARG"
 			;;
+		t)
+			opt_container="$OPTARG"
+			;;
 		-)
 			case "${OPTARG}" in
+				container)
+					opt_container="${!OPTIND}"
+					OPTIND=$((OPTIND + 1))
+					;;
 				image)
 					opt_image="${!OPTIND}"
 					OPTIND=$((OPTIND + 1))
 					;;
 				hostname)
 					opt_hostname="${!OPTIND}"
+					OPTIND=$((OPTIND + 1))
+					;;
+				job-yaml)
+					opt_job_yaml="${!OPTIND}"
+					OPTIND=$((OPTIND + 1))
+					;;
+				pattern)
+					opt_pattern="${!OPTIND}"
 					OPTIND=$((OPTIND + 1))
 					;;
 				proxy)
@@ -53,14 +63,20 @@ done
 
 shift $((OPTIND - 1))
 
-[[ "$opt_job_yaml" ]] || {
+opt_hostname=${opt_hostname:-$LKP_DOCKER_HOSTNAME}
+opt_test_dir=${opt_test_dir:-$LKP_DOCKER_TEST_DIR}
+
+[[ $opt_container ]] && load_container "$opt_container"
+
+[[ $opt_job_yaml ]] || {
 	echo "No job yaml specified. Use -j <job_yaml> to specify a job yaml."
 	exit 1
 }
 
 cmd="$LKP_SRC/docker/run -i $opt_image --hostname $opt_hostname -d $opt_test_dir"
 [[ "$opt_recreate" = true ]] && cmd="$cmd --recreate"
-exec_cmd $cmd || exit
+
+exec_cmd $cmd
 
 test()
 {
