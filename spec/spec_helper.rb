@@ -10,3 +10,5 @@ if ENV['GENERATE_COVERAGE'] == 'true'
 end
 
 LKP_SRC ||= ENV['LKP_SRC']
+
+require "#{LKP_SRC}/lib/lkp_tmpdir"
