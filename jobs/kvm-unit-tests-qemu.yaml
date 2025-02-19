@@ -1,0 +1,8 @@
+suite: kvm-unit-tests-qemu
+testcase: kvm-unit-tests-qemu
+category: functional
+
+qemu-next:
+kvm-unit-tests-qemu:
+
+kernel_cmdline: kvm.enable_vmware_backdoor=Y
