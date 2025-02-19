@@ -91,6 +91,7 @@ pmu-tools::
 postmark::
 pybench::
 qat::
+qemu-next::
 qperf::
 reaim::
 redis-server::

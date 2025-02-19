@@ -8,6 +8,7 @@ fuse: fuse3
 lib32gcc-dev: lib32gcc-12-dev
 libaio:
 libasound2:
+libcurl:
 libdw1: libdw1t64
 libevent-openssl-2: libevent-openssl-2.1-7
 libevent: libevent-2.1-7
@@ -16,6 +17,9 @@ libgsl: libgsl27
 libipsec-mb: libipsec-mb1
 libjson: libjson-c5
 libldap: libldap2
+libncurses5: libncurses6
+libnfs13: libnfs14
+libnfs: libnfs14
 libntfs: libntfs-3g89
 libperl5:
 libpolly-dev: libpolly-18-dev

@@ -1,0 +1,23 @@
+pkgname=qemu-next
+pkgver=git
+pkgrel=1
+arch=('i386' 'x86_64')
+url="https://gitlab.com/qemu-project/qemu"
+license=('GPL')
+source=("https://gitlab.com/qemu-project/qemu.git")
+md5sums=('SKIP')
+
+. $LKP_SRC/lib/debug.sh
+. $LKP_SRC/lib/install.sh
+. $LKP_SRC/lib/reproduce-log.sh
+. $LKP_SRC/lib/tests/pkgbuild.sh
+
+build()
+{
+	build_qemu qemu/master HEAD
+}
+
+package()
+{
+	pack_qemu qemu/master
+}

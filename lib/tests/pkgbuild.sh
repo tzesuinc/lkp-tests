@@ -126,3 +126,53 @@ cp_to_pkg()
 	log_cmd mkdir -p "$dst_dir"
 	log_cmd cp -af $src "$dst_dir"
 }
+
+update_submodules()
+{
+	git submodule update --init --recursive
+}
+
+build_qemu()
+{
+	local qemu_branch=$1
+	local qemu_commit=$2
+	local qemu_config=x86_64-softmmu
+
+	[[ -n "$qemu_commit" ]] || return
+	[[ -n "$qemu_branch" ]] || return
+
+	local qemu_remote=${qemu_branch%%/*}
+
+	log_cmd cd "$srcdir/$qemu_remote"
+
+	log_cmd git checkout -q $qemu_commit || return
+
+	update_submodules || return
+
+	log_cmd ./configure --target-list="$qemu_config" --disable-docs --enable-kvm --prefix=${pkgdir} || return
+
+	unset LDFLAGS
+	log_cmd make -j $nr_cpu 2>&1
+}
+
+pack_qemu()
+{
+	local qemu_branch=$1
+	[ -n "$qemu_branch" ] || return
+
+	local qemu_remote=${qemu_branch%%/*}
+
+	log_cmd cd "$srcdir/$qemu_remote"
+
+	log_cmd make install V=1 || return
+
+	# remove var/run dir as it conflicts with debian rootfs which has /var/run links to /run
+	log_cmd cd $pkgdir
+
+	log_cmd ls -lrt
+	log_cmd ls -lrt var/run
+	log_cmd rm -rf var
+
+	# create /bin/kvm link that app like avocado list requires kvm bin
+	log_cmd ln -s qemu-system-x86_64 bin/kvm
+}
