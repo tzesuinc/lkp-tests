@@ -331,6 +331,7 @@ libsm6: libSM
 libsmbclient-dev: libsmbclient-devel
 libsnappy-dev: snappy-devel
 libsnappy1v5: snappy
+libsndio7.0: sndio
 libsodium-dev: libsodium-devel
 libspice-protocol-dev: spice-protocol
 libspice-server-dev:
