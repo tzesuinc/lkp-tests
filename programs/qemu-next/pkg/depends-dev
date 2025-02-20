@@ -37,6 +37,7 @@ python
 python-dev
 python-pip
 python-tomli
+python-venv
 uuid-dev
 valgrind
 xfslibs-dev
