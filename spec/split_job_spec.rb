@@ -29,7 +29,7 @@ describe 'lkp-split-job' do
   end
 
   def execute_test(id)
-    `LKP_SRC=#{@tmp_src_dir} #{@tmp_src_dir}/bin/lkp split-job -t lkp-tbox -o #{@tmp_dir} spec/split-job/#{id}.yaml`
+    `LKP_SRC=#{@tmp_src_dir} LKP_CORE_SRC=#{@tmp_src_dir} #{@tmp_src_dir}/bin/lkp split-job -t lkp-tbox -o #{@tmp_dir} spec/split-job/#{id}.yaml`
 
     Dir[@tmp_dir.path("#{id}-*.yaml")].each do |actual_yaml|
       `sed -i 's/:#! /#!/g' #{actual_yaml}`
@@ -43,7 +43,7 @@ describe 'lkp-split-job' do
 
   it 'split with --compatible option' do
     Dir.chdir(@tmp_src_dir.to_s) do
-      `LKP_SRC=#{@tmp_src_dir} #{@tmp_src_dir}/bin/lkp split-job --compatible -o #{@tmp_dir} spec/split-job/compatible.yaml`
+      `LKP_SRC=#{@tmp_src_dir} LKP_CORE_SRC=#{@tmp_src_dir} #{@tmp_src_dir}/bin/lkp split-job --compatible -o #{@tmp_dir} spec/split-job/compatible.yaml`
       new_yaml = 'compatible-test_1.yaml'
       # delete machine specific settings
       %w[testbox tbox_group local_run memory nr_cpu ssd_partitions hdd_partitions].each { |s| `sed -i '/#{s}:/d' #{@tmp_dir.path(new_yaml)}` }
