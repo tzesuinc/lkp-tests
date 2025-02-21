@@ -36,6 +36,7 @@ kernbench::
 kernel-selftests::
 ku-latency::
 kvm-kernel-boot-test::
+kvm-unit-tests-qemu::
 kvm-unit-tests::
 leaking-addresses::
 lib-micro::

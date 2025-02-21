@@ -28,6 +28,7 @@ igt::
 iozone::
 kbuild::
 ku-latency::
+kvm-unit-tests-qemu::
 kvm-unit-tests::
 leaking-addresses::
 lib-micro::
