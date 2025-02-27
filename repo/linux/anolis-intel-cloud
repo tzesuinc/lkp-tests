@@ -18,23 +18,27 @@ tests:
     downstream: anolis
     parameters:
       kconfig: x86_64-anolis-intel-cloud-devel-5.10
+      base_commit: v5.10.134
       mail_to:
       - aubrey.li@linux.intel.com
   - branch: devel-6.6
     downstream: anolis
     parameters:
       kconfig: x86_64-anolis-intel-cloud-devel-6.6
+      base_commit: v6.6.71
       mail_to:
       - aubrey.li@linux.intel.com
   - branch: intel-5.10-*
     downstream: anolis
     parameters:
       kconfig: x86_64-anolis-intel-cloud-intel-5.10
+      base_commit: v5.10.134
       mail_to:
       - aubrey.li@linux.intel.com
   - branch: intel-6.6-*
     downstream: anolis
     parameters:
       kconfig: x86_64-anolis-intel-cloud-intel-6.6
+      base_commit: v6.6.71
       mail_to:
       - aubrey.li@linux.intel.com
