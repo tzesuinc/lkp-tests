@@ -8,10 +8,10 @@ describe 'log_cmd' do
   let(:log_cmd) { "#{LKP_SRC}/bin/log_cmd " }
   before(:all) do
     @pwd = Dir.pwd
-    @tmp_dir = Dir.mktmpdir
-    FileUtils.chmod 'go+rwx', @tmp_dir
-    ENV['TMP_RESULT_ROOT'] = @tmp_dir
-    Dir.chdir(@tmp_dir)
+    @tmp_dir = LKP::TmpDir.new('log-cmd-spec-src-')
+    @tmp_dir.add_permission
+    ENV['TMP_RESULT_ROOT'] = @tmp_dir.to_s
+    Dir.chdir(@tmp_dir.to_s)
   end
 
   it 'creates multi dirs' do
@@ -57,7 +57,7 @@ describe 'log_cmd' do
   end
 
   after(:all) do
-    FileUtils.rm_rf(@tmp_dir)
+    @tmp_dir.cleanup!
     Dir.chdir(@pwd)
   end
 end
