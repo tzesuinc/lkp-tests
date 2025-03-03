@@ -668,7 +668,7 @@ module DataStore
 
     def collection
       c = Collection.new(table, axes)
-      c.set_date create_time
+      c.apply_date create_time
     end
 
     def delete
@@ -735,7 +735,7 @@ module DataStore
       self
     end
 
-    def set_date(date)
+    def apply_date(date)
       @date = date
       self
     end
