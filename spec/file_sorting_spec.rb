@@ -31,11 +31,11 @@ describe 'Directory File Sorting' do
   }
 
   describe 'File Sorting Tests' do
-    directories.each do |dir_name, config|  
-      context "in #{dir_name}" do           
+    directories.each do |dir_name, config|
+      context "in #{dir_name}" do
         let(:files) { filtered_files(config[:path], config[:filter]) }
 
-        it 'has sorted content and no duplicates in each file' do 
+        it 'has sorted content and no duplicates in each file' do
           files.each do |filename|
             file_path = File.join(config[:path], filename)
             next if File.directory?(file_path)
@@ -44,7 +44,7 @@ describe 'Directory File Sorting' do
             sorted_and_unique_content = sorted_file_content(file_path).uniq
 
             expect(content).to eq(sorted_and_unique_content),
-              "Content in #{file_path} is not sorted or unique."
+                               "Content in #{file_path} is not sorted or unique."
           end
         end
       end
