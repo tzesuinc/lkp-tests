@@ -6,22 +6,22 @@ require "#{LKP_SRC}/lib/job"
 
 describe 'filters/need_kconfig.rb' do
   before(:each) do
-    @tmp_dir = Dir.mktmpdir(nil, '/tmp')
-    FileUtils.chmod 'go+rwx', @tmp_dir
+    @tmp_dir = LKP::TmpDir.new('filter-need-kconfig-spec-src-')
+    @tmp_dir.add_permission
 
-    File.open(File.join(@tmp_dir, 'context.yaml'), 'w') do |f|
+    File.open(@tmp_dir.path('context.yaml'), 'w') do |f|
       f.write({ 'rc_tag' => 'v5.0-rc1', 'kconfig' => 'i386-randconfig' }.to_yaml)
     end
 
-    File.open(File.join(@tmp_dir, '.config'), 'w') do |f|
+    File.open(@tmp_dir.path('.config'), 'w') do |f|
       f.write("CONFIG_X=y\nCONFIG_Y=200\nCONFIG_Z1=m\nCONFIG_Z2=y\nCONFIG_H=0x1000000")
     end
 
-    allow(KernelTag).to receive(:kconfigs_yaml).and_return(File.join(@tmp_dir, 'kconfigs.yaml'))
+    allow(KernelTag).to receive(:kconfigs_yaml).and_return(@tmp_dir.path('kconfigs.yaml'))
   end
 
   after(:each) do
-    FileUtils.remove_entry @tmp_dir
+    @tmp_dir.cleanup!
   end
 
   def generate_kconfigs_yaml(kconfigs_kernel_versions)

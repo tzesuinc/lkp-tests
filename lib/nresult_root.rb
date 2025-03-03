@@ -370,9 +370,7 @@ class NMResultRootCollection
     self
   end
 
-  def set_date(date)
-    @date = date
-  end
+  attr_writer :date
 
   def each(&b)
     return enum_for(__method__) unless block_given?

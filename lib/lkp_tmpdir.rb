@@ -11,6 +11,10 @@ module LKP
       yield self if block_given?
     end
 
+    def add_permission
+      FileUtils.chmod 'go+rwx', @path
+    end
+
     def to_s
       @path
     end

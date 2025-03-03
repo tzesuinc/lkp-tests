@@ -5,16 +5,16 @@ require "#{LKP_SRC}/lib/job"
 
 describe 'filter/need_kernel_version.rb' do
   before(:each) do
-    @tmp_dir = Dir.mktmpdir(nil, '/tmp')
-    FileUtils.chmod 'go+rwx', @tmp_dir
+    @tmp_dir = LKP::TmpDir.new('filter-need-kernel-version-spec-src-')
+    @tmp_dir.add_permission
   end
 
   after(:each) do
-    FileUtils.remove_entry @tmp_dir
+    @tmp_dir.cleanup!
   end
 
   def generate_context(compiler, kernel_version)
-    dir = File.join(@tmp_dir, compiler)
+    dir = @tmp_dir.path(compiler)
     FileUtils.mkdir_p(dir)
     FileUtils.touch("#{dir}/vmlinuz")
     File.open(File.join(dir, 'context.yaml'), 'w') do |f|
