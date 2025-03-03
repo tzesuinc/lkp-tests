@@ -83,8 +83,7 @@ end
 class ResultRootCollection
   include Enumerable
 
-  attr_writer :date_glob
-  attr_writer :queue
+  attr_writer :date_glob, :queue
 
   def initialize(conditions = {})
     @conditions = conditions
@@ -353,7 +352,7 @@ def convert_all_mresult_root(date_from_in = nil, date_to_in = nil)
   date_to = date_of_time date_to_in
   n = 0
   while date <= date_to
-    rtc.set_date(date)
+    rtc.apply_date(date)
     rtc.each do |rt|
       n += 1
       _rt = rt._result_root
