@@ -37,7 +37,7 @@ RSpec.describe "Directory File Sorting" do
           next if File.directory?(file_path)
 
           content = File.readlines(file_path, chomp: true)
-          sorted_content = content.sort
+          sorted_content = `sort -f #{file_path}`.split("\n")
 
           expect(content).to eq(sorted_content),
             "Content in #{file_path} is not sorted. " \
