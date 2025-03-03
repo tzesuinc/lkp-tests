@@ -5,30 +5,8 @@ srhash = {}
 srmaxhash = {}
 phase = 'none'
 
-def handle_suspend_resume(line, srhash, cycle)
-  timestamp, step, id, stage = line.match(/^ *.* \[\d{3}\] .... *(\d{1,6}\.\d{6}): suspend_resume: (.*)\[(\d*)\] (.*)/).captures
-  return if step == 'timekeeping_freeze'
-
-  step = "#{step}_#{id}" if %w(CPU_ON CPU_OFF).include? step
-  k = "#{step}_#{cycle}"
-
-  if stage == 'begin'
-    srhash[k] = timestamp
-  else
-    cost = (timestamp.to_f - srhash[k].to_f) * 1000
-    srhash[k] = cost
-  end
-
-  case step
-  when 'suspend_enter'
-    srhash["suspend_overall_#{cycle}"] = timestamp if stage == 'begin'
-  when 'machine_suspend'
-    handle_machine_suspend(stage, timestamp, srhash, cycle)
-  when 'thaw_processes'
-    handle_thaw_processes(stage, timestamp, srhash, cycle)
-  when /^dpm_(.*)$/
-    handle_dpm(stage, $1)
-  end
+def handle_suspend_enter(stage, timestamp, srhash, cycle)
+  srhash["suspend_overall_#{cycle}"] = timestamp if stage == 'begin'
 end
 
 def handle_machine_suspend(stage, timestamp, srhash, cycle)
@@ -41,25 +19,66 @@ def handle_machine_suspend(stage, timestamp, srhash, cycle)
 end
 
 def handle_thaw_processes(stage, timestamp, srhash, cycle)
-  return unless stage == 'end'
+  if stage == 'end'
+    cost = (timestamp.to_f - srhash["resume_overall_#{cycle}"].to_f) * 1000
+    srhash["resume_overall_#{cycle}"] = cost.to_i
+    cycle += 1
+  end
+  cycle
+end
 
-  cost = (timestamp.to_f - srhash["resume_overall_#{cycle}"].to_f) * 1000
-  srhash["resume_overall_#{cycle}"] = cost.to_i
+def handle_dpm(stage, phase)
+  stage == 'begin' ? phase : 'none'
 end
 
 while (line = $stdin.gets)
   line.chomp!
   case line
   when /^ *.* \[\d{3}\] .... *(\d{1,6}\.\d{6}): suspend_resume: (.*)\[(\d*)\] (.*)/
-    handle_suspend_resume(line, srhash, cycle)
+    timestamp = $1
+    step = $2
+    id = $3
+    stage = $4
+
+    next if step == 'timekeeping_freeze'
+
+    # use CPU_ON/OFF + cpu_id as the hash key to avoid bogus duplicate
+    step = "#{step}_#{id}" if %w(CPU_ON CPU_OFF).include? step
+
+    k = "#{step}_#{cycle}"
+
+    if stage == 'begin'
+      srhash[k] = timestamp
+    else
+      cost = (timestamp.to_f - srhash[k].to_f) * 1000
+      srhash[k] = cost
+    end
+
+    case step
+    when 'suspend_enter'
+      handle_suspend_enter(stage, timestamp, srhash, cycle)
+    when 'machine_suspend'
+      handle_machine_suspend(stage, timestamp, srhash, cycle)
+    when 'thaw_processes'
+      cycle = handle_thaw_processes(stage, timestamp, srhash, cycle)
+    when /^dpm_(.*)$/
+      phase = handle_dpm(stage, $1)
+    end
   when /^ *.* \[\d{3}\] .... *(\d{1,6}\.\d{6}): device_pm_callback_start: (.*) (.*), parent: .*$/
-    timestamp, bus, device = line.match(/^ *.* \[\d{3}\] .... *(\d{1,6}\.\d{6}): device_pm_callback_start: (.*) (.*), parent: .*$/).captures
+    timestamp = $1
+    bus = $2
+    device = $3
     id = "#{bus}_#{device}".tr(' ', '_')
     k = "#{id}_#{phase}_#{cycle}"
-    srhash[k] = srhash.key?(k) ? -1 : timestamp
-  when /^ *.* \[\d{3}\] .... *(\d{1,6}\.\d{6}): device_pm_callback_end: (.*) (.*), err=(\d?)/
-    timestamp, bus, device = line.match(/^ *.* \[\d{3}\] .... *(\d{1,6}\.\d{6}): device_pm_callback_end: (.*) (.*), err=(\d?)$/).captures
-    device.strip!
+    srhash[k] = if srhash.key?(k)
+                  -1
+                else
+                  timestamp
+                end
+  when /^ *.* \[\d{3}\] .... *(\d{1,6}\.\d{6}): device_pm_callback_end: (.*) (.*), err=(\d?)$/
+    timestamp = $1
+    bus = $2
+    device = $3.strip
     id = "#{bus}_#{device}".tr(' ', '_')
     kmax = "#{id}_#{phase}"
     k = "#{kmax}_#{cycle}"
