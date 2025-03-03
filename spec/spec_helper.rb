@@ -9,6 +9,6 @@ if ENV['GENERATE_COVERAGE'] == 'true'
   SimpleCov.start
 end
 
-LKP_SRC ||= ENV['LKP_SRC'] || File.expand_path(File.join(File.dirname(__FILE__), '..'))
+LKP_SRC ||= ENV['LKP_SRC']
 
 require "#{LKP_SRC}/lib/lkp_tmpdir"
