@@ -6,7 +6,7 @@ command="$1"
 shift
 
 case "$command" in
-	build|init|run|test)
+	build|init|install|run|test)
 		$LKP_SRC/docker/$command "$@"
 		;;
 	*)

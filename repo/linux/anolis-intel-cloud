@@ -1,0 +1,44 @@
+url: https://gitee.com/anolis/intel-cloud-kernel.git
+arch_denylist: .*
+arch_allowlist: x86_64
+compiler: gcc
+randconfig_denylist: .*
+randconfig_allowlist: ^$
+test_old_branches: .*
+no_merge_branch: .*
+branch_allowlist: devel-5.10|devel-6.6|intel-5.10-.*|intel-6.6-.*
+branch_denylist: .*
+report_picked_commit: .*
+private_report_branch: .*
+notify_build_success_branch: .*
+mail_to:
+- aubrey.li@linux.intel.com
+tests:
+  - branch: devel-5.10
+    downstream: anolis
+    parameters:
+      kconfig: x86_64-anolis-intel-cloud-devel-5.10
+      base_commit: v5.10.134
+      mail_to:
+      - aubrey.li@linux.intel.com
+  - branch: devel-6.6
+    downstream: anolis
+    parameters:
+      kconfig: x86_64-anolis-intel-cloud-devel-6.6
+      base_commit: v6.6.71
+      mail_to:
+      - aubrey.li@linux.intel.com
+  - branch: intel-5.10-*
+    downstream: anolis
+    parameters:
+      kconfig: x86_64-anolis-intel-cloud-devel-5.10
+      base_commit: v5.10.134
+      mail_to:
+      - aubrey.li@linux.intel.com
+  - branch: intel-6.6-*
+    downstream: anolis
+    parameters:
+      kconfig: x86_64-anolis-intel-cloud-devel-6.6
+      base_commit: v6.6.71
+      mail_to:
+      - aubrey.li@linux.intel.com
