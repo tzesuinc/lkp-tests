@@ -379,7 +379,8 @@ class NMResultRootCollection
 
     table_each = lambda do |tbl|
       col = DataStore::Collection.new tbl, @conditions
-      col.set_date(@date).set_exact(@exact)
+      col.date = @date
+      col.set_exact(@exact)
       col.each(&b)
     end
 
