@@ -12,39 +12,39 @@ describe 'Directory File Sorting' do
   end
 
   directories = {
-    'dir1' => {
+    'adaptation' => {
       path: "#{LKP_SRC}/distro/adaptation",
       filter: ->(filename) { filename != 'README.md' }
     },
-    'dir2' => {
+    'adaptation_pkg' => {
       path: "#{LKP_SRC}/distro/adaptation-pkg",
       filter: nil
     },
-    'dir3' => {
+    'programs' => {
       path: "#{LKP_SRC}/programs",
       filter: ->(filename) { filename.start_with?('depends') }
     },
-    'dir4' => {
+    'etc' => {
       path: "#{LKP_SRC}/etc",
       filter: ->(filename) { filename != 'makepkg.conf' }
     }
   }
 
   describe 'File Sorting Tests' do
-    directories.each do |dir_name, config|  # dir_name = dir1, dir2, dir3, dir4 | config = { path: ..., filter: ... }
-      context "in #{dir_name}" do           # RSpec test group
+    directories.each do |dir_name, config|  
+      context "in #{dir_name}" do           
         let(:files) { filtered_files(config[:path], config[:filter]) }
 
-        it 'has sorted content in each file' do # single test case
+        it 'has sorted content and no duplicates in each file' do 
           files.each do |filename|
             file_path = File.join(config[:path], filename)
             next if File.directory?(file_path)
 
             content = File.readlines(file_path, chomp: true)
-            sorted_content = sorted_file_content(file_path)
+            sorted_and_unique_content = sorted_file_content(file_path).uniq
 
-            expect(content).to eq(sorted_content),
-                               "Content in #{file_path} is not sorted. "
+            expect(content).to eq(sorted_and_unique_content),
+              "Content in #{file_path} is not sorted or unique."
           end
         end
       end
