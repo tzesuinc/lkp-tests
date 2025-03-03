@@ -2,46 +2,52 @@
 require 'spec_helper'
 
 RSpec.describe "Directory File Sorting" do
-  # Define directories and their specific conditions
-  directories = {
-    "dir1" => {
-      path: "#{LKP_SRC}/distro/adaptation", # Replace with actual path
-      filter: ->(filename) { filename != "README.md" } # Exclude README.md
+  def sorted_file_content(file_path)
+    `sort -f #{file_path}`.split("\n")    # Need to be similar to shell command
+  end
+
+  def filtered_files(path, filter)
+    Dir.entries(path)
+       .reject { |f| File.directory?(File.join(path, f)) || f.start_with?('.') } # Exclude directories and hidden files
+       .select { |f| filter.nil? || filter.call(f) }
+  end
+
+  directories = {         # Hash
+    "dir1" => {           # Nested Hash
+      path: "#{LKP_SRC}/distro/adaptation",
+      filter: ->(filename) { filename != "README.md" }
     },
     "dir2" => { 
       path: "#{LKP_SRC}/distro/adaptation-pkg", 
       filter: nil 
     },   
     "dir3" => {
-      path: "#{LKP_SRC}/programs", # Replace with actual path
-      filter: ->(filename) { filename.start_with?("depends") } # Only files starting with "depends"
+      path: "#{LKP_SRC}/programs",
+      filter: ->(filename) { filename.start_with?("depends") }
     },
     "dir4" => {
-      path: "#{LKP_SRC}/etc", # Replace with actual path
-      filter: ->(filename) { filename != "makepkg.conf" } # Exclude makepkg.conf
+      path: "#{LKP_SRC}/etc",
+      filter: ->(filename) { filename != "makepkg.conf" }
     },
   }
 
-  directories.each do |dir_name, config|
-    context "in #{dir_name}" do
-      let(:files) do
-        Dir.entries(config[:path])
-           .reject { |f| File.directory?(File.join(config[:path], f)) } # Exclude directories
-           .reject { |f| f.start_with?('.') } # Exclude hidden files
-           .select { |f| config[:filter].nil? || config[:filter].call(f) } # Apply custom filter if present
-      end
+  describe "File Sorting Tests" do
+    directories.each do |dir_name, config|  # dir_name = dir1, dir2, dir3, dir4 | config = { path: ..., filter: ... }
+      context "in #{dir_name}" do           # RSpec test group
+        let(:files) { filtered_files(config[:path], config[:filter]) }
 
-      it "has sorted content in each file" do
-        files.each do |filename|
-          file_path = File.join(config[:path], filename)
-          next if File.directory?(file_path)
+        it "has sorted content in each file" do   # single test case
+          files.each do |filename|
+            file_path = File.join(config[:path], filename)
+            next if File.directory?(file_path)
 
-          content = File.readlines(file_path, chomp: true)
-          sorted_content = `sort -f #{file_path}`.split("\n")
+            content = File.readlines(file_path, chomp: true)
+            sorted_content = sorted_file_content(file_path)
 
-          expect(content).to eq(sorted_content),
-            "Content in #{file_path} is not sorted. " \
-            "Expected #{sorted_content}, but got #{content}"
+            expect(content).to eq(sorted_content),
+              "Content in #{file_path} is not sorted. " \
+              "Expected #{sorted_content}, but got #{content}"
+          end
         end
       end
     end
