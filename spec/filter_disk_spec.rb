@@ -20,7 +20,7 @@ describe 'filter/disk' do
     File.open(@test_yaml_file, 'w') do |f|
       f.write(contents.to_yaml)
     end
-  
+
     Job.open(@test_yaml_file)
   end
 
