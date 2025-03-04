@@ -1,16 +1,16 @@
 require 'spec_helper'
 
+def sorted_file_content(file_path)
+  `sort -f #{file_path}`.split("\n")
+end
+
+def filtered_files(path, filter)
+  Dir.entries(path)
+     .reject { |f| File.directory?(File.join(path, f)) || f.start_with?('.') }
+     .select { |f| filter.nil? || filter.call(f) }
+end
+
 describe 'Directory File Sorting' do
-  def sorted_file_content(file_path)
-    `sort -f #{file_path}`.split("\n")
-  end
-
-  def filtered_files(path, filter)
-    Dir.entries(path)
-       .reject { |f| File.directory?(File.join(path, f)) || f.start_with?('.') }
-       .select { |f| filter.nil? || filter.call(f) }
-  end
-
   directories = {
     'adaptation' => {
       path: "#{LKP_SRC}/distro/adaptation",
@@ -30,22 +30,18 @@ describe 'Directory File Sorting' do
     }
   }
 
-  describe 'File Sorting Tests' do
-    directories.each do |dir_name, config|
-      context "in #{dir_name}" do
-        let(:files) { filtered_files(config[:path], config[:filter]) }
+  directories.each do |dir_name, config|
+    context "in #{dir_name}" do
+      filtered_files(config[:path], config[:filter]).each do |filename|
+        file_path = File.join(config[:path], filename)
+        next if File.directory?(file_path)
 
-        it 'has sorted content and no duplicates in each file' do
-          files.each do |filename|
-            file_path = File.join(config[:path], filename)
-            next if File.directory?(file_path)
+        it "#{file_path} has sorted content and no duplicates" do
+          content = File.readlines(file_path)
+                        .map(&:chomp)
+          sorted_and_unique_content = sorted_file_content(file_path).uniq
 
-            content = File.readlines(file_path, chomp: true)
-            sorted_and_unique_content = sorted_file_content(file_path).uniq
-
-            expect(content).to eq(sorted_and_unique_content),
-                               "Content in #{file_path} is not sorted or unique."
-          end
+          expect(content).to eq(sorted_and_unique_content)
         end
       end
     end
