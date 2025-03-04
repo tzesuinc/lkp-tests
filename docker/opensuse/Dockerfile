@@ -21,7 +21,6 @@ RUN zypper refresh && \
     # procps installs vmstat, sysctl, etc to partially persistent commonly used dependencies
     procps \
     perf \
-    stress-ng \
     hostname && \
     make install && \
     lkp install
