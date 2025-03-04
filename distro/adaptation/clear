@@ -7,17 +7,17 @@ apache2: httpd
 apt-file:
 at: os-cloudguest-azure
 attr: dev-utils
-autoconf: c-basic
 autoconf-archive: c-basic
+autoconf: c-basic
 automake: c-basic
 autopoint: os-core-dev
 autotools-dev: dev-utils-dev
 bash-completion: os-core
 bc: bc
 bind9:
-binutils: c-basic
 binutils-dev: c-basic
 binutils/stable: c-basic
+binutils: c-basic
 bison: c-basic
 blktrace: performance-tools
 boxes:
@@ -29,18 +29,18 @@ build-essential: c-basic
 bzip2: os-core-update
 ca-certificates: dev-utils-dev
 cgroup-bin: os-core-dev
-cgroupfs-mount:
 cgroup-tools:
+cgroupfs-mount:
 cifs-utils: storage-utils
-clang: dev-utils
-clang-3.9: dev-utils
 clang-3.9-dev: dev-utils-dev
+clang-3.9: dev-utils
 clang-7: dev-utils
+clang: dev-utils
 cmake: dev-utils
 cpio: dev-utils
-cpp: dev-utils
 cpp-6: dev-utils
 cpp-7: dev-utils
+cpp: dev-utils
 cpuid: sysadmin-basic
 crda: dev-utils
 cron:
@@ -73,8 +73,8 @@ fakeroot: os-testsuite-0day
 file: os-core-dev
 fio: fio
 flex: c-basic
-fontconfig: dev-utils-dev
 fontconfig-config: dev-utils-dev
+fontconfig: dev-utils-dev
 fonts-dejavu-core:
 freeglut3: qt-basic-dev
 freeipmi-bmc-watchdog: sysadmin-hostmgmt
@@ -85,16 +85,16 @@ fuse: storage-utils-dev
 g++-6: c-basic
 g++: c-basic
 gawk: os-core
-gcc-6: c-basic
 gcc-6-multilib: dev-utils-dev
+gcc-6: c-basic
 gcc-7: c-extras-gcc7
-gcc: c-basic
 gcc-multilib: dev-utils-dev
+gcc: c-basic
 gdb: gdb
 gengetopt:
 genisoimage:
-gettext: os-core-dev
 gettext-base: os-core-dev
+gettext: os-core-dev
 gfortran: os-core-dev
 git: git
 glibc-doc:
@@ -114,14 +114,14 @@ i2c-tools: os-testsuite-0day
 iasl: os-testsuite-0day
 indent: c-basic
 info2man:
-initramfs-tools: sysadmin-basic
 initramfs-tools-core:i386: sysadmin-basic
+initramfs-tools: sysadmin-basic
 inotify-tools: inotify-tools
 install-info: texinfo
 intltool-debian: os-testsuite-0day
 inxi:
-iperf: sysadmin-basic
 iperf3: sysadmin-basic
+iperf: sysadmin-basic
 ipmitool: sysadmin-basic
 iproute2: network-basic
 iw: network-basic
@@ -133,61 +133,60 @@ klibc-utils:i386:
 kmod: os-core
 less: os-core
 lftp:
-libmariadbclient18:
-libarchive-dev: os-core-update-dev
 libacl1-dev: os-core
-libaio1: os-core-dev
 libaio-dev: storage-utils-dev
+libaio1: os-core-dev
 libann0:
 libapache2-mpm-itk:
+libapparmor-dev:
+libapparmor1:
 libarchive-dev: os-core-update-dev
 libarchive-zip-perl:
 libasan2: os-core-dev
 libasan3: os-core-dev
-libasound2: storage-utils-dev
 libasound2-data: storage-utils-dev
 libasound2-dev: storage-utils-dev
+libasound2: storage-utils-dev
 libatomic1: os-core-dev
-libattr1: os-core-dev
 libattr1-dev: os-core-dev
+libattr1: os-core-dev
 libaudit-dev: dev-utils-dev
 libaudit: dev-utils-dev
 libbabeltrace-dev:
-libgtk2.0-dev:
-libperl-dev: perl-basic-dev
-libslang2-dev:
 libblas3: big-data-basic
 libblkid-dev: os-core-dev
 libboost-filesystem-dev:
-libbz2-dev: os-core-dev
+libbsd-dev:
+libbsd0:
 libbz2-1.0:
-libc6: dev-utils-dev
+libbz2-dev: os-core-dev
+libc-bin/unstable: dev-utils-dev
+libc-bin: dev-utils-dev
+libc-dev-bin: dev-utils-dev
+libc-l10n: os-core-dev
 libc6-dbg:
+libc6-dev-i386/unstable: dev-utils-dev
+libc6-dev-x32/unstable: dev-utils-dev
+libc6-dev-x32: dev-utils-dev
+libc6-dev/unstable: dev-utils-dev
 libc6-dev: dev-utils-dev
 libc6-dev:i386: dev-utils-dev
-libc6-dev-i386/unstable: dev-utils-dev
-libc6-dev/unstable: dev-utils-dev
-libc6-dev-x32: dev-utils-dev
-libc6-dev-x32/unstable: dev-utils-dev
 libc6-i386: dev-utils-dev
 libc6/unstable: dev-utils-dev
-libcairo2:dev-utils-dev
+libc6: dev-utils-dev
 libcairo2-dev: dev-utils-dev
-libcap2: dev-utils-dev
-libcap2-bin: sysadmin-basic
+libcairo2:dev-utils-dev
 libcap-dev: dev-utils-dev
 libcap-ng-dev: dev-utils-dev
-libc-bin: dev-utils-dev
-libc-bin/unstable: dev-utils-dev
+libcap2-bin: sysadmin-basic
+libcap2: dev-utils-dev
 libcc1-0: os-core-dev
-libc-dev-bin: dev-utils-dev
 libcdt5: os-core-dev
 libcgraph6: os-core-dev
-libcilkrts5:
 libcilkrts5/unstable:
-libc-l10n: os-core-dev
-libclang1-3.9: dev-utils-dev
+libcilkrts5:
 libclang-dev: dev-utils-dev
+libclang1-3.9: dev-utils-dev
 libconfig-dev: devpkg-libconfig
 libcroco3: os-core-dev
 libdatrie1: storage-utils-dev
@@ -196,21 +195,21 @@ libdbi-perl: perl-basic
 libdbus-1-dev: os-core
 libdpkg-perl:
 libdrm-amdgpu1:
-libdrm-dev: libva-utils
 libdrm-dev/unstable: libva-utils
+libdrm-dev: libva-utils
 libdw-dev: dev-utils-dev
 libedit-dev:
 libegl1-mesa-dev: dev-utils-dev
-libelf1: dev-utils-dev
 libelf-dev: dev-utils-dev
+libelf1: dev-utils-dev
 libevent-2.0-5: tmux
 libevent-2.1-6: tmux
 libevent-dev: dev-utils-dev
 libexpat1-dev:
-libfabric1:
 libfabric-dev:
-libfdt1: dtc
+libfabric1:
 libfdt-dev: dtc
+libfdt1: dtc
 libffi-dev: dev-utils-dev
 libfftw3-bin: qt-basic-dev
 libfftw3-dev: qt-basic-dev
@@ -223,15 +222,17 @@ libfontconfig1: dev-utils-dev
 libfreetype6: dev-utils-dev
 libfuse-dev: storage-utils-dev
 libgbm-dev: dev-utils-dev
-libgcc1:
-libgcc-dev: dev-utils-dev
-libgcc-7-dev: dev-utils-dev
 libgcc-7-dev/unstable: dev-utils-dev
+libgcc-7-dev: dev-utils-dev
+libgcc-dev: dev-utils-dev
+libgcc1:
+libgcrypt-dev: devpkg-libgcrypt
+libgcrypt20: devpkg-libgcrypt
 libgd3: stream-server
-libgdbm3: sysadmin-basic-dev
 libgdbm-dev: sysadmin-basic-dev
-libgflags2v5:
+libgdbm3: sysadmin-basic-dev
 libgflags-dev:
+libgflags2v5:
 libgl1-mesa-dev: dev-utils-dev
 libgles2-mesa: dev-utils-dev
 libglib2.0-0: os-core-dev
@@ -239,130 +240,136 @@ libglib2.0-dev: os-core-dev
 libglu-dev: qt-basic-dev
 libgmp-dev: os-core-dev
 libgomp1: os-core-dev
-libgpm2: os-core-dev
 libgpm-dev: os-core-dev
+libgpm2: os-core-dev
 libgraphite2-3: os-testsuite-0day
+libgtk2.0-dev:
 libgts-0.7-5:
 libgvc6: os-core-dev
 libgvpr2: os-core-dev
 libharfbuzz0b: dev-utils-dev
-libhugetlbfs:
 libhugetlbfs-bin:
 libhugetlbfs-dev:
+libhugetlbfs:
 libhwloc-dev: dev-utils-dev
 libiberty-dev: c-basic-legacy
-libibverbs1: storage-utils
 libibverbs-dev: storage-utils-dev
+libibverbs1: storage-utils
 libice6: os-core-dev
 libicu: dev-utils-dev
 libipa-hbac0:
+libipc-run-perl: perl-extras
+libipsec-mb-dev:
+libipsec-mb:
 libisl15:
 libitm1: os-core-dev
 libjbig0:
-libjpeg62-turbo: dev-utils-dev
 libjpeg-dev: dev-utils-dev
+libjpeg62-turbo: dev-utils-dev
 libjson-c-dev: os-core-dev
-libklibc-dev: dev-utils-dev
-libkmod2: os-core-dev
-libkmod-dev: os-core-dev
-libkeyutils1: os-core-dev
 libkeyutils-dev: os-core-dev
+libkeyutils1: os-core-dev
+libklibc-dev: dev-utils-dev
+libkmod-dev: os-core-dev
+libkmod2: os-core-dev
 libldb1: storage-utils
 libllvm3.9: os-testsuite-0day
-liblsan0: os-core-dev
 liblsan0/unstable: os-core-dev
+liblsan0: os-core-dev
 libltdl7: os-core-dev
-liblzma-dev: dev-utils-dev
 liblz4-1:
 liblz4-dev:
-libmagic1: os-core-dev
+liblzma-dev: dev-utils-dev
 libmagic-mgc: os-core-dev
+libmagic1: os-core-dev
 libmariadbclient-dev: os-testsuite-0day
+libmariadbclient18:
 libmodule-build-perl:
 libmount-dev: os-core-dev
 libmpc3: os-core-dev
 libmpfr6:
-libmpx2: dev-utils-dev
 libmpx2/unstable: dev-utils-dev
+libmpx2: dev-utils-dev
 libncurses5-dev: os-core-dev
 libncursesw5-dev: os-core-dev
 libnl-3-dev: storage-utils
 libnl-genl-3-dev: storage-utils
 libnl-route-3-dev: network-basic-dev
-libnpth0: storage-utils-dev
 libnpth0-dev: storage-utils-dev
+libnpth0: storage-utils-dev
 libnss-sss: os-core-dev
-libnuma1: dev-utils-dev
 libnuma-dev: dev-utils-dev
+libnuma1: dev-utils-dev
 libobjc-7-dev/unstable:
-liboop4:
 liboop-dev:
+liboop4:
 libopencryptoki0:
-libopenmpi2: dev-utils-dev
 libopenmpi-dev: dev-utils-dev
+libopenmpi2: dev-utils-dev
 libpango-1.0-0: storage-utils-dev
 libpangocairo-1.0-0: storage-utils-dev
 libpangoft2-1.0-0: storage-utils-dev
 libpathplan4: os-core-dev
-libpcap0.8-dev: network-basic-dev
 libpcap-dev: network-basic-dev
+libpcap0.8-dev: network-basic-dev
+libpci-dev: sysadmin-basic-dev
 libpci3: sysadmin-basic
 libpciaccess-dev: dev-utils-dev
-libpci-dev: sysadmin-basic-dev
+libperl-dev: perl-basic-dev
 libperl5: perl-basic
-libipc-run-perl: perl-extras
 libpipeline1: dev-utils-dev
 libpixman-1-0: dev-utils-dev
 libpixman-1-dev: dev-utils-dev
-libpng16-16: dev-utils-dev
 libpng-dev: dev-utils-dev
-libpopt0: dev-utils
+libpng16-16: dev-utils-dev
 libpopt-dev: dev-utils
+libpopt0: dev-utils
 libprocps-dev: os-core-dev
 libprotobuf-dev: network-basic-dev
-libquadmath0: os-core-dev
 libquadmath0/unstable: os-core-dev
-librdmacm1: network-basic
+libquadmath0: os-core-dev
 librdmacm-dev: network-basic-dev
-libreadline5: os-core
+librdmacm1: network-basic
 libreadline-dev: os-core-dev
-libsamplerate0: qt-basic-dev
+libreadline5: os-core
 libsamplerate0-dev: qt-basic-dev
-libsctp1: dev-utils-dev
+libsamplerate0: qt-basic-dev
 libsctp-dev: dev-utils-dev
+libsctp1: dev-utils-dev
 libsdl1.2debian: stream-server
 libselinux1:
+libslang2-dev:
 libsm6: os-core-dev
 libsmbclient: os-core-dev
-libsnappy1v5:
 libsnappy-dev:
+libsnappy1v5:
 libsqlite3-dev: linux-tools
 libssl-dev: os-core
-libssl: os-core
 libssl-dev: os-core-update
+libssl: os-core
 libsss-idmap0:
 libsss-simpleifp0:
 libstdc++-6-dev: os-core-dev
-libstdc++6/unstable: os-core
 libstdc++-7-dev/unstable: os-core-dev
-libthai0: storage-utils-dev
+libstdc++6/unstable: os-core
 libthai-data: weston-extras
+libthai0: storage-utils-dev
 libtiff5: storage-utils-dev
 libtimedate-perl: perl-extras
 libtinfo-dev: os-core-dev
-libtirpc: storage-utils-dev
 libtirpc-dev: storage-utils-dev
-libtool: dev-utils-dev
+libtirpc: storage-utils-dev
 libtool-bin: os-core-dev
-libtsan0: os-core-dev
+libtool: dev-utils-dev
 libtsan0/unstable: os-core-dev
-libubsan0: os-core-dev
+libtsan0: os-core-dev
 libubsan0/unstable: os-core-dev
-libudev1: os-core-dev
+libubsan0: os-core-dev
 libudev-dev: os-core-dev
+libudev1: os-core-dev
 libunistring0: os-core-dev
-libunwind8: os-core-dev
 libunwind-dev: dev-utils-dev
+libunwind8: os-core-dev
 libuuid1: os-core-dev
 libuv1-dev:
 libwaffle-dev:
@@ -374,16 +381,16 @@ libx11-dev: os-core-dev
 libx11-xcb-dev: os-core-dev
 libxau6: libX11client
 libxaw7: os-testsuite-0day
-libxcb1: os-core-dev
 libxcb-render0: os-core-dev
 libxcb-shm0: os-core-dev
+libxcb1: os-core-dev
 libxdmcp6: os-core-dev
 libxdot4: os-core-dev
 libxext6: os-core-dev
 libxkbcommon-dev: qt-basic-dev
-libxml2: dev-utils
 libxml2-dev: dev-utils-dev
 libxml2-utils: dev-utils
+libxml2: dev-utils
 libxmu6: gimp
 libxpm4: texlive
 libxrender1: dev-utils-dev
@@ -393,13 +400,13 @@ libzmq3-dev:
 libzmq5: software-testing
 libzstd-dev:
 linux-base: linux-tools
+linux-libc-dev/unstable: dev-utils-dev
 linux-libc-dev: dev-utils-dev
 linux-libc-dev:i386: dev-utils-dev
-linux-libc-dev/unstable: dev-utils-dev
 linux-perf: linux-tools
 lksctp-tools:
-llvm-3.9: dev-utils
 llvm-3.9-dev: dev-utils-dev
+llvm-3.9: dev-utils
 llvm-7: dev-utils
 llvm-dev: dev-utils-dev
 locales: sysadmin-basic
@@ -410,8 +417,8 @@ lvm2: storage-utils
 lxc:
 m4: os-core-dev
 make: c-basic
-man: sysadmin-basic
 man-db: sysadmin-basic
+man: sysadmin-basic
 manpages-dev: sysadmin-basic
 maven: dev-utils-dev
 mcelog: kernel-lts
@@ -427,13 +434,13 @@ nbd-client:
 nbd-server:
 ncurses-bin: sysadmin-basic
 needrestart:
+net-tools: network-basic
 netcat-openbsd: network-basic
 netpipe-lam:
 netpipe-mpich2:
 netpipe-openmpi:
 netpipe-pvm:
 netpipe-tcp:
-net-tools: network-basic
 nfs-common: storage-utils
 nfs-kernel-server: storage-utils
 nilfs-tools:
@@ -441,8 +448,8 @@ nscd:
 ntpdate:
 numactl: sysadmin-basic
 nvme-cli: storage-utils
-ocfs2-tools:
 ocfs2-tools-dev:
+ocfs2-tools:
 openbsd-inetd:
 opencryptoki:
 openjdk: java-runtime
@@ -452,11 +459,12 @@ pandoc: os-testsuite-0day
 parallel: sysadmin-basic
 parted: storage-utils
 patch: patch
+pax:
 pbzip2: os-testsuite-phoronix
 pciutils: sysadmin-basic
-perl: perl-basic
 perl-base: perl-basic
 perl-modules-5: perl-basic
+perl: perl-basic
 phoronix-test-suite: os-testsuite-phoronix
 php-cli: php-basic
 php-xml: php-basic
@@ -466,22 +474,14 @@ pkg-config: c-basic
 plzip:
 po-debconf:
 postfix:
-postgresql: database-basic
 postgresql-contrib: database-basic
+postgresql: database-basic
 postmark: mail-utils
 procps: os-core
 protobuf-compiler: sysadmin-basic-dev
 psmisc: os-core
 pulseaudio: qt-basic-dev
 pxz:
-python: python-basic
-python2.7: python2-basic
-python3: python3-basic
-python3-colorama: python-extras
-python3-mako: python-extras
-python3-markupsafe: python-extras
-python3-numpy: python-extras
-python3-six: python-extras
 python-configparser: python-basic-dev
 python-crypto: python-basic-dev
 python-csvkit:
@@ -500,9 +500,17 @@ python-simplejson: python-extras
 python-six: python2-basic
 python-sss:
 python-wheel: python2-basic
-qemu: kvm-host
+python2.7: python2-basic
+python3-colorama: python-extras
+python3-mako: python-extras
+python3-markupsafe: python-extras
+python3-numpy: python-extras
+python3-six: python-extras
+python3: python3-basic
+python: python-basic
 qemu-system-x86: kvm-host
 qemu-utils: kvm-host
+qemu: kvm-host
 quota:
 reiserfsprogs:
 rpcbind:storage-utils
@@ -510,7 +518,6 @@ rstatd:
 rsync: dev-utils
 rsyslog:
 rt-tests: performance-tools
-ruby2.3-dev: ruby-basic
 ruby-bunny: os-testsuite-0day
 ruby-colorize: os-testsuite-0day
 ruby-dev: ruby-basic
@@ -518,11 +525,12 @@ ruby-facets: os-testsuite-0day
 ruby-git: os-testsuite-0day
 ruby-gnuplot: os-testsuite-0day
 ruby-mail: os-testsuite-0day
-ruby: ruby-basic
 ruby-serialport: os-testsuite-0day
 ruby-sinatra: os-testsuite-0day
 ruby-term-ansicolor: os-testsuite-0day
 ruby-text-table: os-testsuite-0day
+ruby2.3-dev: ruby-basic
+ruby: ruby-basic
 runc: cloud-control
 runit:
 rusers:
@@ -537,17 +545,17 @@ sgml-data:
 siege: performance-tools
 socat: sysadmin-basic
 ssh: openssh-server
-sssd:
-sssd-ad:
 sssd-ad-common:
+sssd-ad:
 sssd-common:
 sssd-dbus:
 sssd-ipa:
-sssd-krb5:
 sssd-krb5-common:
+sssd-krb5:
 sssd-ldap:
 sssd-proxy:
 sssd-tools:
+sssd:
 strace: sysadmin-basic
 stress-ng: dev-utils
 sudo: sudo
@@ -590,15 +598,6 @@ xmlto: os-core-dev
 xorg: desktop
 xsltproc: dev-utils
 xutils-dev: os-clr-on-clr-dev
-zlib1g: os-core-dev
 zlib1g-dev: os-core-dev
+zlib1g: os-core-dev
 zsh: zsh
-libapparmor1:
-libapparmor-dev:
-libbsd0:
-libbsd-dev:
-libgcrypt20: devpkg-libgcrypt
-libgcrypt-dev: devpkg-libgcrypt
-libipsec-mb:
-libipsec-mb-dev:
-pax:

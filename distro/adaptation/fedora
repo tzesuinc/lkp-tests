@@ -90,8 +90,8 @@ libc6: glibc.x86_64
 libcairo2-dev: cairo-devel
 libcairo2:
 libcap-dev: libcap-devel
-libcap-ng0:
 libcap-ng-dev: libcap-ng-devel
+libcap-ng0:
 libcap2-bin: libcap
 libcapstone-dev: capstone-devel
 libcapstone4: capstone
@@ -124,8 +124,8 @@ libevent-dev: libevent-devel
 libevent-openssl-2:
 libexpat1-dev: expat-devel
 libfabric-dev: libfabric-devel
-libfdt1:
 libfdt-dev: libfdt-devel
+libfdt1:
 libffi-dev: libffi-devel
 libfile-stripnondeterminism-perl:
 libfuse-dev: fuse-devel
@@ -205,12 +205,12 @@ libmnl-dev: libmnl-devel
 libmount-dev: libmount-devel
 libmpfr-dev: mpfr-devel
 libmpfr6: mpfr
-libncurses5: ncurses
 libncurses5-dev: ncurses-devel
+libncurses5: ncurses
 libncursesw5-dev:
 libndctl-dev: ndctl-devel
-libnfs13: libnfs
 libnfs-dev: libnfs-devel
+libnfs13: libnfs
 libnl-3-200: libnl3
 libnl-3-dev: libnl3-devel
 libnl-cli-3-200: libnl3-cli
@@ -281,16 +281,16 @@ libselinux1-dev: libselinux-devel
 libselinux1: libselinux
 libsigsegv2:
 libslang2-dev: slang-devel
-libslirp0: libslirp
 libslirp-dev: libslirp-devel
+libslirp0: libslirp
 libsmbclient-dev:
 libsnappy-dev: snappy-devel
 libsnappy1v5: snappy
 libsndio7.0:
 libsodium-dev:
 libspice-protocol-dev: spice-protocol
-libspice-server1: spice-server
 libspice-server-dev: spice-server-devel
+libspice-server1: spice-server
 libsqlite3-0: libsqlite3x
 libsqlite3-dev: libsqlite3x-devel
 libssh-4: libssh
@@ -312,8 +312,8 @@ libunwind-dev: libunwind-devel
 liburcu-dev: userspace-rcu-devel
 liburcu: userspace-rcu
 liburing-dev: liburing-devel
-libusb-1.0-0: libusb1
 libusb-1.0-0-dev: libusb-compat-0.1-devel
+libusb-1.0-0: libusb1
 libuuid1: libuuid
 libuv1-dev: libuv-devel
 libv4l-dev: libv4l-devel
