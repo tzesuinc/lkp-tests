@@ -1,15 +1,15 @@
 acpica-tools: acpica
 acpidump: acpica
-build-essential:
 binutils-dev: binutils-devel
+build-essential:
 default-jdk: java-1_8_0-openjdk-devel
 elfutils-devel: elfutils
 iproute: iproute2
 libacl1-dev: libacl-devel
 libaio-dev: libaio-devel
-libattr1-dev: libattr-devel
 libapparmor-dev: libapparmor-devel
 libarchive-tools: libarchive13 bsdtar
+libattr1-dev: libattr-devel
 libaudit-dev: audit-devel
 libbabeltrace-dev: babeltrace-devel
 libbsd-dev: libbsd-devel
@@ -17,11 +17,11 @@ libc-dev: glibc-devel
 libc-dev:i386: glibc-devel-32bit
 libc6-dbg: glibc-debuginfo
 libc6-dev-i386: glibc-devel-32bit
+libc6-dev-x32: glibc-devel
 libc6-dev: glibc-devel
 libc6-dev:i386: glibc-devel-32bit
-libc6-dev-x32: glibc-devel
-libcap:
 libcap-dev:
+libcap:
 libcapstone-dev: libcapstone-devel
 libclang-dev: clang-devel
 libdw-dev: elfutils
@@ -29,8 +29,8 @@ libegl-dev: Mesa-libEGL-devel
 libegl1: Mesa-libEGL1
 libgbm-dev:
 libgcrypt-dev: libgcrypt-devel
-libgles2: Mesa-libGLESv2-2
 libgles2-mesa-dev: Mesa-libGL-devel
+libgles2: Mesa-libGLESv2-2
 libgtk2.0-dev: gtk2-devel
 libiberty-dev: binutils-devel
 libipc-run-perl: perl-IPC-Run
@@ -46,12 +46,6 @@ libkmod-dev: libkmod2
 liblzma-dev: xz-devel
 libmpfr-dev: mpfr-devel
 libnuma-dev: libnuma-devel
-libssl-dev: openssl-devel
-libtirpc-dev: libtirpc-devel
-libtirpc: libtirpc3
-libtraceevent-dev: libtraceevent-devel
-libtracefs-dev: libtracefs-devel
-libxml2-dev: libxml2-devel
 libperl-dev: perl
 libpfm4-dev: libpfm-devel
 libpthread-stubs0-dev: pthread-stubs-devel
@@ -60,7 +54,13 @@ libpython3: python3
 libsctp-dev: lksctp-tools-devel
 libsctp1: lksctp-tools
 libslang2-dev: slang-devel
+libssl-dev: openssl-devel
+libtirpc-dev: libtirpc-devel
+libtirpc: libtirpc3
+libtraceevent-dev: libtraceevent-devel
+libtracefs-dev: libtracefs-devel
 libunwind-dev: libunwind-devel
+libxml2-dev: libxml2-devel
 libxxhash-dev: xxhash-devel
 libzstd-dev: libzstd-devel
 linux-cpupower: cpupower
@@ -71,10 +71,10 @@ llvm-dev: llvm-devel
 ncurses-bin: ncurses
 python-dev: python3-devel
 python-setuptools: python3-setuptools
-systemtap-sdt-dev: systemtap-sdt-devel
 rng-tools5: rng-tools
-ruby-git:
 ruby-dev: ruby-devel
+ruby-git:
+systemtap-sdt-dev: systemtap-sdt-devel
 xsltproc: libxslt
 xz-utils: xz
 zlib1g-dev: zlib-devel
