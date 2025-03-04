@@ -148,6 +148,9 @@ map_python_packages()
 		centos-[9]*)
 			map_python2_to_python3
 			;;
+		opensuse-*)
+			map_python2_to_python3
+			;;
 	esac
 }
 
