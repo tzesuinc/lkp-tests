@@ -7,11 +7,16 @@
 
 cd $BENCHMARK_ROOT/libhugetlbfs-test || die "can not cd libhugetlbfs-test"
 
+is_clearlinux && {
+	make_opt="PREFIX=/usr LIB32=lib32 LIB64=lib64 CFLAGS=-fPIC"
+	sed -i 's#/usr/bin/env python#/usr/bin/env python2#g' tests/run_tests.py
+}
+
 build_libhugetlbfs()
 {
 	log_cmd ./autogen.sh
 	log_cmd ./configure
-	log_cmd make BUILDTYPE=NATIVEONLY
+	log_cmd make $make_opt BUILDTYPE=NATIVEONLY
 }
 
 build_libhugetlbfs || die "make failed"
@@ -22,7 +27,7 @@ build_libhugetlbfs || die "make failed"
 log_cmd obj/hugeadm --add-temp-swap=32 --pool-pages-min $pagesize:32 --hard \
 	|| die "config huge pages size and number failed"
 
-log_cmd make check
+log_cmd make $make_opt check
 
 # replace the full-width characters with half-width to avoid the stderr.json
 # eg.

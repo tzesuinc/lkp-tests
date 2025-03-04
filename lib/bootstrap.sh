@@ -157,10 +157,22 @@ add_lkp_user()
 	fi
 }
 
+clearlinux_timesync()
+{
+	echo "[Time]" >/etc/systemd/timesyncd.conf
+	echo "NTP=internal-lkp-server" >>/etc/systemd/timesyncd.conf
+	timedatectl set-ntp false
+	timedatectl set-ntp true
+	hwclock -w
+}
+
 run_ntpdate()
 {
 	[ -z "$NO_NETWORK" ] || return
+
 	[ "$LKP_SERVER" = internal-lkp-server ] || return
+
+	is_clearlinux && clearlinux_timesync && return
 
 	[ -x '/usr/sbin/ntpdate' ] || return
 
@@ -694,7 +706,7 @@ boot_init()
 
 	mount_debugfs
 
-	if is_aliyunos; then
+	if is_clearlinux || is_aliyunos; then
 		add_nfs_default_options
 	fi
 

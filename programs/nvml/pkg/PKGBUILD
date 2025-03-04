@@ -12,6 +12,8 @@ source=('https://github.com/pmem/valgrind.git'
 	'https://github.com/pmem/nvml.git')
 md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 
+. $LKP_SRC/lib/env.sh
+
 build_install_valgrind_pmem()
 {
 	cd "${srcdir}/valgrind"
@@ -92,9 +94,11 @@ package()
 	cp -af "${srcdir}/${pkgname}" "${benchmark_path}"
 	. $LKP_SRC/lib/env.sh
 
-	cd "${srcdir}/valgrind"
-	make DESTDIR="${pkgdir}" install
-	cd "${srcdir}/libfabric"
-	make DESTDIR="${pkgdir}" install
-	cp -af "/usr/local/libcxx" "${pkgdir}/usr/local"
+	is_clearlinux || {
+		cd "${srcdir}/valgrind"
+		make DESTDIR="${pkgdir}" install
+		cd "${srcdir}/libfabric"
+		make DESTDIR="${pkgdir}" install
+		cp -af "/usr/local/libcxx" "${pkgdir}/usr/local"
+	}
 }

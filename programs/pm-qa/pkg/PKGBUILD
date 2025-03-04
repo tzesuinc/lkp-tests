@@ -7,12 +7,16 @@ license=('GPL')
 source=('https://git.linaro.org/power/pm-qa.git' https://github.com/glmark2/glmark2.git)
 sha256sums=('SKIP' 'SKIP')
 
+. $LKP_SRC/lib/env.sh
+
 build()
 {
 	cd ${srcdir}/pm-qa
 	make -C cpuidle cpuidle_killer
 	cd utils
 	make
+
+	is_clearlinux && return
 
 	cd ${srcdir}/glmark2
 	benchmark_path="${pkgdir}/lkp/benchmarks/${pkgname}"

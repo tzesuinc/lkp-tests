@@ -14,6 +14,8 @@ source=(
 	'https://github.com/pmem/ndctl.git')
 md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 
+. $LKP_SRC/lib/env.sh
+
 build_install_valgrind_pmem()
 {
 	cd "${srcdir}/valgrind"
@@ -92,6 +94,8 @@ build()
 		sed -i 's/CXXFLAGS += -Wno-unknown-attributes/CXXFLAGS += -Wno-ignored-attributes/' ./src/benchmarks/Makefile
 	}
 
+	is_clearlinux && return
+
 	build_install_valgrind_pmem
 	build_install_ndctl
 	build_install_pmdk
@@ -103,13 +107,14 @@ package()
 	benchmark_path="${pkgdir}/lkp/benchmarks"
 	mkdir -p "${benchmark_path}"
 	cp -af "${srcdir}/${pkgname}" "${benchmark_path}"
-	. $LKP_SRC/lib/env.sh
 
-	cd "${srcdir}/valgrind"
-	make DESTDIR="${pkgdir}" install
-	cp -af "/usr/local/libcxx" "${pkgdir}/usr/local"
-	cd "${srcdir}/ndctl"
-	make DESTDIR="${pkgdir}" install
-	cd "${srcdir}/pmdk"
-	make DESTDIR="${pkgdir}" install
+	is_clearlinux || {
+		cd "${srcdir}/valgrind"
+		make DESTDIR="${pkgdir}" install
+		cp -af "/usr/local/libcxx" "${pkgdir}/usr/local"
+		cd "${srcdir}/ndctl"
+		make DESTDIR="${pkgdir}" install
+		cd "${srcdir}/pmdk"
+		make DESTDIR="${pkgdir}" install
+	}
 }

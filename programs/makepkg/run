@@ -24,6 +24,8 @@ export GIT_SSL_NO_VERIFY=true
 
 cd $(get_pkg_dir $benchmark) || die "pkg is empty"
 
+is_clearlinux && ln -sf $BENCHMARK_ROOT/makepkg/bin/fakeroot /usr/bin/fakeroot
+
 pack_to=$(basename $rootfs)
 [[ -n "$PKG_MNT" ]] || PKG_MNT=/osimage/pkg
 mkdir -p "$PKG_MNT"

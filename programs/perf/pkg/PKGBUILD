@@ -7,9 +7,13 @@ license=('GPL')
 source=('https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git')
 md5sums=('SKIP')
 
+. $LKP_SRC/lib/env.sh
+
 build()
 {
 	cd $srcdir/linux/tools/perf
+
+	is_clearlinux && ln -sf /usr/bin/ld.gold $BUILD_DIR/ld
 
 	# NO_JEVENTS=1 to support python older than 3.6
 	# NO_LIBTRACEEVENT=1 to support the distributions which have no libtraceevent
