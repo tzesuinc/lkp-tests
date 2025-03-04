@@ -154,7 +154,8 @@ detect_system()
 		_system_name="Amazon Linux"
 	elif
 		[ -f ${rootfs}/etc/os-release ] &&
-			GREP_OPTIONS="" \command \grep "ID=opensuse" ${rootfs}/etc/os-release >/dev/null
+			(GREP_OPTIONS="" \command \grep 'ID="opensuse-leap"' ${rootfs}/etc/os-release >/dev/null ||
+			GREP_OPTIONS="" \command \grep 'ID="opensuse"' ${rootfs}/etc/os-release >/dev/null)
 	then
 		_system_name="OpenSuSE"
 		_system_version="$(awk -F'=' '$1=="VERSION_ID"{gsub(/"/,"");print $2}' ${rootfs}/etc/os-release | head -n 1)" #'

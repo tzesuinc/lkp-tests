@@ -350,6 +350,10 @@ install_base_support()
 		(
 			cd $LKP_SRC || exit
 			gem install bundler -v $bundler_version
+			# Adds bundler to PATH for OpenSUSE
+			if [ "$distro" = "opensuse" ]; then
+				export PATH=$PATH:/usr/lib64/ruby/gems/$(gem --version)/gems/bundler-$bundler_version/exe
+			fi
 			bundle install
 		)
 	fi

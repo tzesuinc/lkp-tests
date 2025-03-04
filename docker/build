@@ -55,7 +55,16 @@ opt_test_dir=${opt_test_dir:-$LKP_DOCKER_TEST_DIR}
 
 cd $LKP_SRC
 
-cmd="docker build . -f docker/${opt_image%%/*}/Dockerfile -t lkp-tests/${opt_image} --build-arg hostname=${opt_hostname} --build-arg base_image=${opt_image//\//:}"
+# Substitution for image names (example: debian/buster -> debian:buster)
+# Special for opensuse/leap or opensuse/tumbleweed, does not affect it
+# 	(example: opensuse/leap:latest -> opensuse/leap:latest)
+if [[ "$opt_image" == opensuse/* ]]; then
+	base_image=$(echo "$opt_image" | sed 's|opensuse/\([^/]*\)/|opensuse/\1:|')
+else
+	base_image=${opt_image//\//:}
+fi
+
+cmd="docker build . -f docker/${opt_image%%/*}/Dockerfile -t lkp-tests/${opt_image} --build-arg hostname=${opt_hostname} --build-arg base_image=${base_image}"
 [[ $opt_proxy ]] && cmd="$cmd --build-arg http_proxy=${opt_proxy} --build-arg https_proxy=${opt_proxy}"
 
 exec_cmd $cmd

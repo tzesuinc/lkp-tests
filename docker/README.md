@@ -16,7 +16,7 @@ cd lkp-tests
 image=debian/buster
 hostname=lkp-docker.${image//\//.}
 
-docker build -f docker/${image%%/*}/Dockerfile -t lkp-tests/${image} -t lkp-tests/${image}:$(git log -1 --pretty=%h) --build-arg hostname=$hostname --build-arg base_image=${image//\//:} .
+docker build -f docker/${image%%/*}/Dockerfile -t lkp-tests/${image} -t lkp-tests/${image}:$(git log -1 --pretty=%h) --build-arg hostname=$hostname --build-arg base_image=$(if [[ "$image" == opensuse/* ]]; then echo "$image" | sed 's|opensuse/\([^/]*\)/|opensuse/\1:|'; else echo ${image//\//:}; fi) .
 
 docker run --rm --entrypoint '' lkp-tests/${image} lkp help
 ```
