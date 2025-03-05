@@ -34,7 +34,6 @@ gcc-multilib: libgcc
 gdbserver: gdb-gdbserver
 gettext-base: gettext
 gfortran: gcc-gfortran
-glibc-debuginfo:
 hpcc:
 init-system-helpers:
 initramfs-tools: dracut
