@@ -407,22 +407,19 @@ def latency_stat?(stats_field)
 end
 
 def failure_stat?(stats_field)
-  $metric_failure.each { |pattern| return true if stats_field =~ %r{^#{pattern}} }
-  false
+  $metric_failure.any? { |pattern| stats_field =~ %r{^#{pattern}} }
 end
 
 def pass_stat?(stats_field)
-  $metric_pass.each { |pattern| return true if stats_field =~ %r{^#{pattern}} }
-  false
+  $metric_pass.any? { |pattern| stats_field =~ %r{^#{pattern}} }
 end
 
 def memory_change?(stats_field)
   stats_field =~ /^(boot-meminfo|boot-memory|proc-vmstat|numa-vmstat|meminfo|memmap|numa-meminfo)\./
 end
 
-def should_add_max_latency(stats_field)
-  $metric_add_max_latency.each { |pattern| return true if stats_field =~ %r{^#{pattern}$} }
-  false
+def add_max_latency?(stats_field)
+  $metric_add_max_latency.any? { |pattern| stats_field =~ %r{^#{pattern}$} }
 end
 
 def sort_remove_margin(array, max_margin = nil)
@@ -436,7 +433,7 @@ def sort_remove_margin(array, max_margin = nil)
 end
 
 # NOTE: array *must* be sorted
-def get_min_mean_max(array)
+def min_mean_max(array)
   return [0, 0, 0] if array.to_a.empty?
 
   [array[0], array[array.size / 2], array[-1]]
@@ -583,7 +580,7 @@ def __get_changed_stats(a, b, is_incomplete_run, options)
     sorted_b = sort_remove_margin b_k, max_margin
     next if sorted_b.empty?
 
-    min_b, mean_b, max_b = get_min_mean_max sorted_b
+    min_b, mean_b, max_b = min_mean_max sorted_b
     next unless max_b
 
     v.pop(v.size - resize) if resize && v.size > resize
@@ -592,7 +589,7 @@ def __get_changed_stats(a, b, is_incomplete_run, options)
     sorted_a = sort_remove_margin v, max_margin
     next if sorted_a.empty?
 
-    min_a, mean_a, max_a = get_min_mean_max sorted_a
+    min_a, mean_a, max_a = min_mean_max sorted_a
     next unless max_a
 
     if !is_force_stat && !changed_stats?(sorted_a, min_a, mean_a, max_a,
