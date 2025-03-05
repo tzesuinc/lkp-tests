@@ -1,7 +1,6 @@
 cmake
 libacl1-dev
 libaio-dev
-libcap
 libcap-dev
 libgmp-dev
 libnuma-dev
