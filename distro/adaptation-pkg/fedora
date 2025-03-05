@@ -54,7 +54,6 @@ mutilate::
 ndctl::
 nepim::
 netperf::
-netpipe-lam: netpipe
 netpipe::
 nuttcp::
 nvdimm: ndctl
