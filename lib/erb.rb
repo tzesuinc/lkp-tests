@@ -9,6 +9,7 @@ require "#{LKP_SRC}/lib/hashugar"
 
 # bring in functions usable for ERB code segments
 require "#{LKP_SRC}/lib/unit"
+require "#{LKP_SRC}/lib/string"
 
 # Support references to variables (with real values) defined in the same job.
 #
@@ -27,7 +28,7 @@ require "#{LKP_SRC}/lib/unit"
 def expand_erb(template, context_hash = {})
   return template unless template =~ /^%|<%/
 
-  yaml = template.gsub(/<%.*?%>/m, '').gsub(/^%[^>].*$/, '')
+  yaml = template.remove(/<%.*?%>/m).remove(/^%[^>].*$/)
   job = YAML.load(yaml) || {}
   job.merge!(context_hash)
   context = Hashugar.new(job).instance_eval { binding }

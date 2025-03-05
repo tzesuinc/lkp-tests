@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
 
-REGEX_ANSI_COLOR = /\e\[([0-9;]+m|[mK])/.freeze
+require 'active_support/core_ext/string'
 
+REGEX_ANSI_COLOR = /\e\[([0-9;]+m|[mK])/.freeze
 class String
   # for converting log lines into "Content-Type: text/plain;" emails
   def plain_text
-    gsub(REGEX_ANSI_COLOR, '')
+    remove(REGEX_ANSI_COLOR)
       .tr("\r", "\n")
-      .gsub(/[^[:print:]\n]/, '')
+      .remove(/[^[:print:]\n]/)
   end
 
   # invalid byte sequence in US-ASCII (ArgumentError)
@@ -19,7 +20,7 @@ class String
   end
 
   def strip_nonprintable_characters
-    gsub(/[^[:print:]]/, '')
+    remove(/[^[:print:]]/)
   end
 
   def numeric?
@@ -29,7 +30,7 @@ class String
   end
 
   def uncolorize
-    gsub(/\e\[(\d+)?(;\d+)?(;\d+)?m/, '').gsub(/\e\[K/, '')
+    remove(/\e\[(\d+)?(;\d+)?(;\d+)?m/).remove(/\e\[K/)
   end
 
   def unicode_escape
