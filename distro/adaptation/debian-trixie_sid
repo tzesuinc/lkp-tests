@@ -5,7 +5,7 @@ cython:
 dh-systemd: debhelper
 dwarves: pahole
 exfat-utils: exfatprogs
-freeglut:
+freeglut: libglut3.12
 fuse: fuse3
 gcc: gcc-12
 lib32gcc-dev: lib32gcc-11-dev
