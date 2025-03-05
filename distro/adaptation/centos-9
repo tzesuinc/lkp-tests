@@ -13,7 +13,7 @@ grub-common: grub2-common
 libbabeltrace-ctf-dev: libbabeltrace-devel
 libbabeltrace-ctf1: libbabeltrace
 libbabeltrace-dev: libbabeltrace-devel
-libbpf-dev: libbpf-devel-1.3.0
+libbpf-dev: libbpf-devel
 libclang-dev: clang-devel
 libcunit1-dev: CUnit-devel
 libdw1: libdwarves1

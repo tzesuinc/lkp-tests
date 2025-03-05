@@ -364,7 +364,7 @@ install_base_support()
 	create_host_config
 }
 
-enable_centos_source()
+enable_source_repository()
 {
 	if ! yum list installed | grep -q yum-utils; then
 		yum install -y yum-utils
@@ -388,7 +388,10 @@ distro=$_system_name_lowercase
 echo "distro=$distro"
 echo "version=$_system_version"
 
-[ "$distro" = "centos" ] && enable_centos_source
+# Enable source repositories for CentOS and Rocky Linux
+if [ "$distro" = "centos" ] || [ "$distro" = "rocky" ]; then
+    enable_source_repository
+fi
 
 DISTRO=$distro
 export DISTRO
