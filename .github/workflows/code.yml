@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: ['archlinux/base', 'centos/stream9', 'debian/bookworm', 'fedora/41', 'opensuse/leap', 'rockylinux/9', 'ubuntu/jammy', 'ubuntu/noble']
+        image: ['archlinux/base', 'centos/stream9', 'debian/bookworm', 'fedora/41', 'opensuse/leap', 'rockylinux/9', 'ubuntu/noble']
 
     steps:
       - uses: actions/checkout@v3
