@@ -65,13 +65,13 @@ add_one_sample(kbps_fault, throughput_fault, median_fault, ret)
 exit if throughput.empty?
 
 def cal_stddev(throughput, kbps)
-  return throughput.standard_deviation / throughput.average if throughput.size > 1
+  return throughput.standard_deviation / throughput.average if throughput.many?
 
   kbps.standard_deviation * kbps.size / kbps.average
 end
 
 def cal_median_stddev(median)
-  return median.standard_deviation / median.average if median.size > 1
+  return median.standard_deviation / median.average if median.many?
 
   0
 end

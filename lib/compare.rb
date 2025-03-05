@@ -39,7 +39,7 @@ class AxesGrouper
 
   def group
     map = {}
-    if @compare_runs.to_a.size > 1
+    if @compare_runs.to_a.many?
       @compare_runs.size.times do
         as = {}
         map[as] ||= AxesGroup.new self, as, 'compare_runs' => @compare_runs
@@ -767,7 +767,7 @@ module Compare
 
     vs = stat[VALUES]
     stat[AVGS] = vs.map { |v| v && !v.empty? ? v.average : 0 }
-    stat[STDDEVS] = vs.map { |v| v && v.size > 1 ? v.standard_deviation : -1 }
+    stat[STDDEVS] = vs.map { |v| v && v.many? ? v.standard_deviation : -1 }
   end
 
   def self.calc_min_max(stat)
@@ -1141,7 +1141,7 @@ module Compare
       p.on('-o <search-axes>', '--override-search <search-axes>',
            'Search Axes') do |search_axes|
         search_axes = DataStore::Layout.axes_from_string(search_axes)
-        options[:compare_different_rts] = true if search_axes.size > 1
+        options[:compare_different_rts] = true if search_axes.many?
         prev_axes = msearch_axes[-1] || {}
         msearch_axes << prev_axes.merge(search_axes)
       end
@@ -1187,7 +1187,7 @@ module Compare
       end.flatten
     else
       job_name = '*.yaml'
-      if job_dirs.size > 1
+      if job_dirs.many?
         options[:compare_different_rts] = true
         job_name = 'job.yaml'
       end

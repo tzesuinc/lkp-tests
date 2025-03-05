@@ -11,7 +11,7 @@ class Array
 
   def duplicated_elements
     group_by { |i| i }
-      .select { |_k, v| v.size > 1 }
+      .select { |_k, v| v.many? }
       .map(&:first)
   end
 

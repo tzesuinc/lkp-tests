@@ -270,7 +270,7 @@ def commit_exists?(commit)
 end
 
 def merge_commit?(commit)
-  git_parents(commit).size > 1
+  git_parents(commit).many?
 end
 
 def __commit_name(commit)

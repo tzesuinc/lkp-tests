@@ -240,7 +240,7 @@ module Git
       end
 
       def merge?
-        parents.size > 1
+        parents.many?
       end
 
       def patch_id
