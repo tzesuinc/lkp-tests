@@ -78,7 +78,7 @@ def split_constraints(constraints)
   archs, constraints = constraints.partition { |constraint| constraint =~ /^(i386|x86_64)$/ }
 
   types, constraints = constraints.partition { |constraint| constraint =~ /^(y|m|n|\d+|0[xX][A-Fa-f0-9]+|utf8)$/ }
-  raise Job::SyntaxError, "Wrong syntax of kconfig setting: #{constraints}" if types.size > 1
+  raise Job::SyntaxError, "Wrong syntax of kconfig setting: #{constraints}" if types.many?
 
   raise Job::SyntaxError, "Wrong syntax of kconfig setting: #{constraints}" unless constraints.empty?
 

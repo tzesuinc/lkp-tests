@@ -152,6 +152,12 @@ detect_system()
 	then
 		_system_version="$(awk -F'=' '$1=="VERSION_ID"{gsub(/"/,"");print $2}'  ${rootfs}/etc/os-release | head -n 1)"
 		_system_name="Amazon Linux"
+    elif
+        [ -f ${rootfs}/etc/os-release ] &&
+            GREP_OPTIONS="" \command \grep 'ID="rocky"' ${rootfs}/etc/os-release >/dev/null
+    then
+        _system_name="Rocky"
+        _system_version="$(awk -F'=' '$1=="VERSION_ID"{gsub(/"/,"");print $2}' ${rootfs}/etc/os-release | awk -F'.' '{print $1}' | head -n 1)"
 	elif
 		[ -f ${rootfs}/etc/os-release ] &&
 			(GREP_OPTIONS="" \command \grep 'ID="opensuse-leap"' ${rootfs}/etc/os-release >/dev/null ||

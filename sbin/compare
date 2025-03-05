@@ -596,7 +596,7 @@ def get_v_and_stddev(value, dim, is_fail)
       v_stddev = v.length
       v = v.sum
     else
-      v_stddev = v.standard_deviation if v.size > 1
+      v_stddev = v.standard_deviation if v.many?
       v = v.average
     end
   elsif is_fail
@@ -640,7 +640,7 @@ def show_delta(stat, key_g)
 
     noisy = false
     value.each_value do |v|
-      next unless v.is_a?(Array) && v.size > 1
+      next unless v.is_a?(Array) && v.many?
 
       if v.standard_deviation.abs > v.average.abs / 2 || v.average.negative?
         noisy = true

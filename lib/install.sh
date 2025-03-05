@@ -16,7 +16,7 @@ sync_distro_sources()
 		else
 			yum update
 		fi ;;
-	redhat) yum update ;;
+	redhat|rocky) yum update ;;
 	archlinux) yay -Sy --needed;;
 	opensuse)
 		zypper update ;;
@@ -149,6 +149,9 @@ map_python_packages()
 			map_python2_to_python3
 			;;
 		opensuse-*)
+			map_python2_to_python3
+			;;
+		rocky-[9]*)
 			map_python2_to_python3
 			;;
 	esac
