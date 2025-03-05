@@ -23,28 +23,28 @@ describe 'filter/nr_threads' do
 
   context 'when nr_threads is defined in top level with valid value' do
     it 'does not filter the job' do
-      job = generate_job({ 'testcase' => 'testcase', 'nr_threads' => 1 })
+      job = generate_job('testcase' => 'testcase', 'nr_threads' => 1)
       job.expand_params
     end
   end
 
   context 'when nr_threads is defined in top level with invalid value' do
     it 'filters the job' do
-      job = generate_job({ 'testcase' => 'testcase', 'nr_threads' => 0 })
+      job = generate_job('testcase' => 'testcase', 'nr_threads' => 0)
       expect { redirect_to_string { job.expand_params } }.to raise_error Job::ParamError
     end
   end
 
   context 'when nr_threads is defined in second level with valid value' do
     it 'does not filter the job' do
-      job = generate_job({ 'testcase' => 'testcase', 'sleep' => { 'nr_threads' => 1 } })
+      job = generate_job('testcase' => 'testcase', 'sleep' => { 'nr_threads' => 1 })
       job.expand_params
     end
   end
 
   context 'when nr_threads is defined in second level with invalid value' do
     it 'does not filter the job' do
-      job = generate_job({ 'testcase' => 'testcase', 'sleep' => { 'nr_threads' => 0 } })
+      job = generate_job('testcase' => 'testcase', 'sleep' => { 'nr_threads' => 0 })
       job.expand_params
     end
   end

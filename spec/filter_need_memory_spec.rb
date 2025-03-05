@@ -26,21 +26,21 @@ describe 'filters/need_memory' do
 
   context 'when do not have need_memory' do
     it 'does not filter the job' do
-      job = generate_job({ 'testcase' => 'testcase' })
+      job = generate_job('testcase' => 'testcase')
       job.expand_params
     end
   end
 
   context 'when need_memory smaller than available_memory' do
     it 'does not filter the job' do
-      job = generate_job({ 'testcase' => 'testcase', 'need_memory' => "#{system_free_mem_gb - 1}G" })
+      job = generate_job('testcase' => 'testcase', 'need_memory' => "#{system_free_mem_gb - 1}G")
       job.expand_params
     end
   end
 
   context 'when need_memory larger than available_memory' do
     it 'filter the job' do
-      job = generate_job({ 'testcase' => 'testcase', 'need_memory' => '100%', 'nr_cpu' => system_free_mem_gb + 2 })
+      job = generate_job('testcase' => 'testcase', 'need_memory' => '100%', 'nr_cpu' => system_free_mem_gb + 2)
       expect { redirect_to_string { job.expand_params } }.to raise_error Job::ParamError
     end
   end
