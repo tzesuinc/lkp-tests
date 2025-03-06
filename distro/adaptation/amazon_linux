@@ -45,10 +45,13 @@ libc-dev: glibc-devel
 libc-dev:i386:
 libc6-dbg:
 libc6-dev-i386:
+libc6-dev-x32:
 libc6-dev: glibc-devel glibc-static
 libc6-dev:i386:
 libc6-i386:
 libc6: glibc
+libcairo2-dev: cairo-devel
+libcap-dev: libcap-devel
 libcap-ng-dev: libcap-ng-devel
 libcilkrts5:
 libclang-dev: clang-devel
