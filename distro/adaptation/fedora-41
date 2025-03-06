@@ -10,8 +10,8 @@ liblzo2-2: lzo
 liblzo2-dev: lzo-devel
 libncurses5: ncurses
 libnfs13: libnfs
-librbd-dev: librbd-devel
 libpcre3-dev: pcre-devel
+librbd-dev: librbd-devel
 libsasl2-dev: cyrus-sasl-devel
 libsdl2-2.0-0: SDL2
 libseccomp2: libseccomp
