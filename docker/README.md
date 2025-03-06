@@ -69,6 +69,11 @@ lkp docker test -i $image -j hackbench.yaml -g pipe-8-process-1600 --hostname $h
 lkp docker test -i $image -j hackbench.yaml --any --hostname $hostname
 ```
 
+The alternative method to run rt
+```
+lkp docker rt --container $hostname --options "hackbench"
+```
+
 ## Test by lkp docker
 
 ```

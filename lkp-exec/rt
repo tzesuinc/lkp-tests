@@ -18,7 +18,7 @@ usage()
 {
 	cat <<-EOF
 Usage:
-	lkp $script_name [-d N[dwm]] [-f filename] [ -p project ] [patterns...]
+	lkp $script_name [-d N[dwm]] [-f filename] [ -p project ] [-t test_directory] [patterns...]
 Example:
 	lkp $script_name -d 3d  lkp-ws02  xfstests /0/
 EOF
@@ -28,18 +28,21 @@ EOF
 
 [[ $# = 0 ]] && usage
 
-while getopts "f:d:p:q:" opt
+while getopts "f:d:p:q:t:" opt
 do
 	case $opt in
 		f ) opt_file="$OPTARG"; ;;
 		d ) opt_date="$OPTARG"; ;;
 		p ) opt_project="$OPTARG"; ;;
 		q ) opt_queue="$OPTARG"; ;;
+		t ) opt_test_dir="$OPTARG"; ;;
 		? ) usage >&2; ;;
 	esac
 done
 
 shift $((OPTIND-1))
+
+[[ $opt_test_dir ]] && KTEST_PATHS_DIR=$opt_test_dir
 
 [[ $opt_date =~ [0-9]+d$ ]] && opt_date=${opt_date%d}
 [[ $opt_date =~ [0-9]+w$ ]] && opt_date=$((${opt_date%w} * 7))

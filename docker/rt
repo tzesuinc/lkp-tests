@@ -17,6 +17,10 @@ while getopts "t:-:" opt; do
 					opt_container="${!OPTIND}"
 					OPTIND=$((OPTIND + 1))
 					;;
+				options)
+					opt_options="${!OPTIND}"
+					OPTIND=$((OPTIND + 1))
+					;;
 				*)
 					echo "Unknown option --${OPTARG}"
 					exit 1
@@ -30,6 +34,4 @@ shift $((OPTIND - 1))
 
 cd $LKP_SRC
 
-cmd="docker exec -it $opt_container bash"
-
-exec_cmd $cmd
+docker exec $opt_container bash -c "lkp rt $opt_options"
