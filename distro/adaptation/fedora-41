@@ -16,6 +16,7 @@ libsdl2-2.0-0: SDL2
 libseccomp2: libseccomp
 libslirp0: libslirp
 libsndio7.0:
+libspice-server1:
 libssh-4: libssh
 libssh-dev: libssh-devel
 libusb-1.0-0-dev: libusb1-devel
@@ -23,7 +24,6 @@ libusb-1.0-0: libusb
 libvde-dev:
 libvde0:
 libvdeplug2:
-libspice-server1:
 netpipe-lam:
 netpipe-mpich2:
 netpipe-openmpi:
