@@ -1,6 +1,6 @@
 autopoint: gettext
-btrfs-tools:
 bsdtar: bsdtar
+btrfs-tools:
 gfortran: gcc-gfortran
 libarchive-tools: libarchive-devel
 libbabeltrace-ctf-dev: libbabeltrace-devel
@@ -14,13 +14,13 @@ libelf-dev: elfutils-devel
 libgles2-mesa:
 libmariadb3: mariadb-connector-c
 libopencryptoki0:
-libpfm4: libpfm-devel
 libpfm4-dev: libpfm-devel
+libpfm4: libpfm-devel
 libpng12-dev:
 libreadline5: compat-readline5
 libstdc++-dev: libstdc++-devel libstdc++-static
-libtsan0: libtsan
 libtracefs-dev:
+libtsan0: libtsan
 libvirt-clients:
 libvirt-daemon-system:
 libvirt-dev:
