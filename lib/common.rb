@@ -8,6 +8,7 @@ require 'fileutils'
 require 'stringio'
 require "#{LKP_SRC}/lib/array"
 require "#{LKP_SRC}/lib/log"
+require "#{LKP_SRC}/lib/string"
 require 'English'
 
 def deepcopy(o)
@@ -128,7 +129,7 @@ def format_number(number)
     s = format(fmt, number)
     # Remove trailing 0
     if fmt[-1] == 'f'
-      s.gsub(/\.?0+$/, '')
+      s.remove(/\.?0+$/)
     else
       s
     end

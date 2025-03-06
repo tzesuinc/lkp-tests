@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require "#{LKP_SRC}/lib/string"
+
 while (line = $stdin.gets)
   next if line.index('Command being timed: ')
 
@@ -12,7 +14,7 @@ while (line = $stdin.gets)
   #   ...
   next unless val
 
-  key = key.gsub(/^\s+/, '').gsub(/ \([^)]+\)/, '').gsub(/\s+/, '_').downcase
+  key = key.remove(/^\s+/).remove(/ \([^)]+\)/).gsub(/\s+/, '_').downcase
   case key
   when 'elapsed_time'
     times = val.split ':'
