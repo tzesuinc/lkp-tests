@@ -31,40 +31,17 @@ $index_perf = load_yaml "#{LKP_SRC_ETC}/index-perf-all.yaml"
 $index_latency = load_yaml "#{LKP_SRC_ETC}/index-latency-all.yaml"
 
 class LinuxTestcasesTableSet
-  LINUX_PERF_TESTCASES =
-    %w[aim7 aim9 angrybirds blogbench dbench
-       dd-write ebizzy sysbench-fileio fishtank fsmark glbenchmark
-       hackbench uperf hpcc idle iozone iperf jitter jsbenchmark kbuild
-       ku-latency linpack mlc nepim netperf netpipe
-       nuttcp octane oltp openarena pbzip2 rcurefscale
-       perf-bench-numa-mem perf-bench-sched-pipe pft
-       phoronix-test-suite pigz pixz plzip postmark pxz qperf
-       reaim sdf siege sockperf speccpu specjbb2013
-       specjbb2015 specpower stutter sunspider tbench tcrypt
-       thrulay tlbflush unixbench vm-scalability will-it-scale
-       chromeswap fio-basic apachebench perf-event-tests swapin
-       tpcc mytest exit-free pgbench boot-trace sysbench-cpu
-       sysbench-memory sysbench-threads sysbench-mutex stream
-       perf-bench-futex mutilate lmbench3 lib-micro schbench
-       pmbench linkbench rocksdb cassandra redis power-idle
-       mongodb ycsb memtier mcperf fio-jbod cyclictest filebench igt
-       autonuma-benchmark adrestia kernbench rt-app migratepages intel-ipsec-mb
-       simd-stress bpftrace stress-ng coremark tinymembench pybench phpbench lz4-test openssl-speed].freeze
-  LINUX_TESTCASES =
-    %w[analyze-suspend boot blktests cpu-hotplug ext4-frags ftq ftrace-onoff fwq
-       galileo irda-kernel kernel-builtin kernel-selftests kvm-unit-tests kvm-unit-tests-qemu
-       leaking-addresses lkvs locktorture ltp mce-test otc-ddt piglit pm-qa nvml qat
-       qemu rcuscale rcutorture suspend suspend-stress trinity ndctl nfs-test hwsim
-       idle-inject mdadm-selftests nvml test-bpf mce-log perf-sanity-tests
-       update-ucode reboot cat libhugetlbfs-test ocfs2test
-       perf-test fxmark kvm-kernel-boot-test rdma-pyverbs
-       xfstests packetdrill avocado v4l2 vmem perf-stat-tests cgroup2-test].freeze
-  OTHER_TESTCASES =
-    %w[convert-lkpdoc-to-html convert-lkpdoc-to-html-css rsync-rootfs
-       health-stats hwinfo ipmi-setup debug
-       lkp-install-run lkp-services lkp-src pack lkp-qemu
-       pack-deps makepkg makepkg-deps borrow dpdk-dts mbtest
-       bust-shm-exit upgrade-trinity deploy-clang kmemleak-test kunit].freeze
+  def self.load_testcases(file_path)
+    if File.exist?(file_path)
+      File.readlines(file_path).map(&:strip).reject(&:empty?)
+    else
+      log_warn "File not found: #{file_path}"
+    end
+  end
+
+  LINUX_PERF_TESTCASES = load_testcases("#{LKP_SRC}/etc/linux-perf-test-cases").freeze
+  LINUX_TESTCASES = load_testcases("#{LKP_SRC}/etc/linux-test-cases").freeze
+  OTHER_TESTCASES = load_testcases("#{LKP_SRC}/etc/other-test-cases").freeze
 end
 
 def functional_test?(testcase)
