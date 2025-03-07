@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 def sorted_file_content(file_path)
-  `sort -f #{file_path} | uniq`
+  `LC_ALL=C sort -f #{file_path} | uniq`
 end
 
 def filtered_files(path, filter)
