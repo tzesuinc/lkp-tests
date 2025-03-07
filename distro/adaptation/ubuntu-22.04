@@ -7,7 +7,7 @@ exfat-utils: exfatprogs
 fuse: fuse3
 lib32gcc-dev: lib32gcc-12-dev
 libcurl: libcurl4
-libevent-openssl-2: libevent-openssl-2.1-7
+libevent-openssl: libevent-openssl-2.1-7
 libevent: libevent-2.1-7
 libgsl: libgsl27
 libipsec-mb: libipsec-mb1
