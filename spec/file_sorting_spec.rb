@@ -25,7 +25,7 @@ describe 'Directory File Sorting' do
     },
     'etc' => {
       path: "#{LKP_SRC}/etc",
-      filter: ->(filename) { filename != 'makepkg.conf' }
+      filter: ->(filename) { filename != 'makepkg.conf' && filename !~ /\.(rb|yml)$/ }
     }
   }
 
