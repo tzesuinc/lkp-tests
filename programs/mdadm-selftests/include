@@ -8,3 +8,6 @@ need_kconfig:
 - MD_RAID456
 - MD_MULTIPATH
 - BLK_DEV_LOOP
+- EXT3_FS: y
+- EXT3_FS_POSIX_ACL: y
+- EXT3_FS_SECURITY: y
