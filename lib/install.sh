@@ -45,8 +45,8 @@ adapt_packages()
 {
 	local distro_file distro_ver_file
 	if [ -z "$PKG_TYPE" ]; then
-		distro_ver_file="$LKP_SRC/distro/adaptation/$distro-$_system_version"
-		distro_file="$LKP_SRC/distro/adaptation/$distro"
+		distro_ver_file="$LKP_SRC/distro/adaptation/$distro/$distro-$_system_version"
+		distro_file="$LKP_SRC/distro/adaptation/$distro/$distro"
 	else
 		distro_file="$LKP_SRC/distro/adaptation-$PKG_TYPE/$distro"
 	fi
