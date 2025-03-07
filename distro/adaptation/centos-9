@@ -24,6 +24,7 @@ libgles2: mesa-libGL
 libgoogle-perftools-dev:
 libjudy-dev: Judy-devel
 libjudydebian1: Judy
+libpcre3-dev: pcre-devel
 libpfm4-dev: libpfm-devel
 libpfm4: libpfm
 libpng12-dev:
