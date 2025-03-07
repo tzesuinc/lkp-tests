@@ -136,6 +136,9 @@ map_python_packages()
 	#	debian 11 and higher version source anymore
 	#	ubuntu 20.04 and higher version source anymore
 	case "$distro-$_system_version" in
+		amazon_linux-2023)
+			map_python2_to_python3
+			;;
 		debian-1[1-9]*|debian-trixie_sid|debian-bookworm_sid)
 			map_python2_to_python3
 			;;
