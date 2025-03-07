@@ -120,7 +120,7 @@ libegl1: mesa-libEGL
 libelf-dev: elfutils-devel
 libelf1: elfutils-libelf
 libevent-dev: libevent-devel
-libevent-openssl-2:
+libevent-openssl:
 libexpat1-dev: expat-devel
 libfabric-dev: libfabric-devel
 libfdt-dev: libfdt-devel

@@ -103,7 +103,7 @@ libegl1: Mesa-libEGL1
 libelf-dev: libelf-devel
 libevdev: libevdev2
 libevent-dev: libevent-devel
-libevent-openssl-2: libevent-2_1-8
+libevent-openssl: libevent-2_1-8
 libfabric-dev: libfabric-devel
 libfdt-dev: libfdt-devel
 libffi-dev: libffi-devel
