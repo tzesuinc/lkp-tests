@@ -189,7 +189,7 @@ libpciaccess-dev: libpciaccess-devel
 libpcre3: libpcre1
 libperl-dev: perl
 libperl5: perl
-libpfm4-dev: libpfm-devel
+libpfm-dev: libpfm-devel
 libpipewire-dev: pipewire-devel
 libpixman-1-dev: libpixman-1-0-devel
 libpmem-dev: libpmem-devel

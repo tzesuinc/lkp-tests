@@ -9,8 +9,8 @@ libdw1:
 libgoogle-perftools-dev: gperftools-devel
 libmariadb-dev:
 libmariadb3:
-libpfm4-dev: libpfm-devel
-libpfm4: libpfm
+libpfm-dev: libpfm-devel
+libpfm: libpfm
 libpython3: python3-libs
 libtraceevent-dev:
 libtraceevent1:
