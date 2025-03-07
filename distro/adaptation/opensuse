@@ -186,6 +186,7 @@ libpcap-dev: libpcap-devel
 libpcap: libpcap1
 libpci-dev: pciutils-devel
 libpciaccess-dev: libpciaccess-devel
+libpcre3-dev: pcre-devel
 libpcre3: libpcre1
 libperl-dev: perl
 libperl5: perl
