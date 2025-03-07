@@ -368,8 +368,8 @@ fixup_bpf()
 {
 	prepare_for_bpf
 
-	log_cmd make -j${nr_cpu} -C ../../../tools/bpf/bpftool 2>&1 || return
-	log_cmd make install -C ../../../tools/bpf/bpftool 2>&1 || return
+	log_cmd make -j${nr_cpu} -C ../../../tools/bpf/bpftool 2>&1 || return 2
+	log_cmd make install -C ../../../tools/bpf/bpftool 2>&1 || return 2
 	type ping6 && {
 		sed -i 's/if ping -6/if ping6/g' bpf/test_skb_cgroup_id.sh 2>/dev/null
 		sed -i 's/ping -${1}/ping${1%4}/g' bpf/test_sock_addr.sh 2>/dev/null
@@ -697,7 +697,10 @@ run_tests()
 
 		check_test_group_kconfig $group
 
-		fixup_test_group $group || die "fixup_$group failed"
+		fixup_test_group $group
+		local exit_status=$?
+		[[ $exit_status = 2 ]] && return $exit_status
+		[[ $exit_status = 0 ]] || die "fixup_$group failed as $exit_status"
 
 		if grep -E -q -m 1 "^TARGETS \+?=  ?$group" Makefile; then
 			log_cmd make -j${nr_cpu} -C $group 2>&1
