@@ -175,7 +175,7 @@ libc6-i386: dev-utils-dev
 libc6/unstable: dev-utils-dev
 libc6: dev-utils-dev
 libcairo2-dev: dev-utils-dev
-libcairo2:dev-utils-dev
+libcairo2: dev-utils-dev
 libcap-dev: dev-utils-dev
 libcap-ng-dev: dev-utils-dev
 libcap2-bin: sysadmin-basic
@@ -344,8 +344,7 @@ libsmbclient: os-core-dev
 libsnappy-dev:
 libsnappy1v5:
 libsqlite3-dev: linux-tools
-libssl-dev: os-core
-libssl-dev: os-core-update
+libssl-dev: os-core-dev
 libssl: os-core
 libsss-idmap0:
 libsss-simpleifp0:
@@ -513,7 +512,7 @@ qemu-utils: kvm-host
 qemu: kvm-host
 quota:
 reiserfsprogs:
-rpcbind:storage-utils
+rpcbind: storage-utils
 rstatd:
 rsync: dev-utils
 rsyslog:
