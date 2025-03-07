@@ -10,7 +10,7 @@ libaio:
 libasound2:
 libcurl:
 libdw1: libdw1t64
-libevent-openssl-2: libevent-openssl-2.1-7
+libevent-openssl: libevent-openssl-2.1-7
 libevent: libevent-2.1-7
 libglut3: libglut3.12
 libgsl: libgsl27
