@@ -14,7 +14,7 @@ lib64gcc-dev: lib64gcc-11-dev
 lib64gcc1: lib64gcc-s1
 libasan: libasan6
 libcilkrts5:
-libevent-openssl-2: libevent-openssl-2.1-7
+libevent-openssl: libevent-openssl-2.1-7
 libevent: libevent-2.1-7
 libgcc-dev: libgcc-11-dev
 libgcrypt-dev: libgcrypt20-dev

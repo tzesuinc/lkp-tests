@@ -4,7 +4,7 @@ bsdextrautils:
 fsverity:
 lib32gcc-dev: lib32gcc-10-dev
 libcurl: libcurl4
-libevent-openssl-2: libevent-openssl-2.1-7
+libevent-openssl: libevent-openssl-2.1-7
 libgcrypt-dev: libgcrypt20-dev
 libgsl: libgsl23
 libipsec-mb: libipsec-mb0
