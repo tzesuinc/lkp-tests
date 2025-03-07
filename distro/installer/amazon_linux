@@ -6,5 +6,11 @@ detect_system
 if [[ "$_system_version" = "2" ]]; then
     yum install -y $*
 else
-    dnf -y install $*
+    if [[ "$_system_version" = "2023" ]]; then
+        # use --allowerasing to resolve issue on Amazon Linux 2023
+        #   Problem: problem with installed package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64
+        #    - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from @System conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+        extra_option="--allowerasing"
+    fi
+    dnf -y install "$extra_option" $*
 fi

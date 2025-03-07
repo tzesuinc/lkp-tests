@@ -142,7 +142,7 @@ map_python_packages()
 		ubuntu-2[0-9].*)
 			map_python2_to_python3
 			;;
-		fedora-[3][8-9]*)
+		fedora-[3][8-9]*|fedora-41)
 			map_python2_to_python3
 			;;
 		centos-[9]*)

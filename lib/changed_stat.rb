@@ -17,8 +17,8 @@ module LKP
     attr_reader :cs, :options
 
     def initialize(stat, sorted_a, sorted_b, options)
-      min_b, mean_b, max_b = get_min_mean_max sorted_b
-      min_a, mean_a, max_a = get_min_mean_max sorted_a
+      min_b, mean_b, max_b = min_mean_max sorted_b
+      min_a, mean_a, max_a = min_mean_max sorted_a
 
       @cs = OpenStruct.new sorted_a: sorted_a, min_a: min_a, mean_a: mean_a, max_a: max_a,
                            sorted_b: sorted_b, min_b: min_b, mean_b: mean_b, max_b: max_b,

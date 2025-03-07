@@ -1,4 +1,4 @@
-# base image can be rockylinux:9 and etc
+# base image can be amazonlinux:2023, etc
 ARG base_image
 FROM ${base_image}
 
@@ -16,6 +16,7 @@ RUN dnf upgrade -y && \
     dnf install -y \
     # kernel-tools installs turbostat
     kernel-tools \
+    bsdtar \
     make \
     # procps installs vmstat, sysctl, etc to partially persistent commonly used dependencies
     procps \

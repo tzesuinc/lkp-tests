@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 def sorted_file_content(file_path)
-  `sort -f #{file_path}`.split("\n")
+  `LC_ALL=C sort -f #{file_path} | uniq`
 end
 
 def filtered_files(path, filter)
   Dir.entries(path)
-     .reject { |f| File.directory?(File.join(path, f)) || f.start_with?('.') }
+     .reject { |f| File.symlink?(File.join(path, f)) || File.directory?(File.join(path, f)) || f.start_with?('.') }
      .select { |f| filter.nil? || filter.call(f) }
 end
 
@@ -17,8 +17,7 @@ describe 'Directory File Sorting' do
       filter: ->(filename) { filename != 'README.md' }
     },
     'adaptation_pkg' => {
-      path: "#{LKP_SRC}/distro/adaptation-pkg",
-      filter: nil
+      path: "#{LKP_SRC}/distro/adaptation-pkg"
     },
     'programs' => {
       path: "#{LKP_SRC}/programs",
@@ -26,7 +25,7 @@ describe 'Directory File Sorting' do
     },
     'etc' => {
       path: "#{LKP_SRC}/etc",
-      filter: ->(filename) { filename != 'makepkg.conf' }
+      filter: ->(filename) { filename != 'makepkg.conf' && filename !~ /\.(rb|yml)$/ }
     }
   }
 
@@ -34,14 +33,9 @@ describe 'Directory File Sorting' do
     context "in #{dir_name}" do
       filtered_files(config[:path], config[:filter]).each do |filename|
         file_path = File.join(config[:path], filename)
-        next if File.directory?(file_path)
 
         it "#{file_path} has sorted content and no duplicates" do
-          content = File.readlines(file_path)
-                        .map(&:chomp)
-          sorted_and_unique_content = sorted_file_content(file_path).uniq
-
-          expect(content).to eq(sorted_and_unique_content)
+          expect(File.read(file_path)).to eq(sorted_file_content(file_path))
         end
       end
     end

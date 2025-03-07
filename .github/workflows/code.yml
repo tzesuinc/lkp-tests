@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.0', '2.5', '2.7', '3.2']
+        ruby-version: ['2.4', '2.5', '2.7', '3.2']
 
     steps:
       - uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: ['archlinux/base', 'centos/stream9', 'debian/bookworm', 'fedora/41', 'opensuse/leap', 'rockylinux/9', 'ubuntu/noble']
+        image: ['amazonlinux/2023', 'archlinux/base', 'centos/stream9', 'debian/bookworm', 'fedora/41', 'opensuse/leap', 'oraclelinux/9', 'rockylinux/9', 'ubuntu/noble']
 
     steps:
       - uses: actions/checkout@v3

@@ -54,10 +54,24 @@ docker exec -it $hostname bash
 /lkp/lkp-tests# lkp rt hackbench
 ```
 
+The alternative method to attach to a terminal in the docker container is 
+
+```
+lkp docker attach --container $hostname
+```
+
 The alternative method to run the job is
 
 ```
 lkp docker test -i $image -j hackbench.yaml -g pipe-8-process-1600 --hostname $hostname
+
+# The flag --any can be set to let lkp randomly choose a job from the suite
+lkp docker test -i $image -j hackbench.yaml --any --hostname $hostname
+```
+
+The alternative method to run rt
+```
+lkp docker rt --container $hostname --options "hackbench"
 ```
 
 ## Test by lkp docker

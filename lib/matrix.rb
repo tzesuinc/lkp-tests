@@ -165,7 +165,7 @@ def create_stats_matrix(result_root)
                  else
                    v.sum.to_f / stats_part_len
                  end
-      stats["#{k}.max"] = v.max if should_add_max_latency k
+      stats["#{k}.max"] = v.max if add_max_latency?(k)
     end
     matrix.merge! monitor_stats
   end
