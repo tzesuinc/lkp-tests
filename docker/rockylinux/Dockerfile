@@ -1,4 +1,4 @@
-# base image can be fedora:38, fedora:39 and etc
+# base image can be rockylinux:9 and etc
 ARG base_image
 FROM ${base_image}
 
