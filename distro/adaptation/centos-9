@@ -25,8 +25,8 @@ libgoogle-perftools-dev:
 libjudy-dev: Judy-devel
 libjudydebian1: Judy
 libpcre3-dev: pcre-devel
-libpfm4-dev: libpfm-devel
-libpfm4: libpfm
+libpfm-dev: libpfm-devel
+libpfm: libpfm
 libpng12-dev:
 libpython2:
 libpython3: python3-libs

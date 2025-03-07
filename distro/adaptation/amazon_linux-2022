@@ -14,8 +14,8 @@ libelf-dev: elfutils-devel
 libgles2-mesa:
 libmariadb3: mariadb-connector-c
 libopencryptoki0:
-libpfm4-dev: libpfm-devel
-libpfm4: libpfm-devel
+libpfm-dev: libpfm-devel
+libpfm: libpfm-devel
 libpng12-dev:
 libreadline5: compat-readline5
 libstdc++-dev: libstdc++-devel libstdc++-static
