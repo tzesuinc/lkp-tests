@@ -12,7 +12,6 @@ klibc-utils:
 libacl1-dev: acl
 libaio-dev: libaio
 libarchive-tools:
-libarchive13: libarchive
 libattr1-dev: attr
 libc-dev:i386:
 libc6-dev: glibc

@@ -7,6 +7,7 @@ freeglut:
 fuse: fuse3
 lib32gcc-dev: lib32gcc-12-dev
 libaio:
+libarchive: libarchive13t64
 libasound2:
 libcurl:
 libdw1: libdw1t64

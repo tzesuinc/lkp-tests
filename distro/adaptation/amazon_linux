@@ -31,7 +31,6 @@ libaio-dev: libaio-devel
 libapparmor-dev:
 libapparmor1:
 libarchive-dev: libarchive-devel
-libarchive13: libarchive
 libasound2-dev: alsa-lib-devel
 libattr1-dev: libattr-devel
 libaudit-dev: audit-libs-devel

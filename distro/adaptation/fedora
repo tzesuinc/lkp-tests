@@ -56,7 +56,6 @@ libapparmor1:
 libarchive-dev: libarchive-devel
 libarchive-tools: libarchive bsdtar
 libarchive-zip-perl:
-libarchive13: libarchive
 libasound2-dev: alsa-lib-devel
 libasound2: alsa-lib
 libattr1-dev: libattr-devel
