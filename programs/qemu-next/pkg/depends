@@ -13,7 +13,7 @@ libiscsi
 libjpeg62-turbo
 liblzo2-2
 libncurses5
-libnfs13
+libnfs
 libnuma1
 libpixman-1-0
 libpmem1

@@ -19,7 +19,6 @@ libipsec-mb: libipsec-mb1
 libjson: libjson-c5
 libldap: libldap2
 libncurses5: libncurses6
-libnfs13: libnfs14
 libnfs: libnfs14
 libntfs: libntfs-3g89
 libperl5:

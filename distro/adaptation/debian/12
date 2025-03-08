@@ -31,6 +31,7 @@ libldap: libldap-2.5-0
 libllvm: libllvm14
 libmpx2:
 libmysqlclient-dev: default-libmysqlclient-dev
+libnfs: libnfs13
 libntfs: libntfs-3g89
 libperl5: libperl5.36
 libpolly-dev: libpolly-14-dev

@@ -167,7 +167,6 @@ libncurses5-dev: ncurses-devel
 libncursesw5-dev: ncurses-devel
 libndctl-dev: libndctl-devel
 libnfs-dev: libnfs-devel
-libnfs13: libnfs
 libnl-3-dev: libnl3-devel
 libnl-cli-3-200: libnl3-200
 libnl-genl-3-dev: libnl3-devel
