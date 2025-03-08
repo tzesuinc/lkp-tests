@@ -6,7 +6,7 @@ require 'yaml'
 require "#{LKP_SRC}/lib/programs"
 
 def adapt_packages(distro, generic_packages)
-  distro_file = "#{LKP_SRC}/distro/adaptation/#{distro}"
+  distro_file = "#{LKP_SRC}/distro/adaptation/#{distro}/default"
   return generic_packages unless File.exist? distro_file
 
   distro_packages = YAML.load_file(distro_file)

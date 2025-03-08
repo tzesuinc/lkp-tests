@@ -1,0 +1,47 @@
+autopoint: gettext
+bsdtar: bsdtar
+btrfs-tools:
+gfortran: gcc-gfortran
+libarchive-tools: libarchive-devel
+libbabeltrace-ctf-dev: libbabeltrace-devel
+libbabeltrace-ctf1: libbabeltrace
+libbabeltrace-dev: libbabeltrace-devel
+libbsd-dev: libbsd-devel
+libbsd0: libbsd
+libcapstone-dev: capstone-devel
+libdw-dev: elfutils-devel
+libelf-dev: elfutils-devel
+libgles2-mesa:
+libmariadb3: mariadb-connector-c
+libopencryptoki0:
+libpfm-dev: libpfm-devel
+libpfm: libpfm-devel
+libpng12-dev:
+libreadline5: readline
+libstdc++-dev: libstdc++-devel libstdc++-static
+libtracefs-dev:
+libtsan0: libtsan
+libvirt-clients:
+libvirt-daemon-system:
+libvirt-dev:
+libyaml-cpp-dev: yaml-cpp-devel
+libzstd-dev: libzstd-devel
+linux-cpupower:
+mysql-server:
+network-manager:
+openbsd-inetd:
+perl-modules-5: perl
+pkg-config:
+python3-dev: python3-devel
+python3-minimal: python3
+python3-openssl: python3-pyOpenSSL
+python3-pkg-resources: python3-setuptools
+rstatd:
+rt-tests:
+ruby-dev: ruby-devel
+rusersd:
+sg3-utils:
+tshark:
+update-inetd:
+wpasupplicant:
+xutils-dev:
