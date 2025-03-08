@@ -186,10 +186,12 @@ libpcap-dev: libpcap-devel
 libpcap: libpcap1
 libpci-dev: pciutils-devel
 libpciaccess-dev: libpciaccess-devel
+libpcre3-dev: pcre-devel
 libpcre3: libpcre1
 libperl-dev: perl
 libperl5: perl
 libpfm-dev: libpfm-devel
+libpfm:
 libpipewire-dev: pipewire-devel
 libpixman-1-dev: libpixman-1-0-devel
 libpmem-dev: libpmem-devel
