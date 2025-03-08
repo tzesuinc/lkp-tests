@@ -60,6 +60,8 @@ cd $LKP_SRC
 # 	(example: opensuse/leap:latest -> opensuse/leap:latest)
 if [[ "$opt_image" == opensuse/* ]]; then
 	base_image=$(echo "$opt_image" | sed 's|opensuse/\([^/]*\)/|opensuse/\1:|')
+elif [[ "$opt_image" == redhat/* ]]; then
+	base_image=$(echo "$opt_image" | sed 's|redhat/\([^/]*\)/|redhat/\1:|')
 else
 	base_image=${opt_image//\//:}
 fi

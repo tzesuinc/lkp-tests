@@ -1,0 +1,27 @@
+[centos-vault]
+name=CentOS Vault Repository - BaseOS
+baseurl=https://vault.centos.org/8-stream/BaseOS/x86_64/os
+enabled=1
+gpgcheck=1
+gpgkey=https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256
+
+[centos-vault-extras]
+name=CentOS Vault Repository - Extras
+baseurl=https://vault.centos.org/8-stream/extras/x86_64/os/
+enabled=1
+gpgcheck=1
+gpgkey=https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256
+
+[centos-vault-powertools]
+name=CentOS Vault Repository - PowerTools
+baseurl=https://vault.centos.org/8-stream/PowerTools/x86_64/os/
+enabled=1
+gpgcheck=1
+gpgkey=https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256
+
+[centos-vault-appstream]
+name=CentOS Vault Repository - AppStream
+baseurl=https://vault.centos.org/8-stream/AppStream/x86_64/os/
+enabled=1
+gpgcheck=1
+gpgkey=https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256

@@ -8,7 +8,7 @@ consider to create image for interested test for easy reuse.
 
 ## Getting started
 
-```
+```bash
 git clone https://github.com/intel/lkp-tests.git
 
 cd lkp-tests
@@ -16,20 +16,20 @@ cd lkp-tests
 image=debian/buster
 hostname=lkp-docker.${image//\//.}
 
-docker build -f docker/${image%%/*}/Dockerfile -t lkp-tests/${image} -t lkp-tests/${image}:$(git log -1 --pretty=%h) --build-arg hostname=$hostname --build-arg base_image=$(if [[ "$image" == opensuse/* ]]; then echo "$image" | sed 's|opensuse/\([^/]*\)/|opensuse/\1:|'; else echo ${image//\//:}; fi) .
+docker build -f docker/${image%%/*}/Dockerfile -t lkp-tests/${image} -t lkp-tests/${image}:$(git log -1 --pretty=%h) --build-arg hostname=$hostname --build-arg base_image=$(if [[ "$image" == opensuse/* ]]; then echo "$image" | sed 's|opensuse/\([^/]*\)/|opensuse/\1:|'; elif [[ "$image" == redhat/* ]]; then echo "$image" | sed 's|redhat/\([^/]*\)/|redhat/\1:|'; else echo ${image//\//:}; fi) .
 
 docker run --rm --entrypoint '' lkp-tests/${image} lkp help
 ```
 
 The alternative method to build the image is
 
-```
+```bash
 lkp docker build --image $image --hostname $hostname
 ```
 
 ## Run one atomic job
 
-```
+```bash
 # Add --privileged option to allow privileged access like dmesg, sysctl. Use
 # this with caution.
 docker run -d -h $hostname --name $hostname \
@@ -56,13 +56,13 @@ docker exec -it $hostname bash
 
 The alternative method to attach to a terminal in the docker container is 
 
-```
+```bash
 lkp docker attach --container $hostname
 ```
 
 The alternative method to run the job is
 
-```
+```bash
 lkp docker test -i $image -j hackbench.yaml -g pipe-8-process-1600 --hostname $hostname
 
 # The flag --any can be set to let lkp randomly choose a job from the suite
@@ -76,7 +76,7 @@ lkp docker rt --container $hostname --options "hackbench"
 
 ## Test by lkp docker
 
-```
+```bash
 image=debian/bookworm
 hostname=lkp-docker.${image//\//.}
 
