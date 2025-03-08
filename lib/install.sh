@@ -38,15 +38,15 @@ adapt_package()
 # There are two kinds of packages, packages provided by distribution and packages installed by makepkg
 # The priority for package adaptation is as follow:
 # - adaptation by makepkg, via $LKP_SRC/distro/adaptation-pkg/$distro
-# - adaptation by distro version explicitly, via $LKP_SRC/distro/adaptation/$distro-$_system_version
-# - adaptation by distro explicitly, via $LKP_SRC/distro/adaptation/$distro
+# - adaptation by distro version explicitly, via $LKP_SRC/distro/adaptation/$distro/$_system_version
+# - adaptation by distro explicitly, via $LKP_SRC/distro/adaptation/$distro/default
 # - default to input package name, not found in above
 adapt_packages()
 {
 	local distro_file distro_ver_file
 	if [ -z "$PKG_TYPE" ]; then
-		distro_ver_file="$LKP_SRC/distro/adaptation/$distro-$_system_version"
-		distro_file="$LKP_SRC/distro/adaptation/$distro"
+		distro_ver_file="$LKP_SRC/distro/adaptation/$distro/$_system_version"
+		distro_file="$LKP_SRC/distro/adaptation/$distro/default"
 	else
 		distro_file="$LKP_SRC/distro/adaptation-$PKG_TYPE/$distro"
 	fi
